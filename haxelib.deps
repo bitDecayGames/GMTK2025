@@ -11,7 +11,7 @@ hscript 2.6.0
 newgrounds 2.0.0
 
 # arcade physics
-# echo git https://github.com/MondayHopscotch/echo.git
+echo git https://github.com/MondayHopscotch/echo.git advanced-circles
 
 # full physics
 # nape-haxe4 2.0.22
