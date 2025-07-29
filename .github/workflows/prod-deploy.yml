@@ -32,6 +32,6 @@ jobs:
         with:
           dir: export/html5.zip
           itchUserName: bitdecaygames
-          itchGameName: ::game_name::
+          itchGameName: gmtk2025
           itchChannel: web-release
           butlerApiKey: ${{ secrets.BUTLER_API_KEY }}
