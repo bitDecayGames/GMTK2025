@@ -51,7 +51,7 @@
 	<haxelib name="ldtk-haxe-api" />
 
 	<!-- for echo physics -->
-	<!-- <haxelib name="echo-flixel" /> -->
+	<haxelib name="echo-flixel" />
 
 	<!--In case you want to use nape with flixel-->
 	<!--<haxelib name="nape-haxe4" />-->
