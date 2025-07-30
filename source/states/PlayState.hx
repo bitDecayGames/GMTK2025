@@ -1,5 +1,6 @@
 package states;
 
+import flixel.math.FlxPoint;
 import todo.TODO;
 import flixel.group.FlxGroup;
 import flixel.math.FlxRect;
@@ -42,16 +43,24 @@ class PlayState extends FlxTransitionableState {
 		add(midGroundGroup);
 		add(transitions);
 
-		loadLevel("Level_0");
+		loadLevel("BaseWorld", "Level_0");
 	}
 
-	function loadLevel(level:String) {
+	function loadLevel(world:String, level:String) {
 		unload();
 
-		var level = new Level(level);
-		FmodPlugin.playSong(level.raw.f_Music);
-		midGroundGroup.add(level.terrainLayer);
-		FlxG.worldBounds.copyFrom(level.terrainLayer.getBounds());
+		var level = new Level(world, level);
+		FmodPlugin.playSong(level.rawLevels[0].f_Music);
+		var minBounds = FlxPoint.get(Math.POSITIVE_INFINITY, Math.POSITIVE_INFINITY);
+		var maxBounds = FlxPoint.get(Math.NEGATIVE_INFINITY, Math.NEGATIVE_INFINITY);
+		for (tl in level.terrainLayers) {
+			minBounds.x = Math.min(minBounds.x, tl.x);
+			minBounds.y = Math.min(minBounds.y, tl.y);
+			maxBounds.x = Math.max(maxBounds.x, tl.x + tl.width);
+			maxBounds.y = Math.max(maxBounds.y, tl.y + tl.height);
+			midGroundGroup.add(tl);
+		}
+		FlxG.worldBounds.set(minBounds.x, minBounds.y, maxBounds.x - maxBounds.x, maxBounds.y - maxBounds.y);
 
 		player = new Player(level.spawnPoint.x, level.spawnPoint.y);
 		camera.follow(player);
@@ -96,7 +105,7 @@ class PlayState extends FlxTransitionableState {
 		FlxG.collide(midGroundGroup, player);
 		handleCameraBounds();
 
-		TODO.sfx('scarySound');
+		// TODO.sfx('scarySound');
 	}
 
 	function handleCameraBounds() {
