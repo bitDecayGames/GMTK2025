@@ -7,7 +7,7 @@ import input.SimpleController;
 using echo.FlxEcho;
 
 class Flipper extends FlxSprite {
-	var speed:Float = 700;
+	var speed:Float = 650;
 	var restingAngle:Float = -30;
 	var flipAngle:Float = 30;
 	var power:Float = 150;
