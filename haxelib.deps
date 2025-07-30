@@ -11,8 +11,8 @@ hscript 2.6.0
 newgrounds 2.0.0
 
 # arcade physics
-echo git https://github.com/MondayHopscotch/echo.git gmtk2025
-echo-flixel git https://github.com/AustinEast/echo-flixel.git gmtk2025
+echo git https://github.com/MondayHopscotch/echo.git advanced-circles
+echo-flixel git https://github.com/MondayHopscotch/echo-flixel.git gmtk2025
 
 # full physics
 # nape-haxe4 2.0.22
@@ -23,7 +23,7 @@ ldtk-haxe-api 1.5.3-rc.1
 # bitDecayGames deps
 bitdecaybtree git https://github.com/bitDecayGames/BehaviorTree.git
 bitlytics git https://github.com/bitDecayGames/Bitlytics.git
-flixelutils git https://github.com/bitDecayGames/flixel-utils.git
+flixelutils git https://github.com/bitDecayGames/flixel-utils.git gmtk2025
 
 # for our generation scripting
 json2object 3.11.0
