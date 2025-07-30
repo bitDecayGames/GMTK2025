@@ -12,7 +12,7 @@ newgrounds 2.0.0
 
 # arcade physics
 echo git https://github.com/MondayHopscotch/echo.git gmtk2025
-echo-flixel git https://github.com/AustinEast/echo-flixel.git gmtk2025
+echo-flixel git https://github.com/MondayHopscotch/echo-flixel.git gmtk2025
 
 # full physics
 # nape-haxe4 2.0.22
