@@ -1,44 +1,70 @@
 package entities;
 
 import flixel.FlxSprite;
-import input.InputCalculator;
 import input.SimpleController;
-import bitdecay.flixel.graphics.Aseprite;
-import bitdecay.flixel.graphics.AsepriteMacros;
 
-class Player extends FlxSprite {
-	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/player.json");
-	public static var layers = AsepriteMacros.layerNames("assets/aseprite/characters/player.json");
-	public static var eventData = AsepriteMacros.frameUserData("assets/aseprite/characters/player.json", "Layer 1");
+using echo.FlxEcho;
 
+class Flipper extends FlxSprite {
 	var speed:Float = 150;
-	var playerNum = 0;
+	var restingAngle:Float = 150;
+	var flipAngle:Float = 150;
+	var power:Float = 150;
+	var triggerButton:Button;
+
+	var body:echo.Body;
+
+	private var dir:Float = 0;
 
 	public function new(X:Float, Y:Float) {
 		super(X, Y);
-		// This call can be used once https://github.com/HaxeFlixel/flixel/pull/2860 is merged
-		// FlxAsepriteUtil.loadAseAtlasAndTags(this, AssetPaths.player__png, AssetPaths.player__json);
-		Aseprite.loadAllAnimations(this, AssetPaths.player__json);
-		animation.play(anims.right);
-		animation.onFrameChange.add((anim, frame, index) -> {
-			if (eventData.exists(index)) {
-				trace('frame $index has data ${eventData.get(index)}');
+
+		if (flipAngle - restingAngle < 0) {
+			dir = -1 * speed;
+		} else {
+			dir = 1 * speed;
+		}
+
+		var xOffset = 0.0;
+		var yOffset = -height * .25;
+
+		this.body = this.add_body({
+			x: x,
+			y: y,
+			kinematic: false,
+			rotation: restingAngle,
+			shape: {
+				type: RECT,
+				width: 100,
+				height: 100 / 2,
+				offset_x: xOffset,
+				offset_y: yOffset,
 			}
 		});
+		body.on_move = (x, y) -> this.setPosition(x, y);
+		body.on_rotate = (rot) -> angle = rot;
 	}
 
 	override public function update(delta:Float) {
 		super.update(delta);
+		// if (SimpleController.just_pressed(triggerButton, 1)) {
+		flip(delta);
+		// }
+	}
 
-		var inputDir = InputCalculator.getInputCardinal(playerNum);
-		if (inputDir != NONE) {
-			inputDir.asVector(velocity).scale(speed);
+	public function flip(delta:Float) {
+		if (dir < 0) {
+			if (body.rotation + dir < flipAngle) {
+				body.rotation = flipAngle;
+			} else {
+				body.rotation += dir;
+			}
 		} else {
-			velocity.set();
-		}
-
-		if (SimpleController.just_pressed(Button.A, playerNum)) {
-			color = color ^ 0xFFFFFF;
+			if (body.rotation + dir > flipAngle) {
+				body.rotation = flipAngle;
+			} else {
+				body.rotation += dir;
+			}
 		}
 	}
 }

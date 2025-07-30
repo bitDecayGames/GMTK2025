@@ -10,12 +10,14 @@ import levels.ldtk.Level;
 import levels.ldtk.Ldtk.LdtkProject;
 import achievements.Achievements;
 import entities.Player;
+import entities.Flipper;
 import events.gen.Event;
 import events.EventBus;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
 
+using echo.FlxEcho;
 using states.FlxStateExt;
 
 class PlayState extends FlxTransitionableState {
@@ -44,6 +46,23 @@ class PlayState extends FlxTransitionableState {
 		add(transitions);
 
 		loadLevel("BaseWorld", "Level_0");
+
+		// Set up echo last so it draws on top of all of our cameras
+		FlxEcho.init({
+			width: FlxG.width,
+			height: FlxG.height,
+			gravity_y: 24,
+			iterations: 16,
+		});
+		FlxG.plugins.remove(FlxEcho.instance);
+		add(new Flipper(100, 100));
+
+		FlxEcho.draw_debug = true;
+	}
+
+	override function draw() {
+		FlxEcho.instance.draw();
+		super.draw();
 	}
 
 	function loadLevel(world:String, level:String) {
