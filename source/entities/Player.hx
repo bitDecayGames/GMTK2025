@@ -1,5 +1,7 @@
 package entities;
 
+import constants.CGroups;
+import nape.dynamics.InteractionFilter;
 import nape.geom.Vec2;
 import flixel.FlxSprite;
 import input.InputCalculator;
@@ -35,6 +37,8 @@ class Player extends FlxNapeSprite {
 		body.mass = 1;
 		body.shapes.add(new Circle(16));
 		addPremadeBody(body);
+
+		body.setShapeFilters(new InteractionFilter(CGroups.BALL, CGroups.ALL));
 	}
 
 	override function setBody(body:Body) {

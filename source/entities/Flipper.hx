@@ -1,5 +1,7 @@
 package entities;
 
+import nape.dynamics.InteractionFilter;
+import constants.CGroups;
 import nape.constraint.PivotJoint;
 import flixel.addons.nape.FlxNapeSpace;
 import nape.constraint.AngleJoint;
@@ -48,8 +50,11 @@ class Flipper extends FlxNapeSprite {
 			Vec2.weak(0, h * .5)
 		]));
 
+		body.setShapeFilters(new InteractionFilter(CGroups.CONTROL_SURFACE, CGroups.BALL));
+
 		var pivot = new PivotJoint(body, FlxNapeSpace.space.world, Vec2.get(), body.localPointToWorld(Vec2.get()));
 		pivot.active = true;
+		pivot.stiff = true;
 		pivot.space = FlxNapeSpace.space;
 
 		var angleJoint = new AngleJoint(FlxNapeSpace.space.world, body, Math.min(restingAngle, flipAngle) * degToRad,
@@ -57,7 +62,7 @@ class Flipper extends FlxNapeSprite {
 		angleJoint.active = true;
 		angleJoint.space = FlxNapeSpace.space;
 
-		body.mass = 0.0001;
+		body.mass = 1;
 		body.rotation = restingAngle * degToRad;
 		addPremadeBody(body);
 	}

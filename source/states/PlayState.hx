@@ -1,5 +1,7 @@
 package states;
 
+import constants.CGroups;
+import nape.dynamics.InteractionFilter;
 import nape.phys.BodyType;
 import nape.shape.Polygon;
 import nape.phys.Body;
@@ -53,9 +55,6 @@ class PlayState extends FlxTransitionableState {
 		FlxNapeSpace.space.gravity.setxy(0, 1000);
 		FlxNapeSpace.drawDebug = true;
 
-		// FlxEcho.add_group_bodies(worldTiles);
-		// FlxEcho.add_group_bodies(playerGroup);
-
 		// QLog.error('Example error');
 
 		// Build out our render order
@@ -66,15 +65,7 @@ class PlayState extends FlxTransitionableState {
 		add(transitions);
 
 		loadLevel("BaseWorld", "Level_0");
-
-		flipperGroup.add(new Flipper(-50, 310, 80, 30, 30, -30));
-		flipperGroup.add(new Flipper(10, 110, 80, 30, 150, 210));
 	}
-
-	// override function draw() {
-	// 	super.draw();
-	// 	FlxEcho.instance.draw();
-	// }
 
 	function loadLevel(world:String, level:String) {
 		unload();
@@ -107,27 +98,9 @@ class PlayState extends FlxTransitionableState {
 			}
 		}
 
-		// FlxEcho.instance.world.set(minBounds.x, minBounds.y, maxBounds.x - minBounds.x, maxBounds.y - minBounds.y);
-
-		// FlxEcho.listen(worldTiles, playerGroup, {
-		//	separate: true,
-		//	enter: (a, b, o) -> {
-		//		trace('something happened');
-		//		// Collide.ignoreCollisionsOfBColor(a, b);
-		//	},
-		//	exit: (a, b) -> {
-		//		// Collide.restoreCollisions(a, b);
-		//	}
-		// });
-		// FlxEcho.listen(flipperGroup, playerGroup, {
-		//	separate: true,
-		//	enter: (a, b, o) -> {
-		//		// Collide.ignoreCollisionsOfBColor(a, b);
-		//	},
-		//	exit: (a, b) -> {
-		//		// Collide.restoreCollisions(a, b);
-		//	}
-		// });
+		for (flipper in level.flippers) {
+			flipperGroup.add(flipper);
+		}
 
 		EventBus.fire(new PlayerSpawn(player.x, player.y));
 	}
@@ -144,13 +117,13 @@ class PlayState extends FlxTransitionableState {
 				}
 			}
 		}
+		worldBody.setShapeFilters(new InteractionFilter(CGroups.TERRAIN, ~CGroups.CONTROL_SURFACE));
 		worldBody.space = FlxNapeSpace.space;
 	}
 
 	function buildTileShape(worldBody:Body, shapeX:Float, shapeY:Float, data:TileCollisionData, tSize:Int) {
 		switch (data.type) {
 			case "polygon":
-				// TODO: put these all on a 'world' body or something
 				var b = new FlxObject();
 				var vertices:Array<Vec2> = [];
 				for (p in data.points) {
