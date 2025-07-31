@@ -1,5 +1,10 @@
 package states;
 
+import echo.Body;
+import echo.math.Vector2;
+import flixel.FlxObject;
+import levels.ldtk.LdtkTilemap.LdtkTile;
+import levels.ldtk.BDTilemap;
 import flixel.math.FlxPoint;
 import todo.TODO;
 import flixel.group.FlxGroup;
@@ -21,7 +26,9 @@ using echo.FlxEcho;
 using states.FlxStateExt;
 
 class PlayState extends FlxTransitionableState {
-	var player:FlxSprite;
+	var player:Player;
+	var playerGroup = new FlxGroup();
+	var worldTiles = new FlxGroup();
 	var midGroundGroup = new FlxGroup();
 	var activeCameraTransition:CameraTransition = null;
 
@@ -39,31 +46,36 @@ class PlayState extends FlxTransitionableState {
 			QLog.notice('I got me an event about ${c.count} clicks having happened.');
 		});
 
-		// QLog.error('Example error');
-
-		// Build out our render order
-		add(midGroundGroup);
-		add(transitions);
-
-		loadLevel("BaseWorld", "Level_0");
-
-		// Set up echo last so it draws on top of all of our cameras
 		FlxEcho.init({
 			width: FlxG.width,
 			height: FlxG.height,
 			gravity_y: 24,
 			iterations: 16,
 		});
-		FlxG.plugins.remove(FlxEcho.instance);
+
+		FlxEcho.add_group_bodies(worldTiles);
+		FlxEcho.add_group_bodies(playerGroup);
+
+		// QLog.error('Example error');
+
+		// Build out our render order
+		add(midGroundGroup);
+		add(worldTiles);
+		add(playerGroup);
+		add(transitions);
+
+		loadLevel("BaseWorld", "Level_0");
+
 		add(new Flipper(100, 100));
 
 		FlxEcho.draw_debug = true;
+		// FlxEcho.debug_drawer.draw_quadtree = true;
 	}
 
-	override function draw() {
-		FlxEcho.instance.draw();
-		super.draw();
-	}
+	// override function draw() {
+	// 	super.draw();
+	// 	FlxEcho.instance.draw();
+	// }
 
 	function loadLevel(world:String, level:String) {
 		unload();
@@ -78,12 +90,13 @@ class PlayState extends FlxTransitionableState {
 			maxBounds.x = Math.max(maxBounds.x, tl.x + tl.width);
 			maxBounds.y = Math.max(maxBounds.y, tl.y + tl.height);
 			midGroundGroup.add(tl);
+
+			makeEchoTiles(tl);
 		}
-		FlxG.worldBounds.set(minBounds.x, minBounds.y, maxBounds.x - maxBounds.x, maxBounds.y - maxBounds.y);
 
 		player = new Player(level.spawnPoint.x, level.spawnPoint.y);
 		camera.follow(player);
-		add(player);
+		player.add_to_group(playerGroup);
 
 		for (t in level.camTransitions) {
 			transitions.add(t);
@@ -95,7 +108,57 @@ class PlayState extends FlxTransitionableState {
 			}
 		}
 
+		FlxEcho.instance.world.set(minBounds.x, minBounds.y, maxBounds.x - minBounds.x, maxBounds.y - minBounds.y);
+
+		FlxEcho.listen(worldTiles, playerGroup, {
+			separate: true,
+			enter: (a, b, o) -> {
+				trace('something happened');
+				// Collide.ignoreCollisionsOfBColor(a, b);
+			},
+			exit: (a, b) -> {
+				// Collide.restoreCollisions(a, b);
+			}
+		});
+
 		EventBus.fire(new PlayerSpawn(player.x, player.y));
+	}
+
+	function makeEchoTiles(l:BDTilemap) {
+		for (x in 0...l.widthInTiles) {
+			for (y in 0...l.heightInTiles) {
+				var data = l.getMetaDataAt(x, y);
+				if (data != null) {
+					trace(data);
+					var body = buildTile(data, l.tileWidth);
+					body.set_position(l.x + x * l.tileWidth, l.y + y * l.tileHeight);
+				}
+			}
+		}
+	}
+
+	function buildTile(data:TileCollisionData, tSize:Int):Body {
+		switch (data.type) {
+			case "polygon":
+				// TODO: put these all on a 'world' body or something
+				var b = new FlxObject();
+				var vertices:Array<Vector2> = [];
+				for (p in data.points) {
+					vertices.push(new Vector2(p[0] * tSize, p[1] * tSize));
+					// vertices.push(new Vector2(p[0] * tSize, p[1] * tSize));
+				}
+				var body = FlxEcho.add_body(b, {
+					kinematic: true,
+					shape: {
+						type: POLYGON,
+						vertices: vertices
+					}
+				});
+				b.add_to_group(worldTiles);
+				return body;
+			default:
+				return null;
+		}
 	}
 
 	function unload() {
@@ -104,10 +167,22 @@ class PlayState extends FlxTransitionableState {
 		}
 		transitions.clear();
 
+		for (o in playerGroup) {
+			o.destroy();
+		}
+		playerGroup.clear();
+
 		for (o in midGroundGroup) {
 			o.destroy();
 		}
 		midGroundGroup.clear();
+
+		for (o in worldTiles) {
+			o.destroy();
+		}
+		worldTiles.clear();
+
+		FlxEcho.clear();
 	}
 
 	function handleAchieve(def:AchievementDef) {

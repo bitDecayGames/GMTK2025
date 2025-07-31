@@ -1,5 +1,8 @@
 package levels.ldtk;
 
+import haxe.Json;
+import levels.ldtk.Ldtk;
+import levels.ldtk.Ldtk.LdtkProject;
 import flixel.util.FlxColor;
 import levels.ldtk.Ldtk.Enum_TileTags;
 import levels.ldtk.LdtkTilemap.LdtkTile;
@@ -70,4 +73,24 @@ class BDTilemap extends LdtkTilemap<Enum_TileTags> {
 	override function createTile(index:Int, width:Float, height:Float):BDTile {
 		return new BDTile(this, index, width, height);
 	}
+
+	public function getMetaDataAt(cX:Int, cY:Int):TileCollisionData {
+		if (tileExists(cX, cY)) {
+			var data = getTileData(cX, cY);
+			if (data == null || data.metaData == null) {
+				return null;
+			}
+
+			trace(data.metaData);
+			// TODO: how to not parse this every time? Just lazy load and cache?
+			return cast Json.parse(data.metaData);
+		}
+
+		return null;
+	}
+}
+
+typedef TileCollisionData = {
+	var type:String;
+	var points:Array<Array<Float>>;
 }
