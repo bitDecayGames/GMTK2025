@@ -1159,8 +1159,8 @@
 			{ "id": "INVISIBLE", "tileRect": null, "color": 14984818 }
 		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
 	], "externalEnums": [
-		{ "identifier": "FmodSong", "uid": 223, "values": [{ "id": "LetsGo", "tileRect": null, "color": 12470831 }], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "1935f5689e6b14bce42e4f0b6255a074", "tags": [] },
-		{ "identifier": "FmodSFX", "uid": 224, "values": [ { "id": "MenuHover", "tileRect": null, "color": 12470831 }, { "id": "MenuSelect", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "1935f5689e6b14bce42e4f0b6255a074", "tags": [] }
+		{ "identifier": "FmodSong", "uid": 223, "values": [{ "id": "LetsGo", "tileRect": null, "color": 12470831 }], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "0080d688207c3c09e857d8384f72fa45", "tags": [] },
+		{ "identifier": "FmodSFX", "uid": 224, "values": [ { "id": "MenuHover", "tileRect": null, "color": 12470831 }, { "id": "MenuSelect", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "0080d688207c3c09e857d8384f72fa45", "tags": [] }
 	], "levelFields": [
 		{
 			"identifier": "Music",
@@ -1414,7 +1414,7 @@
 							},
 							{
 								"__identifier": "FlipperRight",
-								"__grid": [16,24],
+								"__grid": [24,20],
 								"__pivot": [0.838,0.5],
 								"__tags": ["control"],
 								"__tile": null,
@@ -1423,14 +1423,14 @@
 								"width": 80,
 								"height": 26,
 								"defUid": 235,
-								"px": [269,392],
-								"fieldInstances": [{ "__identifier": "ForceFactor", "__type": "Float", "__value": 1, "__tile": null, "defUid": 239, "realEditorValues": [] }],
-								"__worldX": 269,
-								"__worldY": 392
+								"px": [397,333],
+								"fieldInstances": [{ "__identifier": "ForceFactor", "__type": "Float", "__value": 3, "__tile": null, "defUid": 239, "realEditorValues": [{ "id": "V_Float", "params": [3] }] }],
+								"__worldX": 397,
+								"__worldY": 333
 							},
 							{
 								"__identifier": "FlipperLeft",
-								"__grid": [20,24],
+								"__grid": [12,24],
 								"__pivot": [0.163,0.5],
 								"__tags": ["control"],
 								"__tile": null,
@@ -1439,10 +1439,10 @@
 								"width": 80,
 								"height": 26,
 								"defUid": 236,
-								"px": [323,392],
+								"px": [195,397],
 								"fieldInstances": [{ "__identifier": "ForceFactor", "__type": "Float", "__value": 1, "__tile": null, "defUid": 237, "realEditorValues": [] }],
-								"__worldX": 323,
-								"__worldY": 392
+								"__worldX": 195,
+								"__worldY": 397
 							}
 						]
 					},
@@ -3017,9 +3017,9 @@
 							{ "px": [224,368], "src": [0,0], "f": 0, "t": 0, "d": [1854], "a": 1 },
 							{ "px": [240,368], "src": [0,0], "f": 0, "t": 0, "d": [1855], "a": 1 },
 							{ "px": [256,368], "src": [0,0], "f": 0, "t": 0, "d": [1856], "a": 1 },
-							{ "px": [272,368], "src": [0,64], "f": 0, "t": 44, "d": [1857], "a": 1 },
-							{ "px": [288,368], "src": [16,64], "f": 0, "t": 45, "d": [1858], "a": 1 },
-							{ "px": [304,368], "src": [32,64], "f": 0, "t": 46, "d": [1859], "a": 1 },
+							{ "px": [272,368], "src": [0,0], "f": 0, "t": 0, "d": [1857], "a": 1 },
+							{ "px": [288,368], "src": [0,0], "f": 0, "t": 0, "d": [1858], "a": 1 },
+							{ "px": [304,368], "src": [0,0], "f": 0, "t": 0, "d": [1859], "a": 1 },
 							{ "px": [320,368], "src": [0,0], "f": 0, "t": 0, "d": [1860], "a": 1 },
 							{ "px": [336,368], "src": [0,0], "f": 0, "t": 0, "d": [1861], "a": 1 },
 							{ "px": [352,368], "src": [0,0], "f": 0, "t": 0, "d": [1862], "a": 1 },

@@ -1,5 +1,6 @@
 package entities;
 
+import nape.phys.Material;
 import constants.CGroups;
 import nape.dynamics.InteractionFilter;
 import nape.geom.Vec2;
@@ -35,7 +36,7 @@ class Player extends FlxNapeSprite {
 
 		var body = new Body(BodyType.DYNAMIC);
 		body.mass = 1;
-		body.shapes.add(new Circle(16));
+		body.shapes.add(new Circle(16, Material.steel()));
 		addPremadeBody(body);
 
 		body.setShapeFilters(new InteractionFilter(CGroups.BALL, CGroups.ALL));
@@ -57,5 +58,10 @@ class Player extends FlxNapeSprite {
 		if (SimpleController.just_pressed(Button.A, playerNum)) {
 			color = color ^ 0xFFFFFF;
 		}
+	}
+
+	override function draw() {
+		this.angle = 0;
+		super.draw();
 	}
 }
