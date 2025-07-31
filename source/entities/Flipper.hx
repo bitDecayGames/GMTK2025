@@ -1,5 +1,6 @@
 package entities;
 
+import input.SimpleController;
 import nape.phys.Material;
 import nape.constraint.WeldJoint;
 import bitdecay.flixel.graphics.Aseprite;
@@ -23,6 +24,8 @@ class Flipper extends FlxNapeSprite {
 	private static var degToRad = Math.PI / 180.0;
 	private static var radToDeg = 180.0 / Math.PI;
 
+	var ctrlGroup:ControlGroup;
+
 	var speed:Float = 450;
 	var restingAngle:Float;
 	var flipAngle:Float;
@@ -35,11 +38,12 @@ class Flipper extends FlxNapeSprite {
 
 	private var dir:Float = 0;
 
-	public function new(X:Float, Y:Float, width:Float, strength:Float, bigRad:Float, smallRad:Float, restingAngle:Float, flipAngle:Float) {
+	public function new(group:ControlGroup, X:Float, Y:Float, width:Float, strength:Float, bigRad:Float, smallRad:Float, restingAngle:Float, flipAngle:Float) {
 		super();
 		Aseprite.loadAllAnimations(this, AssetPaths.flipper__json);
 		animation.play(anims.flipper_1_aseprite);
 		origin.set(12, 24);
+		this.ctrlGroup = group;
 		this.width = width;
 		this.height = bigRad;
 		this.restingAngle = restingAngle;
@@ -80,14 +84,20 @@ class Flipper extends FlxNapeSprite {
 		angleJoint.stiff = true;
 		angleJoint.space = FlxNapeSpace.space;
 
-		body.mass = 1;
+		body.mass = 100;
 		body.rotation = restingAngle * degToRad;
 		addPremadeBody(body);
 	}
 
 	override public function update(delta:Float) {
 		super.update(delta);
-		if (FlxG.keys.pressed.SPACE) {
+		var activated = switch ctrlGroup {
+			case LEFT:
+				FlxG.keys.pressed.Z;
+			case RIGHT:
+				FlxG.keys.pressed.M;
+		};
+		if (activated) {
 			flip(delta);
 		} else {
 			rest(delta);
@@ -124,7 +134,9 @@ class Flipper extends FlxNapeSprite {
 			angleJoint.jointMin = jointMin;
 		}
 
-		body.angularVel = dir * degToRad;
+		body.applyAngularImpulse(dir * (body.mass / 3));
+		// body.applyImpulse();
+		// body.angularVel = dir * degToRad;
 	}
 
 	public function rest(delta:Float) {
@@ -149,8 +161,14 @@ class Flipper extends FlxNapeSprite {
 			angleJoint.jointMin = jointMin;
 		}
 
-		body.angularVel = -dir * degToRad;
+		body.applyAngularImpulse(-dir * (body.mass / 3));
+		// body.angularVel = -dir * degToRad;
 	}
+}
+
+enum ControlGroup {
+	LEFT;
+	RIGHT;
 }
 
 enum FlipDir {
