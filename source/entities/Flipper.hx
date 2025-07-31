@@ -34,7 +34,7 @@ class Flipper extends FlxNapeSprite {
 
 	private var dir:Float = 0;
 
-	public function new(X:Float, Y:Float, width:Float, bigRad:Float, smallRad:Float, restingAngle:Float, flipAngle:Float) {
+	public function new(X:Float, Y:Float, width:Float, strength:Float, bigRad:Float, smallRad:Float, restingAngle:Float, flipAngle:Float) {
 		super();
 		Aseprite.loadAllAnimations(this, AssetPaths.flipper__json);
 		animation.play(anims.flipper_1_aseprite);
@@ -43,6 +43,7 @@ class Flipper extends FlxNapeSprite {
 		this.height = bigRad;
 		this.restingAngle = restingAngle;
 		this.flipAngle = flipAngle;
+		speed *= strength;
 
 		if (flipAngle - restingAngle < 0) {
 			flipDirection = CCW;
