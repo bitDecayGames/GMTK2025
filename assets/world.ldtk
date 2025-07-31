@@ -1530,8 +1530,8 @@
 			{ "id": "INVISIBLE", "tileRect": null, "color": 14984818 }
 		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
 	], "externalEnums": [
-		{ "identifier": "FmodSong", "uid": 223, "values": [{ "id": "LetsGo", "tileRect": null, "color": 12470831 }], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "0080d688207c3c09e857d8384f72fa45", "tags": [] },
-		{ "identifier": "FmodSFX", "uid": 224, "values": [ { "id": "MenuHover", "tileRect": null, "color": 12470831 }, { "id": "MenuSelect", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "0080d688207c3c09e857d8384f72fa45", "tags": [] }
+		{ "identifier": "FmodSong", "uid": 223, "values": [{ "id": "LetsGo", "tileRect": null, "color": 12470831 }], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "1935f5689e6b14bce42e4f0b6255a074", "tags": [] },
+		{ "identifier": "FmodSFX", "uid": 224, "values": [ { "id": "MenuHover", "tileRect": null, "color": 12470831 }, { "id": "MenuSelect", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "1935f5689e6b14bce42e4f0b6255a074", "tags": [] }
 	], "levelFields": [
 		{
 			"identifier": "Music",
@@ -4115,9 +4115,9 @@
 				"externalRelPath": null,
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
-					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
+					{ "__identifier": "GravityY", "__type": "Int", "__value": 750, "__tile": null, "defUid": 257, "realEditorValues": [{ "id": "V_Int", "params": [750] }] },
 					{ "__identifier": "GravityX", "__type": "Int", "__value": 0, "__tile": null, "defUid": 258, "realEditorValues": [] },
-					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
+					{ "__identifier": "BallMass", "__type": "Float", "__value": 2, "__tile": null, "defUid": 259, "realEditorValues": [{ "id": "V_Float", "params": [2] }] }
 				],
 				"layerInstances": [
 					{
@@ -4333,8 +4333,8 @@
 								"defUid": 235,
 								"px": [304,624],
 								"fieldInstances": [
-									{ "__identifier": "ForceFactor", "__type": "Float", "__value": 5, "__tile": null, "defUid": 239, "realEditorValues": [{ "id": "V_Float", "params": [5] }] },
-									{ "__identifier": "Mass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 260, "realEditorValues": [] },
+									{ "__identifier": "ForceFactor", "__type": "Float", "__value": 6, "__tile": null, "defUid": 239, "realEditorValues": [{ "id": "V_Float", "params": [6] }] },
+									{ "__identifier": "Mass", "__type": "Float", "__value": 10, "__tile": null, "defUid": 260, "realEditorValues": [{ "id": "V_Float", "params": [10] }] },
 									{ "__identifier": "Travel", "__type": "Int", "__value": 60, "__tile": null, "defUid": 261, "realEditorValues": [] }
 								],
 								"__worldX": 496,
@@ -4353,8 +4353,8 @@
 								"defUid": 236,
 								"px": [127,624],
 								"fieldInstances": [
-									{ "__identifier": "ForceFactor", "__type": "Float", "__value": 5, "__tile": null, "defUid": 237, "realEditorValues": [{ "id": "V_Float", "params": [5] }] },
-									{ "__identifier": "Mass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 262, "realEditorValues": [null] },
+									{ "__identifier": "ForceFactor", "__type": "Float", "__value": 6, "__tile": null, "defUid": 237, "realEditorValues": [{ "id": "V_Float", "params": [6] }] },
+									{ "__identifier": "Mass", "__type": "Float", "__value": 10, "__tile": null, "defUid": 262, "realEditorValues": [{ "id": "V_Float", "params": [10] }] },
 									{ "__identifier": "Travel", "__type": "Int", "__value": 60, "__tile": null, "defUid": 263, "realEditorValues": [null] }
 								],
 								"__worldX": 319,
