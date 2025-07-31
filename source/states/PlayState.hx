@@ -131,7 +131,9 @@ class PlayState extends FlxTransitionableState {
 				if (data != null) {
 					trace(data);
 					var body = buildTile(data, l.tileWidth);
-					body.set_position(l.x + x * l.tileWidth, l.y + y * l.tileHeight);
+					if (body != null) {
+						body.set_position(l.x + x * l.tileWidth, l.y + y * l.tileHeight);
+					}
 				}
 			}
 		}
