@@ -5,10 +5,12 @@ import input.InputCalculator;
 import input.SimpleController;
 import bitdecay.flixel.graphics.Aseprite;
 import bitdecay.flixel.graphics.AsepriteMacros;
+import flixel.addons.nape.FlxNapeSprite;
+import nape.phys.Body;
+import nape.phys.BodyType;
+import nape.shape.Circle;
 
-using echo.FlxEcho;
-
-class Player extends FlxSprite {
+class Player extends FlxNapeSprite {
 	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/ball.json");
 	public static var layers = AsepriteMacros.layerNames("assets/aseprite/characters/ball.json");
 
@@ -28,12 +30,16 @@ class Player extends FlxSprite {
 		// 	}
 		// });
 
-		this.add_body({
-			shape: {
-				type: CIRCLE,
-				radius: 16
-			}
-		});
+		var w = 30;
+		var h = 50;
+		var body = new Body(BodyType.DYNAMIC);
+		body.shapes.add(new Circle(w));
+		addPremadeBody(body);
+	}
+
+	override function setBody(body:Body) {
+		super.setBody(body);
+		body.userData.data = this;
 	}
 
 	override public function update(delta:Float) {

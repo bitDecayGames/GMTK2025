@@ -1,20 +1,22 @@
 package entities;
 
+import nape.shape.Polygon;
+import nape.geom.Vec2;
+import nape.shape.Circle;
 import echo.math.Vector2;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import input.SimpleController;
+import flixel.addons.nape.FlxNapeSprite;
+import nape.phys.Body;
+import nape.phys.BodyType;
 
-using echo.FlxEcho;
-
-class Flipper extends FlxSprite {
+class Flipper extends FlxNapeSprite {
 	var speed:Float = 650;
 	var restingAngle:Float = 30;
 	var flipAngle:Float = -30;
 	var power:Float = 150;
 	var triggerButton:Button;
-
-	var body:echo.Body;
 
 	private var dir:Float = 0;
 
@@ -28,59 +30,69 @@ class Flipper extends FlxSprite {
 		}
 		var w = 30;
 		var h = 50;
-		this.body = this.add_body({
-			x: x,
-			y: y,
-			kinematic: true,
-			mass: 100,
-			rotation: restingAngle,
-			shapes: [
-				{
-					type: CIRCLE,
-					radius: h * .5,
-					offset_x: 0,
-					offset_y: 0,
-				},
-				{
-					type: CIRCLE,
-					radius: h * .4,
-					offset_x: w,
-					offset_y: 0,
-				},
-				// {
-				// 	type: POLYGON,
-				// 	vertices: [new Vector2(0, -h*.5), new Vector2(w, -h*.4), new Vector2(w, h*.4), new Vector2(0, h*.5)]
-				// }
-			],
-		});
-		body.on_move = (x, y) -> this.setPosition(x, y);
-		body.on_rotate = (rot) -> angle = rot;
+		var body = new Body(BodyType.KINEMATIC);
+		body.shapes.add(new Circle(w, Vec2.weak(0, 0)));
+		body.shapes.add(new Circle(w, Vec2.weak(w, 0)));
+		// body.shapes.add(new Polygon(Vec2.weak(w, 0)));
+		addPremadeBody(body);
+		// this.body = this.add_body({
+		//	x: x,
+		//	y: y,
+		//	kinematic: true,
+		//	mass: 100,
+		//	rotation: restingAngle,
+		//	shapes: [
+		//		{
+		//			type: CIRCLE,
+		//			radius: h * .5,
+		//			offset_x: 0,
+		//			offset_y: 0,
+		//		},
+		//		{
+		//			type: CIRCLE,
+		//			radius: h * .4,
+		//			offset_x: w,
+		//			offset_y: 0,
+		//		},
+		//		// {
+		//		// 	type: POLYGON,
+		//		// 	vertices: [new Vector2(0, -h*.5), new Vector2(w, -h*.4), new Vector2(w, h*.4), new Vector2(0, h*.5)]
+		//		// }
+		//	],
+		// });
+		// body.on_move = (x, y) -> this.setPosition(x, y);
+		// body.on_rotate = (rot) -> angle = rot;
 	}
 
 	override public function update(delta:Float) {
 		super.update(delta);
 		if (FlxG.keys.pressed.SPACE) {
-			body.rotational_velocity = -100;
+			this.angularVelocity = -100;
 			// flip(delta);
 		} else {
-			body.rotational_velocity = 100;
+			this.angularVelocity = 100;
 			// rest(delta);
 		}
+	}
+
+	override function setBody(body:Body) {
+		super.setBody(body);
+		body.userData.data = this;
 	}
 
 	public function flip(delta:Float) {
 		var d = delta * dir;
 		if (d < 0) {
-			if (body.rotation + d < flipAngle) {
-				body.rotation = flipAngle;
+			if (this.angle + d < flipAngle) {
+				this.angle = flipAngle;
 			} else {
-				body.rotation += d;
+				this.angle += d;
 			}
 		} else {
-			if (body.rotation + d > flipAngle) {
-				body.rotation = flipAngle;
+			if (this.angle + d > flipAngle) {
+				this.angle = flipAngle;
 			} else {
-				body.rotation += d;
+				this.angle += d;
 			}
 		}
 	}
@@ -88,16 +100,16 @@ class Flipper extends FlxSprite {
 	public function rest(delta:Float) {
 		var d = delta * dir;
 		if (-d < 0) {
-			if (body.rotation - d < restingAngle) {
-				body.rotation = restingAngle;
+			if (this.angle - d < restingAngle) {
+				this.angle = restingAngle;
 			} else {
-				body.rotation -= d;
+				this.angle -= d;
 			}
 		} else {
-			if (body.rotation - d > restingAngle) {
-				body.rotation = restingAngle;
+			if (this.angle - d > restingAngle) {
+				this.angle = restingAngle;
 			} else {
-				body.rotation -= d;
+				this.angle -= d;
 			}
 		}
 	}

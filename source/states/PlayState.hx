@@ -1,7 +1,5 @@
 package states;
 
-import echo.Body;
-import echo.math.Vector2;
 import flixel.FlxObject;
 import levels.ldtk.LdtkTilemap.LdtkTile;
 import levels.ldtk.BDTilemap;
@@ -21,8 +19,8 @@ import events.EventBus;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
+import flixel.addons.nape.FlxNapeSpace;
 
-using echo.FlxEcho;
 using states.FlxStateExt;
 
 class PlayState extends FlxTransitionableState {
@@ -47,15 +45,12 @@ class PlayState extends FlxTransitionableState {
 			QLog.notice('I got me an event about ${c.count} clicks having happened.');
 		});
 
-		FlxEcho.init({
-			width: FlxG.width,
-			height: FlxG.height,
-			gravity_y: 24,
-			iterations: 16,
-		});
+		FlxNapeSpace.init();
+		FlxNapeSpace.space.gravity.setxy(0, 10);
+		FlxNapeSpace.drawDebug = true;
 
-		FlxEcho.add_group_bodies(worldTiles);
-		FlxEcho.add_group_bodies(playerGroup);
+		// FlxEcho.add_group_bodies(worldTiles);
+		// FlxEcho.add_group_bodies(playerGroup);
 
 		// QLog.error('Example error');
 
@@ -69,10 +64,6 @@ class PlayState extends FlxTransitionableState {
 		loadLevel("BaseWorld", "Level_0");
 
 		var f = new Flipper(200, 410);
-		f.add_to_group(flipperGroup);
-
-		FlxEcho.draw_debug = true;
-		// FlxEcho.debug_drawer.draw_quadtree = true;
 	}
 
 	// override function draw() {
@@ -94,12 +85,12 @@ class PlayState extends FlxTransitionableState {
 			maxBounds.y = Math.max(maxBounds.y, tl.y + tl.height);
 			midGroundGroup.add(tl);
 
-			makeEchoTiles(tl);
+			// makeEchoTiles(tl);
 		}
 
 		player = new Player(level.spawnPoint.x, level.spawnPoint.y);
 		camera.follow(player);
-		player.add_to_group(playerGroup);
+		// player.add_to_group(playerGroup);
 
 		for (t in level.camTransitions) {
 			transitions.add(t);
@@ -111,27 +102,27 @@ class PlayState extends FlxTransitionableState {
 			}
 		}
 
-		FlxEcho.instance.world.set(minBounds.x, minBounds.y, maxBounds.x - minBounds.x, maxBounds.y - minBounds.y);
+		// FlxEcho.instance.world.set(minBounds.x, minBounds.y, maxBounds.x - minBounds.x, maxBounds.y - minBounds.y);
 
-		FlxEcho.listen(worldTiles, playerGroup, {
-			separate: true,
-			enter: (a, b, o) -> {
-				trace('something happened');
-				// Collide.ignoreCollisionsOfBColor(a, b);
-			},
-			exit: (a, b) -> {
-				// Collide.restoreCollisions(a, b);
-			}
-		});
-		FlxEcho.listen(flipperGroup, playerGroup, {
-			separate: true,
-			enter: (a, b, o) -> {
-				// Collide.ignoreCollisionsOfBColor(a, b);
-			},
-			exit: (a, b) -> {
-				// Collide.restoreCollisions(a, b);
-			}
-		});
+		// FlxEcho.listen(worldTiles, playerGroup, {
+		//	separate: true,
+		//	enter: (a, b, o) -> {
+		//		trace('something happened');
+		//		// Collide.ignoreCollisionsOfBColor(a, b);
+		//	},
+		//	exit: (a, b) -> {
+		//		// Collide.restoreCollisions(a, b);
+		//	}
+		// });
+		// FlxEcho.listen(flipperGroup, playerGroup, {
+		//	separate: true,
+		//	enter: (a, b, o) -> {
+		//		// Collide.ignoreCollisionsOfBColor(a, b);
+		//	},
+		//	exit: (a, b) -> {
+		//		// Collide.restoreCollisions(a, b);
+		//	}
+		// });
 
 		EventBus.fire(new PlayerSpawn(player.x, player.y));
 	}
@@ -142,39 +133,41 @@ class PlayState extends FlxTransitionableState {
 				var data = l.getMetaDataAt(x, y);
 				if (data != null) {
 					trace(data);
-					var body = buildTile(data, l.tileWidth);
-					if (body != null) {
-						body.set_position(l.x + x * l.tileWidth, l.y + y * l.tileHeight);
-					}
+					// var body = buildTile(data, l.tileWidth);
+					// if (body != null) {
+					// 	body.set_position(l.x + x * l.tileWidth, l.y + y * l.tileHeight);
+					// }
 				}
 			}
 		}
 	}
 
-	function buildTile(data:TileCollisionData, tSize:Int):Body {
-		switch (data.type) {
-			case "polygon":
-				// TODO: put these all on a 'world' body or something
-				var b = new FlxObject();
-				var vertices:Array<Vector2> = [];
-				for (p in data.points) {
-					vertices.push(new Vector2(p[0] * tSize, p[1] * tSize));
-					// vertices.push(new Vector2(p[0] * tSize, p[1] * tSize));
-				}
-				var body = FlxEcho.add_body(b, {
-					kinematic: true,
-					shape: {
-						type: POLYGON,
-						vertices: vertices
+	/*
+		function buildTile(data:TileCollisionData, tSize:Int):Body {
+			switch (data.type) {
+				case "polygon":
+					// TODO: put these all on a 'world' body or something
+					var b = new FlxObject();
+					var vertices:Array<Vector2> = [];
+					for (p in data.points) {
+						vertices.push(new Vector2(p[0] * tSize, p[1] * tSize));
+						// vertices.push(new Vector2(p[0] * tSize, p[1] * tSize));
 					}
-				});
-				b.add_to_group(worldTiles);
-				return body;
-			default:
-				return null;
+					 var body = FlxEcho.add_body(b, {
+					 	kinematic: true,
+					 	shape: {
+					 		type: POLYGON,
+					 		vertices: vertices
+					 	}
+					 });
+					 b.add_to_group(worldTiles);
+					 return body;
+					return null;
+				default:
+					return null;
+			}
 		}
-	}
-
+	 */
 	function unload() {
 		for (t in transitions) {
 			t.destroy();
@@ -196,7 +189,7 @@ class PlayState extends FlxTransitionableState {
 		}
 		worldTiles.clear();
 
-		FlxEcho.clear();
+		// FlxEcho.clear();
 	}
 
 	function handleAchieve(def:AchievementDef) {
