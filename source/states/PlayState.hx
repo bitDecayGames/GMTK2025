@@ -1,5 +1,9 @@
 package states;
 
+import nape.phys.BodyType;
+import nape.shape.Polygon;
+import nape.phys.Body;
+import nape.geom.Vec2;
 import flixel.FlxObject;
 import levels.ldtk.LdtkTilemap.LdtkTile;
 import levels.ldtk.BDTilemap;
@@ -85,7 +89,7 @@ class PlayState extends FlxTransitionableState {
 			maxBounds.y = Math.max(maxBounds.y, tl.y + tl.height);
 			midGroundGroup.add(tl);
 
-			// makeEchoTiles(tl);
+			makeEchoTiles(tl);
 		}
 
 		player = new Player(level.spawnPoint.x, level.spawnPoint.y);
@@ -128,46 +132,35 @@ class PlayState extends FlxTransitionableState {
 	}
 
 	function makeEchoTiles(l:BDTilemap) {
+		var worldBody = new Body(BodyType.STATIC);
+
 		for (x in 0...l.widthInTiles) {
 			for (y in 0...l.heightInTiles) {
 				var data = l.getMetaDataAt(x, y);
 				if (data != null) {
 					trace(data);
-					// var body = buildTile(data, l.tileWidth);
-					// if (body != null) {
-					// 	body.set_position(l.x + x * l.tileWidth, l.y + y * l.tileHeight);
-					// }
+					buildTileShape(worldBody, l.x + x * l.tileWidth, l.y + y * l.tileHeight, data, l.tileWidth);
 				}
 			}
 		}
+		worldBody.space = FlxNapeSpace.space;
 	}
 
-	/*
-		function buildTile(data:TileCollisionData, tSize:Int):Body {
-			switch (data.type) {
-				case "polygon":
-					// TODO: put these all on a 'world' body or something
-					var b = new FlxObject();
-					var vertices:Array<Vector2> = [];
-					for (p in data.points) {
-						vertices.push(new Vector2(p[0] * tSize, p[1] * tSize));
-						// vertices.push(new Vector2(p[0] * tSize, p[1] * tSize));
-					}
-					 var body = FlxEcho.add_body(b, {
-					 	kinematic: true,
-					 	shape: {
-					 		type: POLYGON,
-					 		vertices: vertices
-					 	}
-					 });
-					 b.add_to_group(worldTiles);
-					 return body;
-					return null;
-				default:
-					return null;
-			}
+	function buildTileShape(worldBody:Body, shapeX:Float, shapeY:Float, data:TileCollisionData, tSize:Int) {
+		switch (data.type) {
+			case "polygon":
+				// TODO: put these all on a 'world' body or something
+				var b = new FlxObject();
+				var vertices:Array<Vec2> = [];
+				for (p in data.points) {
+					vertices.push(new Vec2(shapeX + p[0] * tSize, shapeY + p[1] * tSize));
+				}
+
+				worldBody.shapes.add(new Polygon(vertices));
+			default:
 		}
-	 */
+	}
+
 	function unload() {
 		for (t in transitions) {
 			t.destroy();
