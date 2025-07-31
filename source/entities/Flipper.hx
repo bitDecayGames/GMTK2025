@@ -16,25 +16,25 @@ class Flipper extends FlxNapeSprite {
 	private static var degToRad = Math.PI / 180.0;
 	private static var radToDeg = 180.0 / Math.PI;
 
-	var speed:Float = 650;
+	var speed:Float = 450;
 	var restingAngle:Float = 30;
 	var flipAngle:Float = -30;
-	var power:Float = 150;
-	var triggerButton:Button;
 
 	private var dir:Float = 0;
 
-	public function new(X:Float, Y:Float) {
+	public function new(X:Float, Y:Float, width:Float, height:Float, restingAngle:Float, flipAngle:Float) {
 		super(X, Y);
+		this.restingAngle = restingAngle;
+		this.flipAngle = flipAngle;
 
 		if (flipAngle - restingAngle < 0) {
 			dir = -1 * speed;
 		} else {
 			dir = 1 * speed;
 		}
-		var w = 80;
-		var h = 50;
-		var body = new Body(BodyType.DYNAMIC);
+		var w = width;
+		var h = height;
+		var body = new Body(BodyType.KINEMATIC);
 		body.shapes.add(new Circle(h * .5, Vec2.weak(0, 0)));
 		body.shapes.add(new Circle(h * .4, Vec2.weak(w, 0)));
 		body.shapes.add(new Polygon([
@@ -43,46 +43,35 @@ class Flipper extends FlxNapeSprite {
 			Vec2.weak(w, h * .4),
 			Vec2.weak(0, h * .5)
 		]));
+		body.mass = 0.0001;
 		body.rotation = restingAngle * degToRad;
-		body.gravMassScale = 0;
 		addPremadeBody(body);
-		// this.body = this.add_body({
-		//	x: x,
-		//	y: y,
-		//	kinematic: true,
-		//	mass: 100,
-		//	rotation: restingAngle,
-		//	shapes: [
-		//		{
-		//			type: CIRCLE,
-		//			radius: h * .5,
-		//			offset_x: 0,
-		//			offset_y: 0,
-		//		},
-		//		{
-		//			type: CIRCLE,
-		//			radius: h * .4,
-		//			offset_x: w,
-		//			offset_y: 0,
-		//		},
-		//		// {
-		//		// 	type: POLYGON,
-		//		// 	vertices: [Vec2.weak(0, -h*.5), Vec2.weak(w, -h*.4), Vec2.weak(w, h*.4), Vec2.weak(0, h*.5)]
-		//		// }
-		//	],
-		// });
-		// body.on_move = (x, y) -> this.setPosition(x, y);
-		// body.on_rotate = (rot) -> angle = rot;
 	}
 
 	override public function update(delta:Float) {
 		super.update(delta);
 		if (FlxG.keys.pressed.SPACE) {
-			body.applyAngularImpulse(1000);
-			// flip(delta);
+			body.angularVel = dir * degToRad;
 		} else {
-			body.applyAngularImpulse(-1000);
-			// rest(delta);
+			body.angularVel = -dir * degToRad;
+		}
+		var deg = body.rotation * radToDeg;
+		if (dir < 0) {
+			if (deg > restingAngle) {
+				body.rotation = restingAngle * degToRad;
+				body.angularVel = 0;
+			} else if (deg < flipAngle) {
+				body.rotation = flipAngle * degToRad;
+				body.angularVel = 0;
+			}
+		} else {
+			if (deg < restingAngle) {
+				body.rotation = restingAngle * degToRad;
+				body.angularVel = 0;
+			} else if (deg > flipAngle) {
+				body.rotation = flipAngle * degToRad;
+				body.angularVel = 0;
+			}
 		}
 	}
 
@@ -107,7 +96,7 @@ class Flipper extends FlxNapeSprite {
 				deg += d;
 			}
 		}
-		body.rotation = deg;
+		body.rotation = deg * degToRad;
 	}
 
 	public function rest(delta:Float) {
@@ -126,6 +115,6 @@ class Flipper extends FlxNapeSprite {
 				deg -= d;
 			}
 		}
-		body.rotation = deg;
+		body.rotation = deg * degToRad;
 	}
 }
