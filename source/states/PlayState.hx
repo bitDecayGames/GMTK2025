@@ -54,8 +54,8 @@ class PlayState extends FlxTransitionableState {
 		});
 
 		FlxNapeSpace.init();
-		FlxNapeSpace.velocityIterations = 20;
-		FlxNapeSpace.positionIterations = 20;
+		FlxNapeSpace.velocityIterations = 100;
+		FlxNapeSpace.positionIterations = 100;
 		FlxNapeSpace.space.gravity.setxy(0, 1000);
 
 		#if napeDebug
