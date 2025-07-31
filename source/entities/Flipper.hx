@@ -1,5 +1,6 @@
 package entities;
 
+import nape.constraint.DistanceJoint;
 import input.SimpleController;
 import nape.phys.Material;
 import nape.constraint.WeldJoint;
@@ -26,8 +27,7 @@ class Flipper extends FlxNapeSprite {
 
 	var ctrlGroup:ControlGroup;
 
-	var speed:Float = 450;
-	var restingAngle:Float;
+	var restAngle:Float;
 	var flipAngle:Float;
 
 	var flipDirection:FlipDir;
@@ -36,9 +36,12 @@ class Flipper extends FlxNapeSprite {
 	var jointMax:Float;
 	var angleJoint:AngleJoint;
 
+	var activateJoint:DistanceJoint;
+	var restingJoint:DistanceJoint;
+
 	private var dir:Float = 0;
 
-	public function new(group:ControlGroup, X:Float, Y:Float, width:Float, strength:Float, bigRad:Float, smallRad:Float, restingAngle:Float, flipAngle:Float) {
+	public function new(group:ControlGroup, X:Float, Y:Float, width:Float, strength:Float, bigRad:Float, smallRad:Float, restAng:Float, flipAng:Float) {
 		super();
 		Aseprite.loadAllAnimations(this, AssetPaths.flipper__json);
 		animation.play(anims.flipper_1_aseprite);
@@ -46,17 +49,18 @@ class Flipper extends FlxNapeSprite {
 		this.ctrlGroup = group;
 		this.width = width;
 		this.height = bigRad;
-		this.restingAngle = restingAngle;
-		this.flipAngle = flipAngle;
-		speed *= strength;
 
-		if (flipAngle - restingAngle < 0) {
+		if (flipAng - restAng < 0) {
 			flipDirection = CCW;
-			dir = -1 * speed;
+			flipAngle = Math.min(flipAng, restAng);
+			restAngle = Math.max(flipAng, restAng);
 		} else {
 			flipDirection = CW;
-			dir = 1 * speed;
+			flipAngle = Math.max(flipAng, restAng);
+			restAngle = Math.min(flipAng, restAng);
 		}
+		flipAngle *= degToRad;
+		restAngle *= degToRad;
 		var w = width;
 
 		var body = new Body(BodyType.DYNAMIC);
@@ -77,15 +81,29 @@ class Flipper extends FlxNapeSprite {
 		pivot.stiff = true;
 		pivot.space = FlxNapeSpace.space;
 
-		jointMin = Math.min(restingAngle, flipAngle) * degToRad;
-		jointMax = Math.max(restingAngle, flipAngle) * degToRad;
+		jointMin = Math.min(restAngle, flipAngle);
+		jointMax = Math.max(restAngle, flipAngle);
 		angleJoint = new AngleJoint(FlxNapeSpace.space.world, body, jointMin, jointMax);
 		angleJoint.active = true;
 		angleJoint.stiff = true;
 		angleJoint.space = FlxNapeSpace.space;
 
+		var forceLocalPos = Vec2.get(w - bigRad - smallRad, 0);
+		var activeJointWorldPos = body.localPointToWorld(forceLocalPos.copy().rotate(flipAngle));
+		activateJoint = new DistanceJoint(body, FlxNapeSpace.space.world, forceLocalPos, activeJointWorldPos, 0, 0);
+		activateJoint.active = true;
+		activateJoint.stiff = false;
+		activateJoint.space = FlxNapeSpace.space;
+		activateJoint.maxForce = strength;
+
+		var restingJointWorldPos = body.localPointToWorld(forceLocalPos.copy().rotate(restAngle));
+		restingJoint = new DistanceJoint(body, FlxNapeSpace.space.world, forceLocalPos, restingJointWorldPos, 0, 0);
+		restingJoint.active = true;
+		restingJoint.stiff = false;
+		restingJoint.space = FlxNapeSpace.space;
+
 		body.mass = 100;
-		body.rotation = restingAngle * degToRad;
+		body.rotation = restAngle;
 		addPremadeBody(body);
 	}
 
@@ -109,60 +127,14 @@ class Flipper extends FlxNapeSprite {
 		body.userData.data = this;
 	}
 
-	// Some jank to help us stop moving the flipper once it's at its limit
-	var lockout = 0;
-
 	public function flip(delta:Float) {
-		if (lockout == 1) {
-			return;
-		} else {
-			lockout = 0;
-		}
-
-		if (flipDirection == CCW && body.rotation <= jointMin) {
-			body.angularVel = 0;
-			angleJoint.jointMax = jointMin;
-			lockout = 1;
-			return;
-		} else if (flipDirection == CW && body.rotation >= jointMax) {
-			body.angularVel = 0;
-			angleJoint.jointMin = jointMax;
-			lockout = 1;
-			return;
-		} else {
-			angleJoint.jointMax = jointMax;
-			angleJoint.jointMin = jointMin;
-		}
-
-		body.applyAngularImpulse(dir * (body.mass));
-		// body.applyImpulse();
-		// body.angularVel = dir * degToRad;
+		activateJoint.active = true;
+		restingJoint.active = false;
 	}
 
 	public function rest(delta:Float) {
-		if (lockout == -1) {
-			return;
-		} else {
-			lockout = 0;
-		}
-
-		if (flipDirection == CCW && body.rotation >= jointMax) {
-			body.angularVel = 0;
-			angleJoint.jointMin = jointMax;
-			lockout = -1;
-			return;
-		} else if (flipDirection == CW && body.rotation <= jointMin) {
-			body.angularVel = 0;
-			angleJoint.jointMax = jointMin;
-			lockout = -1;
-			return;
-		} else {
-			angleJoint.jointMax = jointMax;
-			angleJoint.jointMin = jointMin;
-		}
-
-		body.applyAngularImpulse(-dir * (body.mass));
-		// body.angularVel = -dir * degToRad;
+		activateJoint.active = false;
+		restingJoint.active = true;
 	}
 }
 
