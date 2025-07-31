@@ -1,5 +1,6 @@
 package levels.ldtk;
 
+import entities.interact.Popper;
 import entities.Flipper;
 import flixel.FlxSprite;
 import entities.CameraTransition;
@@ -40,6 +41,7 @@ class Level {
 	public var camTransitions:Array<CameraTransition>;
 
 	public var flippers:Array<Flipper> = [];
+	public var poppers:Array<Popper> = [];
 
 	public function new(worldNameOrIID:String, nameOrIID:String) {
 		this.worldID = worldNameOrIID;
@@ -76,6 +78,7 @@ class Level {
 			parseCameraZones(raw.l_Objects.all_CameraZone);
 			parseCameraTransitions(raw.l_Objects.all_CameraTransition);
 			parseFlippers(raw.l_Objects.all_FlipperLeft, raw.l_Objects.all_FlipperRight);
+			parsePoppers(raw.l_Objects.all_Popper, raw.l_Objects.all_SmallPopper);
 		}
 	}
 
@@ -106,6 +109,13 @@ class Level {
 		for (rd in rightDefs) {
 			var f = new Flipper(RIGHT, rd.worldPixelX, rd.worldPixelY, 80, rd.f_ForceFactor, 13, 8, 150, 150 + rd.f_Travel, rd.f_Mass);
 			flippers.push(f);
+		}
+	}
+
+	function parsePoppers(popperDefs:Array<Ldtk.Entity_Popper>, smallPopDefs:Array<Ldtk.Entity_SmallPopper>) {
+		trace(popperDefs.length);
+		for (pd in popperDefs) {
+			poppers.push(new Popper(pd.worldPixelX, pd.worldPixelY, 1000, 75));
 		}
 	}
 }

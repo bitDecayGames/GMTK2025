@@ -1,5 +1,6 @@
 package entities;
 
+import constants.CbTypes;
 import nape.phys.Material;
 import constants.CGroups;
 import nape.dynamics.InteractionFilter;
@@ -14,7 +15,7 @@ import nape.phys.Body;
 import nape.phys.BodyType;
 import nape.shape.Circle;
 
-class Player extends FlxNapeSprite {
+class Player extends SelfAssigningFlxNapeSprite {
 	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/ball.json");
 	public static var layers = AsepriteMacros.layerNames("assets/aseprite/characters/ball.json");
 
@@ -42,6 +43,7 @@ class Player extends FlxNapeSprite {
 		addPremadeBody(body);
 
 		body.setShapeFilters(new InteractionFilter(CGroups.BALL, CGroups.ALL));
+		body.cbTypes.add(CbTypes.CB_BALL);
 	}
 
 	override function setBody(body:Body) {

@@ -15,11 +15,10 @@ import nape.shape.Polygon;
 import nape.geom.Vec2;
 import nape.shape.Circle;
 import flixel.FlxG;
-import flixel.addons.nape.FlxNapeSprite;
 import nape.phys.Body;
 import nape.phys.BodyType;
 
-class Flipper extends FlxNapeSprite {
+class Flipper extends SelfAssigningFlxNapeSprite {
 	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/flipper.json");
 
 	private static var degToRad = Math.PI / 180.0;

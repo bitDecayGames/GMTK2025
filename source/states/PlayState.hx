@@ -1,5 +1,11 @@
 package states;
 
+import entities.interact.Interactable;
+import nape.callbacks.InteractionCallback;
+import constants.CbTypes;
+import nape.callbacks.InteractionType;
+import nape.callbacks.CbEvent;
+import nape.callbacks.InteractionListener;
 import nape.phys.Material;
 import constants.CGroups;
 import nape.dynamics.InteractionFilter;
@@ -35,6 +41,7 @@ class PlayState extends FlxTransitionableState {
 	var playerGroup = new FlxGroup();
 	var worldTiles = new FlxGroup();
 	var midGroundGroup = new FlxGroup();
+	var foregroundGroup = new FlxGroup();
 	var flipperGroup = new FlxGroup();
 	var activeCameraTransition:CameraTransition = null;
 
@@ -54,6 +61,7 @@ class PlayState extends FlxTransitionableState {
 			QLog.notice('I got me an event about ${c.count} clicks having happened.');
 		});
 
+		CbTypes.initTypes();
 		FlxNapeSpace.init();
 		FlxNapeSpace.velocityIterations = 100;
 		FlxNapeSpace.positionIterations = 100;
@@ -69,6 +77,7 @@ class PlayState extends FlxTransitionableState {
 		add(worldTiles);
 		add(playerGroup);
 		add(flipperGroup);
+		add(foregroundGroup);
 		add(transitions);
 
 		loadLevel("BaseWorld", "Level_4");
@@ -111,6 +120,13 @@ class PlayState extends FlxTransitionableState {
 		for (flipper in level.flippers) {
 			flipperGroup.add(flipper);
 		}
+
+		for (popper in level.poppers) {
+			foregroundGroup.add(popper);
+		}
+
+		FlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
+			ballInteractableCallback));
 
 		EventBus.fire(new PlayerSpawn(player.x, player.y));
 	}
@@ -163,6 +179,11 @@ class PlayState extends FlxTransitionableState {
 		}
 		midGroundGroup.clear();
 
+		for (o in foregroundGroup) {
+			o.destroy();
+		}
+		foregroundGroup.clear();
+
 		for (o in worldTiles) {
 			o.destroy();
 		}
@@ -170,6 +191,13 @@ class PlayState extends FlxTransitionableState {
 
 		// FlxEcho.clear();
 		FlxNapeSpace.space.clear();
+	}
+
+	function ballInteractableCallback(data:InteractionCallback) {
+		var player:Player = cast data.int1.castBody.userData.data;
+		var inter:Interactable = cast data.int2.castBody.userData.data;
+
+		inter.handleInteraction(data);
 	}
 
 	function handleAchieve(def:AchievementDef) {
