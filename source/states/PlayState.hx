@@ -97,6 +97,7 @@ class PlayState extends FlxTransitionableState {
 		player.body.mass = level.rawLevels[0].f_BallMass;
 		camera.follow(player);
 		playerGroup.add(player);
+		playerGroup.add(player.emitter);
 
 		for (t in level.camTransitions) {
 			transitions.add(t);

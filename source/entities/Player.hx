@@ -1,5 +1,8 @@
 package entities;
 
+import flixel.util.FlxColor;
+import flixel.effects.particles.FlxParticle;
+import flixel.effects.particles.FlxEmitter;
 import nape.phys.Material;
 import constants.CGroups;
 import nape.dynamics.InteractionFilter;
@@ -22,6 +25,8 @@ class Player extends FlxNapeSprite {
 	var speed:Float = 150;
 	var playerNum = 0;
 
+	public var emitter:FlxEmitter;
+
 	public function new(X:Float, Y:Float) {
 		super(X, Y);
 		// This call can be used once https://github.com/HaxeFlixel/flixel/pull/2860 is merged
@@ -42,6 +47,19 @@ class Player extends FlxNapeSprite {
 		addPremadeBody(body);
 
 		body.setShapeFilters(new InteractionFilter(CGroups.BALL, CGroups.ALL));
+
+		var trailLength = 15;
+		var lifespan = .2;
+		var endScale = 0.7;
+		var startAlpha = 0.1;
+		emitter = new FlxEmitter(X, Y, trailLength);
+		emitter.loadParticles(AssetPaths.ball__png, trailLength, 0, false, false);
+		emitter.launchMode = SQUARE;
+		emitter.velocity.set(0, 0, 0, 0, 0, 0, 0, 0);
+		emitter.lifespan.set(lifespan, lifespan);
+		emitter.scale.set(1, 1, 1, 1, endScale, endScale, endScale, endScale);
+		emitter.alpha.set(startAlpha, startAlpha, 0, 0);
+		emitter.start(false, lifespan / trailLength);
 	}
 
 	override function setBody(body:Body) {
@@ -51,6 +69,7 @@ class Player extends FlxNapeSprite {
 
 	override public function update(delta:Float) {
 		super.update(delta);
+		emitter.setPosition(body.position.x, body.position.y);
 
 		var inputDir = InputCalculator.getInputCardinal(playerNum);
 		if (inputDir != NONE) {
