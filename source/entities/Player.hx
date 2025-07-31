@@ -30,10 +30,8 @@ class Player extends FlxNapeSprite {
 		// 	}
 		// });
 
-		var w = 30;
-		var h = 50;
 		var body = new Body(BodyType.DYNAMIC);
-		body.shapes.add(new Circle(w));
+		body.shapes.add(new Circle(16));
 		addPremadeBody(body);
 	}
 

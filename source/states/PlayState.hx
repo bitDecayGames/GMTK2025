@@ -67,7 +67,8 @@ class PlayState extends FlxTransitionableState {
 
 		loadLevel("BaseWorld", "Level_0");
 
-		var f = new Flipper(50, 310);
+		var f = new Flipper(50, 400);
+		flipperGroup.add(f);
 	}
 
 	// override function draw() {
@@ -183,6 +184,7 @@ class PlayState extends FlxTransitionableState {
 		worldTiles.clear();
 
 		// FlxEcho.clear();
+		FlxNapeSpace.space.clear();
 	}
 
 	function handleAchieve(def:AchievementDef) {
