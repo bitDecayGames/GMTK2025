@@ -32,6 +32,8 @@ class PlayState extends FlxTransitionableState {
 	var midGroundGroup = new FlxGroup();
 	var activeCameraTransition:CameraTransition = null;
 
+	var gravity = FlxPoint.get(0, 16 * 9);
+
 	var transitions = new FlxTypedGroup<CameraTransition>();
 
 	var ldtk = new LdtkProject();
@@ -39,7 +41,7 @@ class PlayState extends FlxTransitionableState {
 	override public function create() {
 		super.create();
 
-		FlxG.camera.pixelPerfectRender = true;
+		// FlxG.camera.pixelPerfectRender = true;
 
 		Achievements.onAchieve.add(handleAchieve);
 		EventBus.subscribe(ClickCount, (c) -> {
@@ -49,8 +51,9 @@ class PlayState extends FlxTransitionableState {
 		FlxEcho.init({
 			width: FlxG.width,
 			height: FlxG.height,
-			gravity_y: 24,
-			iterations: 16,
+			gravity_x: gravity.x,
+			gravity_y: gravity.y,
+			// iterations: 16,
 		});
 
 		FlxEcho.add_group_bodies(worldTiles);
