@@ -1,5 +1,7 @@
 package entities;
 
+import bitdecay.flixel.graphics.Aseprite;
+import bitdecay.flixel.graphics.AsepriteMacros;
 import nape.dynamics.InteractionFilter;
 import constants.CGroups;
 import nape.constraint.PivotJoint;
@@ -14,6 +16,8 @@ import nape.phys.Body;
 import nape.phys.BodyType;
 
 class Flipper extends FlxNapeSprite {
+	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/flipper.json");
+
 	private static var degToRad = Math.PI / 180.0;
 	private static var radToDeg = 180.0 / Math.PI;
 
@@ -23,12 +27,13 @@ class Flipper extends FlxNapeSprite {
 
 	private var dir:Float = 0;
 
-	public function new(X:Float, Y:Float, width:Float, height:Float, restingAngle:Float, flipAngle:Float) {
+	public function new(X:Float, Y:Float, width:Float, bigRad:Float, smallRad:Float, restingAngle:Float, flipAngle:Float) {
 		super();
-		loadGraphic(AssetPaths.flipper__png, true, 80, 58);
+		Aseprite.loadAllAnimations(this, AssetPaths.flipper__json);
+		animation.play(anims.flipper_1_aseprite);
 		origin.set(12, 24);
 		this.width = width;
-		this.height = height;
+		this.height = bigRad;
 		this.restingAngle = restingAngle;
 		this.flipAngle = flipAngle;
 
@@ -38,17 +43,16 @@ class Flipper extends FlxNapeSprite {
 			dir = 1 * speed;
 		}
 		var w = width;
-		var h = height;
 
 		var body = new Body(BodyType.DYNAMIC);
 		body.position.set(Vec2.get(X, Y));
-		body.shapes.add(new Circle(h * .5, Vec2.weak(0, 0)));
-		body.shapes.add(new Circle(h * .4, Vec2.weak(w, 0)));
+		body.shapes.add(new Circle(bigRad, Vec2.weak(0, 0)));
+		body.shapes.add(new Circle(smallRad, Vec2.weak(w - bigRad - smallRad, 0)));
 		body.shapes.add(new Polygon([
-			Vec2.weak(0, -h * .5),
-			Vec2.weak(w, -h * .4),
-			Vec2.weak(w, h * .4),
-			Vec2.weak(0, h * .5)
+			Vec2.weak(0, -bigRad),
+			Vec2.weak(w - bigRad - smallRad, -smallRad),
+			Vec2.weak(w - bigRad - smallRad, smallRad),
+			Vec2.weak(0, bigRad)
 		]));
 
 		body.setShapeFilters(new InteractionFilter(CGroups.CONTROL_SURFACE, CGroups.BALL));
