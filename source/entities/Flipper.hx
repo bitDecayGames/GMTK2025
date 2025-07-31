@@ -28,12 +28,17 @@ class Flipper extends FlxNapeSprite {
 		} else {
 			dir = 1 * speed;
 		}
-		var w = 30;
+		var w = 80;
 		var h = 50;
 		var body = new Body(BodyType.KINEMATIC);
-		body.shapes.add(new Circle(w, Vec2.weak(0, 0)));
-		body.shapes.add(new Circle(w, Vec2.weak(w, 0)));
-		// body.shapes.add(new Polygon(Vec2.weak(w, 0)));
+		body.shapes.add(new Circle(h * .5, Vec2.weak(0, 0)));
+		body.shapes.add(new Circle(h * .4, Vec2.weak(w, 0)));
+		body.shapes.add(new Polygon([
+			Vec2.weak(0, -h * .5),
+			Vec2.weak(w, -h * .4),
+			Vec2.weak(w, h * .4),
+			Vec2.weak(0, h * .5)
+		]));
 		addPremadeBody(body);
 		// this.body = this.add_body({
 		//	x: x,
@@ -56,7 +61,7 @@ class Flipper extends FlxNapeSprite {
 		//		},
 		//		// {
 		//		// 	type: POLYGON,
-		//		// 	vertices: [new Vector2(0, -h*.5), new Vector2(w, -h*.4), new Vector2(w, h*.4), new Vector2(0, h*.5)]
+		//		// 	vertices: [Vec2.weak(0, -h*.5), Vec2.weak(w, -h*.4), Vec2.weak(w, h*.4), Vec2.weak(0, h*.5)]
 		//		// }
 		//	],
 		// });
