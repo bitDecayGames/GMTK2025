@@ -54,8 +54,13 @@ class PlayState extends FlxTransitionableState {
 		});
 
 		FlxNapeSpace.init();
+		FlxNapeSpace.velocityIterations = 20;
+		FlxNapeSpace.positionIterations = 20;
 		FlxNapeSpace.space.gravity.setxy(0, 1000);
+
+		#if napeDebug
 		FlxNapeSpace.drawDebug = true;
+		#end
 
 		// QLog.error('Example error');
 
