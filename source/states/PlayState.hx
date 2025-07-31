@@ -1,5 +1,6 @@
 package states;
 
+import nape.phys.Material;
 import constants.CGroups;
 import nape.dynamics.InteractionFilter;
 import nape.phys.BodyType;
@@ -130,6 +131,8 @@ class PlayState extends FlxTransitionableState {
 		worldBody.space = FlxNapeSpace.space;
 	}
 
+	var baseWallMat = new Material(-.7, .1);
+
 	function buildTileShape(worldBody:Body, shapeX:Float, shapeY:Float, data:TileCollisionData, tSize:Int) {
 		switch (data.type) {
 			case "polygon":
@@ -139,7 +142,7 @@ class PlayState extends FlxTransitionableState {
 					vertices.push(new Vec2(shapeX + p[0] * tSize, shapeY + p[1] * tSize));
 				}
 
-				worldBody.shapes.add(new Polygon(vertices));
+				worldBody.shapes.add(new Polygon(vertices, baseWallMat));
 			default:
 		}
 	}

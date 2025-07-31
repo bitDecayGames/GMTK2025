@@ -35,9 +35,12 @@ class Flipper extends FlxNapeSprite {
 	var jointMin:Float;
 	var jointMax:Float;
 	var angleJoint:AngleJoint;
+	var pivotJoint:PivotJoint;
 
 	var activateJoint:DistanceJoint;
 	var restingJoint:DistanceJoint;
+
+	var flipperMaterial = new Material(-0.2);
 
 	private var dir:Float = 0;
 
@@ -67,23 +70,23 @@ class Flipper extends FlxNapeSprite {
 
 		var body = new Body(BodyType.DYNAMIC);
 		body.position.set(Vec2.get(X, Y));
-		body.shapes.add(new Circle(bigRad, Vec2.weak(0, 0), Material.rubber()));
-		body.shapes.add(new Circle(smallRad, Vec2.weak(w - bigRad - smallRad, 0), Material.rubber()));
+		body.shapes.add(new Circle(bigRad, Vec2.weak(0, 0), flipperMaterial));
+		body.shapes.add(new Circle(smallRad, Vec2.weak(w - bigRad - smallRad, 0), flipperMaterial));
 		body.shapes.add(new Polygon([
 			Vec2.weak(0, -bigRad),
 			Vec2.weak(w - bigRad - smallRad, -smallRad),
 			Vec2.weak(w - bigRad - smallRad, smallRad),
 			Vec2.weak(0, bigRad)
-		], Material.rubber()));
+		], flipperMaterial));
 		body.mass = fmass;
 		body.isBullet = true;
 
 		body.setShapeFilters(new InteractionFilter(CGroups.CONTROL_SURFACE, CGroups.BALL));
 
-		var pivot = new PivotJoint(body, FlxNapeSpace.space.world, Vec2.get(), body.localPointToWorld(Vec2.get()));
-		pivot.active = true;
-		pivot.stiff = true;
-		pivot.space = FlxNapeSpace.space;
+		pivotJoint = new PivotJoint(body, FlxNapeSpace.space.world, Vec2.get(), body.localPointToWorld(Vec2.get()));
+		pivotJoint.active = true;
+		pivotJoint.stiff = true;
+		pivotJoint.space = FlxNapeSpace.space;
 
 		jointMin = Math.min(restAngle, flipAngle);
 		jointMax = Math.max(restAngle, flipAngle);
@@ -133,14 +136,77 @@ class Flipper extends FlxNapeSprite {
 		body.userData.data = this;
 	}
 
+	// Some jank to help us stop moving the flipper once it's at its limit
+	var lockout = 0;
+
 	public function flip(delta:Float) {
+		if (lockout == 1) {
+			return;
+		} else {
+			lockout = 0;
+		}
+
+		if (flipDirection == CCW && body.rotation <= jointMin) {
+			body.rotation = jointMin;
+			makeStatic();
+			lockout = 1;
+			return;
+		} else if (flipDirection == CW && body.rotation >= jointMax) {
+			body.rotation = jointMax;
+			makeStatic();
+			lockout = 1;
+			return;
+		} else {
+			makeDynamic();
+			angleJoint.jointMax = jointMax;
+			angleJoint.jointMin = jointMin;
+		}
+
 		activateJoint.active = true;
 		restingJoint.active = false;
 	}
 
 	public function rest(delta:Float) {
+		if (lockout == -1) {
+			return;
+		} else {
+			lockout = 0;
+		}
+
+		if (flipDirection == CCW && body.rotation >= jointMax) {
+			body.rotation = jointMax;
+			makeStatic();
+			lockout = -1;
+			return;
+		} else if (flipDirection == CW && body.rotation <= jointMin) {
+			body.rotation = jointMin;
+			makeStatic();
+			lockout = -1;
+			return;
+		} else {
+			makeDynamic();
+			angleJoint.jointMax = jointMax;
+			angleJoint.jointMin = jointMin;
+		}
+
 		activateJoint.active = false;
 		restingJoint.active = true;
+	}
+
+	function makeStatic() {
+		pivotJoint.active = false;
+		angleJoint.active = false;
+		activateJoint.active = false;
+		restingJoint.active = false;
+		body.type = BodyType.STATIC;
+		body.setShapeMaterials(flipperMaterial);
+	}
+
+	function makeDynamic() {
+		pivotJoint.active = true;
+		angleJoint.active = true;
+		body.type = BodyType.DYNAMIC;
+		body.setShapeMaterials(flipperMaterial);
 	}
 }
 

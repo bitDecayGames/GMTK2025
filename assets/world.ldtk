@@ -4333,7 +4333,7 @@
 								"defUid": 235,
 								"px": [304,624],
 								"fieldInstances": [
-									{ "__identifier": "Force", "__type": "Float", "__value": 10000, "__tile": null, "defUid": 239, "realEditorValues": [{ "id": "V_Float", "params": [10000] }] },
+									{ "__identifier": "Force", "__type": "Float", "__value": 5, "__tile": null, "defUid": 239, "realEditorValues": [{ "id": "V_Float", "params": [5] }] },
 									{ "__identifier": "Mass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 260, "realEditorValues": [] },
 									{ "__identifier": "Travel", "__type": "Int", "__value": 60, "__tile": null, "defUid": 261, "realEditorValues": [] }
 								],
@@ -4353,9 +4353,9 @@
 								"defUid": 236,
 								"px": [127,624],
 								"fieldInstances": [
-									{ "__identifier": "Force", "__type": "Float", "__value": 100, "__tile": null, "defUid": 237, "realEditorValues": [{ "id": "V_Float", "params": [100] }] },
+									{ "__identifier": "Force", "__type": "Float", "__value": 10, "__tile": null, "defUid": 237, "realEditorValues": [{ "id": "V_Float", "params": [10] }] },
 									{ "__identifier": "Mass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 262, "realEditorValues": [null] },
-									{ "__identifier": "Travel", "__type": "Int", "__value": 60, "__tile": null, "defUid": 263, "realEditorValues": [null] }
+									{ "__identifier": "Travel", "__type": "Int", "__value": 90, "__tile": null, "defUid": 263, "realEditorValues": [{ "id": "V_Int", "params": [90] }] }
 								],
 								"__worldX": 319,
 								"__worldY": -96

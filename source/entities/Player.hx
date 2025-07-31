@@ -38,7 +38,7 @@ class Player extends FlxNapeSprite {
 		body.mass = 1;
 		body.isBullet = true;
 
-		body.shapes.add(new Circle(16, Material.steel()));
+		body.shapes.add(new Circle(16, Material.sand()));
 		addPremadeBody(body);
 
 		body.setShapeFilters(new InteractionFilter(CGroups.BALL, CGroups.ALL));
