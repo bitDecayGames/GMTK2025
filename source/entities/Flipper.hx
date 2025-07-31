@@ -134,7 +134,7 @@ class Flipper extends FlxNapeSprite {
 			angleJoint.jointMin = jointMin;
 		}
 
-		body.applyAngularImpulse(dir * (body.mass / 3));
+		body.applyAngularImpulse(dir * (body.mass));
 		// body.applyImpulse();
 		// body.angularVel = dir * degToRad;
 	}
@@ -161,7 +161,7 @@ class Flipper extends FlxNapeSprite {
 			angleJoint.jointMin = jointMin;
 		}
 
-		body.applyAngularImpulse(-dir * (body.mass / 3));
+		body.applyAngularImpulse(-dir * (body.mass));
 		// body.angularVel = -dir * degToRad;
 	}
 }

@@ -22,6 +22,8 @@ class Level {
 	**/
 	public var worldID:String;
 
+	public var world:Ldtk.Ldtk_World;
+
 	/**
 	 * The raw level from the project. Available to get any needed
 	 * one-off values out of the level for special use-cases
@@ -41,7 +43,6 @@ class Level {
 
 	public function new(worldNameOrIID:String, nameOrIID:String) {
 		this.worldID = worldNameOrIID;
-		var world:Ldtk.Ldtk_World = null;
 		for (w in project.worlds) {
 			if (w.identifier == worldNameOrIID || w.iid == worldNameOrIID) {
 				world = w;
@@ -93,10 +94,14 @@ class Level {
 
 	function parseFlippers(leftDefs:Array<Ldtk.Entity_FlipperLeft>, rightDefs:Array<Ldtk.Entity_FlipperRight>) {
 		for (ld in leftDefs) {
-			flippers.push(new Flipper(LEFT, ld.worldPixelX, ld.worldPixelY, 80, ld.f_ForceFactor, 13, 8, 30, -50));
+			var f = new Flipper(LEFT, ld.worldPixelX, ld.worldPixelY, 80, ld.f_ForceFactor, 13, 8, 30, 30 - ld.f_Travel);
+			f.body.mass = ld.f_Mass;
+			flippers.push(f);
 		}
 		for (rd in rightDefs) {
-			flippers.push(new Flipper(RIGHT, rd.worldPixelX, rd.worldPixelY, 80, rd.f_ForceFactor, 13, 8, 150, 230));
+			var f = new Flipper(RIGHT, rd.worldPixelX, rd.worldPixelY, 80, rd.f_ForceFactor, 13, 8, 150, 150 + rd.f_Travel);
+			f.body.mass = rd.f_Mass;
+			flippers.push(f);
 		}
 	}
 }

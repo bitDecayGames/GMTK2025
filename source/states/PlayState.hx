@@ -56,7 +56,6 @@ class PlayState extends FlxTransitionableState {
 		FlxNapeSpace.init();
 		FlxNapeSpace.velocityIterations = 100;
 		FlxNapeSpace.positionIterations = 100;
-		FlxNapeSpace.space.gravity.setxy(0, 1000);
 
 		#if napeDebug
 		FlxNapeSpace.drawDebug = true;
@@ -74,10 +73,12 @@ class PlayState extends FlxTransitionableState {
 		loadLevel("BaseWorld", "Level_0");
 	}
 
-	function loadLevel(world:String, level:String) {
+	function loadLevel(worldName:String, levelName:String) {
 		unload();
 
-		var level = new Level(world, level);
+		var level = new Level(worldName, levelName);
+		FlxNapeSpace.space.gravity.setxy(level.rawLevels[0].f_GravityX, level.rawLevels[0].f_GravityY);
+
 		FmodPlugin.playSong(level.rawLevels[0].f_Music);
 		var minBounds = FlxPoint.get(Math.POSITIVE_INFINITY, Math.POSITIVE_INFINITY);
 		var maxBounds = FlxPoint.get(Math.NEGATIVE_INFINITY, Math.NEGATIVE_INFINITY);
@@ -92,6 +93,7 @@ class PlayState extends FlxTransitionableState {
 		}
 
 		player = new Player(level.spawnPoint.x, level.spawnPoint.y);
+		player.body.mass = level.rawLevels[0].f_BallMass;
 		camera.follow(player);
 		playerGroup.add(player);
 
