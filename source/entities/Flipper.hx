@@ -123,6 +123,8 @@ class Flipper extends FlxNapeSprite {
 				FlxG.keys.pressed.Z;
 			case RIGHT:
 				FlxG.keys.pressed.M;
+			default:
+				FlxG.keys.pressed.SPACE;
 		};
 		if (activated) {
 			flip(delta);

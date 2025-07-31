@@ -71,7 +71,7 @@ class PlayState extends FlxTransitionableState {
 		add(flipperGroup);
 		add(transitions);
 
-		loadLevel("BaseWorld", "Level_0");
+		loadLevel("BaseWorld", "Level_4");
 	}
 
 	function loadLevel(worldName:String, levelName:String) {
@@ -90,7 +90,7 @@ class PlayState extends FlxTransitionableState {
 			maxBounds.y = Math.max(maxBounds.y, tl.y + tl.height);
 			midGroundGroup.add(tl);
 
-			makeEchoTiles(tl);
+			makeTileBodies(tl);
 		}
 
 		player = new Player(level.spawnPoint.x, level.spawnPoint.y);
@@ -115,7 +115,7 @@ class PlayState extends FlxTransitionableState {
 		EventBus.fire(new PlayerSpawn(player.x, player.y));
 	}
 
-	function makeEchoTiles(l:BDTilemap) {
+	function makeTileBodies(l:BDTilemap) {
 		var worldBody = new Body(BodyType.STATIC);
 
 		for (x in 0...l.widthInTiles) {
