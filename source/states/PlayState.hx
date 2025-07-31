@@ -30,6 +30,7 @@ class PlayState extends FlxTransitionableState {
 	var playerGroup = new FlxGroup();
 	var worldTiles = new FlxGroup();
 	var midGroundGroup = new FlxGroup();
+	var flipperGroup = new FlxGroup();
 	var activeCameraTransition:CameraTransition = null;
 
 	var gravity = FlxPoint.get(0, 16 * 9);
@@ -65,11 +66,13 @@ class PlayState extends FlxTransitionableState {
 		add(midGroundGroup);
 		add(worldTiles);
 		add(playerGroup);
+		add(flipperGroup);
 		add(transitions);
 
 		loadLevel("BaseWorld", "Level_0");
 
-		add(new Flipper(100, 100));
+		var f = new Flipper(200, 410);
+		f.add_to_group(flipperGroup);
 
 		FlxEcho.draw_debug = true;
 		// FlxEcho.debug_drawer.draw_quadtree = true;
@@ -117,6 +120,15 @@ class PlayState extends FlxTransitionableState {
 			separate: true,
 			enter: (a, b, o) -> {
 				trace('something happened');
+				// Collide.ignoreCollisionsOfBColor(a, b);
+			},
+			exit: (a, b) -> {
+				// Collide.restoreCollisions(a, b);
+			}
+		});
+		FlxEcho.listen(flipperGroup, playerGroup, {
+			separate: true,
+			enter: (a, b, o) -> {
 				// Collide.ignoreCollisionsOfBColor(a, b);
 			},
 			exit: (a, b) -> {
