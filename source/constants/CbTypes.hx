@@ -9,6 +9,6 @@ class CbTypes {
 
 	public static function initTypes() {
 		CB_TERRAIN = new CbType();
-		CB_HAND = new CbType();
+		CB_BALL = new CbType();
 	}
 }
