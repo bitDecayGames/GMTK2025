@@ -57,6 +57,12 @@ class Level {
 		// So we load every level in the world file and stitch them all together
 		for (raw in world.levels) {
 			rawLevels.push(raw);
+
+			var autoTileLayer = new BDTilemap();
+			autoTileLayer.loadLdtk(raw.l_AutoLayer_baked);
+			autoTileLayer.setPosition(raw.worldX, raw.worldY);
+			terrainLayers.push(autoTileLayer);
+
 			var terrainLayer = new BDTilemap();
 			terrainLayer.loadLdtk(raw.l_Terrain);
 			terrainLayer.setPosition(raw.worldX, raw.worldY);
