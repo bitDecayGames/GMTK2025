@@ -67,8 +67,8 @@ class PlayState extends FlxTransitionableState {
 
 		loadLevel("BaseWorld", "Level_0");
 
-		flipperGroup.add(new Flipper(50, 410, 80, 30, 30, -30));
-		flipperGroup.add(new Flipper(250, 410, 80, 30, 150, 210));
+		flipperGroup.add(new Flipper(-50, 310, 80, 30, 30, -30));
+		flipperGroup.add(new Flipper(10, 110, 80, 30, 150, 210));
 	}
 
 	// override function draw() {

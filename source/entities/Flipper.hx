@@ -1,5 +1,8 @@
 package entities;
 
+import nape.constraint.PivotJoint;
+import flixel.addons.nape.FlxNapeSpace;
+import nape.constraint.AngleJoint;
 import flixel.math.FlxMath;
 import nape.shape.Polygon;
 import nape.geom.Vec2;
@@ -17,13 +20,13 @@ class Flipper extends FlxNapeSprite {
 	private static var radToDeg = 180.0 / Math.PI;
 
 	var speed:Float = 450;
-	var restingAngle:Float = 30;
-	var flipAngle:Float = -30;
+	var restingAngle:Float;
+	var flipAngle:Float;
 
 	private var dir:Float = 0;
 
 	public function new(X:Float, Y:Float, width:Float, height:Float, restingAngle:Float, flipAngle:Float) {
-		super(X, Y);
+		super();
 		this.restingAngle = restingAngle;
 		this.flipAngle = flipAngle;
 
@@ -34,7 +37,8 @@ class Flipper extends FlxNapeSprite {
 		}
 		var w = width;
 		var h = height;
-		var body = new Body(BodyType.KINEMATIC);
+		var body = new Body(BodyType.DYNAMIC);
+		body.position.set(Vec2.get(X, Y));
 		body.shapes.add(new Circle(h * .5, Vec2.weak(0, 0)));
 		body.shapes.add(new Circle(h * .4, Vec2.weak(w, 0)));
 		body.shapes.add(new Polygon([
@@ -43,6 +47,16 @@ class Flipper extends FlxNapeSprite {
 			Vec2.weak(w, h * .4),
 			Vec2.weak(0, h * .5)
 		]));
+
+		var pivot = new PivotJoint(body, FlxNapeSpace.space.world, Vec2.get(), body.localPointToWorld(Vec2.get()));
+		pivot.active = true;
+		pivot.space = FlxNapeSpace.space;
+
+		var angleJoint = new AngleJoint(FlxNapeSpace.space.world, body, Math.min(restingAngle, flipAngle) * degToRad,
+			Math.max(restingAngle, flipAngle) * degToRad);
+		angleJoint.active = true;
+		angleJoint.space = FlxNapeSpace.space;
+
 		body.mass = 0.0001;
 		body.rotation = restingAngle * degToRad;
 		addPremadeBody(body);
@@ -51,27 +65,9 @@ class Flipper extends FlxNapeSprite {
 	override public function update(delta:Float) {
 		super.update(delta);
 		if (FlxG.keys.pressed.SPACE) {
-			body.angularVel = dir * degToRad;
+			flip(delta);
 		} else {
-			body.angularVel = -dir * degToRad;
-		}
-		var deg = body.rotation * radToDeg;
-		if (dir < 0) {
-			if (deg > restingAngle) {
-				body.rotation = restingAngle * degToRad;
-				body.angularVel = 0;
-			} else if (deg < flipAngle) {
-				body.rotation = flipAngle * degToRad;
-				body.angularVel = 0;
-			}
-		} else {
-			if (deg < restingAngle) {
-				body.rotation = restingAngle * degToRad;
-				body.angularVel = 0;
-			} else if (deg > flipAngle) {
-				body.rotation = flipAngle * degToRad;
-				body.angularVel = 0;
-			}
+			rest(delta);
 		}
 	}
 
@@ -81,40 +77,10 @@ class Flipper extends FlxNapeSprite {
 	}
 
 	public function flip(delta:Float) {
-		var deg = body.rotation * radToDeg;
-		var d = delta * dir;
-		if (d < 0) {
-			if (deg + d < flipAngle) {
-				deg = flipAngle;
-			} else {
-				deg += d;
-			}
-		} else {
-			if (deg + d > flipAngle) {
-				deg = flipAngle;
-			} else {
-				deg += d;
-			}
-		}
-		body.rotation = deg * degToRad;
+		body.angularVel = dir * degToRad;
 	}
 
 	public function rest(delta:Float) {
-		var deg = body.rotation * radToDeg;
-		var d = delta * dir;
-		if (-d < 0) {
-			if (deg - d < restingAngle) {
-				deg = restingAngle;
-			} else {
-				deg -= d;
-			}
-		} else {
-			if (deg - d > restingAngle) {
-				deg = restingAngle;
-			} else {
-				deg -= d;
-			}
-		}
-		body.rotation = deg * degToRad;
+		body.angularVel = -dir * degToRad;
 	}
 }
