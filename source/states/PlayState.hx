@@ -50,7 +50,7 @@ class PlayState extends FlxTransitionableState {
 		});
 
 		FlxNapeSpace.init();
-		FlxNapeSpace.space.gravity.setxy(0, 10);
+		FlxNapeSpace.space.gravity.setxy(0, 1000);
 		FlxNapeSpace.drawDebug = true;
 
 		// FlxEcho.add_group_bodies(worldTiles);
@@ -67,8 +67,8 @@ class PlayState extends FlxTransitionableState {
 
 		loadLevel("BaseWorld", "Level_0");
 
-		var f = new Flipper(50, 400);
-		flipperGroup.add(f);
+		flipperGroup.add(new Flipper(-50, 310, 80, 30, 30, -30));
+		flipperGroup.add(new Flipper(10, 110, 80, 30, 150, 210));
 	}
 
 	// override function draw() {

@@ -1,5 +1,8 @@
 package entities;
 
+import nape.constraint.PivotJoint;
+import flixel.addons.nape.FlxNapeSpace;
+import nape.constraint.AngleJoint;
 import flixel.math.FlxMath;
 import nape.shape.Polygon;
 import nape.geom.Vec2;
@@ -16,25 +19,26 @@ class Flipper extends FlxNapeSprite {
 	private static var degToRad = Math.PI / 180.0;
 	private static var radToDeg = 180.0 / Math.PI;
 
-	var speed:Float = 650;
-	var restingAngle:Float = 30;
-	var flipAngle:Float = -30;
-	var power:Float = 150;
-	var triggerButton:Button;
+	var speed:Float = 450;
+	var restingAngle:Float;
+	var flipAngle:Float;
 
 	private var dir:Float = 0;
 
-	public function new(X:Float, Y:Float) {
-		super(X, Y);
+	public function new(X:Float, Y:Float, width:Float, height:Float, restingAngle:Float, flipAngle:Float) {
+		super();
+		this.restingAngle = restingAngle;
+		this.flipAngle = flipAngle;
 
 		if (flipAngle - restingAngle < 0) {
 			dir = -1 * speed;
 		} else {
 			dir = 1 * speed;
 		}
-		var w = 80;
-		var h = 50;
+		var w = width;
+		var h = height;
 		var body = new Body(BodyType.DYNAMIC);
+		body.position.set(Vec2.get(X, Y));
 		body.shapes.add(new Circle(h * .5, Vec2.weak(0, 0)));
 		body.shapes.add(new Circle(h * .4, Vec2.weak(w, 0)));
 		body.shapes.add(new Polygon([
@@ -43,46 +47,27 @@ class Flipper extends FlxNapeSprite {
 			Vec2.weak(w, h * .4),
 			Vec2.weak(0, h * .5)
 		]));
+
+		var pivot = new PivotJoint(body, FlxNapeSpace.space.world, Vec2.get(), body.localPointToWorld(Vec2.get()));
+		pivot.active = true;
+		pivot.space = FlxNapeSpace.space;
+
+		var angleJoint = new AngleJoint(FlxNapeSpace.space.world, body, Math.min(restingAngle, flipAngle) * degToRad,
+			Math.max(restingAngle, flipAngle) * degToRad);
+		angleJoint.active = true;
+		angleJoint.space = FlxNapeSpace.space;
+
+		body.mass = 0.0001;
 		body.rotation = restingAngle * degToRad;
-		body.gravMassScale = 0;
 		addPremadeBody(body);
-		// this.body = this.add_body({
-		//	x: x,
-		//	y: y,
-		//	kinematic: true,
-		//	mass: 100,
-		//	rotation: restingAngle,
-		//	shapes: [
-		//		{
-		//			type: CIRCLE,
-		//			radius: h * .5,
-		//			offset_x: 0,
-		//			offset_y: 0,
-		//		},
-		//		{
-		//			type: CIRCLE,
-		//			radius: h * .4,
-		//			offset_x: w,
-		//			offset_y: 0,
-		//		},
-		//		// {
-		//		// 	type: POLYGON,
-		//		// 	vertices: [Vec2.weak(0, -h*.5), Vec2.weak(w, -h*.4), Vec2.weak(w, h*.4), Vec2.weak(0, h*.5)]
-		//		// }
-		//	],
-		// });
-		// body.on_move = (x, y) -> this.setPosition(x, y);
-		// body.on_rotate = (rot) -> angle = rot;
 	}
 
 	override public function update(delta:Float) {
 		super.update(delta);
 		if (FlxG.keys.pressed.SPACE) {
-			body.applyAngularImpulse(1000);
-			// flip(delta);
+			flip(delta);
 		} else {
-			body.applyAngularImpulse(-1000);
-			// rest(delta);
+			rest(delta);
 		}
 	}
 
@@ -92,40 +77,10 @@ class Flipper extends FlxNapeSprite {
 	}
 
 	public function flip(delta:Float) {
-		var deg = body.rotation * radToDeg;
-		var d = delta * dir;
-		if (d < 0) {
-			if (deg + d < flipAngle) {
-				deg = flipAngle;
-			} else {
-				deg += d;
-			}
-		} else {
-			if (deg + d > flipAngle) {
-				deg = flipAngle;
-			} else {
-				deg += d;
-			}
-		}
-		body.rotation = deg;
+		body.angularVel = dir * degToRad;
 	}
 
 	public function rest(delta:Float) {
-		var deg = body.rotation * radToDeg;
-		var d = delta * dir;
-		if (-d < 0) {
-			if (deg - d < restingAngle) {
-				deg = restingAngle;
-			} else {
-				deg -= d;
-			}
-		} else {
-			if (deg - d > restingAngle) {
-				deg = restingAngle;
-			} else {
-				deg -= d;
-			}
-		}
-		body.rotation = deg;
+		body.angularVel = -dir * degToRad;
 	}
 }
