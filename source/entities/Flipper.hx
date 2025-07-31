@@ -1,5 +1,6 @@
 package entities;
 
+import nape.phys.Material;
 import nape.constraint.WeldJoint;
 import bitdecay.flixel.graphics.Aseprite;
 import bitdecay.flixel.graphics.AsepriteMacros;
@@ -34,7 +35,7 @@ class Flipper extends FlxNapeSprite {
 
 	private var dir:Float = 0;
 
-	public function new(X:Float, Y:Float, width:Float, bigRad:Float, smallRad:Float, restingAngle:Float, flipAngle:Float) {
+	public function new(X:Float, Y:Float, width:Float, strength:Float, bigRad:Float, smallRad:Float, restingAngle:Float, flipAngle:Float) {
 		super();
 		Aseprite.loadAllAnimations(this, AssetPaths.flipper__json);
 		animation.play(anims.flipper_1_aseprite);
@@ -43,6 +44,7 @@ class Flipper extends FlxNapeSprite {
 		this.height = bigRad;
 		this.restingAngle = restingAngle;
 		this.flipAngle = flipAngle;
+		speed *= strength;
 
 		if (flipAngle - restingAngle < 0) {
 			flipDirection = CCW;
@@ -55,14 +57,14 @@ class Flipper extends FlxNapeSprite {
 
 		var body = new Body(BodyType.DYNAMIC);
 		body.position.set(Vec2.get(X, Y));
-		body.shapes.add(new Circle(bigRad, Vec2.weak(0, 0)));
-		body.shapes.add(new Circle(smallRad, Vec2.weak(w - bigRad - smallRad, 0)));
+		body.shapes.add(new Circle(bigRad, Vec2.weak(0, 0), Material.rubber()));
+		body.shapes.add(new Circle(smallRad, Vec2.weak(w - bigRad - smallRad, 0), Material.rubber()));
 		body.shapes.add(new Polygon([
 			Vec2.weak(0, -bigRad),
 			Vec2.weak(w - bigRad - smallRad, -smallRad),
 			Vec2.weak(w - bigRad - smallRad, smallRad),
 			Vec2.weak(0, bigRad)
-		]));
+		], Material.rubber()));
 
 		body.setShapeFilters(new InteractionFilter(CGroups.CONTROL_SURFACE, CGroups.BALL));
 
@@ -97,14 +99,25 @@ class Flipper extends FlxNapeSprite {
 		body.userData.data = this;
 	}
 
+	// Some jank to help us stop moving the flipper once it's at its limit
+	var lockout = 0;
+
 	public function flip(delta:Float) {
+		if (lockout == 1) {
+			return;
+		} else {
+			lockout = 0;
+		}
+
 		if (flipDirection == CCW && body.rotation <= jointMin) {
 			body.angularVel = 0;
 			angleJoint.jointMax = jointMin;
+			lockout = 1;
 			return;
 		} else if (flipDirection == CW && body.rotation >= jointMax) {
 			body.angularVel = 0;
 			angleJoint.jointMin = jointMax;
+			lockout = 1;
 			return;
 		} else {
 			angleJoint.jointMax = jointMax;
@@ -115,13 +128,21 @@ class Flipper extends FlxNapeSprite {
 	}
 
 	public function rest(delta:Float) {
+		if (lockout == -1) {
+			return;
+		} else {
+			lockout = 0;
+		}
+
 		if (flipDirection == CCW && body.rotation >= jointMax) {
 			body.angularVel = 0;
 			angleJoint.jointMin = jointMax;
+			lockout = -1;
 			return;
 		} else if (flipDirection == CW && body.rotation <= jointMin) {
 			body.angularVel = 0;
 			angleJoint.jointMax = jointMin;
+			lockout = -1;
 			return;
 		} else {
 			angleJoint.jointMax = jointMax;

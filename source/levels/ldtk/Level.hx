@@ -93,10 +93,10 @@ class Level {
 
 	function parseFlippers(leftDefs:Array<Ldtk.Entity_FlipperLeft>, rightDefs:Array<Ldtk.Entity_FlipperRight>) {
 		for (ld in leftDefs) {
-			flippers.push(new Flipper(ld.worldPixelX, ld.worldPixelY, 80, 13, 8, 30, -30));
+			flippers.push(new Flipper(ld.worldPixelX, ld.worldPixelY, 80, ld.f_ForceFactor, 13, 8, 30, -50));
 		}
 		for (rd in rightDefs) {
-			flippers.push(new Flipper(rd.worldPixelX, rd.worldPixelY, 80, 13, 8, 150, 210));
+			flippers.push(new Flipper(rd.worldPixelX, rd.worldPixelY, 80, rd.f_ForceFactor, 13, 8, 150, 230));
 		}
 	}
 }
