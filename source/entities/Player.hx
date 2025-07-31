@@ -36,6 +36,8 @@ class Player extends FlxNapeSprite {
 
 		var body = new Body(BodyType.DYNAMIC);
 		body.mass = 1;
+		body.isBullet = true;
+
 		body.shapes.add(new Circle(16, Material.steel()));
 		addPremadeBody(body);
 
