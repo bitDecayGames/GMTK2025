@@ -1,5 +1,6 @@
 package entities;
 
+import flixel.math.FlxMath;
 import nape.shape.Polygon;
 import nape.geom.Vec2;
 import nape.shape.Circle;
@@ -12,6 +13,9 @@ import nape.phys.Body;
 import nape.phys.BodyType;
 
 class Flipper extends FlxNapeSprite {
+	private static var degToRad = Math.PI / 180.0;
+	private static var radToDeg = 180.0 / Math.PI;
+
 	var speed:Float = 650;
 	var restingAngle:Float = 30;
 	var flipAngle:Float = -30;
@@ -30,7 +34,7 @@ class Flipper extends FlxNapeSprite {
 		}
 		var w = 80;
 		var h = 50;
-		var body = new Body(BodyType.KINEMATIC);
+		var body = new Body(BodyType.DYNAMIC);
 		body.shapes.add(new Circle(h * .5, Vec2.weak(0, 0)));
 		body.shapes.add(new Circle(h * .4, Vec2.weak(w, 0)));
 		body.shapes.add(new Polygon([
@@ -39,6 +43,8 @@ class Flipper extends FlxNapeSprite {
 			Vec2.weak(w, h * .4),
 			Vec2.weak(0, h * .5)
 		]));
+		body.rotation = restingAngle * degToRad;
+		body.gravMassScale = 0;
 		addPremadeBody(body);
 		// this.body = this.add_body({
 		//	x: x,
@@ -72,10 +78,10 @@ class Flipper extends FlxNapeSprite {
 	override public function update(delta:Float) {
 		super.update(delta);
 		if (FlxG.keys.pressed.SPACE) {
-			this.angularVelocity = -100;
+			body.applyAngularImpulse(1000);
 			// flip(delta);
 		} else {
-			this.angularVelocity = 100;
+			body.applyAngularImpulse(-1000);
 			// rest(delta);
 		}
 	}
@@ -86,36 +92,40 @@ class Flipper extends FlxNapeSprite {
 	}
 
 	public function flip(delta:Float) {
+		var deg = body.rotation * radToDeg;
 		var d = delta * dir;
 		if (d < 0) {
-			if (this.angle + d < flipAngle) {
-				this.angle = flipAngle;
+			if (deg + d < flipAngle) {
+				deg = flipAngle;
 			} else {
-				this.angle += d;
+				deg += d;
 			}
 		} else {
-			if (this.angle + d > flipAngle) {
-				this.angle = flipAngle;
+			if (deg + d > flipAngle) {
+				deg = flipAngle;
 			} else {
-				this.angle += d;
+				deg += d;
 			}
 		}
+		body.rotation = deg;
 	}
 
 	public function rest(delta:Float) {
+		var deg = body.rotation * radToDeg;
 		var d = delta * dir;
 		if (-d < 0) {
-			if (this.angle - d < restingAngle) {
-				this.angle = restingAngle;
+			if (deg - d < restingAngle) {
+				deg = restingAngle;
 			} else {
-				this.angle -= d;
+				deg -= d;
 			}
 		} else {
-			if (this.angle - d > restingAngle) {
-				this.angle = restingAngle;
+			if (deg - d > restingAngle) {
+				deg = restingAngle;
 			} else {
-				this.angle -= d;
+				deg -= d;
 			}
 		}
+		body.rotation = deg;
 	}
 }

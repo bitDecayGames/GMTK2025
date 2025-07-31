@@ -63,7 +63,7 @@ class PlayState extends FlxTransitionableState {
 
 		loadLevel("BaseWorld", "Level_0");
 
-		var f = new Flipper(200, 410);
+		var f = new Flipper(50, 310);
 	}
 
 	// override function draw() {
