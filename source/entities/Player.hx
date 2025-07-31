@@ -1,14 +1,19 @@
 package entities;
 
+import constants.CGroups;
+import nape.dynamics.InteractionFilter;
+import nape.geom.Vec2;
 import flixel.FlxSprite;
 import input.InputCalculator;
 import input.SimpleController;
 import bitdecay.flixel.graphics.Aseprite;
 import bitdecay.flixel.graphics.AsepriteMacros;
+import flixel.addons.nape.FlxNapeSprite;
+import nape.phys.Body;
+import nape.phys.BodyType;
+import nape.shape.Circle;
 
-using echo.FlxEcho;
-
-class Player extends FlxSprite {
+class Player extends FlxNapeSprite {
 	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/ball.json");
 	public static var layers = AsepriteMacros.layerNames("assets/aseprite/characters/ball.json");
 
@@ -28,12 +33,17 @@ class Player extends FlxSprite {
 		// 	}
 		// });
 
-		this.add_body({
-			shape: {
-				type: CIRCLE,
-				radius: 16
-			}
-		});
+		var body = new Body(BodyType.DYNAMIC);
+		body.mass = 1;
+		body.shapes.add(new Circle(16));
+		addPremadeBody(body);
+
+		body.setShapeFilters(new InteractionFilter(CGroups.BALL, CGroups.ALL));
+	}
+
+	override function setBody(body:Body) {
+		super.setBody(body);
+		body.userData.data = this;
 	}
 
 	override public function update(delta:Float) {
@@ -41,9 +51,7 @@ class Player extends FlxSprite {
 
 		var inputDir = InputCalculator.getInputCardinal(playerNum);
 		if (inputDir != NONE) {
-			inputDir.asVector(velocity).scale(speed);
-		} else {
-			velocity.set();
+			body.velocity.set(new Vec2(inputDir.asVector().x * speed, inputDir.asVector().y * speed));
 		}
 
 		if (SimpleController.just_pressed(Button.A, playerNum)) {

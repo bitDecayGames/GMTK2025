@@ -1,7 +1,11 @@
 package states;
 
-import echo.Body;
-import echo.math.Vector2;
+import constants.CGroups;
+import nape.dynamics.InteractionFilter;
+import nape.phys.BodyType;
+import nape.shape.Polygon;
+import nape.phys.Body;
+import nape.geom.Vec2;
 import flixel.FlxObject;
 import levels.ldtk.LdtkTilemap.LdtkTile;
 import levels.ldtk.BDTilemap;
@@ -21,8 +25,8 @@ import events.EventBus;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
+import flixel.addons.nape.FlxNapeSpace;
 
-using echo.FlxEcho;
 using states.FlxStateExt;
 
 class PlayState extends FlxTransitionableState {
@@ -49,16 +53,9 @@ class PlayState extends FlxTransitionableState {
 			QLog.notice('I got me an event about ${c.count} clicks having happened.');
 		});
 
-		FlxEcho.init({
-			width: FlxG.width,
-			height: FlxG.height,
-			gravity_x: gravity.x,
-			gravity_y: gravity.y,
-			// iterations: 16,
-		});
-
-		FlxEcho.add_group_bodies(worldTiles);
-		FlxEcho.add_group_bodies(playerGroup);
+		FlxNapeSpace.init();
+		FlxNapeSpace.space.gravity.setxy(0, 1000);
+		FlxNapeSpace.drawDebug = true;
 
 		// QLog.error('Example error');
 
@@ -70,18 +67,7 @@ class PlayState extends FlxTransitionableState {
 		add(transitions);
 
 		loadLevel("BaseWorld", "Level_0");
-
-		var f = new Flipper(200, 410);
-		f.add_to_group(flipperGroup);
-
-		FlxEcho.draw_debug = true;
-		// FlxEcho.debug_drawer.draw_quadtree = true;
 	}
-
-	// override function draw() {
-	// 	super.draw();
-	// 	FlxEcho.instance.draw();
-	// }
 
 	function loadLevel(world:String, level:String) {
 		unload();
@@ -102,7 +88,7 @@ class PlayState extends FlxTransitionableState {
 
 		player = new Player(level.spawnPoint.x, level.spawnPoint.y);
 		camera.follow(player);
-		player.add_to_group(playerGroup);
+		playerGroup.add(player);
 
 		for (t in level.camTransitions) {
 			transitions.add(t);
@@ -114,67 +100,40 @@ class PlayState extends FlxTransitionableState {
 			}
 		}
 
-		FlxEcho.instance.world.set(minBounds.x, minBounds.y, maxBounds.x - minBounds.x, maxBounds.y - minBounds.y);
-
-		FlxEcho.listen(worldTiles, playerGroup, {
-			separate: true,
-			enter: (a, b, o) -> {
-				trace('something happened');
-				// Collide.ignoreCollisionsOfBColor(a, b);
-			},
-			exit: (a, b) -> {
-				// Collide.restoreCollisions(a, b);
-			}
-		});
-		FlxEcho.listen(flipperGroup, playerGroup, {
-			separate: true,
-			enter: (a, b, o) -> {
-				// Collide.ignoreCollisionsOfBColor(a, b);
-			},
-			exit: (a, b) -> {
-				// Collide.restoreCollisions(a, b);
-			}
-		});
+		for (flipper in level.flippers) {
+			flipperGroup.add(flipper);
+		}
 
 		EventBus.fire(new PlayerSpawn(player.x, player.y));
 	}
 
 	function makeEchoTiles(l:BDTilemap) {
+		var worldBody = new Body(BodyType.STATIC);
+
 		for (x in 0...l.widthInTiles) {
 			for (y in 0...l.heightInTiles) {
 				var data = l.getMetaDataAt(x, y);
 				if (data != null) {
 					trace(data);
-					var body = buildTile(data, l.tileWidth);
-					if (body != null) {
-						body.set_position(l.x + x * l.tileWidth, l.y + y * l.tileHeight);
-					}
+					buildTileShape(worldBody, l.x + x * l.tileWidth, l.y + y * l.tileHeight, data, l.tileWidth);
 				}
 			}
 		}
+		worldBody.setShapeFilters(new InteractionFilter(CGroups.TERRAIN, ~CGroups.CONTROL_SURFACE));
+		worldBody.space = FlxNapeSpace.space;
 	}
 
-	function buildTile(data:TileCollisionData, tSize:Int):Body {
+	function buildTileShape(worldBody:Body, shapeX:Float, shapeY:Float, data:TileCollisionData, tSize:Int) {
 		switch (data.type) {
 			case "polygon":
-				// TODO: put these all on a 'world' body or something
 				var b = new FlxObject();
-				var vertices:Array<Vector2> = [];
+				var vertices:Array<Vec2> = [];
 				for (p in data.points) {
-					vertices.push(new Vector2(p[0] * tSize, p[1] * tSize));
-					// vertices.push(new Vector2(p[0] * tSize, p[1] * tSize));
+					vertices.push(new Vec2(shapeX + p[0] * tSize, shapeY + p[1] * tSize));
 				}
-				var body = FlxEcho.add_body(b, {
-					kinematic: true,
-					shape: {
-						type: POLYGON,
-						vertices: vertices
-					}
-				});
-				b.add_to_group(worldTiles);
-				return body;
+
+				worldBody.shapes.add(new Polygon(vertices));
 			default:
-				return null;
 		}
 	}
 
@@ -199,7 +158,8 @@ class PlayState extends FlxTransitionableState {
 		}
 		worldTiles.clear();
 
-		FlxEcho.clear();
+		// FlxEcho.clear();
+		FlxNapeSpace.space.clear();
 	}
 
 	function handleAchieve(def:AchievementDef) {

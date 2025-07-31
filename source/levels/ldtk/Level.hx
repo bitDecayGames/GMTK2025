@@ -1,5 +1,6 @@
 package levels.ldtk;
 
+import entities.Flipper;
 import flixel.FlxSprite;
 import entities.CameraTransition;
 import flixel.math.FlxRect;
@@ -36,6 +37,8 @@ class Level {
 	public var camZones:Map<String, FlxRect>;
 	public var camTransitions:Array<CameraTransition>;
 
+	public var flippers:Array<Flipper> = [];
+
 	public function new(worldNameOrIID:String, nameOrIID:String) {
 		this.worldID = worldNameOrIID;
 		var world:Ldtk.Ldtk_World = null;
@@ -65,6 +68,7 @@ class Level {
 
 			parseCameraZones(raw.l_Objects.all_CameraZone);
 			parseCameraTransitions(raw.l_Objects.all_CameraTransition);
+			parseFlippers(raw.l_Objects.all_FlipperLeft, raw.l_Objects.all_FlipperRight);
 		}
 	}
 
@@ -84,6 +88,15 @@ class Level {
 				camTrigger.addGuideTrigger(def.f_Directions[i].toCardinal(), camZones.get(def.f_Zones[i].entityIid));
 			}
 			camTransitions.push(camTrigger);
+		}
+	}
+
+	function parseFlippers(leftDefs:Array<Ldtk.Entity_FlipperLeft>, rightDefs:Array<Ldtk.Entity_FlipperRight>) {
+		for (ld in leftDefs) {
+			flippers.push(new Flipper(ld.worldPixelX, ld.worldPixelY, 80, 26, 30, -30));
+		}
+		for (rd in rightDefs) {
+			flippers.push(new Flipper(rd.worldPixelX, rd.worldPixelY, 80, 26, 150, 210));
 		}
 	}
 }
