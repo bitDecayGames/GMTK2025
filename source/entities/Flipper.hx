@@ -5,14 +5,10 @@ import constants.CGroups;
 import nape.constraint.PivotJoint;
 import flixel.addons.nape.FlxNapeSpace;
 import nape.constraint.AngleJoint;
-import flixel.math.FlxMath;
 import nape.shape.Polygon;
 import nape.geom.Vec2;
 import nape.shape.Circle;
-import echo.math.Vector2;
 import flixel.FlxG;
-import flixel.FlxSprite;
-import input.SimpleController;
 import flixel.addons.nape.FlxNapeSprite;
 import nape.phys.Body;
 import nape.phys.BodyType;
@@ -29,6 +25,10 @@ class Flipper extends FlxNapeSprite {
 
 	public function new(X:Float, Y:Float, width:Float, height:Float, restingAngle:Float, flipAngle:Float) {
 		super();
+		loadGraphic(AssetPaths.flipper__png, true, 80, 58);
+		origin.set(12, 24);
+		this.width = width;
+		this.height = height;
 		this.restingAngle = restingAngle;
 		this.flipAngle = flipAngle;
 
@@ -39,6 +39,7 @@ class Flipper extends FlxNapeSprite {
 		}
 		var w = width;
 		var h = height;
+
 		var body = new Body(BodyType.DYNAMIC);
 		body.position.set(Vec2.get(X, Y));
 		body.shapes.add(new Circle(h * .5, Vec2.weak(0, 0)));
