@@ -70,7 +70,7 @@ class PlayState extends FlxTransitionableState {
 		add(flipperGroup);
 		add(transitions);
 
-		loadLevel("BaseWorld", "Level_0");
+		loadLevel("BaseWorld", "Level_4");
 	}
 
 	function loadLevel(worldName:String, levelName:String) {
