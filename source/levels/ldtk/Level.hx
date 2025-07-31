@@ -57,6 +57,12 @@ class Level {
 		// So we load every level in the world file and stitch them all together
 		for (raw in world.levels) {
 			rawLevels.push(raw);
+
+			var autoTileLayer = new BDTilemap();
+			autoTileLayer.loadLdtk(raw.l_AutoLayer_baked);
+			autoTileLayer.setPosition(raw.worldX, raw.worldY);
+			terrainLayers.push(autoTileLayer);
+
 			var terrainLayer = new BDTilemap();
 			terrainLayer.loadLdtk(raw.l_Terrain);
 			terrainLayer.setPosition(raw.worldX, raw.worldY);
@@ -94,11 +100,11 @@ class Level {
 
 	function parseFlippers(leftDefs:Array<Ldtk.Entity_FlipperLeft>, rightDefs:Array<Ldtk.Entity_FlipperRight>) {
 		for (ld in leftDefs) {
-			var f = new Flipper(LEFT, ld.worldPixelX, ld.worldPixelY, 80, ld.f_Force, 13, 8, 30, 30 - ld.f_Travel, ld.f_Mass);
+			var f = new Flipper(LEFT, ld.worldPixelX, ld.worldPixelY, 80, ld.f_ForceFactor, 13, 8, 30, 30 - ld.f_Travel, ld.f_Mass);
 			flippers.push(f);
 		}
 		for (rd in rightDefs) {
-			var f = new Flipper(RIGHT, rd.worldPixelX, rd.worldPixelY, 80, rd.f_Force, 13, 8, 150, 150 + rd.f_Travel, rd.f_Mass);
+			var f = new Flipper(RIGHT, rd.worldPixelX, rd.worldPixelY, 80, rd.f_ForceFactor, 13, 8, 150, 150 + rd.f_Travel, rd.f_Mass);
 			flippers.push(f);
 		}
 	}

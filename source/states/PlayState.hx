@@ -1,5 +1,6 @@
 package states;
 
+import nape.phys.Material;
 import constants.CGroups;
 import nape.dynamics.InteractionFilter;
 import nape.phys.BodyType;
@@ -70,7 +71,7 @@ class PlayState extends FlxTransitionableState {
 		add(flipperGroup);
 		add(transitions);
 
-		loadLevel("BaseWorld", "Level_0");
+		loadLevel("BaseWorld", "Level_4");
 	}
 
 	function loadLevel(worldName:String, levelName:String) {
@@ -89,7 +90,7 @@ class PlayState extends FlxTransitionableState {
 			maxBounds.y = Math.max(maxBounds.y, tl.y + tl.height);
 			midGroundGroup.add(tl);
 
-			makeEchoTiles(tl);
+			makeTileBodies(tl);
 		}
 
 		player = new Player(level.spawnPoint.x, level.spawnPoint.y);
@@ -114,7 +115,7 @@ class PlayState extends FlxTransitionableState {
 		EventBus.fire(new PlayerSpawn(player.x, player.y));
 	}
 
-	function makeEchoTiles(l:BDTilemap) {
+	function makeTileBodies(l:BDTilemap) {
 		var worldBody = new Body(BodyType.STATIC);
 
 		for (x in 0...l.widthInTiles) {
@@ -130,6 +131,8 @@ class PlayState extends FlxTransitionableState {
 		worldBody.space = FlxNapeSpace.space;
 	}
 
+	var baseWallMat = new Material(-.7, .1);
+
 	function buildTileShape(worldBody:Body, shapeX:Float, shapeY:Float, data:TileCollisionData, tSize:Int) {
 		switch (data.type) {
 			case "polygon":
@@ -139,7 +142,7 @@ class PlayState extends FlxTransitionableState {
 					vertices.push(new Vec2(shapeX + p[0] * tSize, shapeY + p[1] * tSize));
 				}
 
-				worldBody.shapes.add(new Polygon(vertices));
+				worldBody.shapes.add(new Polygon(vertices, baseWallMat));
 			default:
 		}
 	}
