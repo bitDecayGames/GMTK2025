@@ -11,7 +11,7 @@ hscript 2.6.0
 newgrounds 2.0.0
 
 # arcade physics
-echo git https://github.com/MondayHopscotch/echo.git advanced-circles
+echo git https://github.com/MondayHopscotch/echo.git gmtk2025
 echo-flixel git https://github.com/MondayHopscotch/echo-flixel.git gmtk2025
 
 # full physics

@@ -21,14 +21,18 @@ class FmodPlugin extends FlxBasic {
 	 * Helper to play song and automatically convert the enum to an event string
 	**/
 	public static function playSong(song:FmodSong) {
+		#if !nosound
 		FmodManager.PlaySong(song.event());
+		#end
 	}
 
 	/**
 	 * Helper to play sfx and automatically convert the enum to an event string
 	**/
 	public static function playSFX(sfx:FmodSFX) {
+		#if !nosound
 		FmodManager.PlaySoundOneShot(sfx.event());
+		#end
 	}
 
 	/**
@@ -38,7 +42,11 @@ class FmodPlugin extends FlxBasic {
 	 * @see FmodManager.PlaySoundWithReference()
 	**/
 	public static function playSFXWithRef(sfx:FmodSFX):String {
+		#if !nosound
 		return FmodManager.PlaySoundWithReference(sfx.event());
+		#else
+		return "";
+		#end
 	}
 
 	/**
@@ -49,7 +57,11 @@ class FmodPlugin extends FlxBasic {
 	 * @see FmodManager.PlaySoundAndAssignID()
 	**/
 	public static function PlaySoundAndAssignId(sfx:FmodSFX, id:String):String {
+		#if !nosound
 		return FmodManager.PlaySoundAndAssignId(sfx.event(), id);
+		#else
+		return "";
+		#end
 	}
 
 	override function update(elapsed:Float) {
