@@ -53,8 +53,7 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 	private var dir:Float = 0;
 
 	// public function new(group:ControlGroup, X:Float, Y:Float, width:Float, strength:Float, bigRad:Float, smallRad:Float, restAng:Float, flipAng:Float,
-	public function new(group:ControlGroup, X:Float, Y:Float, width:Float, bigRad:Float, smallRad:Float, restAng:Float, flipAng:Float,
-			fmass:Float) {
+	public function new(group:ControlGroup, X:Float, Y:Float, width:Float, bigRad:Float, smallRad:Float, restAng:Float, flipAng:Float, fmass:Float) {
 		super();
 		Aseprite.loadAllAnimations(this, AssetPaths.flipper__json);
 		animation.play(anims.flipper_1_aseprite);

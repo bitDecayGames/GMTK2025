@@ -52,6 +52,8 @@ class PlayState extends FlxTransitionableState {
 	var flipperGroup = new FlxGroup();
 	var activeCameraTransition:CameraTransition = null;
 
+	var isPaused:Bool = false;
+	var originalTimeScaleBeforePausing:Float;
 
 	var transitions = new FlxTypedGroup<CameraTransition>();
 
@@ -89,7 +91,11 @@ class PlayState extends FlxTransitionableState {
 
 		add(focusZones);
 
+		#if logan
+		loadLevel("Logan", "Level_7");
+		#else
 		loadLevel("BaseWorld", "Level_4");
+		#end
 	}
 
 	function loadLevel(worldName:String, levelName:String) {
@@ -117,7 +123,11 @@ class PlayState extends FlxTransitionableState {
 			minBounds.y = Math.min(minBounds.y, tl.y);
 			maxBounds.x = Math.max(maxBounds.x, tl.x + tl.width);
 			maxBounds.y = Math.max(maxBounds.y, tl.y + tl.height);
-			midGroundGroup.add(tl);
+
+			#if (debug || drawTerrain)
+			tl.alpha = .5;
+			// midGroundGroup.add(tl);
+			#end
 
 			makeTileBodies(tl);
 		}
@@ -159,6 +169,10 @@ class PlayState extends FlxTransitionableState {
 		for (slingshot in level.slingshots) {
 			flipperGroup.add(slingshot.emitter);
 			flipperGroup.add(slingshot);
+		}
+
+		for (interactable in level.interactables) {
+			foregroundGroup.add(interactable);
 		}
 
 		for (tunnel in level.tunnels) {
@@ -277,6 +291,14 @@ class PlayState extends FlxTransitionableState {
 	}
 
 	override public function update(elapsed:Float) {
+		if (FlxG.keys.justPressed.P || FlxG.keys.justPressed.ESCAPE) {
+			togglePause();
+		}
+
+		if (isPaused) {
+			return;
+		}
+
 		super.update(elapsed);
 
 		if (FlxG.mouse.justPressed) {
@@ -286,6 +308,17 @@ class PlayState extends FlxTransitionableState {
 		handleCameraBounds();
 
 		// TODO.sfx('scarySound');
+	}
+
+	function togglePause() {
+		isPaused = !isPaused;
+
+		if (isPaused) {
+			originalTimeScaleBeforePausing = FlxG.timeScale;
+			FlxG.timeScale = 0;
+		} else {
+			FlxG.timeScale = originalTimeScaleBeforePausing;
+		}
 	}
 
 	var tmp = FlxPoint.get();
