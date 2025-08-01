@@ -1,5 +1,6 @@
 package entities;
 
+import types.Direction;
 import bitdecay.flixel.spacial.Cardinal;
 import flixel.math.FlxRect;
 import flixel.FlxObject;
@@ -16,7 +17,7 @@ class CameraTransition extends FlxObject {
 	/**
 	 * The camera bounding boxes associated with which sides of the `zone`
 	**/
-	public var camGuides = new Map<Cardinal, FlxRect>();
+	public var camGuides = new Map<Direction, FlxRect>();
 
 	public function new(area:FlxRect) {
 		super(area.x, area.y);
@@ -25,7 +26,7 @@ class CameraTransition extends FlxObject {
 		zone = area;
 	}
 
-	public function addGuideTrigger(dir:Cardinal, zone:FlxRect) {
+	public function addGuideTrigger(dir:Direction, zone:FlxRect) {
 		camGuides.set(dir, zone);
 	}
 }

@@ -1,5 +1,7 @@
 package entities.interact;
 
+import flixel.effects.particles.FlxEmitter;
+import todo.TODO;
 import nape.callbacks.InteractionCallback;
 import constants.CbTypes;
 import nape.constraint.DistanceJoint;
@@ -32,6 +34,8 @@ class Popper extends Interactable {
 	// Required velocity to trigger the popper
 	var sensitivity:Float = 10;
 
+	public var emitter:FlxEmitter;
+
 	public function new(X:Float, Y:Float, strength:Float, sensitivity:Float) {
 		super(X, Y);
 		Aseprite.loadAllAnimations(this, AssetPaths.jetBumper__json);
@@ -51,11 +55,29 @@ class Popper extends Interactable {
 		body.setShapeMaterials(new Material(-100));
 
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
+
+		var lifespan = 0.3;
+		var startScale = 1;
+		var endScale = 2.5;
+		var startAlpha = 1;
+		var endAlpha = 0;
+		emitter = new FlxEmitter(X, Y, 1);
+		emitter.loadParticles(AssetPaths.bumper_trail__png, 1, 0, false, false);
+		emitter.launchMode = SQUARE;
+		emitter.velocity.set(0, 0, 0, 0, 0, 0, 0, 0);
+		emitter.lifespan.set(lifespan, lifespan);
+		emitter.scale.set(startScale, startScale, startScale, startScale, endScale, endScale, endScale, endScale);
+		emitter.alpha.set(startAlpha, startAlpha, endAlpha, endAlpha);
 	}
 
 	override public function handleInteraction(data:InteractionCallback) {
+		emitter.start(true);
+
 		var arb = data.arbiters.at(0).collisionArbiter;
-		var impactNormal = arb.normal; // .mul(-1);
+		var impactNormal = arb.normal;
+		if (arb.shape2.body == body) {
+			impactNormal.muleq(-1);
+		}
 
 		var impactImpulse = arb.normalImpulse(data.int1.castBody);
 		trace(impactImpulse);
@@ -70,6 +92,7 @@ class Popper extends Interactable {
 			// if (data.int1.castBody.velocity.dot(impactNormal) >= sensitivity) {
 			// if (data.int1.castBody.velocity.length >= sensitivity) {
 			data.int1.castBody.applyImpulse(impactNormal.mul(bumpStrength));
+			TODO.sfx('popper hit');
 		}
 	}
 }

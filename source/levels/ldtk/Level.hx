@@ -1,5 +1,7 @@
 package levels.ldtk;
 
+import types.Direction;
+import entities.interact.Slingshot;
 import entities.interact.Popper;
 import entities.Flipper;
 import flixel.FlxSprite;
@@ -42,6 +44,7 @@ class Level {
 
 	public var flippers:Array<Flipper> = [];
 	public var poppers:Array<Popper> = [];
+	public var slingshots:Array<Slingshot> = [];
 
 	public function new(worldNameOrIID:String, nameOrIID:String) {
 		this.worldID = worldNameOrIID;
@@ -79,6 +82,7 @@ class Level {
 			parseCameraTransitions(raw.l_Objects.all_CameraTransition);
 			parseFlippers(raw.l_Objects.all_FlipperLeft, raw.l_Objects.all_FlipperRight);
 			parsePoppers(raw.l_Objects.all_Popper, raw.l_Objects.all_SmallPopper);
+			parseSlingshots(raw.l_Objects.all_Slingshot_Left, raw.l_Objects.all_Slingshot_Right);
 		}
 	}
 
@@ -95,7 +99,7 @@ class Level {
 			var transArea = FlxRect.get(def.worldPixelX, def.worldPixelY, def.width, def.height);
 			var camTrigger = new CameraTransition(transArea);
 			for (i in 0...def.f_Directions.length) {
-				camTrigger.addGuideTrigger(def.f_Directions[i].toCardinal(), camZones.get(def.f_Zones[i].entityIid));
+				camTrigger.addGuideTrigger(def.f_Directions[i], camZones.get(def.f_Zones[i].entityIid));
 			}
 			camTransitions.push(camTrigger);
 		}
@@ -113,9 +117,18 @@ class Level {
 	}
 
 	function parsePoppers(popperDefs:Array<Ldtk.Entity_Popper>, smallPopDefs:Array<Ldtk.Entity_SmallPopper>) {
-		trace(popperDefs.length);
 		for (pd in popperDefs) {
 			poppers.push(new Popper(pd.worldPixelX, pd.worldPixelY, 1000, 75));
+		}
+	}
+
+	function parseSlingshots(leftDefs:Array<Ldtk.Entity_Slingshot_Left>, rightDefs:Array<Ldtk.Entity_Slingshot_Right>) {
+		for (ld in leftDefs) {
+			slingshots.push(new Slingshot(ld.worldPixelX, ld.worldPixelY, 750, Direction.RIGHT, 30));
+		}
+
+		for (rd in rightDefs) {
+			slingshots.push(new Slingshot(rd.worldPixelX, rd.worldPixelY, 750, Direction.LEFT, 30));
 		}
 	}
 }

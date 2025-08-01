@@ -123,7 +123,13 @@ class PlayState extends FlxTransitionableState {
 		}
 
 		for (popper in level.poppers) {
+			foregroundGroup.add(popper.emitter);
 			foregroundGroup.add(popper);
+		}
+
+		for (slingshot in level.slingshots) {
+			flipperGroup.add(slingshot.emitter);
+			flipperGroup.add(slingshot);
 		}
 
 		FlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
@@ -227,19 +233,19 @@ class PlayState extends FlxTransitionableState {
 			var bounds = activeCameraTransition.getRotatedBounds();
 			for (dir => camZone in activeCameraTransition.camGuides) {
 				switch (dir) {
-					case N:
+					case UP:
 						if (player.y < bounds.top) {
 							setCameraBounds(camZone);
 						}
-					case S:
+					case DOWN:
 						if (player.y > bounds.bottom) {
 							setCameraBounds(camZone);
 						}
-					case E:
+					case RIGHT:
 						if (player.x > bounds.right) {
 							setCameraBounds(camZone);
 						}
-					case W:
+					case LEFT:
 						if (player.x < bounds.left) {
 							setCameraBounds(camZone);
 						}

@@ -22,6 +22,9 @@ class Player extends SelfAssigningFlxNapeSprite {
 	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/ball.json");
 	public static var layers = AsepriteMacros.layerNames("assets/aseprite/characters/ball.json");
 
+	private static var degToRad = Math.PI / 180.0;
+	private static var radToDeg = 180.0 / Math.PI;
+
 	// public static var eventData = AsepriteMacros.frameUserData("assets/aseprite/characters/ball.json", "Layer 1");
 	var speed:Float = 150;
 	var playerNum = 0;
@@ -44,7 +47,7 @@ class Player extends SelfAssigningFlxNapeSprite {
 		body.mass = 1;
 		body.isBullet = true;
 
-		body.shapes.add(new Circle(16, Material.sand()));
+		body.shapes.add(new Circle(16, Material.steel()));
 		addPremadeBody(body);
 
 		body.setShapeFilters(new InteractionFilter(CGroups.BALL, CGroups.ALL));
@@ -52,15 +55,17 @@ class Player extends SelfAssigningFlxNapeSprite {
 
 		var trailLength = 15;
 		var lifespan = .2;
-		var endScale = 0.7;
-		var startAlpha = 0.1;
+		var startScale = 0.8;
+		var endScale = 0.0;
+		var startAlpha = 1;
+		var endAlpha = 0.3;
 		emitter = new FlxEmitter(X, Y, trailLength);
-		emitter.loadParticles(AssetPaths.ball__png, trailLength, 0, false, false);
+		emitter.loadParticles(AssetPaths.ball_trail__png, trailLength, 0, false, false);
 		emitter.launchMode = SQUARE;
 		emitter.velocity.set(0, 0, 0, 0, 0, 0, 0, 0);
 		emitter.lifespan.set(lifespan, lifespan);
-		emitter.scale.set(1, 1, 1, 1, endScale, endScale, endScale, endScale);
-		emitter.alpha.set(startAlpha, startAlpha, 0, 0);
+		emitter.scale.set(startScale, startScale, startScale, startScale, endScale, endScale, endScale, endScale);
+		emitter.alpha.set(startAlpha, startAlpha, endAlpha, endAlpha);
 		emitter.start(false, lifespan / trailLength);
 	}
 
@@ -72,6 +77,8 @@ class Player extends SelfAssigningFlxNapeSprite {
 	override public function update(delta:Float) {
 		super.update(delta);
 		emitter.setPosition(body.position.x, body.position.y);
+		var rot = body.velocity.angle * radToDeg;
+		emitter.angle.set(rot, rot, rot, rot);
 
 		var inputDir = InputCalculator.getInputCardinal(playerNum);
 		if (inputDir != NONE) {
