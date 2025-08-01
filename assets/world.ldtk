@@ -7779,8 +7779,8 @@
 			{ "id": "INVISIBLE", "tileRect": null, "color": 14984818 }
 		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
 	], "externalEnums": [
-		{ "identifier": "FmodSong", "uid": 223, "values": [{ "id": "LetsGo", "tileRect": null, "color": 12470831 }], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "0080d688207c3c09e857d8384f72fa45", "tags": [] },
-		{ "identifier": "FmodSFX", "uid": 224, "values": [ { "id": "MenuHover", "tileRect": null, "color": 12470831 }, { "id": "MenuSelect", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "0080d688207c3c09e857d8384f72fa45", "tags": [] },
+		{ "identifier": "FmodSong", "uid": 223, "values": [ { "id": "Fkip", "tileRect": null, "color": 14120515 }, { "id": "LetsGo", "tileRect": null, "color": 12470831 } ], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "61cc6f0973502d9c001d3425b81dc94a", "tags": [] },
+		{ "identifier": "FmodSFX", "uid": 224, "values": [ { "id": "MenuHover", "tileRect": null, "color": 12470831 }, { "id": "MenuSelect", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "61cc6f0973502d9c001d3425b81dc94a", "tags": [] },
 		{ "identifier": "Direction", "uid": 870, "values": [
 			{ "id": "UP", "tileRect": { "tilesetUid": 16, "x": 0, "y": 80, "w": 16, "h": 16 }, "color": 12470831 },
 			{ "id": "DOWN", "tileRect": { "tilesetUid": 16, "x": 48, "y": 80, "w": 16, "h": 16 }, "color": 14120515 },
@@ -15911,7 +15911,7 @@
 		] },
 		{ "iid": "47e5e350-5e50-11f0-8054-278e27a8ca32", "identifier": "Logan", "defaultLevelWidth": 256, "defaultLevelHeight": 256, "worldGridWidth": 256, "worldGridHeight": 256, "worldLayout": "Free", "levels": [
 			{
-				"identifier": "Level_7",
+				"identifier": "Flip_challenge_double",
 				"iid": "47e60a60-5e50-11f0-8054-179d98264fe0",
 				"uid": 876,
 				"worldX": 0,
@@ -15921,7 +15921,7 @@
 				"pxHei": 704,
 				"__bgColor": "#696A79",
 				"bgColor": null,
-				"useAutoIdentifier": true,
+				"useAutoIdentifier": false,
 				"bgRelPath": null,
 				"bgPos": null,
 				"bgPivotX": 0.5,

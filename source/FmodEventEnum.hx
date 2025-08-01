@@ -6,6 +6,7 @@ package;
  */
 // @formatter:off
 enum FmodSong {
+    Fkip;
     LetsGo;
 }
 
@@ -17,6 +18,7 @@ enum FmodSFX {
 class FmodEvent {
     public static inline extern overload function event(song:FmodSong):String {
         return switch(song) {
+            case Fkip: "event:/Music/Fkip";
             case LetsGo: "event:/Music/LetsGo";
         }
     }

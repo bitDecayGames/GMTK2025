@@ -46,12 +46,14 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 	var activateJoint:DistanceJoint;
 	var restingJoint:DistanceJoint;
 
+	var flipperStrength:Float = 10;
+
 	var flipperMaterial = new Material(-0.2, .01, .01, 1, 0);
 
 	private var dir:Float = 0;
 
-	public function new(group:ControlGroup, X:Float, Y:Float, width:Float, strength:Float, bigRad:Float, smallRad:Float, restAng:Float, flipAng:Float,
-			fmass:Float) {
+	// public function new(group:ControlGroup, X:Float, Y:Float, width:Float, strength:Float, bigRad:Float, smallRad:Float, restAng:Float, flipAng:Float,
+	public function new(group:ControlGroup, X:Float, Y:Float, width:Float, bigRad:Float, smallRad:Float, restAng:Float, flipAng:Float, fmass:Float) {
 		super();
 		Aseprite.loadAllAnimations(this, AssetPaths.flipper__json);
 		animation.play(anims.flipper_1_aseprite);
@@ -59,7 +61,7 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		this.ctrlGroup = group;
 		this.width = width;
 		this.height = bigRad;
-		strength *= 10000;
+		flipperStrength *= 10000;
 
 		if (flipAng - restAng < 0) {
 			flipDirection = CCW;
@@ -108,7 +110,7 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		activateJoint.stiff = false;
 		activateJoint.space = FlxNapeSpace.space;
 		activateJoint.damping = 0;
-		activateJoint.maxForce = strength * fmass;
+		activateJoint.maxForce = flipperStrength * fmass;
 
 		var restingJointWorldPos = body.localPointToWorld(forceLocalPos.copy().rotate(restAngle));
 		restingJoint = new DistanceJoint(body, FlxNapeSpace.space.world, forceLocalPos, restingJointWorldPos, 0, 0);
@@ -116,7 +118,7 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		restingJoint.stiff = false;
 		restingJoint.space = FlxNapeSpace.space;
 		restingJoint.damping = 0;
-		restingJoint.maxForce = strength * fmass;
+		restingJoint.maxForce = flipperStrength * fmass;
 
 		body.rotation = restAngle;
 		addPremadeBody(body);
