@@ -123,6 +123,7 @@ class PlayState extends FlxTransitionableState {
 		}
 
 		for (popper in level.poppers) {
+			foregroundGroup.add(popper.emitter);
 			foregroundGroup.add(popper);
 		}
 
