@@ -1,5 +1,11 @@
 package entities;
 
+import nape.callbacks.PreFlag;
+import nape.callbacks.PreCallback;
+import constants.CbTypes;
+import nape.callbacks.InteractionType;
+import nape.callbacks.CbEvent;
+import nape.callbacks.PreListener;
 import nape.constraint.DistanceJoint;
 import input.SimpleController;
 import nape.phys.Material;
@@ -36,10 +42,11 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 	var angleJoint:AngleJoint;
 	var pivotJoint:PivotJoint;
 
+	var leverArmScale = 2.0;
 	var activateJoint:DistanceJoint;
 	var restingJoint:DistanceJoint;
 
-	var flipperMaterial = new Material(-0.2, .01, .01, 1, .005);
+	var flipperMaterial = new Material(-0.2, .01, .01, 1, 0);
 
 	private var dir:Float = 0;
 
@@ -94,7 +101,7 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		angleJoint.stiff = true;
 		angleJoint.space = FlxNapeSpace.space;
 
-		var forceLocalPos = Vec2.get(w - bigRad - smallRad, 0);
+		var forceLocalPos = Vec2.get(w - bigRad - smallRad, 0).muleq(leverArmScale);
 		var activeJointWorldPos = body.localPointToWorld(forceLocalPos.copy().rotate(flipAngle));
 		activateJoint = new DistanceJoint(body, FlxNapeSpace.space.world, forceLocalPos, activeJointWorldPos, 0, 0);
 		activateJoint.active = true;
@@ -113,10 +120,27 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 
 		body.rotation = restAngle;
 		addPremadeBody(body);
+
+		body.cbTypes.add(CbTypes.CB_CONTROL_SURFACE);
+
+		// CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
+		var listener = new PreListener(InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_CONTROL_SURFACE, testPre, 0, false);
+		FlxNapeSpace.space.listeners.add(listener);
+	}
+
+	function testPre(cb:PreCallback):PreFlag {
+		if (cb.int2.castBody != body) {
+			return null;
+		}
+		if (body.rotation > jointMax || body.rotation < jointMin) {
+			trace('skipping one');
+			return PreFlag.IGNORE_ONCE;
+		} else {
+			return PreFlag.ACCEPT_ONCE;
+		}
 	}
 
 	override public function update(delta:Float) {
-		super.update(delta);
 		var activated = switch ctrlGroup {
 			case LEFT:
 				FlxG.keys.pressed.Z;
@@ -130,6 +154,7 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		} else {
 			rest(delta);
 		}
+		super.update(delta);
 	}
 
 	override function setBody(body:Body) {
