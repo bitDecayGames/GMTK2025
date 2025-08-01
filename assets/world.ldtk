@@ -36,7 +36,7 @@
 	"backupOnSave": true,
 	"backupLimit": 10,
 	"backupRelPath": "../backups",
-	"levelNamePattern": "Level_%idx",
+	"levelNamePattern": "Level_%world%x%y",
 	"tutorialDesc": null,
 	"customCommands": [{ "command": "lime test html5 -debug", "when": "Manual" }],
 	"flags": [ "ExportOldTableOfContentData", "MultiWorlds" ],
@@ -8201,7 +8201,7 @@
 	"worlds": [
 		{ "iid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2", "identifier": "BaseWorld", "defaultLevelWidth": 640, "defaultLevelHeight": 480, "worldGridWidth": 640, "worldGridHeight": 480, "worldLayout": "Free", "levels": [
 			{
-				"identifier": "Level_0",
+				"identifier": "Level_BaseWorld00",
 				"iid": "d92083a0-1460-11ee-93dd-3b235c51ea36",
 				"uid": 97,
 				"worldX": 0,
@@ -8218,7 +8218,7 @@
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
 				"__bgPos": null,
-				"externalRelPath": "world/Level_0.ldtkl",
+				"externalRelPath": "world/Level_BaseWorld00.ldtkl",
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": "LetsGo", "__tile": null, "defUid": 225, "realEditorValues": [{
 						"id": "V_String",
@@ -8232,7 +8232,7 @@
 				"__neighbours": [{ "levelIid": "c9a33310-5e50-11f0-ae13-a1a4ea0315f0", "dir": "w" }]
 			},
 			{
-				"identifier": "Level_1",
+				"identifier": "Level_BaseWorld_6400",
 				"iid": "c9a33310-5e50-11f0-ae13-a1a4ea0315f0",
 				"uid": 228,
 				"worldX": -640,
@@ -8249,7 +8249,7 @@
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
 				"__bgPos": null,
-				"externalRelPath": "world/Level_1.ldtkl",
+				"externalRelPath": "world/Level_BaseWorld_6400.ldtkl",
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
 					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
@@ -8260,7 +8260,7 @@
 				"__neighbours": [{ "levelIid": "d92083a0-1460-11ee-93dd-3b235c51ea36", "dir": "e" }]
 			},
 			{
-				"identifier": "Level_2",
+				"identifier": "Level_BaseWorld_672_1520",
 				"iid": "dcaeb010-5e50-11f0-ae13-d9f0636ebb1f",
 				"uid": 229,
 				"worldX": -672,
@@ -8277,7 +8277,7 @@
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
 				"__bgPos": null,
-				"externalRelPath": "world/Level_2.ldtkl",
+				"externalRelPath": "world/Level_BaseWorld_672_1520.ldtkl",
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
 					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [null] },
@@ -8288,7 +8288,7 @@
 				"__neighbours": [{ "levelIid": "90c79060-5e50-11f0-aa11-7be173513407", "dir": "s" }]
 			},
 			{
-				"identifier": "Level_4",
+				"identifier": "Level_BaseWorld_672_800",
 				"iid": "90c79060-5e50-11f0-aa11-7be173513407",
 				"uid": 717,
 				"worldX": -672,
@@ -8305,7 +8305,7 @@
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
 				"__bgPos": null,
-				"externalRelPath": "world/Level_4.ldtkl",
+				"externalRelPath": "world/Level_BaseWorld_672_800.ldtkl",
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
 					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
@@ -8316,7 +8316,7 @@
 				"__neighbours": [{ "levelIid": "dcaeb010-5e50-11f0-ae13-d9f0636ebb1f", "dir": "n" }]
 			},
 			{
-				"identifier": "Level_5",
+				"identifier": "Level_BaseWorld688_1344",
 				"iid": "2b992c20-5e50-11f0-92cc-330c7a92f094",
 				"uid": 869,
 				"worldX": 688,
@@ -8333,7 +8333,7 @@
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
 				"__bgPos": null,
-				"externalRelPath": "world/Level_5.ldtkl",
+				"externalRelPath": "world/Level_BaseWorld688_1344.ldtkl",
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
 					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
@@ -8344,7 +8344,7 @@
 				"__neighbours": [{ "levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea", "dir": "e" }]
 			},
 			{
-				"identifier": "Level_6",
+				"identifier": "Level_BaseWorld1344_912",
 				"iid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
 				"uid": 874,
 				"worldX": 1344,
@@ -8361,7 +8361,7 @@
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
 				"__bgPos": null,
-				"externalRelPath": "world/Level_6.ldtkl",
+				"externalRelPath": "world/Level_BaseWorld1344_912.ldtkl",
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
 					{ "__identifier": "GravityY", "__type": "Int", "__value": 900, "__tile": null, "defUid": 257, "realEditorValues": [{ "id": "V_Int", "params": [900] }] },
@@ -8374,7 +8374,7 @@
 		] },
 		{ "iid": "031d4320-5e50-11f0-ae13-51acc99c6704", "identifier": "SpecialWorld", "defaultLevelWidth": 256, "defaultLevelHeight": 256, "worldGridWidth": 256, "worldGridHeight": 256, "worldLayout": "Free", "levels": [
 			{
-				"identifier": "Level_3",
+				"identifier": "Level_SpecialWorld00",
 				"iid": "031d4321-5e50-11f0-ae13-5fc3e13e9d3d",
 				"uid": 230,
 				"worldX": 0,
@@ -8391,7 +8391,7 @@
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
 				"__bgPos": null,
-				"externalRelPath": "world/Level_3.ldtkl",
+				"externalRelPath": "world/Level_SpecialWorld00.ldtkl",
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
 					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
