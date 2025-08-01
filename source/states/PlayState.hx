@@ -40,6 +40,9 @@ using states.FlxStateExt;
 class PlayState extends FlxTransitionableState {
 	var focusZones = new FlxTypedGroup<FlxObject>();
 
+	var ballMass:Float = 1;
+	var gravity = FlxPoint.get(0, 1000);
+
 	var player:Player;
 	var playerGroup = new FlxGroup();
 	var worldTiles = new FlxGroup();
@@ -49,7 +52,6 @@ class PlayState extends FlxTransitionableState {
 	var flipperGroup = new FlxGroup();
 	var activeCameraTransition:CameraTransition = null;
 
-	var gravity = FlxPoint.get(0, 16 * 9);
 
 	var transitions = new FlxTypedGroup<CameraTransition>();
 
@@ -94,7 +96,8 @@ class PlayState extends FlxTransitionableState {
 		unload();
 
 		var level = new Level(worldName, levelName);
-		FlxNapeSpace.space.gravity.setxy(level.rawLevels[0].f_GravityX, level.rawLevels[0].f_GravityY);
+		// FlxNapeSpace.space.gravity.setxy(level.rawLevels[0].f_GravityX, level.rawLevels[0].f_GravityY);
+		FlxNapeSpace.space.gravity.setxy(gravity.x, gravity.y);
 
 		FmodPlugin.playSong(level.rawLevels[0].f_Music);
 
@@ -120,7 +123,8 @@ class PlayState extends FlxTransitionableState {
 		FlxG.worldBounds.set(minBounds.x, minBounds.y, maxBounds.x - minBounds.x, maxBounds.y - minBounds.y);
 
 		player = new Player(level.spawnPoint.x, level.spawnPoint.y);
-		player.body.mass = level.rawLevels[0].f_BallMass;
+		// player.body.mass = level.rawLevels[0].f_BallMass;
+		player.body.mass = ballMass;
 		camera.follow(player, LOCKON, 0.1);
 		playerGroup.add(player.disappearer);
 		playerGroup.add(player.emitter);

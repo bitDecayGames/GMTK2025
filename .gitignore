@@ -1,6 +1,9 @@
 # Build files
 /export
 
+# Build file that is needed sometimes in case language server does not initialize after cloning
+build.hxml
+
 # local copy of dependencies
 /.haxelib
 

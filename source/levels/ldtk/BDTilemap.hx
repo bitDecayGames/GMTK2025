@@ -17,7 +17,7 @@ class BDTile extends LdtkTile<Enum_TileTags> {
 		super(cast tilemap, index, width, height, true);
 
 		#if debug
-		ignoreDrawDebug = true;
+		// ignoreDrawDebug = true;
 		#end
 	}
 
@@ -37,7 +37,7 @@ class BDTile extends LdtkTile<Enum_TileTags> {
 		visible = true;
 		allowCollisions = NONE;
 		#if debug
-		ignoreDrawDebug = tags.length == 0;
+		// ignoreDrawDebug = tags.length == 0;
 		#end
 
 		#if debug
@@ -49,7 +49,7 @@ class BDTile extends LdtkTile<Enum_TileTags> {
 
 		if (tags.contains(INVISIBLE)) {
 			#if debug
-			debugBoundingBoxColor = FlxColor.CYAN;
+			// debugBoundingBoxColor = FlxColor.CYAN;
 			#else
 			visible = false;
 			#end
