@@ -1,5 +1,6 @@
 package levels.ldtk;
 
+import entities.interact.PopperSmall;
 import openfl.utils.AssetType;
 import openfl.Assets;
 import flixel.FlxObject;
@@ -53,6 +54,7 @@ class Level {
 
 	public var flippers:Array<Flipper> = [];
 	public var poppers:Array<Popper> = [];
+	public var poppersSmall:Array<PopperSmall> = [];
 	public var slingshots:Array<Slingshot> = [];
 	public var tunnels:Array<Tunnel> = [];
 
@@ -148,7 +150,10 @@ class Level {
 
 	function parsePoppers(popperDefs:Array<Ldtk.Entity_Popper>, smallPopDefs:Array<Ldtk.Entity_SmallPopper>) {
 		for (pd in popperDefs) {
-			poppers.push(new Popper(pd.worldPixelX, pd.worldPixelY, 1000, 75));
+			poppers.push(new Popper(pd.worldPixelX, pd.worldPixelY, 75));
+		}
+		for (pd in smallPopDefs) {
+			poppersSmall.push(new PopperSmall(pd.worldPixelX, pd.worldPixelY, 75));
 		}
 	}
 
