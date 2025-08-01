@@ -55,15 +55,17 @@ class Player extends SelfAssigningFlxNapeSprite {
 
 		var trailLength = 15;
 		var lifespan = .2;
-		var endScale = 0.6;
-		var startAlpha = 0.8;
+		var startScale = 0.8;
+		var endScale = 0.0;
+		var startAlpha = 1;
+		var endAlpha = 0.3;
 		emitter = new FlxEmitter(X, Y, trailLength);
 		emitter.loadParticles(AssetPaths.ball_trail__png, trailLength, 0, false, false);
 		emitter.launchMode = SQUARE;
 		emitter.velocity.set(0, 0, 0, 0, 0, 0, 0, 0);
 		emitter.lifespan.set(lifespan, lifespan);
-		emitter.scale.set(1, 1, 1, 1, endScale, endScale, endScale, endScale);
-		emitter.alpha.set(startAlpha, startAlpha, 0, 0);
+		emitter.scale.set(startScale, startScale, startScale, startScale, endScale, endScale, endScale, endScale);
+		emitter.alpha.set(startAlpha, startAlpha, endAlpha, endAlpha);
 		emitter.start(false, lifespan / trailLength);
 	}
 
