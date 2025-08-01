@@ -11,7 +11,7 @@
 	"iid": "48a599b0-1460-11ee-8f1d-1923aa7248a0",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 870,
+	"nextUid": 872,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": null,
@@ -6318,13 +6318,13 @@
 				},
 				{
 					"identifier": "Directions",
-					"doc": "The Directions associated with each Zone",
-					"__type": "Array<LocalEnum.Direction>",
-					"uid": 204,
-					"type": "F_Enum(15)",
+					"doc": null,
+					"__type": "Array<ExternEnum.Direction>",
+					"uid": 871,
+					"type": "F_Enum(870)",
 					"isArray": true,
 					"canBeNull": false,
-					"arrayMinLength": 2,
+					"arrayMinLength": null,
 					"arrayMaxLength": null,
 					"editorDisplayMode": "Hidden",
 					"editorDisplayScale": 1,
@@ -6389,79 +6389,6 @@
 			"pivotX": 0,
 			"pivotY": 0,
 			"fieldDefs": []
-		},
-		{
-			"identifier": "Warp",
-			"uid": 231,
-			"tags": [],
-			"exportToToc": false,
-			"allowOutOfBounds": false,
-			"doc": null,
-			"width": 16,
-			"height": 16,
-			"resizableX": false,
-			"resizableY": false,
-			"minWidth": null,
-			"maxWidth": null,
-			"minHeight": null,
-			"maxHeight": null,
-			"keepAspectRatio": false,
-			"tileOpacity": 1,
-			"fillOpacity": 1,
-			"lineOpacity": 1,
-			"hollow": false,
-			"color": "#D77643",
-			"renderMode": "Rectangle",
-			"showName": true,
-			"tilesetId": null,
-			"tileRenderMode": "FitInside",
-			"tileRect": null,
-			"uiTileRect": null,
-			"nineSliceBorders": [],
-			"maxCount": 0,
-			"limitScope": "PerLevel",
-			"limitBehavior": "MoveLastOne",
-			"pivotX": 0,
-			"pivotY": 0,
-			"fieldDefs": [
-				{
-					"identifier": "Pair",
-					"doc": null,
-					"__type": "EntityRef",
-					"uid": 233,
-					"type": "F_EntityRef",
-					"isArray": false,
-					"canBeNull": true,
-					"arrayMinLength": null,
-					"arrayMaxLength": null,
-					"editorDisplayMode": "RefLinkBetweenCenters",
-					"editorDisplayScale": 1,
-					"editorDisplayPos": "Above",
-					"editorLinkStyle": "CurvedArrow",
-					"editorDisplayColor": null,
-					"editorAlwaysShow": true,
-					"editorShowInWorld": true,
-					"editorCutLongValues": true,
-					"editorTextSuffix": null,
-					"editorTextPrefix": null,
-					"useForSmartColor": false,
-					"exportToToc": false,
-					"searchable": false,
-					"min": null,
-					"max": null,
-					"regex": null,
-					"acceptFileTypes": null,
-					"defaultOverride": null,
-					"textLanguageMode": null,
-					"symmetricalRef": true,
-					"autoChainRef": true,
-					"allowOutOfLevelRef": true,
-					"allowedRefs": "OnlySame",
-					"allowedRefsEntityUid": null,
-					"allowedRefTags": [],
-					"tilesetUid": null
-				}
-			]
 		},
 		{
 			"identifier": "FlipperRight",
@@ -7669,12 +7596,6 @@
 			}
 		}
 	], "enums": [
-		{ "identifier": "Direction", "uid": 15, "values": [
-			{ "id": "EAST", "tileRect": { "tilesetUid": 16, "x": 16, "y": 80, "w": 16, "h": 16 }, "color": 12470831 },
-			{ "id": "WEST", "tileRect": { "tilesetUid": 16, "x": 32, "y": 80, "w": 16, "h": 16 }, "color": 14120515 },
-			{ "id": "NORTH", "tileRect": { "tilesetUid": 16, "x": 0, "y": 80, "w": 16, "h": 16 }, "color": 15389866 },
-			{ "id": "SOUTH", "tileRect": { "tilesetUid": 16, "x": 48, "y": 80, "w": 16, "h": 16 }, "color": 14984818 }
-		], "iconTilesetUid": 16, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
 		{ "identifier": "Color", "uid": 71, "values": [
 			{ "id": "EMPTY", "tileRect": null, "color": 16777215 },
 			{ "id": "RED", "tileRect": null, "color": 16733525 },
@@ -7690,7 +7611,13 @@
 		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
 	], "externalEnums": [
 		{ "identifier": "FmodSong", "uid": 223, "values": [{ "id": "LetsGo", "tileRect": null, "color": 12470831 }], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "0080d688207c3c09e857d8384f72fa45", "tags": [] },
-		{ "identifier": "FmodSFX", "uid": 224, "values": [ { "id": "MenuHover", "tileRect": null, "color": 12470831 }, { "id": "MenuSelect", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "0080d688207c3c09e857d8384f72fa45", "tags": [] }
+		{ "identifier": "FmodSFX", "uid": 224, "values": [ { "id": "MenuHover", "tileRect": null, "color": 12470831 }, { "id": "MenuSelect", "tileRect": null, "color": 14120515 } ], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "0080d688207c3c09e857d8384f72fa45", "tags": [] },
+		{ "identifier": "Direction", "uid": 870, "values": [
+			{ "id": "UP", "tileRect": { "tilesetUid": 16, "x": 0, "y": 80, "w": 16, "h": 16 }, "color": 12470831 },
+			{ "id": "DOWN", "tileRect": { "tilesetUid": 16, "x": 48, "y": 80, "w": 16, "h": 16 }, "color": 14120515 },
+			{ "id": "LEFT", "tileRect": { "tilesetUid": 16, "x": 32, "y": 80, "w": 16, "h": 16 }, "color": 15389866 },
+			{ "id": "RIGHT", "tileRect": { "tilesetUid": 16, "x": 16, "y": 80, "w": 16, "h": 16 }, "color": 14984818 }
+		], "iconTilesetUid": 16, "externalRelPath": "../source/types/Direction.hx", "externalFileChecksum": null, "tags": [] }
 	], "levelFields": [
 		{
 			"identifier": "Music",
@@ -7959,12 +7886,12 @@
 										"id": "V_String",
 										"params": ["ba5195e0-1030-11f0-85c4-9d652b41c2d6"]
 									} ] },
-									{ "__identifier": "Directions", "__type": "Array<LocalEnum.Direction>", "__value": [ "WEST", "EAST" ], "__tile": null, "defUid": 204, "realEditorValues": [ {
+									{ "__identifier": "Directions", "__type": "Array<ExternEnum.Direction>", "__value": [ "LEFT", "RIGHT" ], "__tile": null, "defUid": 871, "realEditorValues": [ {
 										"id": "V_String",
-										"params": ["WEST"]
+										"params": ["LEFT"]
 									}, {
 										"id": "V_String",
-										"params": ["EAST"]
+										"params": ["RIGHT"]
 									} ] }
 								],
 								"__worldX": 544,
@@ -8017,30 +7944,6 @@
 								"fieldInstances": [],
 								"__worldX": 256,
 								"__worldY": 288
-							},
-							{
-								"__identifier": "Warp",
-								"__grid": [11,12],
-								"__pivot": [0,0],
-								"__tags": [],
-								"__tile": null,
-								"__smartColor": "#D77643",
-								"iid": "0acb8d10-5e50-11f0-ae13-fb798e36f07e",
-								"width": 16,
-								"height": 16,
-								"defUid": 231,
-								"px": [176,192],
-								"fieldInstances": [{ "__identifier": "Pair", "__type": "EntityRef", "__value": {
-									"entityIid": "0f765070-5e50-11f0-ae13-1d40a1aeb0d2",
-									"layerIid": "031d4322-5e50-11f0-ae13-8509c179f4d4",
-									"levelIid": "031d4321-5e50-11f0-ae13-5fc3e13e9d3d",
-									"worldIid": "031d4320-5e50-11f0-ae13-51acc99c6704"
-								}, "__tile": null, "defUid": 233, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["0f765070-5e50-11f0-ae13-1d40a1aeb0d2"]
-								}] }],
-								"__worldX": 176,
-								"__worldY": 192
 							},
 							{
 								"__identifier": "FlipperRight",
@@ -16080,32 +15983,7 @@
 						"seed": 9344737,
 						"overrideTilesetUid": null,
 						"gridTiles": [],
-						"entityInstances": [
-							{
-								"__identifier": "Warp",
-								"__grid": [7,5],
-								"__pivot": [0,0],
-								"__tags": [],
-								"__tile": null,
-								"__smartColor": "#D77643",
-								"iid": "0f765070-5e50-11f0-ae13-1d40a1aeb0d2",
-								"width": 16,
-								"height": 16,
-								"defUid": 231,
-								"px": [112,80],
-								"fieldInstances": [{ "__identifier": "Pair", "__type": "EntityRef", "__value": {
-									"entityIid": "0acb8d10-5e50-11f0-ae13-fb798e36f07e",
-									"layerIid": "d92083a1-1460-11ee-93dd-39aa5ed0babe",
-									"levelIid": "d92083a0-1460-11ee-93dd-3b235c51ea36",
-									"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
-								}, "__tile": null, "defUid": 233, "realEditorValues": [{
-									"id": "V_String",
-									"params": ["0acb8d10-5e50-11f0-ae13-fb798e36f07e"]
-								}] }],
-								"__worldX": 112,
-								"__worldY": 80
-							}
-						]
+						"entityInstances": []
 					},
 					{
 						"__identifier": "Terrain",
