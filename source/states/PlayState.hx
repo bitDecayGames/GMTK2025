@@ -43,6 +43,7 @@ class PlayState extends FlxTransitionableState {
 	var player:Player;
 	var playerGroup = new FlxGroup();
 	var worldTiles = new FlxGroup();
+	var bgGroup = new FlxGroup();
 	var midGroundGroup = new FlxGroup();
 	var foregroundGroup = new FlxGroup();
 	var flipperGroup = new FlxGroup();
@@ -76,6 +77,7 @@ class PlayState extends FlxTransitionableState {
 		// QLog.error('Example error');
 
 		// Build out our render order
+		add(bgGroup);
 		add(midGroundGroup);
 		add(worldTiles);
 		add(playerGroup);
@@ -95,6 +97,15 @@ class PlayState extends FlxTransitionableState {
 		FlxNapeSpace.space.gravity.setxy(level.rawLevels[0].f_GravityX, level.rawLevels[0].f_GravityY);
 
 		FmodPlugin.playSong(level.rawLevels[0].f_Music);
+
+		for (bg in level.levelBgs) {
+			bgGroup.add(bg);
+		}
+
+		for (fg in level.levelFgs) {
+			foregroundGroup.add(fg);
+		}
+
 		var minBounds = FlxPoint.get(Math.POSITIVE_INFINITY, Math.POSITIVE_INFINITY);
 		var maxBounds = FlxPoint.get(Math.NEGATIVE_INFINITY, Math.NEGATIVE_INFINITY);
 		for (tl in level.terrainLayers) {
@@ -199,6 +210,11 @@ class PlayState extends FlxTransitionableState {
 			o.destroy();
 		}
 		playerGroup.clear();
+
+		for (o in bgGroup) {
+			o.destroy();
+		}
+		bgGroup.clear();
 
 		for (o in midGroundGroup) {
 			o.destroy();
