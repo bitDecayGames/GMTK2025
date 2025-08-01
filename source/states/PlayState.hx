@@ -91,7 +91,11 @@ class PlayState extends FlxTransitionableState {
 
 		add(focusZones);
 
+		#if logan
+		loadLevel("Logan", "Level_7");
+		#else
 		loadLevel("BaseWorld", "Level_4");
+		#end
 	}
 
 	function loadLevel(worldName:String, levelName:String) {
@@ -101,7 +105,8 @@ class PlayState extends FlxTransitionableState {
 		// FlxNapeSpace.space.gravity.setxy(level.rawLevels[0].f_GravityX, level.rawLevels[0].f_GravityY);
 		FlxNapeSpace.space.gravity.setxy(gravity.x, gravity.y);
 
-		FmodPlugin.playSong(level.rawLevels[0].f_Music);
+		// FmodPlugin.playSong(level.rawLevels[0].f_Music);
+		FmodPlugin.playSong(FmodSong.Fkip);
 
 		for (bg in level.levelBgs) {
 			bgGroup.add(bg);
@@ -118,7 +123,11 @@ class PlayState extends FlxTransitionableState {
 			minBounds.y = Math.min(minBounds.y, tl.y);
 			maxBounds.x = Math.max(maxBounds.x, tl.x + tl.width);
 			maxBounds.y = Math.max(maxBounds.y, tl.y + tl.height);
-			midGroundGroup.add(tl);
+
+			#if (debug || drawTerrain)
+			tl.alpha = .5;
+			// midGroundGroup.add(tl);
+			#end
 
 			makeTileBodies(tl);
 		}

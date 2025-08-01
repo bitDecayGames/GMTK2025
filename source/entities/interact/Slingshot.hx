@@ -62,7 +62,7 @@ class Slingshot extends Interactable {
 				Vec2.get(17, 37 + 9)
 			]));
 
-			bounceShape = new Polygon([Vec2.get(-18 + 9, -36), Vec2.get(18, 37 - 9), Vec2.get(-9, 9)]);
+			bounceShape = new Polygon([Vec2.get(-18 + 9, -36), Vec2.get(23, 37 - 9), Vec2.get(-9, 9)]);
 			bounceShape.userData.data = true;
 			body.shapes.add(bounceShape);
 		} else {
@@ -77,7 +77,7 @@ class Slingshot extends Interactable {
 				Vec2.get(-17, 37 + 9)
 			]));
 
-			bounceShape = new Polygon([Vec2.get(18 - 9, -36), Vec2.get(-18, 37 - 9), Vec2.get(9, 9)]);
+			bounceShape = new Polygon([Vec2.get(18 - 9, -36), Vec2.get(-23, 37 - 9), Vec2.get(9, 9)]);
 			bounceShape.userData.data = true;
 			body.shapes.add(bounceShape);
 		}
