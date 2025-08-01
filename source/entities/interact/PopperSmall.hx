@@ -23,29 +23,30 @@ import flixel.addons.nape.FlxNapeSprite;
 import nape.phys.Body;
 import nape.phys.BodyType;
 
-class Popper extends Interactable {
+class PopperSmall extends Interactable {
 	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/jetBumper.json");
 
 	private static var degToRad = Math.PI / 180.0;
 	private static var radToDeg = 180.0 / Math.PI;
 
-	var bumpStrength:Float = 1000;
+	var bumpStrength:Float = 500;
 
 	// Required velocity to trigger the popper
-	var sensitivity:Float = 10;
+	var sensitivity:Float = 1;
 
 	public var emitter:FlxEmitter;
 
 	public function new(X:Float, Y:Float, sensitivity:Float) {
 		super(X, Y);
 		Aseprite.loadAllAnimations(this, AssetPaths.jetBumper__json);
+		this.scale.set(0.3, 0.3);
 		animation.play(anims.jetBumper_0_aseprite);
 		// origin.set(12, 24);
 		this.sensitivity = sensitivity;
 
 		var body = new Body(BodyType.STATIC);
 		body.position.set(Vec2.get(X, Y));
-		body.shapes.add(new Circle(19, Vec2.weak(0, 0)));
+		body.shapes.add(new Circle(5, Vec2.weak(0, 0)));
 		body.isBullet = true;
 
 		body.setShapeFilters(new InteractionFilter(CGroups.INTERACTABLE, CGroups.BALL));
@@ -92,11 +93,6 @@ class Popper extends Interactable {
 			// if (data.int1.castBody.velocity.length >= sensitivity) {
 			data.int1.castBody.applyImpulse(impactNormal.mul(bumpStrength));
 			TODO.sfx('popper hit');
-
-			animation.play(anims.jetBumper_1_aseprite, true);
-			animation.finishCallback = function(name:String) {
-				animation.play(anims.jetBumper_0_aseprite);
-			}
 		}
 	}
 }

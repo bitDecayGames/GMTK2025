@@ -1,5 +1,6 @@
 package entities.interact;
 
+import flixel.util.FlxTimer;
 import entities.interact.Interactable.Triggerable;
 import flixel.FlxObject;
 import flixel.util.FlxSignal;
@@ -8,6 +9,8 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 	public var onlyOneNodeRequired:Bool = false;
 	public var shouldResetNodesOnComplete:Bool = false;
 	public var shouldDisableNodesOnComplete:Bool = false;
+
+	public var IID:String;
 
 	private var nodes:List<Triggerable> = new List<Triggerable>();
 
@@ -43,11 +46,14 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 		on = value;
 		if (different) {
 			onOffSignal.dispatch(on);
-			if (shouldResetNodesOnComplete) {
-				for (node in nodes) {
-					node.resetOnOff();
+			FlxTimer.wait(1, () -> {
+				if (shouldResetNodesOnComplete) {
+					for (node in nodes) {
+						node.resetOnOff();
+					}
+					resetOnOff();
 				}
-			}
+			});
 			if (shouldDisableNodesOnComplete) {
 				for (node in nodes) {
 					node.disabled = true;

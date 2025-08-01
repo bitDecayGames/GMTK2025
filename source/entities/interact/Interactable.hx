@@ -37,7 +37,11 @@ class Interactable extends SelfAssigningFlxNapeSprite implements Triggerable {
 	}
 }
 
-interface Triggerable {
+interface IID {
+	public var IID:String;
+}
+
+interface Triggerable extends IID {
 	private var on:Bool;
 	public var disabled:Bool;
 	public var onOffSignal:FlxTypedSignal<Bool->Void>;
