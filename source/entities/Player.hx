@@ -1,5 +1,7 @@
 package entities;
 
+import flixel.math.FlxPoint;
+import flixel.group.FlxGroup;
 import constants.CbTypes;
 import flixel.util.FlxColor;
 import flixel.effects.particles.FlxParticle;
@@ -30,6 +32,7 @@ class Player extends SelfAssigningFlxNapeSprite {
 	var playerNum = 0;
 
 	public var emitter:FlxEmitter;
+	public var disappearer:FlxEmitter;
 
 	public function new(X:Float, Y:Float) {
 		super(X, Y);
@@ -53,20 +56,29 @@ class Player extends SelfAssigningFlxNapeSprite {
 		body.setShapeFilters(new InteractionFilter(CGroups.BALL, CGroups.ALL, CGroups.BALL, CGroups.ALL));
 		body.cbTypes.add(CbTypes.CB_BALL);
 
-		var trailLength = 15;
+		var trailLength = 200;
 		var lifespan = .2;
-		var startScale = 0.8;
+		var startScale = 0.7;
 		var endScale = 0.0;
 		var startAlpha = 1;
-		var endAlpha = 0.3;
+		var endAlpha = 1;
 		emitter = new FlxEmitter(X, Y, trailLength);
 		emitter.loadParticles(AssetPaths.ball_trail__png, trailLength, 0, false, false);
 		emitter.launchMode = SQUARE;
 		emitter.velocity.set(0, 0, 0, 0, 0, 0, 0, 0);
 		emitter.lifespan.set(lifespan, lifespan);
-		emitter.scale.set(startScale, startScale, startScale, startScale, endScale, endScale, endScale, endScale);
+		emitter.scale.set(startScale, startScale, startScale, startScale, startScale / 2, endScale, startScale / 2, endScale);
 		emitter.alpha.set(startAlpha, startAlpha, endAlpha, endAlpha);
-		emitter.start(false, lifespan / trailLength);
+		emitter.start(false, 0);
+
+		disappearer = new FlxEmitter(X, Y, 20);
+		// TODO: this is the wrong sprite for this, need maybe pieces of the ball?
+		disappearer.loadParticles(AssetPaths.ball_trail__png, 20, 0, false, false);
+		disappearer.launchMode = CIRCLE;
+		disappearer.launchAngle.set(0, 360);
+		disappearer.alpha.set(.8, 1, 0, 0);
+		disappearer.angularVelocity.set(-800, 800, 0, 0);
+		disappearer.lifespan.set(0.8, 1);
 	}
 
 	override function setBody(body:Body) {
@@ -93,5 +105,19 @@ class Player extends SelfAssigningFlxNapeSprite {
 	override function draw() {
 		this.angle = 0;
 		super.draw();
+	}
+
+	function disappear() {
+		visible = false;
+		emitter.visible = false;
+		disappearer.visible = true;
+		disappearer.setPosition(body.position.x, body.position.y);
+		disappearer.start(true);
+	}
+
+	function reappear() {
+		visible = true;
+		emitter.visible = true;
+		disappearer.visible = false;
 	}
 }
