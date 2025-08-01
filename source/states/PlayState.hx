@@ -52,6 +52,8 @@ class PlayState extends FlxTransitionableState {
 	var flipperGroup = new FlxGroup();
 	var activeCameraTransition:CameraTransition = null;
 
+	var isPaused:Bool = false;
+	var originalTimeScaleBeforePausing:Float;
 
 	var transitions = new FlxTypedGroup<CameraTransition>();
 
@@ -271,6 +273,14 @@ class PlayState extends FlxTransitionableState {
 	}
 
 	override public function update(elapsed:Float) {
+		if (FlxG.keys.justPressed.P || FlxG.keys.justPressed.ESCAPE) {
+			togglePause();
+		}
+
+		if (isPaused) {
+			return;
+		}
+
 		super.update(elapsed);
 
 		if (FlxG.mouse.justPressed) {
@@ -280,6 +290,17 @@ class PlayState extends FlxTransitionableState {
 		handleCameraBounds();
 
 		// TODO.sfx('scarySound');
+	}
+
+	function togglePause() {
+		isPaused = !isPaused;
+		
+		if (isPaused) {
+			originalTimeScaleBeforePausing = FlxG.timeScale;
+			FlxG.timeScale = 0;
+		} else {
+			FlxG.timeScale = originalTimeScaleBeforePausing;
+		}
 	}
 
 	var tmp = FlxPoint.get();

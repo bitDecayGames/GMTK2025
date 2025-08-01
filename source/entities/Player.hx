@@ -108,9 +108,6 @@ class Player extends SelfAssigningFlxNapeSprite {
 			body.velocity.set(new Vec2(inputDir.asVector().x * speed, inputDir.asVector().y * speed));
 		}
 
-		if (SimpleController.just_pressed(Button.A, playerNum)) {
-			color = color ^ 0xFFFFFF;
-		}
 	}
 
 	override function draw() {

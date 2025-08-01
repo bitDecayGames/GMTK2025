@@ -4,6 +4,19 @@
 
 Run `lime run html5`
 
+### Controls
+
+**Flippers:**
+- **Z** - Left flipper
+- **M** - Right flipper
+
+**Game:**
+- **P** or **ESC** - Pause/unpause game
+
+**Debug:**
+- **Arrow Keys** - Move ball directly (debug mode)
+- **A** - Invert ball color (debug mode)
+
 Contributors, please see [CONTRIBUTING.md](./docs/CONTRIBUTING.md)
 
 ### Notes / Tips
