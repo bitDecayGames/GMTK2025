@@ -294,7 +294,7 @@ class PlayState extends FlxTransitionableState {
 
 	function togglePause() {
 		isPaused = !isPaused;
-		
+
 		if (isPaused) {
 			originalTimeScaleBeforePausing = FlxG.timeScale;
 			FlxG.timeScale = 0;

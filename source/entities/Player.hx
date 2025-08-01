@@ -107,7 +107,6 @@ class Player extends SelfAssigningFlxNapeSprite {
 		if (inputDir != NONE) {
 			body.velocity.set(new Vec2(inputDir.asVector().x * speed, inputDir.asVector().y * speed));
 		}
-
 	}
 
 	override function draw() {
