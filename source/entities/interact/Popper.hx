@@ -93,6 +93,11 @@ class Popper extends Interactable {
 			// if (data.int1.castBody.velocity.length >= sensitivity) {
 			data.int1.castBody.applyImpulse(impactNormal.mul(bumpStrength));
 			TODO.sfx('popper hit');
+
+			animation.play(anims.jetBumper_1_aseprite, true);
+			animation.finishCallback = function(name:String) {
+				animation.play(anims.jetBumper_0_aseprite);
+			}
 		}
 	}
 }

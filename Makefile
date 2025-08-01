@@ -13,7 +13,7 @@ dev: # Start development build
 
 dev-test: # Start development build with play flag
 	@echo "Starting development build (direct to play).."
-	lime test html5 -D play
+	lime test html5 -D play -D drawTerrain
 
 debug: # Start debug build with play flag
 	@echo "Starting debug build (direct to play).."

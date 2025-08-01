@@ -126,7 +126,7 @@ class PlayState extends FlxTransitionableState {
 
 			#if (debug || drawTerrain)
 			tl.alpha = .5;
-			// midGroundGroup.add(tl);
+			midGroundGroup.add(tl);
 			#end
 
 			makeTileBodies(tl);
