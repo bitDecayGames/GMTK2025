@@ -125,6 +125,7 @@ class PlayState extends FlxTransitionableState {
 		playerGroup.add(player.disappearer);
 		playerGroup.add(player.emitter);
 		playerGroup.add(player);
+		playerGroup.add(player.sparks);
 
 		for (t in level.camTransitions) {
 			transitions.add(t);
@@ -248,6 +249,7 @@ class PlayState extends FlxTransitionableState {
 		var player:Player = cast data.int1.castBody.userData.data;
 		var inter:Interactable = cast data.int2.castBody.userData.data;
 
+		player.handleInteraction(data);
 		inter.handleInteraction(data);
 	}
 
