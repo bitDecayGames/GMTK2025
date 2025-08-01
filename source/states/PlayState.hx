@@ -166,6 +166,10 @@ class PlayState extends FlxTransitionableState {
 			flipperGroup.add(slingshot);
 		}
 
+		for (interactable in level.interactables) {
+			foregroundGroup.add(interactable);
+		}
+
 		for (tunnel in level.tunnels) {
 			midGroundGroup.add(tunnel);
 		}

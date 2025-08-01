@@ -1,5 +1,6 @@
 package entities.interact;
 
+import flixel.util.FlxTimer;
 import flixel.effects.particles.FlxEmitter;
 import todo.TODO;
 import nape.callbacks.InteractionCallback;
@@ -24,16 +25,21 @@ import nape.phys.Body;
 import nape.phys.BodyType;
 import flixel.util.FlxSignal;
 
-class Target extends Interactable {
-	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/jetBumper.json");
+/**
+ * These will only stay on for a quarter of a second, they should be hooked up to Lights instead of
+ * directly to a CollectionTrigger
+ */
+class TargetLarge extends Interactable {
+	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/wideTarget.json");
 
-	public function new(X:Float, Y:Float) {
+	public function new(X:Float, Y:Float, rotation:Float) {
 		super(X, Y);
-		Aseprite.loadAllAnimations(this, AssetPaths.jetBumper__json);
-		animation.play(anims.jetBumper_0_aseprite);
+		Aseprite.loadAllAnimations(this, AssetPaths.wideTarget__json);
+		animation.play(anims.wideTarget_0_aseprite);
 		var body = new Body(BodyType.STATIC);
+		body.rotation = rotation;
 		body.position.set(Vec2.get(X, Y));
-		body.shapes.add(new Circle(19, Vec2.weak(0, 0)));
+		body.shapes.add(new Polygon(Polygon.rect(-width / 2, -height / 2, width, height)));
 		body.isBullet = true;
 		body.setShapeFilters(new InteractionFilter(CGroups.INTERACTABLE, CGroups.BALL));
 		addPremadeBody(body);
@@ -42,6 +48,16 @@ class Target extends Interactable {
 	}
 
 	override public function handleInteraction(data:InteractionCallback) {
-		TODO.sfx('target hit');
+		TODO.sfx('large target hit');
+		setOn(true);
+		animation.play(anims.wideTarget_1_aseprite);
+		FlxTimer.wait(0.2, () -> {
+			resetOnOff();
+		});
+	}
+
+	override function resetOnOff() {
+		super.resetOnOff();
+		animation.play(anims.wideTarget_0_aseprite);
 	}
 }
