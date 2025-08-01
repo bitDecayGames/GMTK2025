@@ -1,14 +1,11 @@
 package levels.ldtk;
 
-<<<<<<< HEAD
 import entities.interact.PopperSmall;
-=======
 import nape.geom.Vec2;
 import entities.interact.TargetLarge;
 import entities.interact.TargetSmall;
 import entities.interact.CollectionTrigger;
 import entities.interact.Interactable;
->>>>>>> 97996cd39a02c1a72713d3bf733203b7037802fd
 import openfl.utils.AssetType;
 import openfl.Assets;
 import flixel.FlxObject;
