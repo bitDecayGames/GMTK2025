@@ -11527,7 +11527,7 @@
 							},
 							{
 								"__identifier": "Tunnel",
-								"__grid": [13,43],
+								"__grid": [16,31],
 								"__pivot": [0.5,0.5],
 								"__tags": ["interactable"],
 								"__tile": { "tilesetUid": 246, "x": 128, "y": 0, "w": 64, "h": 64 },
@@ -11536,7 +11536,7 @@
 								"width": 64,
 								"height": 64,
 								"defUid": 250,
-								"px": [216,696],
+								"px": [264,504],
 								"fieldInstances": [{ "__identifier": "Exit", "__type": "EntityRef", "__value": {
 									"entityIid": "d4472dc0-5e50-11f0-8607-472e6e81acee",
 									"layerIid": "dcaeb011-5e50-11f0-ae13-573e4b38e151",
@@ -11546,8 +11546,8 @@
 									"id": "V_String",
 									"params": ["d4472dc0-5e50-11f0-8607-472e6e81acee"]
 								}] }],
-								"__worldX": 408,
-								"__worldY": -24
+								"__worldX": 456,
+								"__worldY": -216
 							},
 							{
 								"__identifier": "Tunnel",
@@ -11564,22 +11564,6 @@
 								"fieldInstances": [{ "__identifier": "Exit", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 872, "realEditorValues": [] }],
 								"__worldX": 440,
 								"__worldY": -664
-							},
-							{
-								"__identifier": "Spawn",
-								"__grid": [9,27],
-								"__pivot": [0,0],
-								"__tags": ["Player"],
-								"__tile": null,
-								"__smartColor": "#FFFFFF",
-								"iid": "a79e9450-5e50-11f0-aa11-c109c416b965",
-								"width": 16,
-								"height": 16,
-								"defUid": 74,
-								"px": [144,432],
-								"fieldInstances": [],
-								"__worldX": 336,
-								"__worldY": -288
 							}
 						]
 					},
@@ -14020,6 +14004,22 @@
 								"fieldInstances": [],
 								"__worldX": 1032,
 								"__worldY": -344
+							},
+							{
+								"__identifier": "Spawn",
+								"__grid": [34,56],
+								"__pivot": [0,0],
+								"__tags": ["Player"],
+								"__tile": null,
+								"__smartColor": "#FFFFFF",
+								"iid": "a79e9450-5e50-11f0-aa11-c109c416b965",
+								"width": 16,
+								"height": 16,
+								"defUid": 74,
+								"px": [544,896],
+								"fieldInstances": [],
+								"__worldX": 1232,
+								"__worldY": -448
 							}
 						]
 					},

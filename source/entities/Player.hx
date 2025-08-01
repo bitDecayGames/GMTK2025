@@ -50,7 +50,7 @@ class Player extends SelfAssigningFlxNapeSprite {
 		body.shapes.add(new Circle(16, Material.steel()));
 		addPremadeBody(body);
 
-		body.setShapeFilters(new InteractionFilter(CGroups.BALL, CGroups.ALL));
+		body.setShapeFilters(new InteractionFilter(CGroups.BALL, CGroups.ALL, CGroups.BALL, CGroups.ALL));
 		body.cbTypes.add(CbTypes.CB_BALL);
 
 		var trailLength = 15;

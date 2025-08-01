@@ -35,12 +35,13 @@ class Tunnel extends Interactable {
 		var body = new Body(BodyType.STATIC);
 		body.position.set(Vec2.get(X, Y));
 		body.shapes.add(new Polygon(Polygon.rect(-24, -24, 48, 48)));
-		// body.isBullet = true;
+		// body.isBullet = true;(
+		body.shapes.at(0).sensorEnabled = true;
 
-		body.setShapeFilters(new InteractionFilter(CGroups.SENSOR, CGroups.BALL));
+		body.setShapeFilters(new InteractionFilter(0, 0, CGroups.INTERACTABLE, CGroups.BALL));
 		addPremadeBody(body);
 
-		body.cbTypes.add(CbTypes.CB_SENSOR);
+		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
 	}
 
 	override public function handleInteraction(data:InteractionCallback) {
@@ -48,6 +49,10 @@ class Tunnel extends Interactable {
 			return;
 		}
 
+		// TODO: this shouldn't be instantaneous
 		TODO.sfx('warp enter');
+
+		data.int1.castBody.velocity.muleq(0);
+		data.int1.castBody.position.set(exit.body.position);
 	}
 }

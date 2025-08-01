@@ -138,6 +138,10 @@ class PlayState extends FlxTransitionableState {
 
 		FlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
 			ballInteractableCallback));
+		FlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.SENSOR, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
+			sensorStartCb));
+		FlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.ONGOING, InteractionType.SENSOR, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
+			sensorOngoingCb));
 
 		EventBus.fire(new PlayerSpawn(player.x, player.y));
 	}
@@ -149,7 +153,7 @@ class PlayState extends FlxTransitionableState {
 			for (y in 0...l.heightInTiles) {
 				var data = l.getMetaDataAt(x, y);
 				if (data != null) {
-					trace(data);
+					// trace(data);
 					buildTileShape(worldBody, l.x + x * l.tileWidth, l.y + y * l.tileHeight, data, l.tileWidth);
 				}
 			}
@@ -215,6 +219,15 @@ class PlayState extends FlxTransitionableState {
 
 		inter.handleInteraction(data);
 	}
+
+	function sensorStartCb(data:InteractionCallback) {
+		var player:Player = cast data.int1.castBody.userData.data;
+		var inter:Interactable = cast data.int2.castBody.userData.data;
+
+		inter.handleInteraction(data);
+	}
+
+	function sensorOngoingCb(data:InteractionCallback) {}
 
 	function handleAchieve(def:AchievementDef) {
 		add(def.toToast(true));

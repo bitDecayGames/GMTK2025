@@ -81,7 +81,7 @@ class BDTilemap extends LdtkTilemap<Enum_TileTags> {
 				return null;
 			}
 
-			trace(data.metaData);
+			// trace(data.metaData);
 			// TODO: how to not parse this every time? Just lazy load and cache?
 			return cast Json.parse(data.metaData);
 		}
