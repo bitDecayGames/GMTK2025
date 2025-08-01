@@ -1,5 +1,7 @@
 package entities.interact;
 
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.effects.particles.FlxEmitter;
 import todo.TODO;
@@ -53,6 +55,19 @@ class Tunnel extends Interactable {
 		TODO.sfx('warp enter');
 
 		data.int1.castBody.velocity.muleq(0);
-		data.int1.castBody.position.set(exit.body.position);
+		var d = data.int1.userData.data;
+		d.disappear();
+		FlxTween.tween(data.int1.castBody, {
+			"position.x": exit.body.position.x,
+			"position.y": exit.body.position.y,
+			"velocity.x": 0,
+			"velocity.y": 0
+		}, 1.0, {
+			ease: FlxEase.cubeInOut,
+			type: ONESHOT,
+			onComplete: (t:FlxTween) -> {
+				d.reappear();
+			}
+		});
 	}
 }
