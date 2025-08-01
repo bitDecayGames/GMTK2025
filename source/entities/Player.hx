@@ -1,5 +1,6 @@
 package entities;
 
+import nape.callbacks.InteractionCallback;
 import flixel.math.FlxPoint;
 import flixel.group.FlxGroup;
 import constants.CbTypes;
@@ -33,6 +34,7 @@ class Player extends SelfAssigningFlxNapeSprite {
 
 	public var emitter:FlxEmitter;
 	public var disappearer:FlxEmitter;
+	public var sparks:FlxEmitter;
 
 	public function new(X:Float, Y:Float) {
 		super(X, Y);
@@ -79,6 +81,15 @@ class Player extends SelfAssigningFlxNapeSprite {
 		disappearer.alpha.set(.8, 1, 0, 0);
 		disappearer.angularVelocity.set(-800, 800, 0, 0);
 		disappearer.lifespan.set(0.8, 1);
+
+		sparks = new FlxEmitter(X, Y, 20);
+		sparks.loadParticles(AssetPaths.spark__png, 20, 0, false, false);
+		sparks.launchMode = CIRCLE;
+		sparks.speed.set(400, 500);
+		sparks.launchAngle.set(0, 360);
+		sparks.alpha.set(.8, 1, 0, 0);
+		sparks.angularVelocity.set(-800, 800, 0, 0);
+		sparks.lifespan.set(.1, .2);
 	}
 
 	override function setBody(body:Body) {
@@ -107,7 +118,7 @@ class Player extends SelfAssigningFlxNapeSprite {
 		super.draw();
 	}
 
-	function disappear() {
+	public function disappear() {
 		visible = false;
 		emitter.visible = false;
 		disappearer.visible = true;
@@ -115,9 +126,26 @@ class Player extends SelfAssigningFlxNapeSprite {
 		disappearer.start(true);
 	}
 
-	function reappear() {
+	public function reappear() {
 		visible = true;
 		emitter.visible = true;
 		disappearer.visible = false;
+	}
+
+	public function spark() {
+		sparks.setPosition(body.position.x, body.position.y);
+		sparks.start(true);
+	}
+
+	public function handleInteraction(data:InteractionCallback) {
+		var arb = data.arbiters.at(0).collisionArbiter;
+		var impactNormal = Vec2.get(arb.normal.x, arb.normal.y);
+		if (arb.shape2.body == body) {
+			impactNormal.muleq(-1);
+		}
+		var impactImpulse = arb.normalImpulse(data.int1.castBody);
+		if (impactImpulse.length >= 1) {
+			spark();
+		}
 	}
 }
