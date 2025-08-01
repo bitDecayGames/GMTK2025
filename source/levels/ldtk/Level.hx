@@ -83,6 +83,7 @@ class Level {
 			parseFlippers(raw.l_Objects.all_FlipperLeft, raw.l_Objects.all_FlipperRight);
 			parsePoppers(raw.l_Objects.all_Popper, raw.l_Objects.all_SmallPopper);
 			parseSlingshots(raw.l_Objects.all_Slingshot_Left, raw.l_Objects.all_Slingshot_Right);
+			parseTunnels(raw.l_Objects.all_Tunnel);
 		}
 	}
 
@@ -124,11 +125,17 @@ class Level {
 
 	function parseSlingshots(leftDefs:Array<Ldtk.Entity_Slingshot_Left>, rightDefs:Array<Ldtk.Entity_Slingshot_Right>) {
 		for (ld in leftDefs) {
-			slingshots.push(new Slingshot(ld.worldPixelX, ld.worldPixelY, 750, Direction.RIGHT, 30));
+			slingshots.push(new Slingshot(ld.worldPixelX, ld.worldPixelY, 750, Direction.RIGHT, 0));
 		}
 
 		for (rd in rightDefs) {
-			slingshots.push(new Slingshot(rd.worldPixelX, rd.worldPixelY, 750, Direction.LEFT, 30));
+			slingshots.push(new Slingshot(rd.worldPixelX, rd.worldPixelY, 750, Direction.LEFT, 0));
+		}
+	}
+
+	function parseTunnels(tunnelDefs:Array<Ldtk.Entity_Tunnel>) {
+		for (td in tunnelDefs) {
+			// var tunnel = new Tunnel();
 		}
 	}
 }

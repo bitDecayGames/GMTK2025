@@ -15,6 +15,8 @@ class Interactable extends SelfAssigningFlxNapeSprite {
 	private static var degToRad = Math.PI / 180.0;
 	private static var radToDeg = 180.0 / Math.PI;
 
+	public var IID:String;
+
 	public function handleInteraction(data:InteractionCallback) {
 		// Override to provide functionality
 	}
