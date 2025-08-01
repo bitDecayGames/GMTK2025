@@ -80,8 +80,8 @@ class Popper extends Interactable {
 		}
 
 		var impactImpulse = arb.normalImpulse(data.int1.castBody);
-		trace(impactImpulse);
-		trace(impactImpulse.length);
+		// trace(impactImpulse);
+		// trace(impactImpulse.length);
 
 		// trace(impactNormal);
 		// trace(data.int1.castBody.velocity);

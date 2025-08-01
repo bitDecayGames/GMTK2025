@@ -1,5 +1,7 @@
 package entities;
 
+import flixel.math.FlxPoint;
+import flixel.group.FlxGroup;
 import constants.CbTypes;
 import flixel.util.FlxColor;
 import flixel.effects.particles.FlxParticle;
@@ -50,23 +52,24 @@ class Player extends SelfAssigningFlxNapeSprite {
 		body.shapes.add(new Circle(16, Material.steel()));
 		addPremadeBody(body);
 
-		body.setShapeFilters(new InteractionFilter(CGroups.BALL, CGroups.ALL));
+		body.setShapeFilters(new InteractionFilter(CGroups.BALL, CGroups.ALL, CGroups.BALL, CGroups.ALL));
 		body.cbTypes.add(CbTypes.CB_BALL);
 
-		var trailLength = 15;
+		var trailLength = 200;
 		var lifespan = .2;
-		var startScale = 0.8;
+		var startScale = 0.7;
 		var endScale = 0.0;
 		var startAlpha = 1;
-		var endAlpha = 0.3;
+		var endAlpha = 1;
 		emitter = new FlxEmitter(X, Y, trailLength);
 		emitter.loadParticles(AssetPaths.ball_trail__png, trailLength, 0, false, false);
 		emitter.launchMode = SQUARE;
 		emitter.velocity.set(0, 0, 0, 0, 0, 0, 0, 0);
 		emitter.lifespan.set(lifespan, lifespan);
-		emitter.scale.set(startScale, startScale, startScale, startScale, endScale, endScale, endScale, endScale);
+		emitter.scale.set(startScale, startScale, startScale, startScale, startScale / 2, endScale, startScale / 2, endScale);
 		emitter.alpha.set(startAlpha, startAlpha, endAlpha, endAlpha);
-		emitter.start(false, lifespan / trailLength);
+		// emitter.start(false, lifespan / trailLength);
+		emitter.start(false, 0);
 	}
 
 	override function setBody(body:Body) {
