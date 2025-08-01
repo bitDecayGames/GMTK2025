@@ -123,10 +123,12 @@ class PlayState extends FlxTransitionableState {
 		}
 
 		for (popper in level.poppers) {
+			foregroundGroup.add(popper.emitter);
 			foregroundGroup.add(popper);
 		}
 
 		for (slingshot in level.slingshots) {
+			flipperGroup.add(slingshot.emitter);
 			flipperGroup.add(slingshot);
 		}
 
