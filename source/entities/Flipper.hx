@@ -39,7 +39,7 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 	var activateJoint:DistanceJoint;
 	var restingJoint:DistanceJoint;
 
-	var flipperMaterial = new Material(-0.2);
+	var flipperMaterial = new Material(-0.2, .01, .01, 1, .005);
 
 	private var dir:Float = 0;
 
