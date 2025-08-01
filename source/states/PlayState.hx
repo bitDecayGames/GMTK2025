@@ -99,7 +99,8 @@ class PlayState extends FlxTransitionableState {
 		// FlxNapeSpace.space.gravity.setxy(level.rawLevels[0].f_GravityX, level.rawLevels[0].f_GravityY);
 		FlxNapeSpace.space.gravity.setxy(gravity.x, gravity.y);
 
-		FmodPlugin.playSong(level.rawLevels[0].f_Music);
+		// FmodPlugin.playSong(level.rawLevels[0].f_Music);
+		FmodPlugin.playSong(FmodSong.Fkip);
 
 		for (bg in level.levelBgs) {
 			bgGroup.add(bg);
