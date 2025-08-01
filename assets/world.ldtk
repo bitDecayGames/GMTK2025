@@ -11,7 +11,7 @@
 	"iid": "48a599b0-1460-11ee-8f1d-1923aa7248a0",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 872,
+	"nextUid": 873,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": null,
@@ -6787,7 +6787,45 @@
 			"limitBehavior": "MoveLastOne",
 			"pivotX": 0.5,
 			"pivotY": 0.5,
-			"fieldDefs": []
+			"fieldDefs": [
+				{
+					"identifier": "Exit",
+					"doc": null,
+					"__type": "EntityRef",
+					"uid": 872,
+					"type": "F_EntityRef",
+					"isArray": false,
+					"canBeNull": true,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "RefLinkBetweenCenters",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "CurvedArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": true,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": null,
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
+				}
+			]
 		},
 		{
 			"identifier": "Kicker",
@@ -7617,7 +7655,7 @@
 			{ "id": "DOWN", "tileRect": { "tilesetUid": 16, "x": 48, "y": 80, "w": 16, "h": 16 }, "color": 14120515 },
 			{ "id": "LEFT", "tileRect": { "tilesetUid": 16, "x": 32, "y": 80, "w": 16, "h": 16 }, "color": 15389866 },
 			{ "id": "RIGHT", "tileRect": { "tilesetUid": 16, "x": 16, "y": 80, "w": 16, "h": 16 }, "color": 14984818 }
-		], "iconTilesetUid": 16, "externalRelPath": "../source/types/Direction.hx", "externalFileChecksum": null, "tags": [] }
+		], "iconTilesetUid": 16, "externalRelPath": "../source/types/Direction.hx", "externalFileChecksum": "d9d0868d18b9a6244951f099d5f943e8", "tags": [] }
 	], "levelFields": [
 		{
 			"identifier": "Music",
@@ -11210,7 +11248,7 @@
 				"externalRelPath": null,
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
-					{ "__identifier": "GravityY", "__type": "Int", "__value": 800, "__tile": null, "defUid": 257, "realEditorValues": [{ "id": "V_Int", "params": [800] }] },
+					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [null] },
 					{ "__identifier": "GravityX", "__type": "Int", "__value": 0, "__tile": null, "defUid": 258, "realEditorValues": [] },
 					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
 				],
@@ -11334,22 +11372,6 @@
 								"fieldInstances": [],
 								"__worldX": 488,
 								"__worldY": -552
-							},
-							{
-								"__identifier": "Tunnel",
-								"__grid": [10,11],
-								"__pivot": [0.5,0.5],
-								"__tags": ["interactable"],
-								"__tile": { "tilesetUid": 246, "x": 128, "y": 0, "w": 64, "h": 64 },
-								"__smartColor": "#3E2731",
-								"iid": "30c93e00-5e50-11f0-8de1-73bcab891ddf",
-								"width": 64,
-								"height": 64,
-								"defUid": 250,
-								"px": [168,184],
-								"fieldInstances": [],
-								"__worldX": 360,
-								"__worldY": -536
 							},
 							{
 								"__identifier": "Kicker",
@@ -11502,6 +11524,46 @@
 								"fieldInstances": [],
 								"__worldX": 528,
 								"__worldY": -205
+							},
+							{
+								"__identifier": "Tunnel",
+								"__grid": [13,42],
+								"__pivot": [0.5,0.5],
+								"__tags": ["interactable"],
+								"__tile": { "tilesetUid": 246, "x": 128, "y": 0, "w": 64, "h": 64 },
+								"__smartColor": "#3E2731",
+								"iid": "d35f3ec0-5e50-11f0-8607-97c1cc8e1c7e",
+								"width": 64,
+								"height": 64,
+								"defUid": 250,
+								"px": [216,680],
+								"fieldInstances": [{ "__identifier": "Exit", "__type": "EntityRef", "__value": {
+									"entityIid": "d4472dc0-5e50-11f0-8607-472e6e81acee",
+									"layerIid": "dcaeb011-5e50-11f0-ae13-573e4b38e151",
+									"levelIid": "dcaeb010-5e50-11f0-ae13-d9f0636ebb1f",
+									"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
+								}, "__tile": null, "defUid": 872, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["d4472dc0-5e50-11f0-8607-472e6e81acee"]
+								}] }],
+								"__worldX": 408,
+								"__worldY": -40
+							},
+							{
+								"__identifier": "Tunnel",
+								"__grid": [15,3],
+								"__pivot": [0.5,0.5],
+								"__tags": ["interactable"],
+								"__tile": { "tilesetUid": 246, "x": 128, "y": 0, "w": 64, "h": 64 },
+								"__smartColor": "#3E2731",
+								"iid": "d4472dc0-5e50-11f0-8607-472e6e81acee",
+								"width": 64,
+								"height": 64,
+								"defUid": 250,
+								"px": [248,56],
+								"fieldInstances": [{ "__identifier": "Exit", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 872, "realEditorValues": [] }],
+								"__worldX": 440,
+								"__worldY": -664
 							}
 						]
 					},
@@ -13863,7 +13925,7 @@
 								"height": 64,
 								"defUid": 250,
 								"px": [607,784],
-								"fieldInstances": [],
+								"fieldInstances": [{ "__identifier": "Exit", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 872, "realEditorValues": [] }],
 								"__worldX": 1295,
 								"__worldY": -560
 							},
@@ -13895,7 +13957,15 @@
 								"height": 64,
 								"defUid": 250,
 								"px": [352,1136],
-								"fieldInstances": [],
+								"fieldInstances": [{ "__identifier": "Exit", "__type": "EntityRef", "__value": {
+									"entityIid": "6973d730-5e50-11f0-92cc-d32788aa436c",
+									"layerIid": "2b992c21-5e50-11f0-92cc-ad9b941cbc8d",
+									"levelIid": "2b992c20-5e50-11f0-92cc-330c7a92f094",
+									"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
+								}, "__tile": null, "defUid": 872, "realEditorValues": [{
+									"id": "V_String",
+									"params": ["6973d730-5e50-11f0-92cc-d32788aa436c"]
+								}] }],
 								"__worldX": 1040,
 								"__worldY": -208
 							},
