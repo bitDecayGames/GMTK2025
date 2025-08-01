@@ -87,7 +87,11 @@ class PlayState extends FlxTransitionableState {
 
 		add(focusZones);
 
+		#if logan
+		loadLevel("Logan", "Level_7");
+		#else
 		loadLevel("BaseWorld", "Level_4");
+		#end
 	}
 
 	function loadLevel(worldName:String, levelName:String) {
