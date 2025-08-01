@@ -1,5 +1,6 @@
 package entities.interact;
 
+import flixel.effects.particles.FlxEmitter;
 import nape.shape.Shape;
 import todo.TODO;
 import nape.callbacks.InteractionCallback;
@@ -36,6 +37,8 @@ class Slingshot extends Interactable {
 	var sensitivity:Float = 10;
 
 	var bounceShape:Shape;
+
+	public var emitter:FlxEmitter;
 
 	public function new(X:Float, Y:Float, strength:Float, facing:Direction, sensitivity:Float) {
 		super(X, Y);
@@ -85,9 +88,24 @@ class Slingshot extends Interactable {
 		body.setShapeMaterials(new Material(-100));
 
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
+
+		var lifespan = 0.3;
+		var startScale = 1;
+		var endScale = 2.5;
+		var startAlpha = 1;
+		var endAlpha = 0;
+		emitter = new FlxEmitter(X, Y, 1);
+		emitter.loadParticles(AssetPaths.slingshot_trail__png, 1, 0, false, false);
+		emitter.launchMode = SQUARE;
+		emitter.velocity.set(0, 0, 0, 0, 0, 0, 0, 0);
+		emitter.lifespan.set(lifespan, lifespan);
+		emitter.scale.set(startScale, startScale, startScale, startScale, endScale, endScale, endScale, endScale);
+		emitter.alpha.set(startAlpha, startAlpha, endAlpha, endAlpha);
 	}
 
 	override public function handleInteraction(data:InteractionCallback) {
+		emitter.start(true);
+
 		var arb = data.arbiters.at(0).collisionArbiter;
 
 		if (arb.body1 == body && !arb.shape1.userData.data) {
