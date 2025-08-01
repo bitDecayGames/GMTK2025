@@ -1,5 +1,6 @@
 package states;
 
+import flixel.FlxCamera.FlxCameraFollowStyle;
 import entities.interact.Interactable;
 import nape.callbacks.InteractionCallback;
 import constants.CbTypes;
@@ -37,6 +38,8 @@ import flixel.addons.nape.FlxNapeSpace;
 using states.FlxStateExt;
 
 class PlayState extends FlxTransitionableState {
+	var focusZones = new FlxTypedGroup<FlxObject>();
+
 	var player:Player;
 	var playerGroup = new FlxGroup();
 	var worldTiles = new FlxGroup();
@@ -80,6 +83,8 @@ class PlayState extends FlxTransitionableState {
 		add(foregroundGroup);
 		add(transitions);
 
+		add(focusZones);
+
 		loadLevel("BaseWorld", "Level_4");
 	}
 
@@ -101,6 +106,7 @@ class PlayState extends FlxTransitionableState {
 
 			makeTileBodies(tl);
 		}
+		FlxG.worldBounds.set(minBounds.x, minBounds.y, maxBounds.x - minBounds.x, maxBounds.y - minBounds.y);
 
 		player = new Player(level.spawnPoint.x, level.spawnPoint.y);
 		player.body.mass = level.rawLevels[0].f_BallMass;
@@ -134,6 +140,10 @@ class PlayState extends FlxTransitionableState {
 
 		for (tunnel in level.tunnels) {
 			midGroundGroup.add(tunnel);
+		}
+
+		for (focus in level.focusZones) {
+			focusZones.add(focus);
 		}
 
 		FlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
@@ -204,12 +214,16 @@ class PlayState extends FlxTransitionableState {
 		}
 		foregroundGroup.clear();
 
+		for (o in focusZones) {
+			o.destroy();
+		}
+		focusZones.clear();
+
 		for (o in worldTiles) {
 			o.destroy();
 		}
 		worldTiles.clear();
 
-		// FlxEcho.clear();
 		FlxNapeSpace.space.clear();
 	}
 
@@ -240,13 +254,34 @@ class PlayState extends FlxTransitionableState {
 			EventBus.fire(new Click(FlxG.mouse.x, FlxG.mouse.y));
 		}
 
-		FlxG.collide(midGroundGroup, player);
 		handleCameraBounds();
 
 		// TODO.sfx('scarySound');
 	}
 
+	var tmp = FlxPoint.get();
+
 	function handleCameraBounds() {
+		var camZoneFound = false;
+		for (zone in focusZones) {
+			if (FlxG.overlap(zone, player)) {
+				camZoneFound = true;
+				if (zone.width >= camera.width && zone.height >= camera.height) {
+					camera.setScrollBoundsRect(zone.x, zone.y, zone.width, zone.height);
+				} else {
+					camera.follow(zone);
+					camera.deadzone = null;
+					camera.followLerp = 0.2;
+				}
+				break;
+			}
+		}
+		if (!camZoneFound) {
+			camera.setScrollBounds(null, null, null, null);
+			camera.follow(player);
+			camera.followLerp = 0.2;
+		}
+
 		if (activeCameraTransition == null) {
 			FlxG.overlap(player, transitions, (p, t) -> {
 				activeCameraTransition = cast t;

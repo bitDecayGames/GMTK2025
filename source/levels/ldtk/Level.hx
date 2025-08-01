@@ -1,5 +1,6 @@
 package levels.ldtk;
 
+import flixel.FlxObject;
 import entities.interact.Tunnel;
 import types.Direction;
 import entities.interact.Slingshot;
@@ -40,8 +41,9 @@ class Level {
 	public var terrainLayers:Array<BDTilemap> = [];
 	public var spawnPoint:FlxPoint = FlxPoint.get();
 
-	public var camZones:Map<String, FlxRect>;
-	public var camTransitions:Array<CameraTransition>;
+	public var camZones = new Map<String, FlxRect>();
+	public var focusZones = new Array<FlxObject>();
+	public var camTransitions = new Array<CameraTransition>();
 
 	public var flippers:Array<Flipper> = [];
 	public var poppers:Array<Popper> = [];
@@ -90,9 +92,12 @@ class Level {
 	}
 
 	function parseCameraZones(zoneDefs:Array<Ldtk.Entity_CameraZone>) {
-		camZones = new Map<String, FlxRect>();
 		for (z in zoneDefs) {
-			camZones.set(z.iid, FlxRect.get(z.worldPixelX, z.worldPixelY, z.width, z.height));
+			if (z.f_AutoFocus) {
+				focusZones.push(new FlxObject(z.worldPixelX, z.worldPixelY, z.width, z.height));
+			} else {
+				camZones.set(z.iid, FlxRect.get(z.worldPixelX, z.worldPixelY, z.width, z.height));
+			}
 		}
 	}
 
