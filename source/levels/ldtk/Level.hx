@@ -1,5 +1,6 @@
 package levels.ldtk;
 
+import entities.interact.Tunnel;
 import types.Direction;
 import entities.interact.Slingshot;
 import entities.interact.Popper;
@@ -45,6 +46,7 @@ class Level {
 	public var flippers:Array<Flipper> = [];
 	public var poppers:Array<Popper> = [];
 	public var slingshots:Array<Slingshot> = [];
+	public var tunnels:Array<Tunnel> = [];
 
 	public function new(worldNameOrIID:String, nameOrIID:String) {
 		this.worldID = worldNameOrIID;
@@ -135,7 +137,35 @@ class Level {
 
 	function parseTunnels(tunnelDefs:Array<Ldtk.Entity_Tunnel>) {
 		for (td in tunnelDefs) {
-			// var tunnel = new Tunnel();
+			var tunnel = new Tunnel(td.worldPixelX, td.worldPixelY);
+			tunnel.IID = td.iid;
+			tunnels.push(tunnel);
+		}
+
+		for (td in tunnelDefs) {
+			if (td.f_Exit == null) {
+				continue;
+			}
+
+			var entrance:Tunnel = null;
+			var exit:Tunnel = null;
+			for (tun in tunnels) {
+				if (tun.IID == td.iid) {
+					entrance = tun;
+				}
+
+				if (tun.IID == td.f_Exit.entityIid) {
+					exit = tun;
+				}
+
+				if (entrance != null && exit != null) {
+					break;
+				}
+			}
+
+			if (entrance != null && exit != null) {
+				entrance.exit = exit;
+			}
 		}
 	}
 }

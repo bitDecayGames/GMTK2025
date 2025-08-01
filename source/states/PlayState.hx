@@ -132,6 +132,10 @@ class PlayState extends FlxTransitionableState {
 			flipperGroup.add(slingshot);
 		}
 
+		for (tunnel in level.tunnels) {
+			midGroundGroup.add(tunnel);
+		}
+
 		FlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
 			ballInteractableCallback));
 
@@ -185,6 +189,11 @@ class PlayState extends FlxTransitionableState {
 			o.destroy();
 		}
 		midGroundGroup.clear();
+
+		for (o in flipperGroup) {
+			o.destroy();
+		}
+		flipperGroup.clear();
 
 		for (o in foregroundGroup) {
 			o.destroy();
