@@ -11291,8 +11291,8 @@
 				"identifier": "Level_2",
 				"iid": "dcaeb010-5e50-11f0-ae13-d9f0636ebb1f",
 				"uid": 229,
-				"worldX": -672,
-				"worldY": -1520,
+				"worldX": 192,
+				"worldY": -1200,
 				"worldDepth": 0,
 				"pxWid": 496,
 				"pxHei": 720,
@@ -11350,8 +11350,8 @@
 								"defUid": 247,
 								"px": [198,281],
 								"fieldInstances": [],
-								"__worldX": -474,
-								"__worldY": -1239
+								"__worldX": 390,
+								"__worldY": -919
 							},
 							{
 								"__identifier": "Popper",
@@ -11366,8 +11366,8 @@
 								"defUid": 247,
 								"px": [120,344],
 								"fieldInstances": [],
-								"__worldX": -552,
-								"__worldY": -1176
+								"__worldX": 312,
+								"__worldY": -856
 							},
 							{
 								"__identifier": "Popper",
@@ -11382,8 +11382,8 @@
 								"defUid": 247,
 								"px": [104,242],
 								"fieldInstances": [],
-								"__worldX": -568,
-								"__worldY": -1278
+								"__worldX": 296,
+								"__worldY": -958
 							},
 							{
 								"__identifier": "DropTarget",
@@ -11398,8 +11398,8 @@
 								"defUid": 249,
 								"px": [360,200],
 								"fieldInstances": [],
-								"__worldX": -312,
-								"__worldY": -1320
+								"__worldX": 552,
+								"__worldY": -1000
 							},
 							{
 								"__identifier": "DropTarget",
@@ -11414,8 +11414,8 @@
 								"defUid": 249,
 								"px": [328,184],
 								"fieldInstances": [],
-								"__worldX": -344,
-								"__worldY": -1336
+								"__worldX": 520,
+								"__worldY": -1016
 							},
 							{
 								"__identifier": "DropTarget",
@@ -11430,8 +11430,8 @@
 								"defUid": 249,
 								"px": [296,168],
 								"fieldInstances": [],
-								"__worldX": -376,
-								"__worldY": -1352
+								"__worldX": 488,
+								"__worldY": -1032
 							},
 							{
 								"__identifier": "Kicker",
@@ -11446,8 +11446,8 @@
 								"defUid": 251,
 								"px": [424,360],
 								"fieldInstances": [],
-								"__worldX": -248,
-								"__worldY": -1160
+								"__worldX": 616,
+								"__worldY": -840
 							},
 							{
 								"__identifier": "Bumper",
@@ -11462,8 +11462,8 @@
 								"defUid": 252,
 								"px": [392,184],
 								"fieldInstances": [],
-								"__worldX": -280,
-								"__worldY": -1336
+								"__worldX": 584,
+								"__worldY": -1016
 							},
 							{
 								"__identifier": "Bumper",
@@ -11478,8 +11478,8 @@
 								"defUid": 252,
 								"px": [408,152],
 								"fieldInstances": [],
-								"__worldX": -264,
-								"__worldY": -1368
+								"__worldX": 600,
+								"__worldY": -1048
 							},
 							{
 								"__identifier": "TargetSmall",
@@ -11494,8 +11494,8 @@
 								"defUid": 253,
 								"px": [408,328],
 								"fieldInstances": [],
-								"__worldX": -264,
-								"__worldY": -1192
+								"__worldX": 600,
+								"__worldY": -872
 							},
 							{
 								"__identifier": "FlipperRight",
@@ -11514,8 +11514,8 @@
 									{ "__identifier": "Mass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 260, "realEditorValues": [] },
 									{ "__identifier": "Travel", "__type": "Int", "__value": 60, "__tile": null, "defUid": 261, "realEditorValues": [] }
 								],
-								"__worldX": -368,
-								"__worldY": -896
+								"__worldX": 496,
+								"__worldY": -576
 							},
 							{
 								"__identifier": "FlipperLeft",
@@ -11534,8 +11534,8 @@
 									{ "__identifier": "Mass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 262, "realEditorValues": [null] },
 									{ "__identifier": "Travel", "__type": "Int", "__value": 60, "__tile": null, "defUid": 263, "realEditorValues": [{ "id": "V_Int", "params": [60] }] }
 								],
-								"__worldX": -545,
-								"__worldY": -896
+								"__worldX": 319,
+								"__worldY": -576
 							},
 							{
 								"__identifier": "Bumper",
@@ -11550,8 +11550,8 @@
 								"defUid": 252,
 								"px": [24,440],
 								"fieldInstances": [],
-								"__worldX": -648,
-								"__worldY": -1080
+								"__worldX": 216,
+								"__worldY": -760
 							},
 							{
 								"__identifier": "Slingshot_Left",
@@ -11566,8 +11566,8 @@
 								"defUid": 866,
 								"px": [96,515],
 								"fieldInstances": [],
-								"__worldX": -576,
-								"__worldY": -1005
+								"__worldX": 288,
+								"__worldY": -685
 							},
 							{
 								"__identifier": "Slingshot_Right",
@@ -11582,8 +11582,8 @@
 								"defUid": 868,
 								"px": [336,515],
 								"fieldInstances": [],
-								"__worldX": -336,
-								"__worldY": -1005
+								"__worldX": 528,
+								"__worldY": -685
 							},
 							{
 								"__identifier": "Tunnel",
@@ -11606,8 +11606,8 @@
 									"id": "V_String",
 									"params": ["d4472dc0-5e50-11f0-8607-472e6e81acee"]
 								}] }],
-								"__worldX": -408,
-								"__worldY": -1016
+								"__worldX": 456,
+								"__worldY": -696
 							},
 							{
 								"__identifier": "Tunnel",
@@ -11622,8 +11622,8 @@
 								"defUid": 250,
 								"px": [248,56],
 								"fieldInstances": [{ "__identifier": "Exit", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 872, "realEditorValues": [] }],
-								"__worldX": -424,
-								"__worldY": -1464
+								"__worldX": 440,
+								"__worldY": -1144
 							}
 						]
 					},
@@ -12354,7 +12354,7 @@
 						"entityInstances": []
 					}
 				],
-				"__neighbours": [{ "levelIid": "90c79060-5e50-11f0-aa11-7be173513407", "dir": "s" }]
+				"__neighbours": [{ "levelIid": "2b992c20-5e50-11f0-92cc-330c7a92f094", "dir": "e" }]
 			},
 			{
 				"identifier": "Level_4",
@@ -13882,7 +13882,7 @@
 						"entityInstances": []
 					}
 				],
-				"__neighbours": [{ "levelIid": "dcaeb010-5e50-11f0-ae13-d9f0636ebb1f", "dir": "n" }]
+				"__neighbours": []
 			},
 			{
 				"identifier": "Level_5",
@@ -14732,7 +14732,7 @@
 						"entityInstances": []
 					}
 				],
-				"__neighbours": [{ "levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea", "dir": "e" }]
+				"__neighbours": [ { "levelIid": "dcaeb010-5e50-11f0-ae13-d9f0636ebb1f", "dir": "w" }, { "levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea", "dir": "e" } ]
 			},
 			{
 				"identifier": "Level_6",
@@ -14746,12 +14746,12 @@
 				"__bgColor": "#696A79",
 				"bgColor": null,
 				"useAutoIdentifier": true,
-				"bgRelPath": null,
-				"bgPos": null,
+				"bgRelPath": "../art/backgrounds/BaseWorld_Level_6.png",
+				"bgPos": "Cover",
 				"bgPivotX": 0.5,
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
-				"__bgPos": null,
+				"__bgPos": { "topLeftPx": [0,0], "scale": [1.0526315789473684,1.0526315789473684], "cropRect": [16,0,608,912] },
 				"externalRelPath": null,
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
