@@ -1,5 +1,6 @@
 package entities.interact;
 
+import nape.shape.Shape;
 import todo.TODO;
 import nape.callbacks.InteractionCallback;
 import constants.CbTypes;
@@ -21,9 +22,10 @@ import flixel.FlxG;
 import flixel.addons.nape.FlxNapeSprite;
 import nape.phys.Body;
 import nape.phys.BodyType;
+import types.Direction;
 
-class Popper extends Interactable {
-	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/jetBumper.json");
+class Slingshot extends Interactable {
+	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/slingshot.json");
 
 	private static var degToRad = Math.PI / 180.0;
 	private static var radToDeg = 180.0 / Math.PI;
@@ -33,19 +35,50 @@ class Popper extends Interactable {
 	// Required velocity to trigger the popper
 	var sensitivity:Float = 10;
 
-	public function new(X:Float, Y:Float, strength:Float, sensitivity:Float) {
+	var bounceShape:Shape;
+
+	public function new(X:Float, Y:Float, strength:Float, facing:Direction, sensitivity:Float) {
 		super(X, Y);
-		Aseprite.loadAllAnimations(this, AssetPaths.jetBumper__json);
-		animation.play(anims.jetBumper_0_aseprite);
+		Aseprite.loadAllAnimations(this, AssetPaths.slingshot__json);
+		animation.play(anims.slingshot_0_aseprite);
 		// origin.set(12, 24);
 		bumpStrength = strength;
 		this.sensitivity = sensitivity;
 
 		var body = new Body(BodyType.STATIC);
 		body.position.set(Vec2.get(X, Y));
-		body.shapes.add(new Circle(19, Vec2.weak(0, 0)));
-		body.isBullet = true;
 
+		if (facing == RIGHT) {
+			body.shapes.add(new Circle(9, Vec2.weak(-18, -36))); // top circle
+			body.shapes.add(new Circle(9, Vec2.weak(-18, 18))); // back circle
+			body.shapes.add(new Circle(9, Vec2.weak(18, 37))); // bottom circle
+			body.shapes.add(new Polygon([
+				Vec2.get(-18 - 9, -36),
+				Vec2.get(-18 - 9, 18),
+				Vec2.get(-18, 18 + 9),
+				Vec2.get(17, 37 + 9)
+			]));
+
+			bounceShape = new Polygon([Vec2.get(-18 + 9, -36), Vec2.get(18, 37 - 9), Vec2.get(-9, 9)]);
+			bounceShape.userData.data = true;
+			body.shapes.add(bounceShape);
+		} else {
+			flipX = true;
+			body.shapes.add(new Circle(9, Vec2.weak(18, -36)));
+			body.shapes.add(new Circle(9, Vec2.weak(18, 18)));
+			body.shapes.add(new Circle(9, Vec2.weak(-18, 37)));
+			body.shapes.add(new Polygon([
+				Vec2.get(18 + 9, -36),
+				Vec2.get(18 + 9, 18),
+				Vec2.get(18, 18 + 9),
+				Vec2.get(-17, 37 + 9)
+			]));
+
+			bounceShape = new Polygon([Vec2.get(18 - 9, -36), Vec2.get(-18, 37 - 9), Vec2.get(9, 9)]);
+			bounceShape.userData.data = true;
+			body.shapes.add(bounceShape);
+		}
+		body.isBullet = true;
 		body.setShapeFilters(new InteractionFilter(CGroups.INTERACTABLE, CGroups.BALL));
 		addPremadeBody(body);
 
@@ -56,14 +89,23 @@ class Popper extends Interactable {
 
 	override public function handleInteraction(data:InteractionCallback) {
 		var arb = data.arbiters.at(0).collisionArbiter;
+
+		if (arb.body1 == body && !arb.shape1.userData.data) {
+			TODO.sfx('slingshot non-bounce side hit');
+			return;
+		} else if (arb.body2 == body && !arb.shape2.userData.data) {
+			TODO.sfx('slingshot non-bounce side hit');
+			return;
+		}
+
 		var impactNormal = arb.normal;
 		if (arb.shape2.body == body) {
 			impactNormal.muleq(-1);
 		}
 
 		var impactImpulse = arb.normalImpulse(data.int1.castBody);
-		trace(impactImpulse);
-		trace(impactImpulse.length);
+		// trace(impactImpulse);
+		// trace(impactImpulse.length);
 
 		// trace(impactNormal);
 		// trace(data.int1.castBody.velocity);
@@ -74,7 +116,7 @@ class Popper extends Interactable {
 			// if (data.int1.castBody.velocity.dot(impactNormal) >= sensitivity) {
 			// if (data.int1.castBody.velocity.length >= sensitivity) {
 			data.int1.castBody.applyImpulse(impactNormal.mul(bumpStrength));
-			TODO.sfx('popper hit');
+			TODO.sfx('slingshot face hit');
 		}
 	}
 }
