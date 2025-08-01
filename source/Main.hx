@@ -36,10 +36,10 @@ import states.PlayState;
 #if credits
 import states.CreditsState;
 #end
+
 #if FLX_DEBUG
 // import plugins.GlobalDebugPlugin;
 #end
-
 class Main extends Sprite {
 	public function new() {
 		super();
@@ -113,7 +113,7 @@ class Main extends Sprite {
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, function(e:KeyboardEvent) {
 			if (FlxG.debugger.visible && e.keyCode == Keyboard.SLASH) {
 				// if (!FlxG.game.debugger.console.visible) {
-					// FlxG.game.debugger.console.visible = true;
+				// FlxG.game.debugger.console.visible = true;
 				// }
 
 				// @:privateAccess
