@@ -101,11 +101,14 @@ class Slingshot extends Interactable {
 		emitter.lifespan.set(lifespan, lifespan);
 		emitter.scale.set(startScale, startScale, startScale, startScale, endScale, endScale, endScale, endScale);
 		emitter.alpha.set(startAlpha, startAlpha, endAlpha, endAlpha);
+		if (facing != RIGHT) {
+			for (p in emitter) {
+				p.flipX = true;
+			}
+		}
 	}
 
 	override public function handleInteraction(data:InteractionCallback) {
-		emitter.start(true);
-
 		var arb = data.arbiters.at(0).collisionArbiter;
 
 		if (arb.body1 == body && !arb.shape1.userData.data) {
@@ -120,6 +123,7 @@ class Slingshot extends Interactable {
 		if (arb.shape2.body == body) {
 			impactNormal.muleq(-1);
 		}
+		emitter.start(true);
 
 		var impactImpulse = arb.normalImpulse(data.int1.castBody);
 		// trace(impactImpulse);
