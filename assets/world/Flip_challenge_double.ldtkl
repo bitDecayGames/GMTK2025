@@ -72,30 +72,12 @@
 					"fieldInstances": [
 						{ "__identifier": "ForceFactor", "__type": "Float", "__value": 1, "__tile": null, "defUid": 239, "realEditorValues": [] },
 						{ "__identifier": "Mass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 260, "realEditorValues": [] },
-						{ "__identifier": "Travel", "__type": "Int", "__value": 60, "__tile": null, "defUid": 261, "realEditorValues": [] }
+						{ "__identifier": "Travel", "__type": "Int", "__value": 60, "__tile": null, "defUid": 261, "realEditorValues": [] },
+						{ "__identifier": "Rest", "__type": "Point", "__value": null, "__tile": null, "defUid": 2251, "realEditorValues": [] },
+						{ "__identifier": "Activate", "__type": "Point", "__value": null, "__tile": null, "defUid": 2252, "realEditorValues": [] }
 					],
 					"__worldX": 509,
 					"__worldY": 472
-				},
-				{
-					"__identifier": "FlipperRight",
-					"__grid": [34,20],
-					"__pivot": [0.838,0.5],
-					"__tags": ["control"],
-					"__tile": null,
-					"__smartColor": "#EAD4AA",
-					"iid": "a52706c0-5e50-11f0-8054-233935247696",
-					"width": 80,
-					"height": 26,
-					"defUid": 235,
-					"px": [557,328],
-					"fieldInstances": [
-						{ "__identifier": "ForceFactor", "__type": "Float", "__value": 1, "__tile": null, "defUid": 239, "realEditorValues": [] },
-						{ "__identifier": "Mass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 260, "realEditorValues": [] },
-						{ "__identifier": "Travel", "__type": "Int", "__value": 60, "__tile": null, "defUid": 261, "realEditorValues": [] }
-					],
-					"__worldX": 557,
-					"__worldY": 328
 				},
 				{
 					"__identifier": "Popper",
@@ -277,6 +259,37 @@
 					"fieldInstances": [],
 					"__worldX": 313,
 					"__worldY": 409
+				},
+				{
+					"__identifier": "FlipperFree",
+					"__grid": [34,20],
+					"__pivot": [0.5,0.5],
+					"__tags": ["control"],
+					"__tile": null,
+					"__smartColor": "#8F6D0F",
+					"iid": "f6a26250-5e50-11f0-86e4-712b01110da6",
+					"width": 160,
+					"height": 160,
+					"defUid": 2254,
+					"px": [552,328],
+					"fieldInstances": [
+						{ "__identifier": "ForceFactor", "__type": "Float", "__value": 1, "__tile": null, "defUid": 2255, "realEditorValues": [] },
+						{ "__identifier": "Mass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 2256, "realEditorValues": [] },
+						{ "__identifier": "Rest", "__type": "Point", "__value": { "cx": 30, "cy": 24 }, "__tile": null, "defUid": 2258, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["30,24"]
+						}] },
+						{ "__identifier": "Active", "__type": "Point", "__value": { "cx": 29, "cy": 18 }, "__tile": null, "defUid": 2259, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["29,18"]
+						}] },
+						{ "__identifier": "Clockwise", "__type": "Bool", "__value": true, "__tile": null, "defUid": 2260, "realEditorValues": [{
+							"id": "V_Bool",
+							"params": [ true ]
+						}] }
+					],
+					"__worldX": 552,
+					"__worldY": 328
 				}
 			]
 		},
