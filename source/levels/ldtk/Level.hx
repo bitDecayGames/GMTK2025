@@ -127,6 +127,7 @@ class Level {
 			parseTunnels(raw.l_Objects.all_Tunnel);
 			parseTriggerables(raw.l_Objects.all_CollectionTrigger, raw.l_Objects.all_TargetSmall, raw.l_Objects.all_TargetLarge, raw.l_Objects.all_DropTarget,
 				raw.l_Objects.all_LightSmallRound, raw.l_Objects.all_Gate, raw.l_Objects.all_Sensor);
+			parseKickers(raw.l_Objects.all_Kicker);
 		}
 	}
 

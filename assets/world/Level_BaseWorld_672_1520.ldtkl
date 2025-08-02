@@ -178,7 +178,10 @@
 					"defUid": 251,
 					"px": [424,360],
 					"fieldInstances": [
-						{ "__identifier": "Direction", "__type": "Point", "__value": null, "__tile": null, "defUid": 1765, "realEditorValues": [] },
+						{ "__identifier": "Direction", "__type": "Point", "__value": { "cx": 24, "cy": 25 }, "__tile": null, "defUid": 1765, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["24,25"]
+						}] },
 						{ "__identifier": "Force", "__type": "Float", "__value": 1000, "__tile": null, "defUid": 1766, "realEditorValues": [] }
 					],
 					"__worldX": -248,

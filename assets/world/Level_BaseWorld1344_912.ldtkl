@@ -146,7 +146,7 @@
 							"id": "V_String",
 							"params": ["6,43"]
 						}] },
-						{ "__identifier": "Force", "__type": "Float", "__value": 1000, "__tile": null, "defUid": 1766, "realEditorValues": [] }
+						{ "__identifier": "Force", "__type": "Float", "__value": 1000, "__tile": null, "defUid": 1766, "realEditorValues": [{ "id": "V_Float", "params": [1000] }] }
 					],
 					"__worldX": 1440,
 					"__worldY": -145
@@ -614,6 +614,22 @@
 					}] }],
 					"__worldX": 1560,
 					"__worldY": -424
+				},
+				{
+					"__identifier": "Spawn",
+					"__grid": [33,41],
+					"__pivot": [0,0],
+					"__tags": ["Player"],
+					"__tile": null,
+					"__smartColor": "#FFFFFF",
+					"iid": "e6d93e80-5e50-11f0-9c8f-bd638af5abde",
+					"width": 32,
+					"height": 32,
+					"defUid": 74,
+					"px": [528,656],
+					"fieldInstances": [],
+					"__worldX": 1872,
+					"__worldY": -256
 				}
 			]
 		},
