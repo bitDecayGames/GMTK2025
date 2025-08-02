@@ -20,10 +20,13 @@
   ],
   "layers": [
    { "name": "Layer", "opacity": 255, "blendMode": "normal" },
+   { "name": "Playfield Art", "opacity": 255, "blendMode": "normal" },
    { "name": "Layer 2", "opacity": 255, "blendMode": "normal" },
    { "name": "Layer 1", "opacity": 255, "blendMode": "normal" },
    { "name": "Lights", "opacity": 255, "blendMode": "normal" },
-   { "name": "Foreground", "opacity": 255, "blendMode": "normal" }
+   { "name": "shadows", "opacity": 166, "blendMode": "normal" },
+   { "name": "Foreground", "opacity": 255, "blendMode": "normal" },
+   { "name": "Props", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
   ]
