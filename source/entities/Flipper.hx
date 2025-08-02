@@ -15,7 +15,7 @@ import bitdecay.flixel.graphics.AsepriteMacros;
 import nape.dynamics.InteractionFilter;
 import constants.CGroups;
 import nape.constraint.PivotJoint;
-import flixel.addons.nape.FlxNapeSpace;
+import addons.BDFlxNapeSpace;
 import nape.constraint.AngleJoint;
 import nape.shape.Polygon;
 import nape.geom.Vec2;
@@ -91,32 +91,32 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 
 		body.setShapeFilters(new InteractionFilter(CGroups.CONTROL_SURFACE, CGroups.BALL));
 
-		pivotJoint = new PivotJoint(body, FlxNapeSpace.space.world, Vec2.get(), body.localPointToWorld(Vec2.get()));
+		pivotJoint = new PivotJoint(body, BDFlxNapeSpace.space.world, Vec2.get(), body.localPointToWorld(Vec2.get()));
 		pivotJoint.active = true;
 		pivotJoint.stiff = true;
-		pivotJoint.space = FlxNapeSpace.space;
+		pivotJoint.space = BDFlxNapeSpace.space;
 
 		jointMin = Math.min(restAngle, flipAngle);
 		jointMax = Math.max(restAngle, flipAngle);
-		angleJoint = new AngleJoint(FlxNapeSpace.space.world, body, jointMin, jointMax);
+		angleJoint = new AngleJoint(BDFlxNapeSpace.space.world, body, jointMin, jointMax);
 		angleJoint.active = true;
 		angleJoint.stiff = true;
-		angleJoint.space = FlxNapeSpace.space;
+		angleJoint.space = BDFlxNapeSpace.space;
 
 		var forceLocalPos = Vec2.get(w - bigRad - smallRad, 0).muleq(leverArmScale);
 		var activeJointWorldPos = body.localPointToWorld(forceLocalPos.copy().rotate(flipAngle));
-		activateJoint = new DistanceJoint(body, FlxNapeSpace.space.world, forceLocalPos, activeJointWorldPos, 0, 0);
+		activateJoint = new DistanceJoint(body, BDFlxNapeSpace.space.world, forceLocalPos, activeJointWorldPos, 0, 0);
 		activateJoint.active = true;
 		activateJoint.stiff = false;
-		activateJoint.space = FlxNapeSpace.space;
+		activateJoint.space = BDFlxNapeSpace.space;
 		activateJoint.damping = 0;
 		activateJoint.maxForce = flipperStrength * fmass;
 
 		var restingJointWorldPos = body.localPointToWorld(forceLocalPos.copy().rotate(restAngle));
-		restingJoint = new DistanceJoint(body, FlxNapeSpace.space.world, forceLocalPos, restingJointWorldPos, 0, 0);
+		restingJoint = new DistanceJoint(body, BDFlxNapeSpace.space.world, forceLocalPos, restingJointWorldPos, 0, 0);
 		restingJoint.active = true;
 		restingJoint.stiff = false;
-		restingJoint.space = FlxNapeSpace.space;
+		restingJoint.space = BDFlxNapeSpace.space;
 		restingJoint.damping = 0;
 		restingJoint.maxForce = flipperStrength * fmass;
 
@@ -127,7 +127,7 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 
 		// CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
 		var listener = new PreListener(InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_CONTROL_SURFACE, testPre, 0, false);
-		FlxNapeSpace.space.listeners.add(listener);
+		BDFlxNapeSpace.space.listeners.add(listener);
 	}
 
 	function testPre(cb:PreCallback):PreFlag {

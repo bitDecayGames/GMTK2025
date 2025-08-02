@@ -16,7 +16,7 @@ import input.InputCalculator;
 import input.SimpleController;
 import bitdecay.flixel.graphics.Aseprite;
 import bitdecay.flixel.graphics.AsepriteMacros;
-import flixel.addons.nape.FlxNapeSprite;
+import addons.BDFlxNapeSprite;
 import nape.phys.Body;
 import nape.phys.BodyType;
 import nape.shape.Circle;
