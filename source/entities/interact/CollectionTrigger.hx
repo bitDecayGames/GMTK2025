@@ -18,6 +18,7 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 
 	public var disabled:Bool;
 	public var onOffSignal:FlxTypedSignal<Bool->Void> = new FlxTypedSignal<Bool->Void>();
+	public var followListensTo:Bool;
 
 	public function new() {
 		super();
