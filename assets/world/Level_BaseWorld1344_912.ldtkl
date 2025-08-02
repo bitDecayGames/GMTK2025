@@ -142,7 +142,10 @@
 					"defUid": 251,
 					"px": [96,767],
 					"fieldInstances": [
-						{ "__identifier": "Direction", "__type": "Point", "__value": null, "__tile": null, "defUid": 1765, "realEditorValues": [] },
+						{ "__identifier": "Direction", "__type": "Point", "__value": { "cx": 6, "cy": 43 }, "__tile": null, "defUid": 1765, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["6,43"]
+						}] },
 						{ "__identifier": "Force", "__type": "Float", "__value": 1000, "__tile": null, "defUid": 1766, "realEditorValues": [] }
 					],
 					"__worldX": 1440,
@@ -558,6 +561,22 @@
 					],
 					"__worldX": 1656,
 					"__worldY": -232
+				},
+				{
+					"__identifier": "Spawn",
+					"__grid": [33,40],
+					"__pivot": [0,0],
+					"__tags": ["Player"],
+					"__tile": null,
+					"__smartColor": "#FFFFFF",
+					"iid": "a79e9450-5e50-11f0-aa11-c109c416b965",
+					"width": 32,
+					"height": 32,
+					"defUid": 74,
+					"px": [528,640],
+					"fieldInstances": [],
+					"__worldX": 1872,
+					"__worldY": -272
 				}
 			]
 		},
