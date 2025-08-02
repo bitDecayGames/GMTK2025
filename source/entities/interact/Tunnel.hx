@@ -26,6 +26,7 @@ import addons.BDFlxNapeSprite;
 import nape.phys.Body;
 import nape.phys.BodyType;
 import entities.Player;
+import ui.HudMessage;
 
 class Tunnel extends Interactable {
 	// public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/tunnel.json");
@@ -66,6 +67,8 @@ class Tunnel extends Interactable {
 				player.reappear();
 				if (!isRespawn && onTunnelExit != null) {
 					onTunnelExit(targetTunnel);
+				} else if (isRespawn) {
+					HudMessage.show("You can do it!");
 				}
 			}
 		});

@@ -41,6 +41,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
 import addons.BDFlxNapeSpace;
+import ui.HudMessage;
 
 using states.FlxStateExt;
 
@@ -217,7 +218,11 @@ class PlayState extends FlxTransitionableState {
 		// Set up tunnel exit tracking
 		Tunnel.onTunnelExit = (exitTunnel) -> {
 			lastTunnelExit = exitTunnel;
+			HudMessage.show("You can do it!");
 		};
+
+		// Show welcome message
+		HudMessage.show("Let's GOOOOOOO");
 	}
 
 	function getClosestTunnelToSpawn():Tunnel {
