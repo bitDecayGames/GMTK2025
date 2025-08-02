@@ -49,7 +49,7 @@ class TargetLarge extends Interactable {
 	}
 
 	override public function handleInteraction(data:InteractionCallback) {
-		TODO.sfx('large target hit');
+		FmodPlugin.playSFX(FmodSFX.TargetHit);
 		setOn(true);
 		super.handleInteraction(data);
 	}

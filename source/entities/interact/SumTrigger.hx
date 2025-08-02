@@ -36,6 +36,11 @@ class SumTrigger extends FlxObject implements Triggerable {
 		}
 	}
 
+	override function update(elapsed:Float) {
+		super.update(elapsed);
+		check();
+	}
+
 	public function setOn(value:Bool) {
 		if (disabled)
 			return;
