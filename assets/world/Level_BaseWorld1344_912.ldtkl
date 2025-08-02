@@ -1097,20 +1097,20 @@
 			"__pxTotalOffsetY": 0,
 			"__tilesetDefUid": 227,
 			"__tilesetRelPath": "aseprite/baseTileset.png",
-			"iid": "10f2fae1-5e50-11f0-8acb-0df1691e9dd0",
+			"iid": "b3a9a071-5e50-11f0-96b4-757f597ffa1d",
 			"levelId": 874,
-			"layerDefUid": 2508,
+			"layerDefUid": 3248,
 			"pxOffsetX": 0,
 			"pxOffsetY": 0,
 			"visible": true,
 			"optionalRules": [],
 			"intGridCsv": [],
 			"autoLayerTiles": [],
-			"seed": 5856072,
+			"seed": 7637798,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
 			"entityInstances": []
 		}
 	],
-	"__neighbours": [ { "levelIid": "2b992c20-5e50-11f0-92cc-330c7a92f094", "dir": "w" }, { "levelIid": "b9237f30-5e50-11f0-8acb-af7576dfeb38", "dir": "e" } ]
+	"__neighbours": [{ "levelIid": "2b992c20-5e50-11f0-92cc-330c7a92f094", "dir": "w" }]
 }
