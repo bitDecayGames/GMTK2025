@@ -1,5 +1,6 @@
 package states;
 
+import flixel.input.keyboard.FlxKey;
 import flixel.FlxCamera.FlxCameraFollowStyle;
 import entities.interact.Interactable;
 import nape.callbacks.InteractionCallback;
@@ -106,7 +107,7 @@ class PlayState extends FlxTransitionableState {
 		FlxNapeSpace.space.gravity.setxy(gravity.x, gravity.y);
 
 		// FmodPlugin.playSong(level.rawLevels[0].f_Music);
-		FmodPlugin.playSong(FmodSong.Fkip);
+		// FmodPlugin.playSong(FmodSong.Fkip);
 
 		for (bg in level.levelBgs) {
 			bgGroup.add(bg);
@@ -313,6 +314,11 @@ class PlayState extends FlxTransitionableState {
 
 		if (isPaused) {
 			return;
+		}
+
+		/* Cheese to make the flipper sound exactly once all the time*/
+		if (FlxG.keys.anyJustPressed([FlxKey.Z, FlxKey.M])) {
+			FmodPlugin.playSFX(FmodSFX.FlipperStart);
 		}
 
 		super.update(elapsed);

@@ -51,7 +51,7 @@ class Tunnel extends Interactable {
 			return;
 		}
 
-		TODO.sfx('warp enter');
+		FmodPlugin.playSFX(FmodSFX.TunnelEnter);
 
 		data.int1.castBody.velocity.muleq(0);
 		var d = data.int1.userData.data;

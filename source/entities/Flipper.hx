@@ -173,6 +173,7 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		} else {
 			lockout = 0;
 		}
+		
 
 		if (flipDirection == CCW && body.rotation <= jointMin) {
 			body.rotation = jointMin;
