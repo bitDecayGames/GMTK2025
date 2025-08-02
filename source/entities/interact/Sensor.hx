@@ -14,10 +14,10 @@ import nape.phys.BodyType;
  * These are on when the ball is intersecting the body, and off when the ball is not. They are invisible.
  */
 class Sensor extends Interactable {
-	public function new(X:Float, Y:Float, W:Float, H:Float, rotation:Float = 0.0) {
+	public function new(X:Float, Y:Float, W:Float, H:Float) {
 		super(X, Y);
+		visible = false;
 		var body = new Body(BodyType.STATIC);
-		body.rotation = rotation;
 		body.position.set(Vec2.get(X, Y));
 		var shape = new Polygon(Polygon.rect(-W / 2, -H / 2, W, H));
 		shape.sensorEnabled = true;
@@ -32,5 +32,6 @@ class Sensor extends Interactable {
 
 	override public function handleInteraction(data:InteractionCallback) {
 		// TODO: this is on-enter I believe, need an on-exit
+		setOn(true);
 	}
 }
