@@ -24,6 +24,7 @@ class CreditsState extends FlxTransitionableState {
 	var _txtThankYou:FlxBitmapText;
 	var _txtRole:Array<FlxBitmapText>;
 	var _txtCreator:Array<FlxBitmapText>;
+	var _underlines:Map<FlxBitmapText, FlxSprite>;
 
 	// Quick appearance variables
 	private var backgroundColor = FlxColor.BLACK;
@@ -36,8 +37,8 @@ class CreditsState extends FlxTransitionableState {
 		AssetPaths.FLStudioLogo__png,
 		AssetPaths.FmodLogoWhite__png,
 		AssetPaths.HaxeFlixelLogo__png,
-		AssetPaths.pyxel_edit__png,
-		AssetPaths.aseprite__png
+		AssetPaths.aseprite__png,
+		AssetPaths.ldtk__png
 	];
 
 	override public function create():Void {
@@ -62,6 +63,7 @@ class CreditsState extends FlxTransitionableState {
 
 		_txtRole = new Array<FlxBitmapText>();
 		_txtCreator = new Array<FlxBitmapText>();
+		_underlines = new Map<FlxBitmapText, FlxSprite>();
 
 		_allCreditElements.push(_txtCreditsTitle);
 
@@ -72,7 +74,16 @@ class CreditsState extends FlxTransitionableState {
 		var creditsVerticalOffset = FlxG.height;
 
 		for (flxText in _txtRole) {
-			flxText.setPosition(entryLeftMargin, creditsVerticalOffset);
+			center(flxText);
+			flxText.y = creditsVerticalOffset;
+			
+			// Position underline if this text has one
+			if (_underlines.exists(flxText)) {
+				var underline = _underlines.get(flxText);
+				center(underline);
+				underline.y = flxText.y + flxText.height + 2;
+			}
+			
 			creditsVerticalOffset += entryVerticalSpacing;
 		}
 
@@ -83,7 +94,8 @@ class CreditsState extends FlxTransitionableState {
 		creditsVerticalOffset += entryVerticalSpacing;
 
 		for (flxText in _txtCreator) {
-			flxText.setPosition(FlxG.width - flxText.width - entryRightMargin, creditsVerticalOffset);
+			center(flxText);
+			flxText.y = creditsVerticalOffset;
 			creditsVerticalOffset += entryVerticalSpacing;
 		}
 
@@ -119,6 +131,13 @@ class CreditsState extends FlxTransitionableState {
 		finalRoleArray.push(roleText);
 		finalRoleArray.push(roleText);
 		_allCreditElements.push(roleText);
+		
+		// Add underline for category names
+		var underline = new FlxSprite();
+		underline.makeGraphic(Std.int(roleText.width), 2, FlxColor.WHITE);
+		add(underline);
+		_allCreditElements.push(underline);
+		_underlines.set(roleText, underline);
 
 		if (finalCreatorsArray.length != 0) {
 			// placeholders to get credits to align properly

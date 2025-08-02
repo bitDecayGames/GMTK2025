@@ -19,6 +19,7 @@ using states.FlxStateExt;
 
 class MainMenuState extends FlxTransitionableState {
 	var startButton:FlxButton;
+	var creditsButton:FlxButton;
 	var handleInput = true;
 
 	override public function create():Void {
@@ -36,6 +37,11 @@ class MainMenuState extends FlxTransitionableState {
 		startButton.screenCenter(X);
 		startButton.y = FlxG.height * .6;
 		add(startButton);
+
+		creditsButton = MenuBuilder.createTextButton("Credits", clickCredits, MenuSelect, MenuHover);
+		creditsButton.screenCenter(X);
+		creditsButton.y = FlxG.height * .7;
+		add(creditsButton);
 
 		FmodPlugin.playSong(FmodSong.LetsGo);
 
