@@ -112,10 +112,10 @@ class Slingshot extends Interactable {
 		var arb = data.arbiters.at(0).collisionArbiter;
 
 		if (arb.body1 == body && !arb.shape1.userData.data) {
-			TODO.sfx('slingshot non-bounce side hit');
+			FmodPlugin.playSFX(FmodSFX.BallTerrain2);
 			return;
 		} else if (arb.body2 == body && !arb.shape2.userData.data) {
-			TODO.sfx('slingshot non-bounce side hit');
+			FmodPlugin.playSFX(FmodSFX.BallTerrain2);
 			return;
 		}
 
@@ -138,7 +138,7 @@ class Slingshot extends Interactable {
 			// if (data.int1.castBody.velocity.dot(impactNormal) >= sensitivity) {
 			// if (data.int1.castBody.velocity.length >= sensitivity) {
 			data.int1.castBody.applyImpulse(impactNormal.mul(bumpStrength));
-			TODO.sfx('slingshot face hit');
+			FmodPlugin.playSFX(FmodSFX.Slingshot);
 
 			animation.play(anims.slingshot_1_aseprite, true);
 			animation.finishCallback = function(name:String) {

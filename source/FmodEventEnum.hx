@@ -12,10 +12,15 @@ enum FmodSong {
 }
 
 enum FmodSFX {
+    BallTerrain;
+    BallTerrain2;
     FlipperStart;
     FlipperStop;
+    KickerEnter;
+    KickerLaunch;
     MenuHover;
     MenuSelect;
+    Popper;
     Slingshot;
     Slingshot2;
     Slingshot3;
@@ -31,10 +36,15 @@ class FmodEvent {
     }
     public static inline extern overload function event(sfx:FmodSFX):String {
         return switch(sfx) {
+            case BallTerrain: "event:/SFX/Ball/BallTerrain";
+            case BallTerrain2: "event:/SFX/Ball/BallTerrain2";
             case FlipperStart: "event:/SFX/Flipper/FlipperStart";
             case FlipperStop: "event:/SFX/Flipper/FlipperStop";
+            case KickerEnter: "event:/SFX/Kicker/KickerEnter";
+            case KickerLaunch: "event:/SFX/Kicker/KickerLaunch";
             case MenuHover: "event:/SFX/Menu/MenuHover";
             case MenuSelect: "event:/SFX/Menu/MenuSelect";
+            case Popper: "event:/SFX/Popper/Popper";
             case Slingshot: "event:/SFX/Slingshot/Slingshot";
             case Slingshot2: "event:/SFX/Slingshot/Slingshot2";
             case Slingshot3: "event:/SFX/Slingshot/Slingshot3";
