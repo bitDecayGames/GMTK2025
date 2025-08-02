@@ -3,9 +3,9 @@ package states;
 import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.FlxCamera;
-import flixel.util.FlxTimer;
-import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+import flixel.util.FlxTimer;
 import flixel.FlxCamera.FlxCameraFollowStyle;
 import entities.interact.Interactable;
 import nape.callbacks.InteractionCallback;
@@ -34,6 +34,7 @@ import levels.ldtk.Ldtk.LdtkProject;
 import achievements.Achievements;
 import entities.Player;
 import entities.Flipper;
+import entities.interact.Tunnel;
 import events.gen.Event;
 import events.EventBus;
 import flixel.FlxG;
@@ -62,9 +63,11 @@ class PlayState extends FlxTransitionableState {
 	var activeCameraTransition:CameraTransition = null;
 
 	var isPaused:Bool = false;
+	var lastTunnelExit:Tunnel = null;
 	var originalTimeScaleBeforePausing:Float;
 
 	var transitions = new FlxTypedGroup<CameraTransition>();
+	var level:Level;
 
 	var ldtk = new LdtkProject();
 
@@ -110,7 +113,7 @@ class PlayState extends FlxTransitionableState {
 	function loadLevel(worldName:String, levelName:String) {
 		unload();
 
-		var level = new Level(worldName, levelName);
+		level = new Level(worldName, levelName);
 		// BDFlxNapeSpace.space.gravity.setxy(level.rawLevels[0].f_GravityX, level.rawLevels[0].f_GravityY);
 		BDFlxNapeSpace.space.gravity.setxy(gravity.x, gravity.y);
 
@@ -209,6 +212,39 @@ class PlayState extends FlxTransitionableState {
 		BDFlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.END, InteractionType.SENSOR, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE, sensorEndCb));
 
 		EventBus.fire(new PlayerSpawn(player.x, player.y));
+
+		// Set up tunnel exit tracking
+		Tunnel.onTunnelExit = (exitTunnel) -> {
+			lastTunnelExit = exitTunnel;
+		};
+	}
+
+	function getClosestTunnelToSpawn():Tunnel {
+		var closest:Tunnel = null;
+		var closestDist:Float = Math.POSITIVE_INFINITY;
+
+		for (tunnel in level.tunnels) {
+			var dist = Math.sqrt(Math.pow(tunnel.x - level.spawnPoint.x, 2) + Math.pow(tunnel.y - level.spawnPoint.y, 2));
+			if (dist < closestDist) {
+				closest = tunnel;
+				closestDist = dist;
+			}
+		}
+
+		return closest;
+	}
+
+	function respawnToTunnel() {
+		var targetTunnel = lastTunnelExit != null ? lastTunnelExit : getClosestTunnelToSpawn();
+
+		if (targetTunnel == null) {
+			// Fallback to full reset if no tunnels
+			FlxG.resetState();
+			return;
+		}
+
+		// Use tunnel's teleportation with respawn flag
+		Tunnel.teleportTo(player, targetTunnel, true);
 	}
 
 	function makeTileBodies(l:BDTilemap) {
@@ -323,7 +359,7 @@ class PlayState extends FlxTransitionableState {
 		}
 
 		if (FlxG.keys.justPressed.R) {
-			FlxG.resetState();
+			respawnToTunnel();
 			return;
 		}
 

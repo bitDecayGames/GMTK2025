@@ -25,10 +25,13 @@ import flixel.FlxG;
 import addons.BDFlxNapeSprite;
 import nape.phys.Body;
 import nape.phys.BodyType;
+import entities.Player;
 
 class Tunnel extends Interactable {
 	// public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/tunnel.json");
 	public var exit:Tunnel = null;
+
+	public static var onTunnelExit:Tunnel->Void = null;
 
 	public function new(X:Float, Y:Float) {
 		super(X, Y);
@@ -46,27 +49,34 @@ class Tunnel extends Interactable {
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
 	}
 
-	override public function handleInteraction(data:InteractionCallback) {
-		if (exit == null) {
-			return;
-		}
-
+	public static function teleportTo(player:Player, targetTunnel:Tunnel, isRespawn:Bool = false) {
 		FmodPlugin.playSFX(FmodSFX.TunnelEnter);
 
-		data.int1.castBody.velocity.muleq(0);
-		var d = data.int1.userData.data;
-		d.disappear();
-		FlxTween.tween(data.int1.castBody, {
-			"position.x": exit.body.position.x,
-			"position.y": exit.body.position.y,
+		player.body.velocity.muleq(0);
+		player.disappear();
+		FlxTween.tween(player.body, {
+			"position.x": targetTunnel.body.position.x,
+			"position.y": targetTunnel.body.position.y,
 			"velocity.x": 0,
 			"velocity.y": 0
 		}, 1.0, {
 			ease: FlxEase.cubeInOut,
 			type: ONESHOT,
 			onComplete: (t:FlxTween) -> {
-				d.reappear();
+				player.reappear();
+				if (!isRespawn && onTunnelExit != null) {
+					onTunnelExit(targetTunnel);
+				}
 			}
 		});
+	}
+
+	override public function handleInteraction(data:InteractionCallback) {
+		if (exit == null) {
+			return;
+		}
+
+		var player:Player = data.int1.userData.data;
+		teleportTo(player, exit);
 	}
 }

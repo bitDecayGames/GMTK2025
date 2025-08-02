@@ -143,14 +143,16 @@ class Player extends SelfAssigningFlxNapeSprite {
 		var impactImpulse = arb.normalImpulse(data.int1.castBody);
 
 		// Only spark for strong impacts
-		if (impactImpulse.length < 1) return;
+		if (impactImpulse.length < 1)
+			return;
 
 		// Get the other body and shape in the collision
 		var otherBody = (arb.body1 == body) ? arb.body2 : arb.body1;
 		var hitShape = (arb.body1 == body) ? arb.shape2 : arb.shape1;
 
 		// If hitting slingshot, only spark on front face hits
-		if (otherBody.userData.data is Slingshot && hitShape.userData.data != true) return;
+		if (otherBody.userData.data is Slingshot && hitShape.userData.data != true)
+			return;
 
 		spark();
 	}
