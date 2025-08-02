@@ -142,7 +142,10 @@
 					"defUid": 251,
 					"px": [96,767],
 					"fieldInstances": [
-						{ "__identifier": "Direction", "__type": "Point", "__value": null, "__tile": null, "defUid": 1765, "realEditorValues": [] },
+						{ "__identifier": "Direction", "__type": "Point", "__value": { "cx": 6, "cy": 43 }, "__tile": null, "defUid": 1765, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["6,43"]
+						}] },
 						{ "__identifier": "Force", "__type": "Float", "__value": 1000, "__tile": null, "defUid": 1766, "realEditorValues": [] }
 					],
 					"__worldX": 1440,
@@ -922,19 +925,19 @@
 				},
 				{
 					"__identifier": "CameraZone",
-					"__grid": [4,4],
+					"__grid": [0,0],
 					"__pivot": [0,0],
 					"__tags": ["Camera"],
 					"__tile": { "tilesetUid": 16, "x": 64, "y": 64, "w": 16, "h": 16 },
 					"__smartColor": "#FF00FC",
 					"iid": "6176d020-5e50-11f0-9bc6-c13631e64d69",
-					"width": 496,
-					"height": 816,
+					"width": 640,
+					"height": 912,
 					"defUid": 200,
-					"px": [64,64],
+					"px": [0,0],
 					"fieldInstances": [{ "__identifier": "AutoFocus", "__type": "Bool", "__value": false, "__tile": null, "defUid": 873, "realEditorValues": [] }],
-					"__worldX": 1408,
-					"__worldY": -848
+					"__worldX": 1344,
+					"__worldY": -912
 				}
 			]
 		},
