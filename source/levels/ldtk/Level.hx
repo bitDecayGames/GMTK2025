@@ -1,5 +1,6 @@
 package levels.ldtk;
 
+import entities.interact.LightSmallRound;
 import entities.interact.PopperSmall;
 import nape.geom.Vec2;
 import entities.interact.TargetLarge;
@@ -121,8 +122,8 @@ class Level {
 			parsePoppers(raw.l_Objects.all_Popper, raw.l_Objects.all_SmallPopper);
 			parseSlingshots(raw.l_Objects.all_Slingshot_Left, raw.l_Objects.all_Slingshot_Right);
 			parseTunnels(raw.l_Objects.all_Tunnel);
-			parseKickers(raw.l_Objects.all_Kicker);
-			parseTriggerables(raw.l_Objects.all_CollectionTrigger, raw.l_Objects.all_TargetSmall, raw.l_Objects.all_TargetLarge, raw.l_Objects.all_DropTarget);
+			parseTriggerables(raw.l_Objects.all_CollectionTrigger, raw.l_Objects.all_TargetSmall, raw.l_Objects.all_TargetLarge, raw.l_Objects.all_DropTarget,
+				raw.l_Objects.all_LightSmallRound);
 		}
 	}
 
@@ -220,7 +221,8 @@ class Level {
 	}
 
 	function parseTriggerables(collectionTriggers:Array<Ldtk.Entity_CollectionTrigger>, smallTargets:Array<Ldtk.Entity_TargetSmall>,
-			largeTargets:Array<Ldtk.Entity_TargetLarge>, dropTargets:Array<Ldtk.Entity_DropTarget>) {
+			largeTargets:Array<Ldtk.Entity_TargetLarge>, dropTargets:Array<Ldtk.Entity_DropTarget>, smallRoundLights:Array<Ldtk.Entity_LightSmallRound>,) {
+		var listenerToNode = new Map<Triggerable, String>();
 		for (v in smallTargets) {
 			var rotation = 0.0;
 			if (v.f_RotateTo != null) {
@@ -228,9 +230,6 @@ class Level {
 			}
 			var t = new TargetSmall(v.worldPixelX, v.worldPixelY, rotation);
 			t.IID = v.iid;
-			t.onOffSignal.add((v) -> {
-				trace('${t.IID} small target triggered');
-			});
 			interactables.push(t);
 			triggerables.push(t);
 		}
@@ -241,9 +240,15 @@ class Level {
 			}
 			var t = new TargetLarge(v.worldPixelX, v.worldPixelY, rotation);
 			t.IID = v.iid;
-			t.onOffSignal.add((v) -> {
-				trace('${t.IID} large target triggered');
-			});
+			interactables.push(t);
+			triggerables.push(t);
+		}
+		for (v in smallRoundLights) {
+			var t = new LightSmallRound(v.worldPixelX, v.worldPixelY);
+			t.IID = v.iid;
+			if (v.f_ListensTo != null) {
+				listenerToNode.set(t, v.f_ListensTo.entityIid);
+			}
 			interactables.push(t);
 			triggerables.push(t);
 		}
@@ -255,9 +260,6 @@ class Level {
 			t.onlyOneNodeRequired = v.f_OR;
 			t.shouldDisableNodesOnComplete = v.f_DisableNodes;
 			t.shouldResetNodesOnComplete = v.f_ResetNodes;
-			t.onOffSignal.add((v) -> {
-				trace('${t.IID} collection triggered');
-			});
 			triggerables.push(t);
 			triggerToNodes.set(t, nodeIds);
 		}
@@ -270,6 +272,19 @@ class Level {
 					if (triggerable.IID == nodeId) {
 						t.add(triggerable);
 					}
+				}
+			}
+		}
+		for (t in listenerToNode.keys()) {
+			var nodeId = listenerToNode.get(t);
+			for (triggerable in triggerables) {
+				if (triggerable.IID == nodeId) {
+					triggerable.onOffSignal.add((isOn) -> {
+						if (isOn) {
+							t.setOn(true);
+						}
+						// don't turn off, since this light should stay on until reset by some other thing
+					});
 				}
 			}
 		}
