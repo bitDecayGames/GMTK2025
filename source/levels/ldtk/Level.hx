@@ -187,7 +187,7 @@ class Level {
 			while (!fd.f_Clockwise && activeAng > restAng) {
 				activeAng -= Math.PI * 2;
 			}
-			flippers.push(new Flipper(fd.f_Clockwise ? RIGHT : LEFT, fd.worldPixelX, fd.worldPixelY, 80, 13, 8, restAng, activeAng, fd.f_Mass));
+			flippers.push(new Flipper(fd.f_Clockwise ? LEFT : RIGHT, fd.worldPixelX, fd.worldPixelY, 80, 13, 8, restAng, activeAng, fd.f_Mass));
 		}
 	}
 
@@ -231,6 +231,7 @@ class Level {
 
 				if (tun.IID == td.f_Exit.entityIid) {
 					exit = tun;
+					tun.setExit();
 				}
 
 				if (entrance != null && exit != null) {

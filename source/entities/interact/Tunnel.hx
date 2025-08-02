@@ -36,8 +36,10 @@ class Tunnel extends Interactable {
 
 	public function new(X:Float, Y:Float) {
 		super(X, Y);
-		makeGraphic(64, 64, FlxColor.RED);
-
+		loadGraphic(AssetPaths.Icons48x64__png, true, 48, 64);
+		animation.add('enter', [0]);
+		animation.add('exit', [1]);
+		animation.play('enter');
 		var body = new Body(BodyType.STATIC);
 		body.position.set(Vec2.get(X, Y));
 		body.shapes.add(new Polygon(Polygon.rect(-24, -24, 48, 48)));
@@ -48,6 +50,10 @@ class Tunnel extends Interactable {
 		addPremadeBody(body);
 
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
+	}
+
+	public function setExit() {
+		animation.play('exit');
 	}
 
 	public static function teleportTo(player:Player, targetTunnel:Tunnel, isRespawn:Bool = false) {
