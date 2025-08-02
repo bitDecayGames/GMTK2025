@@ -16,7 +16,7 @@ class MessageEntity extends FlxObject implements Triggerable {
 
 	public var disabled:Bool;
 	public var followListensTo:Bool;
-	public var onOffSignal:FlxTypedSignal<Bool->Void>;
+	public var onOffSignal = new FlxTypedSignal<Bool->Void>();
 
 	public function new() {
 		super();
