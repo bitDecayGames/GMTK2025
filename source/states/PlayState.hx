@@ -202,7 +202,8 @@ class PlayState extends FlxTransitionableState {
 		}
 
 		handleCameraBounds(true);
-
+		BDFlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_TERRAIN,
+			ballTerrainHandler));
 		BDFlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
 			ballInteractableCallback));
 		BDFlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.SENSOR, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
@@ -260,6 +261,7 @@ class PlayState extends FlxTransitionableState {
 			}
 		}
 		worldBody.setShapeFilters(new InteractionFilter(CGroups.TERRAIN, ~CGroups.CONTROL_SURFACE));
+		worldBody.cbTypes.add(CbTypes.CB_TERRAIN);
 		worldBody.space = BDFlxNapeSpace.space;
 	}
 
@@ -323,6 +325,17 @@ class PlayState extends FlxTransitionableState {
 		cameraZones = [];
 
 		BDFlxNapeSpace.space.clear();
+	}
+
+	function ballTerrainHandler(data:InteractionCallback) {
+		var impulse = 0.0;
+		for (a in data.arbiters) {
+			impulse += a.totalImpulse(data.int1.castBody).length;
+		}
+
+		QLog.notice('touch @ $impulse');
+		// >100 seems to be a good starting point for the threshold for when to make noise
+		TODO.sfx('ball touched terrain');
 	}
 
 	function ballInteractableCallback(data:InteractionCallback) {
