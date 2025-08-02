@@ -1,5 +1,7 @@
 package levels.ldtk;
 
+import flixel.math.FlxMath;
+import echo.util.ext.FloatExt.deg_to_rad;
 import entities.interact.LightShow;
 import entities.interact.LightArrow;
 import entities.interact.LightTallTriangle;
@@ -128,7 +130,7 @@ class Level {
 
 			parseCameraZones(raw.l_Objects.all_CameraZone);
 			parseCameraTransitions(raw.l_Objects.all_CameraTransition);
-			parseFlippers(raw.l_Objects.all_FlipperLeft, raw.l_Objects.all_FlipperRight);
+			parseFlippers(raw.l_Objects.all_FlipperLeft, raw.l_Objects.all_FlipperRight, raw.l_Objects.all_FlipperFree);
 			parsePoppers(raw.l_Objects.all_Popper, raw.l_Objects.all_SmallPopper);
 			parseSlingshots(raw.l_Objects.all_Slingshot_Left, raw.l_Objects.all_Slingshot_Right);
 			parseTunnels(raw.l_Objects.all_Tunnel);
@@ -162,14 +164,27 @@ class Level {
 		}
 	}
 
-	function parseFlippers(leftDefs:Array<Ldtk.Entity_FlipperLeft>, rightDefs:Array<Ldtk.Entity_FlipperRight>) {
+	function parseFlippers(leftDefs:Array<Ldtk.Entity_FlipperLeft>, rightDefs:Array<Ldtk.Entity_FlipperRight>, freeDefs:Array<Ldtk.Entity_FlipperFree>) {
 		for (ld in leftDefs) {
-			var f = new Flipper(LEFT, ld.worldPixelX, ld.worldPixelY, 80, 13, 8, 30, 30 - ld.f_Travel, ld.f_Mass);
+			var f = new Flipper(LEFT, ld.worldPixelX, ld.worldPixelY, 80, 13, 8, deg_to_rad(30), deg_to_rad(30 - ld.f_Travel), ld.f_Mass);
 			flippers.push(f);
 		}
 		for (rd in rightDefs) {
-			var f = new Flipper(RIGHT, rd.worldPixelX, rd.worldPixelY, 80, 13, 8, 150, 150 + rd.f_Travel, rd.f_Mass);
+			var f = new Flipper(RIGHT, rd.worldPixelX, rd.worldPixelY, 80, 13, 8, deg_to_rad(150), deg_to_rad(150 + rd.f_Travel), rd.f_Mass);
 			flippers.push(f);
+		}
+		for (fd in freeDefs) {
+			var restAng = rotateTo(Vec2.get(fd.cx, fd.cy), Vec2.get(fd.f_Rest.cx, fd.f_Rest.cy));
+			var activeAng = rotateTo(Vec2.get(fd.cx, fd.cy), Vec2.get(fd.f_Active.cx, fd.f_Active.cy));
+
+			while (fd.f_Clockwise && activeAng < restAng) {
+				activeAng += Math.PI * 2;
+			}
+
+			while (!fd.f_Clockwise && activeAng > restAng) {
+				activeAng -= Math.PI * 2;
+			}
+			flippers.push(new Flipper(LEFT, fd.worldPixelX, fd.worldPixelY, 80, 13, 8, restAng, activeAng, fd.f_Mass));
 		}
 	}
 

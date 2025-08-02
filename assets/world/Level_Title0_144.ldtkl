@@ -92,6 +92,22 @@
 					"fieldInstances": [],
 					"__worldX": 192,
 					"__worldY": 48
+				},
+				{
+					"__identifier": "CameraZone",
+					"__grid": [0,0],
+					"__pivot": [0,0],
+					"__tags": ["Camera"],
+					"__tile": { "tilesetUid": 16, "x": 64, "y": 64, "w": 16, "h": 16 },
+					"__smartColor": "#FF00FC",
+					"iid": "3a8a4090-5e50-11f0-86e4-bd9dfd8b713c",
+					"width": 624,
+					"height": 448,
+					"defUid": 200,
+					"px": [0,0],
+					"fieldInstances": [{ "__identifier": "AutoFocus", "__type": "Bool", "__value": false, "__tile": null, "defUid": 873, "realEditorValues": [] }],
+					"__worldX": 0,
+					"__worldY": -144
 				}
 			]
 		},
@@ -1027,5 +1043,5 @@
 			"entityInstances": []
 		}
 	],
-	"__neighbours": []
+	"__neighbours": [{ "levelIid": "1d6c4050-5e50-11f0-86e4-2748da979a4d", "dir": "s" }]
 }

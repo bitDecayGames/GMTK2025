@@ -72,8 +72,6 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 			flipAngle = Math.max(flipAng, restAng);
 			restAngle = Math.min(flipAng, restAng);
 		}
-		flipAngle *= degToRad;
-		restAngle *= degToRad;
 		var w = width;
 
 		var body = new Body(BodyType.DYNAMIC);

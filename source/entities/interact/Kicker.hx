@@ -83,6 +83,7 @@ class Kicker extends Interactable {
 					FmodPlugin.playSFX(FmodSFX.KickerLaunch);
 					player.body.allowMovement = true;
 					player.body.velocity.set(shootDir.mul(kickPower, true));
+					player.spark();
 				});
 				FlxTimer.wait(1.3, () -> {
 					occupied = false;
