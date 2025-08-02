@@ -1,5 +1,6 @@
 package entities.interact;
 
+import flixel.util.FlxTimer;
 import flixel.util.FlxSignal;
 import nape.callbacks.InteractionCallback;
 
@@ -13,14 +14,18 @@ class Interactable extends SelfAssigningFlxNapeSprite implements Triggerable {
 
 	public var disabled:Bool;
 	public var onOffSignal:FlxTypedSignal<Bool->Void> = new FlxTypedSignal<Bool->Void>();
+	public var isBackground:Bool;
+	public var secondsToReset:Float = -1;
+	public var followListensTo:Bool;
 
 	public function setOn(value:Bool) {
 		if (disabled)
 			return;
+
 		var different = on != value;
 		on = value;
 		if (different) {
-			onOffSignal.dispatch(on);
+			onOnOffChanged(value);
 		}
 	}
 
@@ -28,11 +33,26 @@ class Interactable extends SelfAssigningFlxNapeSprite implements Triggerable {
 		return on;
 	}
 
+	private function onOnOffChanged(value:Bool):Void {
+		onOffSignal.dispatch(on);
+		if (on) {
+			if (secondsToReset > 0) {
+				FlxTimer.wait(secondsToReset, () -> {
+					resetOnOff();
+				});
+			}
+		}
+	}
+
 	public function resetOnOff() {
 		setOn(false);
 	}
 
 	public function handleInteraction(data:InteractionCallback) {
+		// Override to provide functionality
+	}
+
+	public function handleInteractionEnd(data:InteractionCallback) {
 		// Override to provide functionality
 	}
 }
@@ -44,8 +64,10 @@ interface IID {
 interface Triggerable extends IID {
 	private var on:Bool;
 	public var disabled:Bool;
+	public var followListensTo:Bool;
 	public var onOffSignal:FlxTypedSignal<Bool->Void>;
 	public function isOn():Bool;
 	public function setOn(value:Bool):Void;
+	private function onOnOffChanged(value:Bool):Void;
 	public function resetOnOff():Void;
 }

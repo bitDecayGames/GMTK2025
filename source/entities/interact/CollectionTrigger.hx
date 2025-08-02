@@ -18,6 +18,7 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 
 	public var disabled:Bool;
 	public var onOffSignal:FlxTypedSignal<Bool->Void> = new FlxTypedSignal<Bool->Void>();
+	public var followListensTo:Bool;
 
 	public function new() {
 		super();
@@ -42,9 +43,11 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 	public function setOn(value:Bool) {
 		if (disabled)
 			return;
-		var different = on != value;
+		if (on != value) {
+			onOnOffChanged(value);
+		}
 		on = value;
-		if (different) {
+		if (on) {
 			onOffSignal.dispatch(on);
 			FlxTimer.wait(1, () -> {
 				if (shouldResetNodesOnComplete) {
@@ -53,12 +56,13 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 					}
 					resetOnOff();
 				}
-			});
-			if (shouldDisableNodesOnComplete) {
-				for (node in nodes) {
-					node.disabled = true;
+				if (shouldDisableNodesOnComplete) {
+					for (node in nodes) {
+						node.disabled = true;
+					}
+					disabled = true;
 				}
-			}
+			});
 		}
 	}
 
@@ -79,4 +83,6 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 		nodes.remove(node);
 		node.onOffSignal.remove(check);
 	}
+
+	function onOnOffChanged(value:Bool) {}
 }

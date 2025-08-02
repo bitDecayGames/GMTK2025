@@ -1,5 +1,14 @@
 package levels.ldtk;
 
+import entities.interact.LightArrow;
+import entities.interact.LightTallTriangle;
+import entities.interact.LightShortTriangle;
+import entities.interact.LightSquare;
+import entities.interact.LightLargeRound;
+import entities.interact.Sensor;
+import entities.interact.Gate;
+import entities.interact.DropTarget;
+import entities.interact.LightSmallRound;
 import entities.interact.PopperSmall;
 import nape.geom.Vec2;
 import entities.interact.TargetLarge;
@@ -10,6 +19,7 @@ import openfl.utils.AssetType;
 import openfl.Assets;
 import flixel.FlxObject;
 import entities.interact.Tunnel;
+import entities.interact.Kicker;
 import types.Direction;
 import entities.interact.Slingshot;
 import entities.interact.Popper;
@@ -61,6 +71,7 @@ class Level {
 	public var poppers:Array<Popper> = [];
 	public var poppersSmall:Array<PopperSmall> = [];
 	public var slingshots:Array<Slingshot> = [];
+	public var kickers:Array<Kicker> = [];
 	public var tunnels:Array<Tunnel> = [];
 	public var interactables:Array<Interactable> = [];
 	public var triggerables:Array<Triggerable> = [];
@@ -119,7 +130,11 @@ class Level {
 			parsePoppers(raw.l_Objects.all_Popper, raw.l_Objects.all_SmallPopper);
 			parseSlingshots(raw.l_Objects.all_Slingshot_Left, raw.l_Objects.all_Slingshot_Right);
 			parseTunnels(raw.l_Objects.all_Tunnel);
-			parseTriggerables(raw.l_Objects.all_CollectionTrigger, raw.l_Objects.all_TargetSmall, raw.l_Objects.all_TargetLarge, raw.l_Objects.all_DropTarget);
+			parseTriggerables(raw.l_Objects.all_CollectionTrigger, raw.l_Objects.all_TargetSmall, raw.l_Objects.all_TargetLarge, raw.l_Objects.all_DropTarget,
+				raw.l_Objects.all_LightSmallRound, raw.l_Objects.all_LightLargeRound, raw.l_Objects.all_LightSquare, raw.l_Objects.all_LightArrow,
+				raw.l_Objects.all_LightShortTriangle, raw.l_Objects.all_LightTallTriangle, raw.l_Objects.all_Post, raw.l_Objects.all_Gate,
+				raw.l_Objects.all_Sensor);
+			parseKickers(raw.l_Objects.all_Kicker);
 		}
 	}
 
@@ -209,8 +224,22 @@ class Level {
 		}
 	}
 
+	function parseKickers(kDefs:Array<Ldtk.Entity_Kicker>) {
+		for (kickerDef in kDefs) {
+			var dir = 0.0;
+			if (kickerDef.f_Direction != null) {
+				dir = rotateTo(Vec2.get(kickerDef.cx, kickerDef.cy), Vec2.get(kickerDef.f_Direction.cx, kickerDef.f_Direction.cy));
+			}
+			kickers.push(new Kicker(kickerDef.worldPixelX, kickerDef.worldPixelY, dir, kickerDef.f_Force));
+		}
+	}
+
 	function parseTriggerables(collectionTriggers:Array<Ldtk.Entity_CollectionTrigger>, smallTargets:Array<Ldtk.Entity_TargetSmall>,
-			largeTargets:Array<Ldtk.Entity_TargetLarge>, dropTargets:Array<Ldtk.Entity_DropTarget>) {
+			largeTargets:Array<Ldtk.Entity_TargetLarge>, dropTargets:Array<Ldtk.Entity_DropTarget>, smallRoundLights:Array<Ldtk.Entity_LightSmallRound>,
+			largeRoundLights:Array<Ldtk.Entity_LightLargeRound>, squareLights:Array<Ldtk.Entity_LightSquare>, arrowLights:Array<Ldtk.Entity_LightArrow>,
+			shortTriangleLights:Array<Ldtk.Entity_LightShortTriangle>, tallTriangleLights:Array<Ldtk.Entity_LightTallTriangle>, posts:Array<Ldtk.Entity_Post>,
+			gates:Array<Ldtk.Entity_Gate>, sensors:Array<Ldtk.Entity_Sensor>) {
+		var listenerToNode = new Map<Triggerable, String>();
 		for (v in smallTargets) {
 			var rotation = 0.0;
 			if (v.f_RotateTo != null) {
@@ -218,9 +247,6 @@ class Level {
 			}
 			var t = new TargetSmall(v.worldPixelX, v.worldPixelY, rotation);
 			t.IID = v.iid;
-			t.onOffSignal.add((v) -> {
-				trace('${t.IID} small target triggered');
-			});
 			interactables.push(t);
 			triggerables.push(t);
 		}
@@ -231,9 +257,109 @@ class Level {
 			}
 			var t = new TargetLarge(v.worldPixelX, v.worldPixelY, rotation);
 			t.IID = v.iid;
-			t.onOffSignal.add((v) -> {
-				trace('${t.IID} large target triggered');
-			});
+			interactables.push(t);
+			triggerables.push(t);
+		}
+		for (v in smallRoundLights) {
+			var t = new LightSmallRound(v.worldPixelX, v.worldPixelY);
+			t.IID = v.iid;
+			if (v.f_ListensTo != null) {
+				listenerToNode.set(t, v.f_ListensTo.entityIid);
+			}
+			interactables.push(t); // should this actually be interactable?
+			triggerables.push(t);
+		}
+		for (v in largeRoundLights) {
+			var t = new LightLargeRound(v.worldPixelX, v.worldPixelY);
+			t.IID = v.iid;
+			if (v.f_ListensTo != null) {
+				listenerToNode.set(t, v.f_ListensTo.entityIid);
+			}
+			interactables.push(t); // should this actually be interactable?
+			triggerables.push(t);
+		}
+		for (v in squareLights) {
+			var t = new LightSquare(v.worldPixelX, v.worldPixelY);
+			t.IID = v.iid;
+			if (v.f_ListensTo != null) {
+				listenerToNode.set(t, v.f_ListensTo.entityIid);
+			}
+			interactables.push(t); // should this actually be interactable?
+			triggerables.push(t);
+		}
+		for (v in shortTriangleLights) {
+			var rotation = 0.0;
+			if (v.f_RotateTo != null) {
+				rotation = rotateTo(Vec2.get(v.cx, v.cy), Vec2.get(v.f_RotateTo.cx, v.f_RotateTo.cy)) + Math.PI * 0.5;
+			}
+			var t = new LightShortTriangle(v.worldPixelX, v.worldPixelY, rotation);
+			t.IID = v.iid;
+			if (v.f_ListensTo != null) {
+				listenerToNode.set(t, v.f_ListensTo.entityIid);
+			}
+			interactables.push(t); // should this actually be interactable?
+			triggerables.push(t);
+		}
+		for (v in tallTriangleLights) {
+			var rotation = 0.0;
+			if (v.f_RotateTo != null) {
+				rotation = rotateTo(Vec2.get(v.cx, v.cy), Vec2.get(v.f_RotateTo.cx, v.f_RotateTo.cy)) + Math.PI * 0.5;
+			}
+			var t = new LightTallTriangle(v.worldPixelX, v.worldPixelY, rotation);
+			t.IID = v.iid;
+			if (v.f_ListensTo != null) {
+				listenerToNode.set(t, v.f_ListensTo.entityIid);
+			}
+			interactables.push(t); // should this actually be interactable?
+			triggerables.push(t);
+		}
+		for (v in arrowLights) {
+			var rotation = 0.0;
+			if (v.f_RotateTo != null) {
+				rotation = rotateTo(Vec2.get(v.cx, v.cy), Vec2.get(v.f_RotateTo.cx, v.f_RotateTo.cy)) + Math.PI * 0.5;
+			}
+			var t = new LightArrow(v.worldPixelX, v.worldPixelY, rotation);
+			t.IID = v.iid;
+			if (v.f_ListensTo != null) {
+				listenerToNode.set(t, v.f_ListensTo.entityIid);
+			}
+			interactables.push(t); // should this actually be interactable?
+			triggerables.push(t);
+		}
+		for (v in dropTargets) {
+			var rotation = 0.0;
+			if (v.f_RotateTo != null) {
+				rotation = rotateTo(Vec2.get(v.cx, v.cy), Vec2.get(v.f_RotateTo.cx, v.f_RotateTo.cy)) + Math.PI * 1.5;
+			}
+			var t = new DropTarget(v.worldPixelX, v.worldPixelY, rotation);
+			t.IID = v.iid;
+			t.secondsToReset = v.f_SecondsToReset;
+			if (v.f_ListensTo != null) {
+				listenerToNode.set(t, v.f_ListensTo.entityIid);
+			}
+			interactables.push(t);
+			triggerables.push(t);
+		}
+		for (v in gates) {
+			var rotation = 0.0;
+			if (v.f_RotateTo != null) {
+				rotation = rotateTo(Vec2.get(v.cx, v.cy), Vec2.get(v.f_RotateTo.cx, v.f_RotateTo.cy)) + Math.PI * 1.5;
+			}
+			var t = new Gate(v.worldPixelX, v.worldPixelY, rotation);
+			t.IID = v.iid;
+			if (v.f_ListensTo != null) {
+				listenerToNode.set(t, v.f_ListensTo.entityIid);
+			}
+			interactables.push(t);
+			triggerables.push(t);
+		}
+		for (v in sensors) {
+			var t = new Sensor(v.worldPixelX, v.worldPixelY, v.width, v.height);
+			t.IID = v.iid;
+			t.secondsToReset = v.f_SecondsToReset;
+			if (v.f_ListensTo != null) {
+				listenerToNode.set(t, v.f_ListensTo.entityIid);
+			}
 			interactables.push(t);
 			triggerables.push(t);
 		}
@@ -245,9 +371,6 @@ class Level {
 			t.onlyOneNodeRequired = v.f_OR;
 			t.shouldDisableNodesOnComplete = v.f_DisableNodes;
 			t.shouldResetNodesOnComplete = v.f_ResetNodes;
-			t.onOffSignal.add((v) -> {
-				trace('${t.IID} collection triggered');
-			});
 			triggerables.push(t);
 			triggerToNodes.set(t, nodeIds);
 		}
@@ -260,6 +383,20 @@ class Level {
 					if (triggerable.IID == nodeId) {
 						t.add(triggerable);
 					}
+				}
+			}
+		}
+		for (t in listenerToNode.keys()) {
+			var nodeId = listenerToNode.get(t);
+			for (triggerable in triggerables) {
+				if (triggerable.IID == nodeId) {
+					triggerable.onOffSignal.add((isOn) -> {
+						if (isOn) {
+							t.setOn(true);
+						} else if (t.followListensTo) {
+							t.setOn(false);
+						}
+					});
 				}
 			}
 		}
