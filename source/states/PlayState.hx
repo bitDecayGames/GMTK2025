@@ -357,10 +357,8 @@ class PlayState extends FlxTransitionableState {
 	var tmp = FlxPoint.get();
 
 	function handleCameraBounds(instant:Bool = false) {
-		if (activeCamBounds != null) {
-			if (!activeCamBounds.containsPoint(player.getMidpoint(tmp))) {
-				transitionCamera(null, instant);
-			}
+		if (activeCamBounds != null && !activeCamBounds.containsPoint(player.getMidpoint(tmp))) {
+			transitionCamera(null, instant);
 		}
 
 		if (activeCamBounds == null) {
@@ -389,12 +387,12 @@ class PlayState extends FlxTransitionableState {
 		}
 
 		TODO.sfx('time warp slow down for camera transition');
-		QLog.notice('starting slowdown');
 		FlxTween.tween(this, {"timeScale": 0.01}, 0.3, {
 			ease: FlxEase.cubeOut,
 			onComplete: (t) -> {
 				if (area != null) {
 					var destPoint = findCameraDest(camera, area);
+					camera.follow(null);
 					FlxTween.tween(camera, {
 						"scroll.x": destPoint.x,
 						"scroll.y": destPoint.y
@@ -402,15 +400,14 @@ class PlayState extends FlxTransitionableState {
 						ease: FlxEase.cubeOut,
 						onComplete: (t) -> {
 							setCameraBounds(area);
+							camera.follow(player, LOCKON, 0.1);
 						}
 					});
 					destPoint.put();
 				} else {
-					setCameraBounds(area);
+					setCameraBounds(null);
 				}
-				QLog.notice('starting transition wait');
 				FlxTimer.wait(1, () -> {
-					QLog.notice('starting speed up');
 					TODO.sfx('time warp speed up to resume gameplay');
 					FlxTween.tween(this, {"timeScale": 1}, 0.3, {
 						ease: FlxEase.cubeOut,
