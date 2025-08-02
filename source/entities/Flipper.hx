@@ -106,36 +106,54 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		var forceLocalPos = Vec2.get(w - bigRad - smallRad, 0).muleq(leverArmScale);
 		var activeJointWorldPos = body.localPointToWorld(forceLocalPos.copy().rotate(flipAngle));
 		activateJoint = new DistanceJoint(body, BDFlxNapeSpace.space.world, forceLocalPos, activeJointWorldPos, 0, 0);
-		activateJoint.active = true;
+		activateJoint.active = false;
 		activateJoint.stiff = false;
 		activateJoint.space = BDFlxNapeSpace.space;
 		activateJoint.damping = 0;
 		activateJoint.maxForce = flipperStrength * fmass;
 
+		// Calculate resting joint position AFTER body rotation is set correctly
 		var restingJointWorldPos = body.localPointToWorld(forceLocalPos.copy().rotate(restAngle));
 		restingJoint = new DistanceJoint(body, BDFlxNapeSpace.space.world, forceLocalPos, restingJointWorldPos, 0, 0);
-		restingJoint.active = true;
+		restingJoint.active = false;
 		restingJoint.stiff = false;
 		restingJoint.space = BDFlxNapeSpace.space;
 		restingJoint.damping = 0;
 		restingJoint.maxForce = flipperStrength * fmass;
 
-		body.rotation = restAngle;
 		addPremadeBody(body);
+
+		// Set rotation after body is added to physics space
+		body.rotation = restAngle;
 
 		body.cbTypes.add(CbTypes.CB_CONTROL_SURFACE);
 
 		// CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
 		var listener = new PreListener(InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_CONTROL_SURFACE, testPre, 0, false);
 		BDFlxNapeSpace.space.listeners.add(listener);
+
+		// Force lockout to 0 to fix CW flipper initialization issue
+		lockout = 0;
+
+		// Ensure flipper starts at correct rotation within joint range
+		body.rotation = restAngle;
+
+		// Only recalculate resting joint for CW flippers (CCW flippers work fine with original calculation)
+		if (flipDirection == CW) {
+			var forceLocalPos2 = Vec2.get(width - height - height / 2, 0).muleq(leverArmScale);
+			var correctedRestingPos = body.localPointToWorld(forceLocalPos2.copy().rotate(restAngle));
+			restingJoint.anchor2 = correctedRestingPos;
+		}
+		restingJoint.active = true;
 	}
 
 	function testPre(cb:PreCallback):PreFlag {
 		if (cb.int2.castBody != body) {
 			return null;
 		}
-		if (body.rotation > jointMax || body.rotation < jointMin) {
-			trace('skipping one');
+		// Add small tolerance for floating point precision issues
+		var tolerance = 0.001;
+		if (body.rotation > (jointMax + tolerance) || body.rotation < (jointMin - tolerance)) {
 			return PreFlag.IGNORE_ONCE;
 		} else {
 			return PreFlag.ACCEPT_ONCE;

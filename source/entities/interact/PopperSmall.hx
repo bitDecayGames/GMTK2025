@@ -57,8 +57,8 @@ class PopperSmall extends Interactable {
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
 
 		var lifespan = 0.3;
-		var startScale = 1;
-		var endScale = 2.5;
+		var startScale = 0.3;
+		var endScale = 1.0;
 		var startAlpha = 1;
 		var endAlpha = 0;
 		emitter = new FlxEmitter(X, Y, 1);

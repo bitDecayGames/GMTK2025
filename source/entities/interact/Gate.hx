@@ -38,6 +38,7 @@ class Gate extends Interactable {
 		body.setShapeMaterials(new Material(-100));
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
 		isBackground = true;
+		followListensTo = true;
 	}
 
 	override public function handleInteraction(data:InteractionCallback) {

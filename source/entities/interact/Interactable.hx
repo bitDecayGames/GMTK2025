@@ -16,6 +16,7 @@ class Interactable extends SelfAssigningFlxNapeSprite implements Triggerable {
 	public var onOffSignal:FlxTypedSignal<Bool->Void> = new FlxTypedSignal<Bool->Void>();
 	public var isBackground:Bool;
 	public var secondsToReset:Float = -1;
+	public var followListensTo:Bool;
 
 	public function setOn(value:Bool) {
 		if (disabled)
@@ -50,6 +51,10 @@ class Interactable extends SelfAssigningFlxNapeSprite implements Triggerable {
 	public function handleInteraction(data:InteractionCallback) {
 		// Override to provide functionality
 	}
+
+	public function handleInteractionEnd(data:InteractionCallback) {
+		// Override to provide functionality
+	}
 }
 
 interface IID {
@@ -59,6 +64,7 @@ interface IID {
 interface Triggerable extends IID {
 	private var on:Bool;
 	public var disabled:Bool;
+	public var followListensTo:Bool;
 	public var onOffSignal:FlxTypedSignal<Bool->Void>;
 	public function isOn():Bool;
 	public function setOn(value:Bool):Void;
