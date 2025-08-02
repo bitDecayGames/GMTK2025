@@ -322,6 +322,11 @@ class PlayState extends FlxTransitionableState {
 			togglePause();
 		}
 
+		if (FlxG.keys.justPressed.R) {
+			FlxG.resetState();
+			return;
+		}
+
 		if (isPaused) {
 			return;
 		}

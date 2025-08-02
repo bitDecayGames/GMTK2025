@@ -12,6 +12,7 @@ Run `lime run html5`
 
 **Game:**
 - **P** or **ESC** - Pause/unpause game
+- **R** - Restart current level
 
 **Debug:**
 - **Arrow Keys** - Move ball directly (debug mode)
