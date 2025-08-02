@@ -21,7 +21,7 @@ import nape.phys.BodyType;
 /**
  * These stay on until they have been reset, good for hooking up to CollectionTriggers to get them to do something
  */
-class LightLongTriangle extends Interactable {
+class LightTallTriangle extends Interactable {
 	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/tallTriangleLight.json");
 
 	public function new(X:Float, Y:Float, rotation:Float = 0.0) {
