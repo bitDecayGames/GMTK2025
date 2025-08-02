@@ -6906,7 +6906,7 @@
 					"uid": 1765,
 					"type": "F_Point",
 					"isArray": false,
-					"canBeNull": true,
+					"canBeNull": false,
 					"arrayMinLength": null,
 					"arrayMaxLength": null,
 					"editorDisplayMode": "PointStar",
