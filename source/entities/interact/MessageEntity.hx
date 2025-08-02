@@ -1,5 +1,6 @@
 package entities.interact;
 
+import ui.HudMessage;
 import flixel.util.FlxSignal.FlxTypedSignal;
 import entities.interact.Interactable.Triggerable;
 import flixel.util.FlxTimer;
@@ -34,10 +35,10 @@ class MessageEntity extends FlxObject implements Triggerable {
 		on = value;
 		if (on) {
 			disabled = true;
-			// TODO: SHOW MESSAGE TO USER
+			// this automatically hides it after the number of seconds
+			HudMessage.show(content, secondsUntilHidden);
 			FlxTimer.wait(secondsUntilHidden, () -> {
 				on = false;
-				// TODO: HIDE MESSAGE FROM USER
 			});
 		}
 	}
