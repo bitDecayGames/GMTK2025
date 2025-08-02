@@ -1,5 +1,6 @@
 package entities.interact;
 
+import flixel.util.FlxTimer;
 import flixel.util.FlxSignal;
 import nape.callbacks.InteractionCallback;
 
@@ -14,14 +15,23 @@ class Interactable extends SelfAssigningFlxNapeSprite implements Triggerable {
 	public var disabled:Bool;
 	public var onOffSignal:FlxTypedSignal<Bool->Void> = new FlxTypedSignal<Bool->Void>();
 	public var isBackground:Bool;
+	public var secondsToReset:Float = -1;
 
 	public function setOn(value:Bool) {
 		if (disabled)
 			return;
+
 		var different = on != value;
 		on = value;
 		if (different) {
 			onOffSignal.dispatch(on);
+			if (on) {
+				if (secondsToReset > 0) {
+					FlxTimer.wait(secondsToReset, () -> {
+						resetOnOff();
+					});
+				}
+			}
 		}
 	}
 

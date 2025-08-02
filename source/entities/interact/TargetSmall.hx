@@ -38,19 +38,22 @@ class TargetSmall extends Interactable {
 		addPremadeBody(body);
 		body.setShapeMaterials(new Material(-100));
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
+		secondsToReset = 0.2;
 	}
 
 	override public function handleInteraction(data:InteractionCallback) {
 		TODO.sfx('small target hit');
 		setOn(true);
-		animation.play(anims.narrowTarget_1_aseprite);
-		FlxTimer.wait(0.2, () -> {
-			resetOnOff();
-		});
 	}
 
-	override function resetOnOff() {
-		super.resetOnOff();
-		animation.play(anims.narrowTarget_0_aseprite);
+	override function setOn(value:Bool) {
+		if (on != value) {
+			if (value) {
+				animation.play(anims.narrowTarget_1_aseprite);
+			} else {
+				animation.play(anims.narrowTarget_0_aseprite);
+			}
+		}
+		super.setOn(value);
 	}
 }
