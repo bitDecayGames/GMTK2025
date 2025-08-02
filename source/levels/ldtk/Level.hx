@@ -186,7 +186,7 @@ class Level {
 			while (!fd.f_Clockwise && activeAng > restAng) {
 				activeAng -= Math.PI * 2;
 			}
-			flippers.push(new Flipper(LEFT, fd.worldPixelX, fd.worldPixelY, 80, 13, 8, restAng, activeAng, fd.f_Mass));
+			flippers.push(new Flipper(fd.f_Clockwise ? RIGHT : LEFT, fd.worldPixelX, fd.worldPixelY, 80, 13, 8, restAng, activeAng, fd.f_Mass));
 		}
 	}
 

@@ -911,22 +911,6 @@
 					],
 					"__worldX": 1688,
 					"__worldY": -408
-				},
-				{
-					"__identifier": "Spawn",
-					"__grid": [33,35],
-					"__pivot": [0,0],
-					"__tags": ["Player"],
-					"__tile": null,
-					"__smartColor": "#FFFFFF",
-					"iid": "a79e9450-5e50-11f0-aa11-c109c416b965",
-					"width": 32,
-					"height": 32,
-					"defUid": 74,
-					"px": [528,560],
-					"fieldInstances": [],
-					"__worldX": 1872,
-					"__worldY": -272
 				}
 			]
 		},
