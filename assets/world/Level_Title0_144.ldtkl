@@ -78,22 +78,6 @@
 					"__worldY": 242
 				},
 				{
-					"__identifier": "Spawn",
-					"__grid": [12,12],
-					"__pivot": [0,0],
-					"__tags": ["Player"],
-					"__tile": null,
-					"__smartColor": "#FFFFFF",
-					"iid": "e7ac9870-5e50-11f0-86e4-67911471ffd2",
-					"width": 32,
-					"height": 32,
-					"defUid": 74,
-					"px": [192,192],
-					"fieldInstances": [],
-					"__worldX": 192,
-					"__worldY": 48
-				},
-				{
 					"__identifier": "CameraZone",
 					"__grid": [0,0],
 					"__pivot": [0,0],
@@ -108,6 +92,56 @@
 					"fieldInstances": [{ "__identifier": "AutoFocus", "__type": "Bool", "__value": false, "__tile": null, "defUid": 873, "realEditorValues": [] }],
 					"__worldX": 0,
 					"__worldY": -144
+				},
+				{
+					"__identifier": "Message",
+					"__grid": [12,18],
+					"__pivot": [0.5,0.5],
+					"__tags": ["triggerable"],
+					"__tile": { "tilesetUid": 16, "x": 160, "y": 16, "w": 16, "h": 16 },
+					"__smartColor": "#C0CBDC",
+					"iid": "d1900970-5e50-11f0-afd1-b1372eb460d5",
+					"width": 16,
+					"height": 16,
+					"defUid": 2262,
+					"px": [200,296],
+					"fieldInstances": [
+						{ "__identifier": "Content", "__type": "String", "__value": "Press 'Z'", "__tile": null, "defUid": 2263, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["Press 'Z'"]
+						}] },
+						{ "__identifier": "SecondsUntilHide", "__type": "Float", "__value": 5, "__tile": null, "defUid": 2265, "realEditorValues": [] },
+						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
+							"entityIid": "127e67b0-5e50-11f0-afd1-dddef41c376e",
+							"layerIid": "50319a91-5e50-11f0-86e4-5ff0bcc45aaf",
+							"levelIid": "50319a90-5e50-11f0-86e4-cd373511dd14",
+							"worldIid": "50317380-5e50-11f0-86e4-e79ef831fdc9"
+						}, "__tile": null, "defUid": 2266, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["127e67b0-5e50-11f0-afd1-dddef41c376e"]
+						}] }
+					],
+					"__worldX": 200,
+					"__worldY": 152
+				},
+				{
+					"__identifier": "Sensor",
+					"__grid": [11,22],
+					"__pivot": [0.5,0.5],
+					"__tags": ["triggerable"],
+					"__tile": null,
+					"__smartColor": "#D743D2",
+					"iid": "127e67b0-5e50-11f0-afd1-dddef41c376e",
+					"width": 145,
+					"height": 51,
+					"defUid": 2220,
+					"px": [191,356],
+					"fieldInstances": [
+						{ "__identifier": "SecondsToReset", "__type": "Float", "__value": -1, "__tile": null, "defUid": 2221, "realEditorValues": [] },
+						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2222, "realEditorValues": [] }
+					],
+					"__worldX": 191,
+					"__worldY": 212
 				}
 			]
 		},

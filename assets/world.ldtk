@@ -9495,11 +9495,11 @@
 				},
 				{
 					"tileId": 90,
-					"data": "{\n  \"type\": \"polygon\",\n  \"points\": [\n    [0, 0.5],\n    [1, 0.75],\n    [1, 1],\n    [0, 1]\n  ]\n}"
+					"data": "{\n  \"type\": \"polygon\",\n  \"points\": [\n    [0, 0.5],\n    [1, 0.25],\n    [1, 1],\n    [0, 1]\n  ]\n}"
 				},
 				{
 					"tileId": 91,
-					"data": "{\n  \"type\": \"polygon\",\n  \"points\": [\n    [0, 0.75],\n    [1, 0],\n    [1, 1],\n    [0, 1]\n  ]\n}"
+					"data": "{\n  \"type\": \"polygon\",\n  \"points\": [\n    [0, 0.25],\n    [1, 0],\n    [1, 1],\n    [0, 1]\n  ]\n}"
 				},
 				{
 					"tileId": 92,
@@ -10582,7 +10582,7 @@
 				"worldY": 528,
 				"worldDepth": 0,
 				"pxWid": 1040,
-				"pxHei": 816,
+				"pxHei": 1312,
 				"__bgColor": "#696A79",
 				"bgColor": null,
 				"useAutoIdentifier": true,

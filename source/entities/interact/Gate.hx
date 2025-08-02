@@ -31,7 +31,7 @@ class Gate extends Interactable {
 		var body = new Body(BodyType.STATIC);
 		body.rotation = rotation;
 		body.position.set(Vec2.get(X, Y));
-		body.shapes.add(new Polygon(Polygon.rect(-width / 2, -height / 2, width, height)));
+		body.shapes.add(new Polygon(Polygon.rect(-48 / 2, -16 / 2, 48, 16)));
 		body.isBullet = true;
 		enableInteractions();
 		addPremadeBody(body);
