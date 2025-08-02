@@ -587,7 +587,7 @@
 				},
 				{
 					"__identifier": "Sensor",
-					"__grid": [11,33],
+					"__grid": [7,34],
 					"__pivot": [0.5,0.5],
 					"__tags": ["triggerable"],
 					"__tile": null,
@@ -596,37 +596,13 @@
 					"width": 48,
 					"height": 32,
 					"defUid": 2220,
-					"px": [184,536],
+					"px": [120,552],
 					"fieldInstances": [
 						{ "__identifier": "SecondsToReset", "__type": "Float", "__value": -1, "__tile": null, "defUid": 2221, "realEditorValues": [] },
 						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2222, "realEditorValues": [] }
 					],
-					"__worldX": 1528,
-					"__worldY": -376
-				},
-				{
-					"__identifier": "LightSmallRound",
-					"__grid": [13,30],
-					"__pivot": [0.5,0.5],
-					"__tags": ["triggerable"],
-					"__tile": { "tilesetUid": 243, "x": 96, "y": 0, "w": 32, "h": 32 },
-					"__smartColor": "#8AFFC7",
-					"iid": "760d0340-5e50-11f0-8907-19b97be88a7d",
-					"width": 16,
-					"height": 16,
-					"defUid": 2211,
-					"px": [216,488],
-					"fieldInstances": [{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
-						"entityIid": "c159a9e0-5e50-11f0-8907-8303170d3bd3",
-						"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
-						"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
-						"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
-					}, "__tile": null, "defUid": 2212, "realEditorValues": [{
-						"id": "V_String",
-						"params": ["c159a9e0-5e50-11f0-8907-8303170d3bd3"]
-					}] }],
-					"__worldX": 1560,
-					"__worldY": -424
+					"__worldX": 1464,
+					"__worldY": -360
 				}
 			]
 		},

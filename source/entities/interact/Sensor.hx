@@ -1,5 +1,6 @@
 package entities.interact;
 
+import flixel.util.FlxTimer;
 import nape.callbacks.InteractionCallback;
 import constants.CbTypes;
 import nape.phys.Material;
@@ -23,15 +24,21 @@ class Sensor extends Interactable {
 		shape.sensorEnabled = true;
 		body.shapes.add(shape);
 		body.isBullet = true;
-		body.setShapeFilters(new InteractionFilter(CGroups.INTERACTABLE, CGroups.BALL));
+		body.setShapeFilters(new InteractionFilter(CGroups.SENSOR, CGroups.BALL));
 		addPremadeBody(body);
 		body.setShapeMaterials(new Material(-100));
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
 		isBackground = true;
+		followListensTo = true;
 	}
 
 	override public function handleInteraction(data:InteractionCallback) {
-		// TODO: this is on-enter I believe, need an on-exit
 		setOn(true);
+	}
+
+	override function handleInteractionEnd(data:InteractionCallback) {
+		FlxTimer.wait(0.5, () -> {
+			setOn(false);
+		});
 	}
 }

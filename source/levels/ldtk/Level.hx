@@ -323,8 +323,9 @@ class Level {
 					triggerable.onOffSignal.add((isOn) -> {
 						if (isOn) {
 							t.setOn(true);
+						} else if (t.followListensTo) {
+							t.setOn(false);
 						}
-						// don't turn off, since this light should stay on until reset by some other thing
 					});
 				}
 			}
