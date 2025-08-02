@@ -1,5 +1,7 @@
 package entities;
 
+import flixel.util.FlxTimer;
+import echo.Physics;
 import nape.callbacks.InteractionCallback;
 import flixel.math.FlxPoint;
 import flixel.group.FlxGroup;
@@ -121,12 +123,16 @@ class Player extends SelfAssigningFlxNapeSprite {
 		disappearer.visible = true;
 		disappearer.setPosition(body.position.x, body.position.y);
 		disappearer.start(true);
+		FlxTimer.wait(0.5, ()->{
+			physicsEnabled = false;
+		});
 	}
 
 	public function reappear() {
 		visible = true;
 		emitter.visible = true;
 		disappearer.visible = false;
+		physicsEnabled = true;
 	}
 
 	public function spark() {

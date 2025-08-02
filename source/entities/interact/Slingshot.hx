@@ -108,14 +108,26 @@ class Slingshot extends Interactable {
 		}
 	}
 
+	function playHitSound(data:InteractionCallback) {
+		var impulse = 0.0;
+		for (a in data.arbiters) {
+			impulse += a.totalImpulse(data.int1.castBody).length;
+		}
+
+		QLog.notice('touch @ $impulse');
+
+		var hitSound = FmodPlugin.playSFXWithRef(FmodSFX.BallTerrain2);
+		FmodManager.SetEventParameterOnSound(hitSound, "volume", impulse);
+	}
+
 	override public function handleInteraction(data:InteractionCallback) {
 		var arb = data.arbiters.at(0).collisionArbiter;
 
 		if (arb.body1 == body && !arb.shape1.userData.data) {
-			FmodPlugin.playSFX(FmodSFX.BallTerrain2);
+			playHitSound(data);
 			return;
 		} else if (arb.body2 == body && !arb.shape2.userData.data) {
-			FmodPlugin.playSFX(FmodSFX.BallTerrain2);
+			playHitSound(data);
 			return;
 		}
 

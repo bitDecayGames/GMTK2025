@@ -115,7 +115,7 @@ class PlayState extends FlxTransitionableState {
 		BDFlxNapeSpace.space.gravity.setxy(gravity.x, gravity.y);
 
 		// FmodPlugin.playSong(level.rawLevels[0].f_Music);
-		// FmodPlugin.playSong(FmodSong.Fkip);
+		FmodPlugin.playSong(FmodSong.Fkip);
 
 		for (bg in level.levelBgs) {
 			bgGroup.add(bg);
@@ -200,6 +200,8 @@ class PlayState extends FlxTransitionableState {
 
 		handleCameraBounds(true);
 		BDFlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_TERRAIN,
+			ballTerrainHandler));
+		BDFlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_CONTROL_SURFACE,
 			ballTerrainHandler));
 		BDFlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
 			ballInteractableCallback));
@@ -298,8 +300,9 @@ class PlayState extends FlxTransitionableState {
 		}
 
 		QLog.notice('touch @ $impulse');
-		// >100 seems to be a good starting point for the threshold for when to make noise
-		TODO.sfx('ball touched terrain');
+
+		var hitSound = FmodPlugin.playSFXWithRef(FmodSFX.BallTerrain2);
+		FmodManager.SetEventParameterOnSound(hitSound, "volume", impulse);
 	}
 
 	function ballInteractableCallback(data:InteractionCallback) {
@@ -341,7 +344,7 @@ class PlayState extends FlxTransitionableState {
 
 		/* Cheese to make the flipper sound exactly once all the time*/
 		if (FlxG.keys.anyJustPressed([FlxKey.Z, FlxKey.X, FlxKey.M])) {
-			FmodPlugin.playSFX(FmodSFX.FlipperStart);
+			FmodPlugin.playSFX(FmodSFX.FlipperStart2);
 		}
 
 		BDFlxNapeSpace.timeScale = timeScale;

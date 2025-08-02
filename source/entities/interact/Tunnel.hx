@@ -65,6 +65,7 @@ class Tunnel extends Interactable {
 			ease: FlxEase.cubeInOut,
 			type: ONESHOT,
 			onComplete: (t:FlxTween) -> {
+				FmodPlugin.playSFX(FmodSFX.TunnelExit);
 				d.reappear();
 			}
 		});

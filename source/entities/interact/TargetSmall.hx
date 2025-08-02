@@ -42,7 +42,7 @@ class TargetSmall extends Interactable {
 	}
 
 	override public function handleInteraction(data:InteractionCallback) {
-		TODO.sfx('small target hit');
+		FmodPlugin.playSFX(FmodSFX.TargetHit);
 		setOn(true);
 	}
 
