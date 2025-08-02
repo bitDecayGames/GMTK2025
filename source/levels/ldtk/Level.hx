@@ -344,24 +344,6 @@ class Level {
 			}
 		}
 
-		for (ls in lightShowToNodes.keys()) {
-			var nodeIds = lightShowToNodes.get(ls);
-			for (nodeId in nodeIds) {
-				for (triggerable in triggerables) {
-					if (triggerable.IID == nodeId) {
-						ls.nodes.push(cast triggerable);
-					}
-				}
-			}
-		}
-		for (ls in lightShowToListens.keys()) {
-			var nodeId = lightShowToListens.get(ls);
-			for (triggerable in triggerables) {
-				if (triggerable.IID == nodeId) {
-					triggerable.onOffSignal.add(ls.start);
-				}
-			}
-		}
 		for (v in dropTargets) {
 			var rotation = 0.0;
 			if (v.f_RotateTo != null) {
@@ -433,6 +415,24 @@ class Level {
 							t.setOn(false);
 						}
 					});
+				}
+			}
+		}
+		for (ls in lightShowToNodes.keys()) {
+			var nodeIds = lightShowToNodes.get(ls);
+			for (nodeId in nodeIds) {
+				for (triggerable in triggerables) {
+					if (triggerable.IID == nodeId) {
+						ls.nodes.push(cast triggerable);
+					}
+				}
+			}
+		}
+		for (ls in lightShowToListens.keys()) {
+			var nodeId = lightShowToListens.get(ls);
+			for (triggerable in triggerables) {
+				if (triggerable.IID == nodeId) {
+					triggerable.onOffSignal.add(ls.start);
 				}
 			}
 		}

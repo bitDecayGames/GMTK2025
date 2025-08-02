@@ -17,6 +17,7 @@ class LightShow extends FlxObject {
 	}
 
 	public function start(v:Bool) {
+		trace('START LIGHT SHOW: ${showType}');
 		if (!started) {
 			started = true;
 			switch (showType) {
