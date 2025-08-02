@@ -19,6 +19,7 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 	public var disabled:Bool;
 	public var onOffSignal:FlxTypedSignal<Bool->Void> = new FlxTypedSignal<Bool->Void>();
 	public var followListensTo:Bool;
+	public var numberOfTimesTriggered:Int = 0;
 
 	public function new() {
 		super();
@@ -48,6 +49,8 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 		}
 		on = value;
 		if (on) {
+			numberOfTimesTriggered += 1;
+			trace('Num: ${numberOfTimesTriggered}');
 			onOffSignal.dispatch(on);
 			FlxTimer.wait(1, () -> {
 				if (shouldResetNodesOnComplete) {

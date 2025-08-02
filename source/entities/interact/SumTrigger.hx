@@ -13,12 +13,14 @@ class SumTrigger extends FlxObject implements Triggerable {
 	public var IID:String;
 
 	public var nodes:List<Interactable> = new List<Interactable>();
+	public var otherNodes:List<Triggerable> = new List<Triggerable>();
 
 	private var on:Bool;
 
 	public var disabled:Bool;
 	public var onOffSignal:FlxTypedSignal<Bool->Void> = new FlxTypedSignal<Bool->Void>();
 	public var followListensTo:Bool;
+	public var numberOfTimesTriggered:Int = 0;
 
 	public function new() {
 		super();
@@ -29,6 +31,9 @@ class SumTrigger extends FlxObject implements Triggerable {
 			var sum = 0;
 			for (node in nodes) {
 				sum += node.numberOfTimesInteractedWith;
+			}
+			for (node in otherNodes) {
+				sum += node.numberOfTimesTriggered;
 			}
 			if (sum >= requiredSum) {
 				setOn(true);
@@ -49,15 +54,22 @@ class SumTrigger extends FlxObject implements Triggerable {
 		}
 		on = value;
 		if (on) {
+			numberOfTimesTriggered += 1;
 			disabled = true;
 			FlxTimer.wait(1, () -> {
 				if (shouldResetNodesOnComplete) {
 					for (node in nodes) {
 						node.resetOnOff();
 					}
+					for (node in otherNodes) {
+						node.resetOnOff();
+					}
 				}
 				if (shouldDisableNodesOnComplete) {
 					for (node in nodes) {
+						node.disabled = true;
+					}
+					for (node in otherNodes) {
 						node.disabled = true;
 					}
 				}
@@ -75,6 +87,6 @@ class SumTrigger extends FlxObject implements Triggerable {
 	}
 
 	function onOnOffChanged(value:Bool) {
-		onOffSignal.dispatch(on);
+		onOffSignal.dispatch(value);
 	}
 }

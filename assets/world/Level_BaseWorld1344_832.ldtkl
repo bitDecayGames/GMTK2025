@@ -464,15 +464,18 @@
 					"height": 16,
 					"defUid": 2211,
 					"px": [408,488],
-					"fieldInstances": [{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
-						"entityIid": "cd02ae40-5e50-11f0-8c4e-fb6ec8c48425",
-						"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
-						"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
-						"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
-					}, "__tile": null, "defUid": 2212, "realEditorValues": [{
-						"id": "V_String",
-						"params": ["cd02ae40-5e50-11f0-8c4e-fb6ec8c48425"]
-					}] }],
+					"fieldInstances": [
+						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
+							"entityIid": "cd02ae40-5e50-11f0-8c4e-fb6ec8c48425",
+							"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
+							"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
+							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
+						}, "__tile": null, "defUid": 2212, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["cd02ae40-5e50-11f0-8c4e-fb6ec8c48425"]
+						}] },
+						{ "__identifier": "FollowListensTo", "__type": "Bool", "__value": false, "__tile": null, "defUid": 2293, "realEditorValues": [] }
+					],
 					"__worldX": 1752,
 					"__worldY": -344
 				},
@@ -488,15 +491,18 @@
 					"height": 16,
 					"defUid": 2211,
 					"px": [424,520],
-					"fieldInstances": [{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
-						"entityIid": "ce7db580-5e50-11f0-8c4e-074f3b4a6981",
-						"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
-						"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
-						"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
-					}, "__tile": null, "defUid": 2212, "realEditorValues": [{
-						"id": "V_String",
-						"params": ["ce7db580-5e50-11f0-8c4e-074f3b4a6981"]
-					}] }],
+					"fieldInstances": [
+						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
+							"entityIid": "ce7db580-5e50-11f0-8c4e-074f3b4a6981",
+							"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
+							"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
+							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
+						}, "__tile": null, "defUid": 2212, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["ce7db580-5e50-11f0-8c4e-074f3b4a6981"]
+						}] },
+						{ "__identifier": "FollowListensTo", "__type": "Bool", "__value": false, "__tile": null, "defUid": 2293, "realEditorValues": [] }
+					],
 					"__worldX": 1768,
 					"__worldY": -312
 				},
@@ -512,15 +518,18 @@
 					"height": 16,
 					"defUid": 2211,
 					"px": [440,552],
-					"fieldInstances": [{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
-						"entityIid": "cf39d990-5e50-11f0-8c4e-f55e584fcc96",
-						"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
-						"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
-						"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
-					}, "__tile": null, "defUid": 2212, "realEditorValues": [{
-						"id": "V_String",
-						"params": ["cf39d990-5e50-11f0-8c4e-f55e584fcc96"]
-					}] }],
+					"fieldInstances": [
+						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
+							"entityIid": "cf39d990-5e50-11f0-8c4e-f55e584fcc96",
+							"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
+							"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
+							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
+						}, "__tile": null, "defUid": 2212, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["cf39d990-5e50-11f0-8c4e-f55e584fcc96"]
+						}] },
+						{ "__identifier": "FollowListensTo", "__type": "Bool", "__value": false, "__tile": null, "defUid": 2293, "realEditorValues": [] }
+					],
 					"__worldX": 1784,
 					"__worldY": -280
 				},
@@ -608,15 +617,18 @@
 					"height": 16,
 					"defUid": 2211,
 					"px": [200,472],
-					"fieldInstances": [{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
-						"entityIid": "c159a9e0-5e50-11f0-8907-8303170d3bd3",
-						"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
-						"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
-						"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
-					}, "__tile": null, "defUid": 2212, "realEditorValues": [{
-						"id": "V_String",
-						"params": ["c159a9e0-5e50-11f0-8907-8303170d3bd3"]
-					}] }],
+					"fieldInstances": [
+						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
+							"entityIid": "c159a9e0-5e50-11f0-8907-8303170d3bd3",
+							"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
+							"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
+							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
+						}, "__tile": null, "defUid": 2212, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["c159a9e0-5e50-11f0-8907-8303170d3bd3"]
+						}] },
+						{ "__identifier": "FollowListensTo", "__type": "Bool", "__value": false, "__tile": null, "defUid": 2293, "realEditorValues": [] }
+					],
 					"__worldX": 1544,
 					"__worldY": -360
 				},
@@ -632,15 +644,18 @@
 					"height": 32,
 					"defUid": 2230,
 					"px": [232,472],
-					"fieldInstances": [{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
-						"entityIid": "c159a9e0-5e50-11f0-8907-8303170d3bd3",
-						"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
-						"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
-						"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
-					}, "__tile": null, "defUid": 2231, "realEditorValues": [{
-						"id": "V_String",
-						"params": ["c159a9e0-5e50-11f0-8907-8303170d3bd3"]
-					}] }],
+					"fieldInstances": [
+						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
+							"entityIid": "c159a9e0-5e50-11f0-8907-8303170d3bd3",
+							"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
+							"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
+							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
+						}, "__tile": null, "defUid": 2231, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["c159a9e0-5e50-11f0-8907-8303170d3bd3"]
+						}] },
+						{ "__identifier": "FollowListensTo", "__type": "Bool", "__value": false, "__tile": null, "defUid": 2292, "realEditorValues": [] }
+					],
 					"__worldX": 1576,
 					"__worldY": -360
 				},
@@ -656,15 +671,18 @@
 					"height": 16,
 					"defUid": 2225,
 					"px": [200,504],
-					"fieldInstances": [{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
-						"entityIid": "c159a9e0-5e50-11f0-8907-8303170d3bd3",
-						"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
-						"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
-						"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
-					}, "__tile": null, "defUid": 2226, "realEditorValues": [{
-						"id": "V_String",
-						"params": ["c159a9e0-5e50-11f0-8907-8303170d3bd3"]
-					}] }],
+					"fieldInstances": [
+						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
+							"entityIid": "c159a9e0-5e50-11f0-8907-8303170d3bd3",
+							"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
+							"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
+							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
+						}, "__tile": null, "defUid": 2226, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["c159a9e0-5e50-11f0-8907-8303170d3bd3"]
+						}] },
+						{ "__identifier": "FollowListensTo", "__type": "Bool", "__value": false, "__tile": null, "defUid": 2291, "realEditorValues": [] }
+					],
 					"__worldX": 1544,
 					"__worldY": -328
 				},
@@ -693,7 +711,8 @@
 						{ "__identifier": "RotateTo", "__type": "Point", "__value": { "cx": 19, "cy": 27 }, "__tile": null, "defUid": 2229, "realEditorValues": [{
 							"id": "V_String",
 							"params": ["19,27"]
-						}] }
+						}] },
+						{ "__identifier": "FollowListensTo", "__type": "Bool", "__value": false, "__tile": null, "defUid": 2290, "realEditorValues": [] }
 					],
 					"__worldX": 1624,
 					"__worldY": -360
@@ -723,7 +742,8 @@
 						{ "__identifier": "RotateTo", "__type": "Point", "__value": { "cx": 12, "cy": 33 }, "__tile": null, "defUid": 2234, "realEditorValues": [{
 							"id": "V_String",
 							"params": ["12,33"]
-						}] }
+						}] },
+						{ "__identifier": "FollowListensTo", "__type": "Bool", "__value": false, "__tile": null, "defUid": 2289, "realEditorValues": [] }
 					],
 					"__worldX": 1576,
 					"__worldY": -328
@@ -753,7 +773,8 @@
 						{ "__identifier": "RotateTo", "__type": "Point", "__value": { "cx": 19, "cy": 34 }, "__tile": null, "defUid": 2237, "realEditorValues": [{
 							"id": "V_String",
 							"params": ["19,34"]
-						}] }
+						}] },
+						{ "__identifier": "FollowListensTo", "__type": "Bool", "__value": false, "__tile": null, "defUid": 2288, "realEditorValues": [] }
 					],
 					"__worldX": 1624,
 					"__worldY": -312

@@ -285,6 +285,7 @@ class Level {
 		for (v in smallRoundLights) {
 			var t = new LightSmallRound(v.worldPixelX, v.worldPixelY);
 			t.IID = v.iid;
+			t.followListensTo = v.f_FollowListensTo;
 			if (v.f_ListensTo != null) {
 				listenerToNode.set(t, v.f_ListensTo.entityIid);
 			}
@@ -294,6 +295,7 @@ class Level {
 		for (v in largeRoundLights) {
 			var t = new LightLargeRound(v.worldPixelX, v.worldPixelY);
 			t.IID = v.iid;
+			t.followListensTo = v.f_FollowListensTo;
 			if (v.f_ListensTo != null) {
 				listenerToNode.set(t, v.f_ListensTo.entityIid);
 			}
@@ -303,6 +305,7 @@ class Level {
 		for (v in squareLights) {
 			var t = new LightSquare(v.worldPixelX, v.worldPixelY);
 			t.IID = v.iid;
+			t.followListensTo = v.f_FollowListensTo;
 			if (v.f_ListensTo != null) {
 				listenerToNode.set(t, v.f_ListensTo.entityIid);
 			}
@@ -316,6 +319,7 @@ class Level {
 			}
 			var t = new LightShortTriangle(v.worldPixelX, v.worldPixelY, rotation);
 			t.IID = v.iid;
+			t.followListensTo = v.f_FollowListensTo;
 			if (v.f_ListensTo != null) {
 				listenerToNode.set(t, v.f_ListensTo.entityIid);
 			}
@@ -329,6 +333,7 @@ class Level {
 			}
 			var t = new LightTallTriangle(v.worldPixelX, v.worldPixelY, rotation);
 			t.IID = v.iid;
+			t.followListensTo = v.f_FollowListensTo;
 			if (v.f_ListensTo != null) {
 				listenerToNode.set(t, v.f_ListensTo.entityIid);
 			}
@@ -454,6 +459,11 @@ class Level {
 						t.nodes.push(interactable);
 					}
 				}
+				for (triggerable in triggerables) {
+					if (triggerable.IID == nodeId) {
+						t.otherNodes.push(triggerable);
+					}
+				}
 			}
 		}
 		for (t in listenerToNode.keys()) {
@@ -462,6 +472,7 @@ class Level {
 				if (triggerable.IID == nodeId) {
 					triggerable.onOffSignal.add((isOn) -> {
 						if (isOn) {
+							trace('turn on: ${t.IID}');
 							t.setOn(true);
 						} else if (t.followListensTo) {
 							t.setOn(false);

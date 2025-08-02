@@ -15,6 +15,8 @@ import nape.phys.BodyType;
  * These are on when the ball is intersecting the body, and off when the ball is not. They are invisible.
  */
 class Sensor extends Interactable {
+	private var resetTimer:FlxTimer;
+
 	public function new(X:Float, Y:Float, W:Float, H:Float) {
 		super(X, Y);
 		visible = false;
@@ -34,11 +36,13 @@ class Sensor extends Interactable {
 
 	override public function handleInteraction(data:InteractionCallback) {
 		setOn(true);
+		if (resetTimer != null)
+			resetTimer.cancel();
 		super.handleInteraction(data);
 	}
 
 	override function handleInteractionEnd(data:InteractionCallback) {
-		FlxTimer.wait(0.5, () -> {
+		resetTimer = FlxTimer.wait(secondsToReset, () -> {
 			setOn(false);
 		});
 	}
