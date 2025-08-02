@@ -198,7 +198,7 @@
 							"id": "V_String",
 							"params": ["44,37"]
 						}] },
-						{ "__identifier": "Force", "__type": "Float", "__value": 100, "__tile": null, "defUid": 1766, "realEditorValues": [] }
+						{ "__identifier": "Force", "__type": "Float", "__value": 1000, "__tile": null, "defUid": 1766, "realEditorValues": [] }
 					],
 					"__worldX": 815,
 					"__worldY": 631
@@ -220,7 +220,7 @@
 							"id": "V_String",
 							"params": ["11,34"]
 						}] },
-						{ "__identifier": "Force", "__type": "Float", "__value": 100, "__tile": null, "defUid": 1766, "realEditorValues": [] }
+						{ "__identifier": "Force", "__type": "Float", "__value": 1000, "__tile": null, "defUid": 1766, "realEditorValues": [] }
 					],
 					"__worldX": 496,
 					"__worldY": 629

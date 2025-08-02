@@ -143,7 +143,7 @@
 					"px": [96,767],
 					"fieldInstances": [
 						{ "__identifier": "Direction", "__type": "Point", "__value": null, "__tile": null, "defUid": 1765, "realEditorValues": [] },
-						{ "__identifier": "Force", "__type": "Float", "__value": 100, "__tile": null, "defUid": 1766, "realEditorValues": [] }
+						{ "__identifier": "Force", "__type": "Float", "__value": 1000, "__tile": null, "defUid": 1766, "realEditorValues": [] }
 					],
 					"__worldX": 1440,
 					"__worldY": -145
