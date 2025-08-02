@@ -1,5 +1,6 @@
 package levels.ldtk;
 
+import entities.interact.LightShow;
 import entities.interact.LightArrow;
 import entities.interact.LightTallTriangle;
 import entities.interact.LightShortTriangle;
@@ -75,6 +76,7 @@ class Level {
 	public var tunnels:Array<Tunnel> = [];
 	public var interactables:Array<Interactable> = [];
 	public var triggerables:Array<Triggerable> = [];
+	public var lightShows:Array<LightShow> = [];
 
 	public function new(worldNameOrIID:String, nameOrIID:String) {
 		this.worldID = worldNameOrIID;
@@ -132,8 +134,8 @@ class Level {
 			parseTunnels(raw.l_Objects.all_Tunnel);
 			parseTriggerables(raw.l_Objects.all_CollectionTrigger, raw.l_Objects.all_TargetSmall, raw.l_Objects.all_TargetLarge, raw.l_Objects.all_DropTarget,
 				raw.l_Objects.all_LightSmallRound, raw.l_Objects.all_LightLargeRound, raw.l_Objects.all_LightSquare, raw.l_Objects.all_LightArrow,
-				raw.l_Objects.all_LightShortTriangle, raw.l_Objects.all_LightTallTriangle, raw.l_Objects.all_Post, raw.l_Objects.all_Gate,
-				raw.l_Objects.all_Sensor);
+				raw.l_Objects.all_LightShortTriangle, raw.l_Objects.all_LightTallTriangle, raw.l_Objects.all_LightShow, raw.l_Objects.all_Post,
+				raw.l_Objects.all_Gate, raw.l_Objects.all_Sensor);
 			parseKickers(raw.l_Objects.all_Kicker);
 		}
 	}
@@ -237,8 +239,8 @@ class Level {
 	function parseTriggerables(collectionTriggers:Array<Ldtk.Entity_CollectionTrigger>, smallTargets:Array<Ldtk.Entity_TargetSmall>,
 			largeTargets:Array<Ldtk.Entity_TargetLarge>, dropTargets:Array<Ldtk.Entity_DropTarget>, smallRoundLights:Array<Ldtk.Entity_LightSmallRound>,
 			largeRoundLights:Array<Ldtk.Entity_LightLargeRound>, squareLights:Array<Ldtk.Entity_LightSquare>, arrowLights:Array<Ldtk.Entity_LightArrow>,
-			shortTriangleLights:Array<Ldtk.Entity_LightShortTriangle>, tallTriangleLights:Array<Ldtk.Entity_LightTallTriangle>, posts:Array<Ldtk.Entity_Post>,
-			gates:Array<Ldtk.Entity_Gate>, sensors:Array<Ldtk.Entity_Sensor>) {
+			shortTriangleLights:Array<Ldtk.Entity_LightShortTriangle>, tallTriangleLights:Array<Ldtk.Entity_LightTallTriangle>,
+			lightShows:Array<Ldtk.Entity_LightShow>, posts:Array<Ldtk.Entity_Post>, gates:Array<Ldtk.Entity_Gate>, sensors:Array<Ldtk.Entity_Sensor>) {
 		var listenerToNode = new Map<Triggerable, String>();
 		for (v in smallTargets) {
 			var rotation = 0.0;
@@ -325,6 +327,40 @@ class Level {
 			}
 			interactables.push(t); // should this actually be interactable?
 			triggerables.push(t);
+		}
+		var lightShowToNodes = new Map<LightShow, Array<String>>();
+		var lightShowToListens = new Map<LightShow, String>();
+		for (v in lightShows) {
+			var t = new LightShow();
+			t.IID = v.iid;
+			t.showType = v.f_ShowType;
+			t.numOfCycles = v.f_NumOfCycles;
+			t.stepSpeed = v.f_StepSpeed;
+			if (v.f_ListensTo != null) {
+				lightShowToListens.set(t, v.f_ListensTo.entityIid);
+			}
+			if (v.f_Nodes != null && v.f_Nodes.length > 0) {
+				lightShowToNodes.set(t, v.f_Nodes.map((f) -> f.entityIid));
+			}
+		}
+
+		for (ls in lightShowToNodes.keys()) {
+			var nodeIds = lightShowToNodes.get(ls);
+			for (nodeId in nodeIds) {
+				for (triggerable in triggerables) {
+					if (triggerable.IID == nodeId) {
+						ls.nodes.push(cast triggerable);
+					}
+				}
+			}
+		}
+		for (ls in lightShowToListens.keys()) {
+			var nodeId = lightShowToListens.get(ls);
+			for (triggerable in triggerables) {
+				if (triggerable.IID == nodeId) {
+					triggerable.onOffSignal.add(ls.start);
+				}
+			}
 		}
 		for (v in dropTargets) {
 			var rotation = 0.0;

@@ -21,7 +21,7 @@ import nape.phys.BodyType;
 /**
  * These stay on until they have been reset, good for hooking up to CollectionTriggers to get them to do something
  */
-class LightTallTriangle extends Interactable {
+class LightTallTriangle extends Light {
 	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/tallTriangleLight.json");
 
 	public function new(X:Float, Y:Float, rotation:Float = 0.0) {
@@ -40,14 +40,7 @@ class LightTallTriangle extends Interactable {
 		body.setShapeMaterials(new Material(-100));
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
 		isBackground = true;
-	}
-
-	override function onOnOffChanged(value:Bool) {
-		if (value) {
-			animation.play(anims.tallTriangleLight_1_aseprite);
-		} else {
-			animation.play(anims.tallTriangleLight_0_aseprite);
-		}
-		super.onOnOffChanged(value);
+		lightOnPath = anims.tallTriangleLight_1_aseprite;
+		lightOffPath = anims.tallTriangleLight_0_aseprite;
 	}
 }
