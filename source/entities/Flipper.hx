@@ -30,7 +30,6 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 	private static var degToRad = Math.PI / 180.0;
 	private static var radToDeg = 180.0 / Math.PI;
 
-	private static var loggedMessages = new Map<String, Bool>();
 
 	var ctrlGroup:ControlGroup;
 
@@ -128,23 +127,17 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		// Set rotation after body is added to physics space
 		body.rotation = restAngle;
 
-		trace('Flipper initialized - rotation: ${body.rotation}, restAngle: ${restAngle}, min: ${jointMin}, max: ${jointMax}');
-
 		body.cbTypes.add(CbTypes.CB_CONTROL_SURFACE);
 
 		// CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
 		var listener = new PreListener(InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_CONTROL_SURFACE, testPre, 0, false);
 		FlxNapeSpace.space.listeners.add(listener);
-		trace('Flipper collision listener added for body type: ${body.type}');
 
 		// Force lockout to 0 to fix CW flipper initialization issue
 		lockout = 0;
 
 		// Ensure flipper starts at correct rotation within joint range
 		body.rotation = restAngle;
-		if (flipDirection == CW) {
-			trace('LOG INFO: Constructor set rotation to: ${body.rotation}, restAngle: ${restAngle}');
-		}
 
 		// Only recalculate resting joint for CW flippers (CCW flippers work fine with original calculation)
 		if (flipDirection == CW) {
@@ -162,21 +155,13 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		// Add small tolerance for floating point precision issues
 		var tolerance = 0.001;
 		if (body.rotation > (jointMax + tolerance) || body.rotation < (jointMin - tolerance)) {
-			trace('Flipper collision blocked - rotation: ${body.rotation}, min: ${jointMin}, max: ${jointMax}');
 			return PreFlag.IGNORE_ONCE;
 		} else {
-			trace('Flipper collision accepted - rotation: ${body.rotation}, min: ${jointMin}, max: ${jointMax}');
 			return PreFlag.ACCEPT_ONCE;
 		}
 	}
 
 	override public function update(delta:Float) {
-		logInfo('LOG INFO: update start');
-		if (FlxG.keys.justPressed.Z || FlxG.keys.justPressed.M) {
-			if (flipDirection == CW) {
-				trace('LOG INFO: Flipper key pressed!');
-			}
-		}
 		var activated = switch ctrlGroup {
 			case LEFT:
 				FlxG.keys.pressed.Z;
@@ -201,20 +186,7 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 	// Some jank to help us stop moving the flipper once it's at its limit
 	var lockout = 0;
 
-	function logInfo(msg:String) {
-		if (loggedMessages.exists(msg))
-			return; // Only log each message once
-		if (flipDirection != CW)
-			return; // Only log for clockwise flippers
-		loggedMessages.set(msg, true);
-
-		trace('LOG INFO: ${msg} - lockout: ${lockout}, rotation: ${body.rotation}, jointMin: ${jointMin}, jointMax: ${jointMax}');
-	}
-
 	public function flip(delta:Float) {
-		logInfo('before button press');
-
-		trace('flip() called - lockout: ${lockout}, rotation: ${body.rotation}');
 		if (lockout == 1) {
 			return;
 		} else {
@@ -239,36 +211,26 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 
 		activateJoint.active = true;
 		restingJoint.active = false;
-
-		logInfo('after button press');
 	}
 
 	public function rest(delta:Float) {
-		logInfo('rest start');
-		if (flipDirection == CW) {
-			trace('CW rest() called - lockout: ${lockout}, rotation: ${body.rotation}');
-		}
 		if (lockout == -1) {
-			logInfo('rest early return lockout -1');
 			return;
 		} else {
 			lockout = 0;
 		}
 
 		if (flipDirection == CCW && body.rotation >= jointMax) {
-			logInfo('rest CCW at jointMax making static');
 			body.rotation = jointMax;
 			makeStatic();
 			lockout = -1;
 			return;
 		} else if (flipDirection == CW && body.rotation <= jointMin) {
-			logInfo('rest CW at jointMin making static');
 			body.rotation = jointMin;
 			makeStatic();
 			lockout = -1;
 			return;
 		} else {
-			logInfo('rest normal operation making dynamic');
 			makeDynamic();
 			angleJoint.jointMax = jointMax;
 			angleJoint.jointMin = jointMin;
@@ -279,7 +241,6 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 	}
 
 	function makeStatic() {
-		trace('Making flipper static');
 		pivotJoint.active = false;
 		angleJoint.active = false;
 		activateJoint.active = false;
@@ -289,7 +250,6 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 	}
 
 	function makeDynamic() {
-		trace('Making flipper dynamic');
 		pivotJoint.active = true;
 		angleJoint.active = true;
 		body.type = BodyType.DYNAMIC;
