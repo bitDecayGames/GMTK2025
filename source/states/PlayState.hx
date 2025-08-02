@@ -172,7 +172,15 @@ class PlayState extends FlxTransitionableState {
 		}
 
 		for (interactable in level.interactables) {
-			foregroundGroup.add(interactable);
+			if (interactable.isBackground) {
+				midGroundGroup.add(interactable);
+			} else {
+				foregroundGroup.add(interactable);
+			}
+		}
+
+		for (kicker in level.kickers) {
+			midGroundGroup.add(kicker);
 		}
 
 		for (tunnel in level.tunnels) {

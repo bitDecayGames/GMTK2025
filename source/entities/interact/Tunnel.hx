@@ -51,7 +51,6 @@ class Tunnel extends Interactable {
 			return;
 		}
 
-		// TODO: this shouldn't be instantaneous
 		TODO.sfx('warp enter');
 
 		data.int1.castBody.velocity.muleq(0);

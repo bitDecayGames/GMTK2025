@@ -45,19 +45,20 @@ class TargetLarge extends Interactable {
 		addPremadeBody(body);
 		body.setShapeMaterials(new Material(-100));
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
+		secondsToReset = 0.2;
 	}
 
 	override public function handleInteraction(data:InteractionCallback) {
 		TODO.sfx('large target hit');
 		setOn(true);
-		animation.play(anims.wideTarget_1_aseprite);
-		FlxTimer.wait(0.2, () -> {
-			resetOnOff();
-		});
 	}
 
-	override function resetOnOff() {
-		super.resetOnOff();
-		animation.play(anims.wideTarget_0_aseprite);
+	override function onOnOffChanged(value:Bool) {
+		if (value) {
+			animation.play(anims.wideTarget_1_aseprite);
+		} else {
+			animation.play(anims.wideTarget_0_aseprite);
+		}
+		super.onOnOffChanged(value);
 	}
 }

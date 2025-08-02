@@ -19,10 +19,9 @@ import nape.phys.Body;
 import nape.phys.BodyType;
 
 /**
- * These will only stay on for a quarter of a second, they should be hooked up to Lights instead of
- * directly to a CollectionTrigger
+ * These can be set to reset after a certain amount of time, or hooked up to some other triggerable
  */
-class TargetSmall extends Interactable {
+class DropTarget extends Interactable {
 	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/narrowTarget.json");
 
 	public function new(X:Float, Y:Float, rotation:Float) {
@@ -34,24 +33,36 @@ class TargetSmall extends Interactable {
 		body.position.set(Vec2.get(X, Y));
 		body.shapes.add(new Polygon(Polygon.rect(-width / 2, -height / 2, width, height)));
 		body.isBullet = true;
-		body.setShapeFilters(new InteractionFilter(CGroups.INTERACTABLE, CGroups.BALL));
+		enableInteractions();
 		addPremadeBody(body);
 		body.setShapeMaterials(new Material(-100));
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
-		secondsToReset = 0.2;
+		isBackground = true;
 	}
 
 	override public function handleInteraction(data:InteractionCallback) {
-		TODO.sfx('small target hit');
+		TODO.sfx('drop target hit');
 		setOn(true);
 	}
 
 	override function onOnOffChanged(value:Bool) {
 		if (value) {
+			disableInteractions();
 			animation.play(anims.narrowTarget_1_aseprite);
 		} else {
+			enableInteractions();
 			animation.play(anims.narrowTarget_0_aseprite);
 		}
 		super.onOnOffChanged(value);
+	}
+
+	function disableInteractions() {
+		FlxTimer.wait(0.2, () -> {
+			body.setShapeFilters(new InteractionFilter(0, 0));
+		});
+	}
+
+	function enableInteractions() {
+		body.setShapeFilters(new InteractionFilter(CGroups.INTERACTABLE, CGroups.BALL));
 	}
 }

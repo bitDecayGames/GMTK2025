@@ -143,7 +143,7 @@
 					"px": [96,767],
 					"fieldInstances": [
 						{ "__identifier": "Direction", "__type": "Point", "__value": null, "__tile": null, "defUid": 1765, "realEditorValues": [] },
-						{ "__identifier": "Force", "__type": "Float", "__value": 100, "__tile": null, "defUid": 1766, "realEditorValues": [] }
+						{ "__identifier": "Force", "__type": "Float", "__value": 1000, "__tile": null, "defUid": 1766, "realEditorValues": [] }
 					],
 					"__worldX": 1440,
 					"__worldY": -145
@@ -274,13 +274,17 @@
 					"__pivot": [0.5,0.5],
 					"__tags": [ "interactable", "triggerable" ],
 					"__tile": { "tilesetUid": 242, "x": 32, "y": 0, "w": 32, "h": 16 },
-					"__smartColor": "#733E39",
+					"__smartColor": "#CCC7C6",
 					"iid": "3c511560-5e50-11f0-8c4e-394290a21a61",
 					"width": 32,
 					"height": 16,
 					"defUid": 249,
 					"px": [117,542],
-					"fieldInstances": [],
+					"fieldInstances": [
+						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2214, "realEditorValues": [] },
+						{ "__identifier": "SecondsToReset", "__type": "Float", "__value": -1, "__tile": null, "defUid": 2215, "realEditorValues": [] },
+						{ "__identifier": "RotateTo", "__type": "Point", "__value": null, "__tile": null, "defUid": 2216, "realEditorValues": [] }
+					],
 					"__worldX": 1461,
 					"__worldY": -370
 				},
@@ -415,7 +419,7 @@
 					"__identifier": "CollectionTrigger",
 					"__grid": [31,32],
 					"__pivot": [0.5,0.5],
-					"__tags": [ "interactable", "triggerable" ],
+					"__tags": ["triggerable"],
 					"__tile": { "tilesetUid": 16, "x": 224, "y": 0, "w": 16, "h": 16 },
 					"__smartColor": "#FF0044",
 					"iid": "3a50d290-5e50-11f0-bb98-2da027f81724",
@@ -467,12 +471,12 @@
 					"__identifier": "LightSmallRound",
 					"__grid": [25,35],
 					"__pivot": [0.5,0.5],
-					"__tags": [ "interactable", "triggerable" ],
+					"__tags": ["triggerable"],
 					"__tile": { "tilesetUid": 243, "x": 96, "y": 0, "w": 32, "h": 32 },
 					"__smartColor": "#8AFFC7",
 					"iid": "e452aef0-5e50-11f0-b2ac-17f25553d78e",
-					"width": 32,
-					"height": 32,
+					"width": 16,
+					"height": 16,
 					"defUid": 2211,
 					"px": [408,568],
 					"fieldInstances": [{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
@@ -491,12 +495,12 @@
 					"__identifier": "LightSmallRound",
 					"__grid": [26,37],
 					"__pivot": [0.5,0.5],
-					"__tags": [ "interactable", "triggerable" ],
+					"__tags": ["triggerable"],
 					"__tile": { "tilesetUid": 243, "x": 96, "y": 0, "w": 32, "h": 32 },
 					"__smartColor": "#8AFFC7",
 					"iid": "ef86b9b0-5e50-11f0-b2ac-77f28ebb2dbd",
-					"width": 32,
-					"height": 32,
+					"width": 16,
+					"height": 16,
 					"defUid": 2211,
 					"px": [424,600],
 					"fieldInstances": [{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
@@ -515,12 +519,12 @@
 					"__identifier": "LightSmallRound",
 					"__grid": [27,39],
 					"__pivot": [0.5,0.5],
-					"__tags": [ "interactable", "triggerable" ],
+					"__tags": ["triggerable"],
 					"__tile": { "tilesetUid": 243, "x": 96, "y": 0, "w": 32, "h": 32 },
 					"__smartColor": "#8AFFC7",
 					"iid": "f3940490-5e50-11f0-b2ac-ab32001c90e8",
-					"width": 32,
-					"height": 32,
+					"width": 16,
+					"height": 16,
 					"defUid": 2211,
 					"px": [440,632],
 					"fieldInstances": [{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
@@ -534,6 +538,26 @@
 					}] }],
 					"__worldX": 1784,
 					"__worldY": -280
+				},
+				{
+					"__identifier": "DropTarget",
+					"__grid": [19,42],
+					"__pivot": [0.5,0.5],
+					"__tags": [ "interactable", "triggerable" ],
+					"__tile": { "tilesetUid": 242, "x": 32, "y": 0, "w": 32, "h": 16 },
+					"__smartColor": "#CCC7C6",
+					"iid": "bdcdd6f0-5e50-11f0-ad19-e7aa0b198dff",
+					"width": 32,
+					"height": 16,
+					"defUid": 249,
+					"px": [312,680],
+					"fieldInstances": [
+						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2214, "realEditorValues": [] },
+						{ "__identifier": "SecondsToReset", "__type": "Float", "__value": 1, "__tile": null, "defUid": 2215, "realEditorValues": [{ "id": "V_Float", "params": [1] }] },
+						{ "__identifier": "RotateTo", "__type": "Point", "__value": null, "__tile": null, "defUid": 2216, "realEditorValues": [] }
+					],
+					"__worldX": 1656,
+					"__worldY": -232
 				}
 			]
 		},
