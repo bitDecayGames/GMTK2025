@@ -63,6 +63,8 @@ class BDFlxNapeSpace extends FlxBasic {
 	 * / FlxNapeTilemaps to initialize the space.
 	 */
 	public static function init():Void {
+		FlxG.plugins.removeAllByType(BDFlxNapeSpace);
+
 		#if (flixel < version("5.6.0"))
 		FlxG.plugins.add(new BDFlxNapeSpace());
 		#else
