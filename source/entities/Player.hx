@@ -20,6 +20,7 @@ import addons.BDFlxNapeSprite;
 import nape.phys.Body;
 import nape.phys.BodyType;
 import nape.shape.Circle;
+import entities.interact.Slingshot;
 
 class Player extends SelfAssigningFlxNapeSprite {
 	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/ball.json");
@@ -140,8 +141,17 @@ class Player extends SelfAssigningFlxNapeSprite {
 			impactNormal.muleq(-1);
 		}
 		var impactImpulse = arb.normalImpulse(data.int1.castBody);
-		if (impactImpulse.length >= 1) {
-			spark();
-		}
+
+		// Only spark for strong impacts
+		if (impactImpulse.length < 1) return;
+
+		// Get the other body and shape in the collision
+		var otherBody = (arb.body1 == body) ? arb.body2 : arb.body1;
+		var hitShape = (arb.body1 == body) ? arb.shape2 : arb.shape1;
+
+		// If hitting slingshot, only spark on front face hits
+		if (otherBody.userData.data is Slingshot && hitShape.userData.data != true) return;
+
+		spark();
 	}
 }

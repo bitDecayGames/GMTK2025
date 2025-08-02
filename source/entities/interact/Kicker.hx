@@ -81,6 +81,7 @@ class Kicker extends Interactable {
 					TODO.sfx('kicker eject');
 					player.body.allowMovement = true;
 					player.body.velocity.set(shootDir.mul(kickPower, true));
+					player.spark();
 				});
 				FlxTimer.wait(1.3, () -> {
 					occupied = false;
