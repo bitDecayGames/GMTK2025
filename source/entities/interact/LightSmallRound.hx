@@ -10,7 +10,7 @@ import bitdecay.flixel.graphics.AsepriteMacros;
 import nape.dynamics.InteractionFilter;
 import constants.CGroups;
 import nape.constraint.PivotJoint;
-import flixel.addons.nape.FlxNapeSpace;
+import addons.BDFlxNapeSpace;
 import nape.constraint.AngleJoint;
 import nape.shape.Polygon;
 import nape.geom.Vec2;
@@ -21,7 +21,7 @@ import nape.phys.BodyType;
 /**
  * These stay on until they have been reset, good for hooking up to CollectionTriggers to get them to do something
  */
-class LightSmallRound extends Interactable {
+class LightSmallRound extends Light {
 	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/smallRoundLight.json");
 
 	public function new(X:Float, Y:Float, rotation:Float = 0.0) {
@@ -40,14 +40,7 @@ class LightSmallRound extends Interactable {
 		body.setShapeMaterials(new Material(-100));
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
 		isBackground = true;
-	}
-
-	override function onOnOffChanged(value:Bool) {
-		if (value) {
-			animation.play(anims.smallRoundLight_1_aseprite);
-		} else {
-			animation.play(anims.smallRoundLight_0_aseprite);
-		}
-		super.onOnOffChanged(value);
+		lightOnPath = anims.smallRoundLight_1_aseprite;
+		lightOffPath = anims.smallRoundLight_0_aseprite;
 	}
 }

@@ -15,7 +15,7 @@ import bitdecay.flixel.graphics.AsepriteMacros;
 import nape.dynamics.InteractionFilter;
 import constants.CGroups;
 import nape.constraint.PivotJoint;
-import flixel.addons.nape.FlxNapeSpace;
+import addons.BDFlxNapeSpace;
 import nape.constraint.AngleJoint;
 import nape.shape.Polygon;
 import nape.geom.Vec2;
@@ -91,51 +91,69 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 
 		body.setShapeFilters(new InteractionFilter(CGroups.CONTROL_SURFACE, CGroups.BALL));
 
-		pivotJoint = new PivotJoint(body, FlxNapeSpace.space.world, Vec2.get(), body.localPointToWorld(Vec2.get()));
+		pivotJoint = new PivotJoint(body, BDFlxNapeSpace.space.world, Vec2.get(), body.localPointToWorld(Vec2.get()));
 		pivotJoint.active = true;
 		pivotJoint.stiff = true;
-		pivotJoint.space = FlxNapeSpace.space;
+		pivotJoint.space = BDFlxNapeSpace.space;
 
 		jointMin = Math.min(restAngle, flipAngle);
 		jointMax = Math.max(restAngle, flipAngle);
-		angleJoint = new AngleJoint(FlxNapeSpace.space.world, body, jointMin, jointMax);
+		angleJoint = new AngleJoint(BDFlxNapeSpace.space.world, body, jointMin, jointMax);
 		angleJoint.active = true;
 		angleJoint.stiff = true;
-		angleJoint.space = FlxNapeSpace.space;
+		angleJoint.space = BDFlxNapeSpace.space;
 
 		var forceLocalPos = Vec2.get(w - bigRad - smallRad, 0).muleq(leverArmScale);
 		var activeJointWorldPos = body.localPointToWorld(forceLocalPos.copy().rotate(flipAngle));
-		activateJoint = new DistanceJoint(body, FlxNapeSpace.space.world, forceLocalPos, activeJointWorldPos, 0, 0);
-		activateJoint.active = true;
+		activateJoint = new DistanceJoint(body, BDFlxNapeSpace.space.world, forceLocalPos, activeJointWorldPos, 0, 0);
+		activateJoint.active = false;
 		activateJoint.stiff = false;
-		activateJoint.space = FlxNapeSpace.space;
+		activateJoint.space = BDFlxNapeSpace.space;
 		activateJoint.damping = 0;
 		activateJoint.maxForce = flipperStrength * fmass;
 
+		// Calculate resting joint position AFTER body rotation is set correctly
 		var restingJointWorldPos = body.localPointToWorld(forceLocalPos.copy().rotate(restAngle));
-		restingJoint = new DistanceJoint(body, FlxNapeSpace.space.world, forceLocalPos, restingJointWorldPos, 0, 0);
-		restingJoint.active = true;
+		restingJoint = new DistanceJoint(body, BDFlxNapeSpace.space.world, forceLocalPos, restingJointWorldPos, 0, 0);
+		restingJoint.active = false;
 		restingJoint.stiff = false;
-		restingJoint.space = FlxNapeSpace.space;
+		restingJoint.space = BDFlxNapeSpace.space;
 		restingJoint.damping = 0;
 		restingJoint.maxForce = flipperStrength * fmass;
 
-		body.rotation = restAngle;
 		addPremadeBody(body);
+
+		// Set rotation after body is added to physics space
+		body.rotation = restAngle;
 
 		body.cbTypes.add(CbTypes.CB_CONTROL_SURFACE);
 
 		// CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
 		var listener = new PreListener(InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_CONTROL_SURFACE, testPre, 0, false);
-		FlxNapeSpace.space.listeners.add(listener);
+		BDFlxNapeSpace.space.listeners.add(listener);
+
+		// Force lockout to 0 to fix CW flipper initialization issue
+		lockout = 0;
+
+		// Ensure flipper starts at correct rotation within joint range
+		body.rotation = restAngle;
+
+		// Only recalculate resting joint for CW flippers (CCW flippers work fine with original calculation)
+		if (flipDirection == CW) {
+			var forceLocalPos2 = Vec2.get(width - height - height / 2, 0).muleq(leverArmScale);
+			var correctedRestingPos = body.localPointToWorld(forceLocalPos2.copy().rotate(restAngle));
+			restingJoint.anchor2 = correctedRestingPos;
+		}
+		restingJoint.active = true;
 	}
 
 	function testPre(cb:PreCallback):PreFlag {
 		if (cb.int2.castBody != body) {
 			return null;
 		}
-		if (body.rotation > jointMax || body.rotation < jointMin) {
-			trace('skipping one');
+		// Add small tolerance for floating point precision issues
+		var tolerance = 0.001;
+		if (body.rotation > (jointMax + tolerance) || body.rotation < (jointMin - tolerance)) {
 			return PreFlag.IGNORE_ONCE;
 		} else {
 			return PreFlag.ACCEPT_ONCE;

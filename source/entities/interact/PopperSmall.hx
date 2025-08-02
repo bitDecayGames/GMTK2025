@@ -13,13 +13,13 @@ import bitdecay.flixel.graphics.AsepriteMacros;
 import nape.dynamics.InteractionFilter;
 import constants.CGroups;
 import nape.constraint.PivotJoint;
-import flixel.addons.nape.FlxNapeSpace;
+import addons.BDFlxNapeSpace;
 import nape.constraint.AngleJoint;
 import nape.shape.Polygon;
 import nape.geom.Vec2;
 import nape.shape.Circle;
 import flixel.FlxG;
-import flixel.addons.nape.FlxNapeSprite;
+import addons.BDFlxNapeSprite;
 import nape.phys.Body;
 import nape.phys.BodyType;
 
@@ -57,8 +57,8 @@ class PopperSmall extends Interactable {
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
 
 		var lifespan = 0.3;
-		var startScale = 1;
-		var endScale = 2.5;
+		var startScale = 0.3;
+		var endScale = 1.0;
 		var startAlpha = 1;
 		var endAlpha = 0;
 		emitter = new FlxEmitter(X, Y, 1);

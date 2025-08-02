@@ -10,7 +10,7 @@ import bitdecay.flixel.graphics.AsepriteMacros;
 import nape.dynamics.InteractionFilter;
 import constants.CGroups;
 import nape.constraint.PivotJoint;
-import flixel.addons.nape.FlxNapeSpace;
+import addons.BDFlxNapeSpace;
 import nape.constraint.AngleJoint;
 import nape.shape.Polygon;
 import nape.geom.Vec2;

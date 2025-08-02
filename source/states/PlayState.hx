@@ -1,6 +1,11 @@
 package states;
 
 import flixel.input.keyboard.FlxKey;
+import flixel.math.FlxMath;
+import flixel.FlxCamera;
+import flixel.util.FlxTimer;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import flixel.FlxCamera.FlxCameraFollowStyle;
 import entities.interact.Interactable;
 import nape.callbacks.InteractionCallback;
@@ -34,11 +39,14 @@ import events.EventBus;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionableState;
-import flixel.addons.nape.FlxNapeSpace;
+import addons.BDFlxNapeSpace;
 
 using states.FlxStateExt;
 
 class PlayState extends FlxTransitionableState {
+	var timeScale:Float = 1;
+	var cameraZones:Array<FlxRect> = [];
+	var activeCamBounds:FlxRect = null;
 	var focusZones = new FlxTypedGroup<FlxObject>();
 
 	var ballMass:Float = 1;
@@ -71,12 +79,12 @@ class PlayState extends FlxTransitionableState {
 		});
 
 		CbTypes.initTypes();
-		FlxNapeSpace.init();
-		FlxNapeSpace.velocityIterations = 100;
-		FlxNapeSpace.positionIterations = 100;
+		BDFlxNapeSpace.init();
+		BDFlxNapeSpace.velocityIterations = 100;
+		BDFlxNapeSpace.positionIterations = 100;
 
 		#if napeDebug
-		FlxNapeSpace.drawDebug = true;
+		BDFlxNapeSpace.drawDebug = true;
 		#end
 
 		// QLog.error('Example error');
@@ -103,8 +111,8 @@ class PlayState extends FlxTransitionableState {
 		unload();
 
 		var level = new Level(worldName, levelName);
-		// FlxNapeSpace.space.gravity.setxy(level.rawLevels[0].f_GravityX, level.rawLevels[0].f_GravityY);
-		FlxNapeSpace.space.gravity.setxy(gravity.x, gravity.y);
+		// BDFlxNapeSpace.space.gravity.setxy(level.rawLevels[0].f_GravityX, level.rawLevels[0].f_GravityY);
+		BDFlxNapeSpace.space.gravity.setxy(gravity.x, gravity.y);
 
 		// FmodPlugin.playSong(level.rawLevels[0].f_Music);
 		// FmodPlugin.playSong(FmodSong.Fkip);
@@ -148,9 +156,7 @@ class PlayState extends FlxTransitionableState {
 		}
 
 		for (_ => zone in level.camZones) {
-			if (zone.containsPoint(level.spawnPoint)) {
-				setCameraBounds(zone);
-			}
+			cameraZones.push(zone);
 		}
 
 		for (flipper in level.flippers) {
@@ -192,13 +198,15 @@ class PlayState extends FlxTransitionableState {
 			focusZones.add(focus);
 		}
 
-		FlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
+		handleCameraBounds(true);
+
+		BDFlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
 			ballInteractableCallback));
-		FlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.SENSOR, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
+		BDFlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.BEGIN, InteractionType.SENSOR, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
 			sensorStartCb));
-		FlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.ONGOING, InteractionType.SENSOR, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
+		BDFlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.ONGOING, InteractionType.SENSOR, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
 			sensorOngoingCb));
-		FlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.END, InteractionType.SENSOR, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE, sensorEndCb));
+		BDFlxNapeSpace.space.listeners.add(new InteractionListener(CbEvent.END, InteractionType.SENSOR, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE, sensorEndCb));
 
 		EventBus.fire(new PlayerSpawn(player.x, player.y));
 	}
@@ -216,7 +224,7 @@ class PlayState extends FlxTransitionableState {
 			}
 		}
 		worldBody.setShapeFilters(new InteractionFilter(CGroups.TERRAIN, ~CGroups.CONTROL_SURFACE));
-		worldBody.space = FlxNapeSpace.space;
+		worldBody.space = BDFlxNapeSpace.space;
 	}
 
 	var baseWallMat = new Material(-.7, .1);
@@ -276,7 +284,9 @@ class PlayState extends FlxTransitionableState {
 		}
 		worldTiles.clear();
 
-		FlxNapeSpace.space.clear();
+		cameraZones = [];
+
+		BDFlxNapeSpace.space.clear();
 	}
 
 	function ballInteractableCallback(data:InteractionCallback) {
@@ -321,6 +331,7 @@ class PlayState extends FlxTransitionableState {
 			FmodPlugin.playSFX(FmodSFX.FlipperStart);
 		}
 
+		BDFlxNapeSpace.timeScale = timeScale;
 		super.update(elapsed);
 
 		if (FlxG.mouse.justPressed) {
@@ -345,60 +356,78 @@ class PlayState extends FlxTransitionableState {
 
 	var tmp = FlxPoint.get();
 
-	function handleCameraBounds() {
-		var camZoneFound = false;
-		for (zone in focusZones) {
-			if (FlxG.overlap(zone, player)) {
-				camZoneFound = true;
-				if (zone.width >= camera.width && zone.height >= camera.height) {
-					camera.setScrollBoundsRect(zone.x, zone.y, zone.width, zone.height);
-				} else {
-					camera.follow(zone);
-					camera.deadzone = null;
-					camera.followLerp = 0.2;
-				}
-				break;
+	function handleCameraBounds(instant:Bool = false) {
+		if (activeCamBounds != null) {
+			if (!activeCamBounds.containsPoint(player.getMidpoint(tmp))) {
+				transitionCamera(null, instant);
 			}
 		}
-		if (!camZoneFound) {
-			camera.setScrollBounds(null, null, null, null);
-			camera.follow(player);
-			camera.followLerp = 0.2;
-		}
 
-		if (activeCameraTransition == null) {
-			FlxG.overlap(player, transitions, (p, t) -> {
-				activeCameraTransition = cast t;
-			});
-		} else if (!FlxG.overlap(player, activeCameraTransition)) {
-			var bounds = activeCameraTransition.getRotatedBounds();
-			for (dir => camZone in activeCameraTransition.camGuides) {
-				switch (dir) {
-					case UP:
-						if (player.y < bounds.top) {
-							setCameraBounds(camZone);
-						}
-					case DOWN:
-						if (player.y > bounds.bottom) {
-							setCameraBounds(camZone);
-						}
-					case RIGHT:
-						if (player.x > bounds.right) {
-							setCameraBounds(camZone);
-						}
-					case LEFT:
-						if (player.x < bounds.left) {
-							setCameraBounds(camZone);
-						}
-					default:
-						QLog.error('camera transition area has unsupported cardinal direction ${dir}');
+		if (activeCamBounds == null) {
+			for (zone in cameraZones) {
+				if (zone.containsPoint(player.getMidpoint(tmp))) {
+					transitionCamera(zone, instant);
 				}
 			}
 		}
 	}
 
 	public function setCameraBounds(bounds:FlxRect) {
-		camera.setScrollBoundsRect(bounds.x, bounds.y, bounds.width, bounds.height);
+		activeCamBounds = bounds;
+		if (bounds == null) {
+			camera.setScrollBounds(null, null, null, null);
+		} else {
+			camera.setScrollBoundsRect(bounds.x, bounds.y, bounds.width, bounds.height);
+		}
+	}
+
+	function transitionCamera(area:FlxRect, instant:Bool = false) {
+		activeCamBounds = area;
+		if (instant) {
+			setCameraBounds(area);
+			return;
+		}
+
+		TODO.sfx('time warp slow down for camera transition');
+		QLog.notice('starting slowdown');
+		FlxTween.tween(this, {"timeScale": 0.01}, 0.3, {
+			ease: FlxEase.cubeOut,
+			onComplete: (t) -> {
+				if (area != null) {
+					var destPoint = findCameraDest(camera, area);
+					FlxTween.tween(camera, {
+						"scroll.x": destPoint.x,
+						"scroll.y": destPoint.y
+					}, 1, {
+						ease: FlxEase.cubeOut,
+						onComplete: (t) -> {
+							setCameraBounds(area);
+						}
+					});
+					destPoint.put();
+				} else {
+					setCameraBounds(area);
+				}
+				QLog.notice('starting transition wait');
+				FlxTimer.wait(1, () -> {
+					QLog.notice('starting speed up');
+					TODO.sfx('time warp speed up to resume gameplay');
+					FlxTween.tween(this, {"timeScale": 1}, 0.3, {
+						ease: FlxEase.cubeOut,
+					});
+				});
+			}
+		});
+	}
+
+	function findCameraDest(camera:FlxCamera, zone:FlxRect):FlxPoint {
+		var current = camera.scroll.copyTo(FlxPoint.get());
+		// keep point within bounds
+		// current.x = FlxMath.bound(current.x, zone.left - camera.viewMarginLeft, zone.right - camera.viewMarginRight);
+		// current.y = FlxMath.bound(current.y, zone.top- camera.viewMarginTop, zone.bottom - camera.viewMarginBottom);
+		current.x = FlxMath.bound(current.x, zone.left - camera.viewMarginLeft, zone.right - camera.viewMarginRight);
+		current.y = FlxMath.bound(current.y, zone.top - camera.viewMarginTop, zone.bottom - camera.viewMarginBottom);
+		return current;
 	}
 
 	override public function onFocusLost() {
