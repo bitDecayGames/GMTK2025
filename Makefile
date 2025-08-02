@@ -32,12 +32,16 @@ clean: # Clean build artifacts
 	@echo "Cleaning build files.."
 	rm -rf export/
 
+pull: # Safe git pull (checks if LDTK is running)
+	@echo "Running safe git pull.."
+	./bin/safe_pull.sh
+
 # -----------------------------------------------------------
 # CAUTION: If you have a file with the same name as make
 # command, you need to add it to .PHONY below, otherwise it
 # won't work. E.g. `make run` wouldn't work if you have
 # `run` file in pwd.
-.PHONY: help dev dev-test debug format setup clean
+.PHONY: help dev dev-test debug format setup clean pull
 
 # -----------------------------------------------------------
 # -----       (Makefile helpers and decoration)      --------
