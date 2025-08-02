@@ -10,6 +10,15 @@
    },
    {
     "filename": "flipper 1.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 80, "h": 58 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 80, "h": 58 },
+    "sourceSize": { "w": 80, "h": 58 },
+    "duration": 100
+   },
+   {
+    "filename": "flipper 2.aseprite",
     "frame": { "x": 80, "y": 0, "w": 80, "h": 58 },
     "rotated": false,
     "trimmed": false,
