@@ -75,10 +75,12 @@ class Kicker extends Interactable {
 		}, .3, {
 			ease: FlxEase.cubeInOut,
 			type: ONESHOT,
+			onStart: (t:FlxTween) -> {
+				FmodPlugin.playSFX(FmodSFX.KickerEnter);
+			},
 			onComplete: (t:FlxTween) -> {
-				TODO.sfx('kicker enter');
 				FlxTimer.wait(1.0, () -> {
-					TODO.sfx('kicker eject');
+					FmodPlugin.playSFX(FmodSFX.KickerLaunch);
 					player.body.allowMovement = true;
 					player.body.velocity.set(shootDir.mul(kickPower, true));
 					player.spark();

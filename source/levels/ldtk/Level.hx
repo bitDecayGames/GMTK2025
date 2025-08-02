@@ -81,6 +81,7 @@ class Level {
 	public var interactables:Array<Interactable> = [];
 	public var triggerables:Array<Triggerable> = [];
 	public var lightShows:Array<LightShow> = [];
+	public var summers:Array<SumTrigger> = [];
 
 	public function new(worldNameOrIID:String, nameOrIID:String) {
 		this.worldID = worldNameOrIID;
@@ -417,6 +418,7 @@ class Level {
 			t.requiredSum = v.f_RequiredSum;
 			t.shouldDisableNodesOnComplete = v.f_DisableNodes;
 			t.shouldResetNodesOnComplete = v.f_ResetNodes;
+			summers.push(t);
 			triggerables.push(t);
 			sumTriggerToNodes.set(t, nodeIds);
 		}
