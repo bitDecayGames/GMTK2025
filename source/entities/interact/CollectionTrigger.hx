@@ -42,6 +42,9 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 	public function setOn(value:Bool) {
 		if (disabled)
 			return;
+		if (on != value) {
+			onOnOffChanged(value);
+		}
 		on = value;
 		if (on) {
 			onOffSignal.dispatch(on);
@@ -79,4 +82,6 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 		nodes.remove(node);
 		node.onOffSignal.remove(check);
 	}
+
+	function onOnOffChanged(value:Bool) {}
 }
