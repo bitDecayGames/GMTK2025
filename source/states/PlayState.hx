@@ -194,6 +194,10 @@ class PlayState extends FlxTransitionableState {
 			midGroundGroup.add(kicker);
 		}
 
+		for (summer in level.summers) {
+			midGroundGroup.add(summer);
+		}
+
 		for (tunnel in level.tunnels) {
 			midGroundGroup.add(tunnel);
 		}
