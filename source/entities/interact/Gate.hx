@@ -9,15 +9,19 @@ import bitdecay.flixel.graphics.Aseprite;
 import bitdecay.flixel.graphics.AsepriteMacros;
 import nape.dynamics.InteractionFilter;
 import constants.CGroups;
+import nape.constraint.PivotJoint;
+import flixel.addons.nape.FlxNapeSpace;
+import nape.constraint.AngleJoint;
 import nape.shape.Polygon;
 import nape.geom.Vec2;
+import nape.shape.Circle;
 import nape.phys.Body;
 import nape.phys.BodyType;
 
 /**
- * These can be set to reset after a certain amount of time, or hooked up to some other triggerable
+ * A gate can only be turned on and off by something else triggering it
  */
-class DropTarget extends Interactable {
+class Gate extends Interactable {
 	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/narrowTarget.json");
 
 	public function new(X:Float, Y:Float, rotation:Float) {
@@ -37,8 +41,7 @@ class DropTarget extends Interactable {
 	}
 
 	override public function handleInteraction(data:InteractionCallback) {
-		TODO.sfx('drop target hit');
-		setOn(true);
+		TODO.sfx('gate hit');
 	}
 
 	override function onOnOffChanged(value:Bool) {
@@ -53,9 +56,7 @@ class DropTarget extends Interactable {
 	}
 
 	function disableInteractions() {
-		FlxTimer.wait(0.2, () -> {
-			body.setShapeFilters(new InteractionFilter(0, 0));
-		});
+		body.setShapeFilters(new InteractionFilter(0, 0));
 	}
 
 	function enableInteractions() {
