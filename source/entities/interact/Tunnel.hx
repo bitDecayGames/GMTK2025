@@ -79,6 +79,7 @@ class Tunnel extends Interactable {
 			return;
 		}
 
+		super.handleInteraction(data);
 		var player:Player = data.int1.userData.data;
 		teleportTo(player, exit);
 	}

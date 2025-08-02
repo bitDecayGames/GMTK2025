@@ -1,5 +1,6 @@
 package levels.ldtk;
 
+import entities.interact.SumTrigger;
 import entities.interact.MessageEntity;
 import flixel.math.FlxMath;
 import echo.util.ext.FloatExt.deg_to_rad;
@@ -138,7 +139,7 @@ class Level {
 			parseTriggerables(raw.l_Objects.all_CollectionTrigger, raw.l_Objects.all_TargetSmall, raw.l_Objects.all_TargetLarge, raw.l_Objects.all_DropTarget,
 				raw.l_Objects.all_LightSmallRound, raw.l_Objects.all_LightLargeRound, raw.l_Objects.all_LightSquare, raw.l_Objects.all_LightArrow,
 				raw.l_Objects.all_LightShortTriangle, raw.l_Objects.all_LightTallTriangle, raw.l_Objects.all_LightShow, raw.l_Objects.all_Post,
-				raw.l_Objects.all_Gate, raw.l_Objects.all_Sensor, raw.l_Objects.all_Message);
+				raw.l_Objects.all_Gate, raw.l_Objects.all_Sensor, raw.l_Objects.all_Message, raw.l_Objects.all_SumTrigger);
 			parseKickers(raw.l_Objects.all_Kicker);
 		}
 	}
@@ -257,7 +258,7 @@ class Level {
 			largeRoundLights:Array<Ldtk.Entity_LightLargeRound>, squareLights:Array<Ldtk.Entity_LightSquare>, arrowLights:Array<Ldtk.Entity_LightArrow>,
 			shortTriangleLights:Array<Ldtk.Entity_LightShortTriangle>, tallTriangleLights:Array<Ldtk.Entity_LightTallTriangle>,
 			lightShows:Array<Ldtk.Entity_LightShow>, posts:Array<Ldtk.Entity_Post>, gates:Array<Ldtk.Entity_Gate>, sensors:Array<Ldtk.Entity_Sensor>,
-			messages:Array<Ldtk.Entity_Message>) {
+			messages:Array<Ldtk.Entity_Message>, sumTriggers:Array<Ldtk.Entity_SumTrigger>) {
 		var listenerToNode = new Map<Triggerable, String>();
 		for (v in smallTargets) {
 			var rotation = 0.0;
@@ -408,6 +409,17 @@ class Level {
 			}
 			triggerables.push(t);
 		}
+		var sumTriggerToNodes = new Map<SumTrigger, Array<String>>();
+		for (v in sumTriggers) {
+			var nodeIds = v.f_Nodes.map((f) -> f.entityIid);
+			var t = new SumTrigger();
+			t.IID = v.iid;
+			t.requiredSum = v.f_RequiredSum;
+			t.shouldDisableNodesOnComplete = v.f_DisableNodes;
+			t.shouldResetNodesOnComplete = v.f_ResetNodes;
+			triggerables.push(t);
+			sumTriggerToNodes.set(t, nodeIds);
+		}
 		var triggerToNodes = new Map<CollectionTrigger, Array<String>>();
 		for (v in collectionTriggers) {
 			var nodeIds = v.f_Nodes.map((f) -> f.entityIid);
@@ -427,6 +439,16 @@ class Level {
 				for (triggerable in triggerables) {
 					if (triggerable.IID == nodeId) {
 						t.add(triggerable);
+					}
+				}
+			}
+		}
+		for (t in sumTriggerToNodes.keys()) {
+			var nodeIds = sumTriggerToNodes.get(t);
+			for (nodeId in nodeIds) {
+				for (interactable in interactables) {
+					if (interactable.IID == nodeId) {
+						t.nodes.push(interactable);
 					}
 				}
 			}

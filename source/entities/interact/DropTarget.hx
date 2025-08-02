@@ -39,6 +39,7 @@ class DropTarget extends Interactable {
 	override public function handleInteraction(data:InteractionCallback) {
 		TODO.sfx('drop target hit');
 		setOn(true);
+		super.handleInteraction(data);
 	}
 
 	override function onOnOffChanged(value:Bool) {

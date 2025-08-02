@@ -32,5 +32,6 @@ class Post extends Interactable {
 
 	override public function handleInteraction(data:InteractionCallback) {
 		TODO.sfx("hit post");
+		super.handleInteraction(data);
 	}
 }
