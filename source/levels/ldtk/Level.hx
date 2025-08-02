@@ -1,5 +1,6 @@
 package levels.ldtk;
 
+import entities.interact.MessageEntity;
 import flixel.math.FlxMath;
 import echo.util.ext.FloatExt.deg_to_rad;
 import entities.interact.LightShow;
@@ -137,7 +138,7 @@ class Level {
 			parseTriggerables(raw.l_Objects.all_CollectionTrigger, raw.l_Objects.all_TargetSmall, raw.l_Objects.all_TargetLarge, raw.l_Objects.all_DropTarget,
 				raw.l_Objects.all_LightSmallRound, raw.l_Objects.all_LightLargeRound, raw.l_Objects.all_LightSquare, raw.l_Objects.all_LightArrow,
 				raw.l_Objects.all_LightShortTriangle, raw.l_Objects.all_LightTallTriangle, raw.l_Objects.all_LightShow, raw.l_Objects.all_Post,
-				raw.l_Objects.all_Gate, raw.l_Objects.all_Sensor);
+				raw.l_Objects.all_Gate, raw.l_Objects.all_Sensor, raw.l_Objects.all_Message);
 			parseKickers(raw.l_Objects.all_Kicker);
 		}
 	}
@@ -255,7 +256,8 @@ class Level {
 			largeTargets:Array<Ldtk.Entity_TargetLarge>, dropTargets:Array<Ldtk.Entity_DropTarget>, smallRoundLights:Array<Ldtk.Entity_LightSmallRound>,
 			largeRoundLights:Array<Ldtk.Entity_LightLargeRound>, squareLights:Array<Ldtk.Entity_LightSquare>, arrowLights:Array<Ldtk.Entity_LightArrow>,
 			shortTriangleLights:Array<Ldtk.Entity_LightShortTriangle>, tallTriangleLights:Array<Ldtk.Entity_LightTallTriangle>,
-			lightShows:Array<Ldtk.Entity_LightShow>, posts:Array<Ldtk.Entity_Post>, gates:Array<Ldtk.Entity_Gate>, sensors:Array<Ldtk.Entity_Sensor>) {
+			lightShows:Array<Ldtk.Entity_LightShow>, posts:Array<Ldtk.Entity_Post>, gates:Array<Ldtk.Entity_Gate>, sensors:Array<Ldtk.Entity_Sensor>,
+			messages:Array<Ldtk.Entity_Message>) {
 		var listenerToNode = new Map<Triggerable, String>();
 		for (v in smallTargets) {
 			var rotation = 0.0;
@@ -394,6 +396,16 @@ class Level {
 				listenerToNode.set(t, v.f_ListensTo.entityIid);
 			}
 			interactables.push(t);
+			triggerables.push(t);
+		}
+		for (v in messages) {
+			var t = new MessageEntity();
+			t.IID = v.iid;
+			t.content = v.f_Content;
+			t.secondsUntilHidden = v.f_SecondsUntilHide;
+			if (v.f_ListensTo != null) {
+				listenerToNode.set(t, v.f_ListensTo.entityIid);
+			}
 			triggerables.push(t);
 		}
 		var triggerToNodes = new Map<CollectionTrigger, Array<String>>();
