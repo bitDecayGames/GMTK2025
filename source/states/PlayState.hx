@@ -126,7 +126,7 @@ class PlayState extends FlxTransitionableState {
 
 			#if (debug || drawTerrain)
 			tl.alpha = .5;
-			// midGroundGroup.add(tl);
+			midGroundGroup.add(tl);
 			#end
 
 			makeTileBodies(tl);
@@ -173,6 +173,10 @@ class PlayState extends FlxTransitionableState {
 
 		for (interactable in level.interactables) {
 			foregroundGroup.add(interactable);
+		}
+
+		for (kicker in level.kickers) {
+			midGroundGroup.add(kicker);
 		}
 
 		for (tunnel in level.tunnels) {

@@ -1,18 +1,16 @@
 package levels.ldtk;
 
-<<<<<<< HEAD
 import entities.interact.PopperSmall;
-=======
 import nape.geom.Vec2;
 import entities.interact.TargetLarge;
 import entities.interact.TargetSmall;
 import entities.interact.CollectionTrigger;
 import entities.interact.Interactable;
->>>>>>> 97996cd39a02c1a72713d3bf733203b7037802fd
 import openfl.utils.AssetType;
 import openfl.Assets;
 import flixel.FlxObject;
 import entities.interact.Tunnel;
+import entities.interact.Kicker;
 import types.Direction;
 import entities.interact.Slingshot;
 import entities.interact.Popper;
@@ -64,6 +62,7 @@ class Level {
 	public var poppers:Array<Popper> = [];
 	public var poppersSmall:Array<PopperSmall> = [];
 	public var slingshots:Array<Slingshot> = [];
+	public var kickers:Array<Kicker> = [];
 	public var tunnels:Array<Tunnel> = [];
 	public var interactables:Array<Interactable> = [];
 	public var triggerables:Array<Triggerable> = [];
@@ -122,6 +121,7 @@ class Level {
 			parsePoppers(raw.l_Objects.all_Popper, raw.l_Objects.all_SmallPopper);
 			parseSlingshots(raw.l_Objects.all_Slingshot_Left, raw.l_Objects.all_Slingshot_Right);
 			parseTunnels(raw.l_Objects.all_Tunnel);
+			parseKickers(raw.l_Objects.all_Kicker);
 			parseTriggerables(raw.l_Objects.all_CollectionTrigger, raw.l_Objects.all_TargetSmall, raw.l_Objects.all_TargetLarge, raw.l_Objects.all_DropTarget);
 		}
 	}
@@ -209,6 +209,13 @@ class Level {
 			if (entrance != null && exit != null) {
 				entrance.exit = exit;
 			}
+		}
+	}
+
+	function parseKickers(kDefs:Array<Ldtk.Entity_Kicker>) {
+		for (kickerDef in kDefs) {
+			var dir = rotateTo(Vec2.get(kickerDef.cx, kickerDef.cy), Vec2.get(kickerDef.f_Direction.cx, kickerDef.f_Direction.cy));
+			kickers.push(new Kicker(kickerDef.worldPixelX, kickerDef.worldPixelY, dir, kickerDef.f_Force));
 		}
 	}
 
