@@ -93,21 +93,21 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		body.setShapeFilters(new InteractionFilter(CGroups.CONTROL_SURFACE, CGroups.BALL));
 
 		pivotJoint = new PivotJoint(body, FlxNapeSpace.space.world, Vec2.get(), body.localPointToWorld(Vec2.get()));
-		pivotJoint.active = true; // Keep pivot to anchor flipper
+		pivotJoint.active = true;
 		pivotJoint.stiff = true;
 		pivotJoint.space = FlxNapeSpace.space;
 
 		jointMin = Math.min(restAngle, flipAngle);
 		jointMax = Math.max(restAngle, flipAngle);
 		angleJoint = new AngleJoint(FlxNapeSpace.space.world, body, jointMin, jointMax);
-		angleJoint.active = true; // Re-enable angle joint
+		angleJoint.active = true;
 		angleJoint.stiff = true;
 		angleJoint.space = FlxNapeSpace.space;
 
 		var forceLocalPos = Vec2.get(w - bigRad - smallRad, 0).muleq(leverArmScale);
 		var activeJointWorldPos = body.localPointToWorld(forceLocalPos.copy().rotate(flipAngle));
 		activateJoint = new DistanceJoint(body, FlxNapeSpace.space.world, forceLocalPos, activeJointWorldPos, 0, 0);
-		activateJoint.active = false; // Start inactive
+		activateJoint.active = false;
 		activateJoint.stiff = false;
 		activateJoint.space = FlxNapeSpace.space;
 		activateJoint.damping = 0;
@@ -116,7 +116,7 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		// Calculate resting joint position AFTER body rotation is set correctly
 		var restingJointWorldPos = body.localPointToWorld(forceLocalPos.copy().rotate(restAngle));
 		restingJoint = new DistanceJoint(body, FlxNapeSpace.space.world, forceLocalPos, restingJointWorldPos, 0, 0);
-		restingJoint.active = false; // Will re-enable after rotation fix
+		restingJoint.active = false;
 		restingJoint.stiff = false;
 		restingJoint.space = FlxNapeSpace.space;
 		restingJoint.damping = 0;
@@ -145,7 +145,7 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 			var correctedRestingPos = body.localPointToWorld(forceLocalPos2.copy().rotate(restAngle));
 			restingJoint.anchor2 = correctedRestingPos;
 		}
-		restingJoint.active = true; // Enable for all flippers
+		restingJoint.active = true;
 	}
 
 	function testPre(cb:PreCallback):PreFlag {
