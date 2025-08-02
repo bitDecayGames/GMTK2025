@@ -33,7 +33,7 @@ class DropTarget extends Interactable {
 		body.position.set(Vec2.get(X, Y));
 		body.shapes.add(new Polygon(Polygon.rect(-width / 2, -height / 2, width, height)));
 		body.isBullet = true;
-		body.setShapeFilters(new InteractionFilter(CGroups.INTERACTABLE, CGroups.BALL));
+		enableInteractions();
 		addPremadeBody(body);
 		body.setShapeMaterials(new Material(-100));
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
@@ -45,14 +45,24 @@ class DropTarget extends Interactable {
 		setOn(true);
 	}
 
-	override function setOn(value:Bool) {
-		if (on != value) {
-			if (value) {
-				animation.play(anims.narrowTarget_1_aseprite);
-			} else {
-				animation.play(anims.narrowTarget_0_aseprite);
-			}
+	override function onOnOffChanged(value:Bool) {
+		if (value) {
+			disableInteractions();
+			animation.play(anims.narrowTarget_1_aseprite);
+		} else {
+			enableInteractions();
+			animation.play(anims.narrowTarget_0_aseprite);
 		}
-		super.setOn(value);
+		super.onOnOffChanged(value);
+	}
+
+	function disableInteractions() {
+		FlxTimer.wait(0.2, () -> {
+			body.setShapeFilters(new InteractionFilter(0, 0));
+		});
+	}
+
+	function enableInteractions() {
+		body.setShapeFilters(new InteractionFilter(CGroups.INTERACTABLE, CGroups.BALL));
 	}
 }

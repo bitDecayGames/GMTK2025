@@ -24,19 +24,23 @@ class Interactable extends SelfAssigningFlxNapeSprite implements Triggerable {
 		var different = on != value;
 		on = value;
 		if (different) {
-			onOffSignal.dispatch(on);
-			if (on) {
-				if (secondsToReset > 0) {
-					FlxTimer.wait(secondsToReset, () -> {
-						resetOnOff();
-					});
-				}
-			}
+			onOnOffChanged(value);
 		}
 	}
 
 	public function isOn():Bool {
 		return on;
+	}
+
+	private function onOnOffChanged(value:Bool):Void {
+		onOffSignal.dispatch(on);
+		if (on) {
+			if (secondsToReset > 0) {
+				FlxTimer.wait(secondsToReset, () -> {
+					resetOnOff();
+				});
+			}
+		}
 	}
 
 	public function resetOnOff() {
@@ -58,5 +62,6 @@ interface Triggerable extends IID {
 	public var onOffSignal:FlxTypedSignal<Bool->Void>;
 	public function isOn():Bool;
 	public function setOn(value:Bool):Void;
+	private function onOnOffChanged(value:Bool):Void;
 	public function resetOnOff():Void;
 }

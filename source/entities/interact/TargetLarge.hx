@@ -53,14 +53,12 @@ class TargetLarge extends Interactable {
 		setOn(true);
 	}
 
-	override function setOn(value:Bool) {
-		if (on != value) {
-			if (value) {
-				animation.play(anims.wideTarget_1_aseprite);
-			} else {
-				animation.play(anims.wideTarget_0_aseprite);
-			}
+	override function onOnOffChanged(value:Bool) {
+		if (value) {
+			animation.play(anims.wideTarget_1_aseprite);
+		} else {
+			animation.play(anims.wideTarget_0_aseprite);
 		}
-		super.setOn(value);
+		super.onOnOffChanged(value);
 	}
 }

@@ -1,5 +1,6 @@
 package levels.ldtk;
 
+import entities.interact.DropTarget;
 import entities.interact.LightSmallRound;
 import entities.interact.PopperSmall;
 import nape.geom.Vec2;
@@ -221,7 +222,7 @@ class Level {
 	}
 
 	function parseTriggerables(collectionTriggers:Array<Ldtk.Entity_CollectionTrigger>, smallTargets:Array<Ldtk.Entity_TargetSmall>,
-			largeTargets:Array<Ldtk.Entity_TargetLarge>, dropTargets:Array<Ldtk.Entity_DropTarget>, smallRoundLights:Array<Ldtk.Entity_LightSmallRound>,) {
+			largeTargets:Array<Ldtk.Entity_TargetLarge>, dropTargets:Array<Ldtk.Entity_DropTarget>, smallRoundLights:Array<Ldtk.Entity_LightSmallRound>) {
 		var listenerToNode = new Map<Triggerable, String>();
 		for (v in smallTargets) {
 			var rotation = 0.0;
@@ -246,6 +247,20 @@ class Level {
 		for (v in smallRoundLights) {
 			var t = new LightSmallRound(v.worldPixelX, v.worldPixelY);
 			t.IID = v.iid;
+			if (v.f_ListensTo != null) {
+				listenerToNode.set(t, v.f_ListensTo.entityIid);
+			}
+			interactables.push(t); // should this actually be interactable?
+			triggerables.push(t);
+		}
+		for (v in dropTargets) {
+			var rotation = 0.0;
+			if (v.f_RotateTo != null) {
+				rotation = rotateTo(Vec2.get(v.cx, v.cy), Vec2.get(v.f_RotateTo.cx, v.f_RotateTo.cy)) + Math.PI * 1.5;
+			}
+			var t = new DropTarget(v.worldPixelX, v.worldPixelY, rotation);
+			t.IID = v.iid;
+			t.secondsToReset = v.f_SecondsToReset;
 			if (v.f_ListensTo != null) {
 				listenerToNode.set(t, v.f_ListensTo.entityIid);
 			}

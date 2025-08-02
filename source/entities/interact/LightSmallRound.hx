@@ -42,14 +42,12 @@ class LightSmallRound extends Interactable {
 		isBackground = true;
 	}
 
-	override function setOn(value:Bool) {
-		if (on != value) {
-			if (value) {
-				animation.play(anims.smallRoundLight_1_aseprite);
-			} else {
-				animation.play(anims.smallRoundLight_0_aseprite);
-			}
+	override function onOnOffChanged(value:Bool) {
+		if (value) {
+			animation.play(anims.smallRoundLight_1_aseprite);
+		} else {
+			animation.play(anims.smallRoundLight_0_aseprite);
 		}
-		super.setOn(value);
+		super.onOnOffChanged(value);
 	}
 }
