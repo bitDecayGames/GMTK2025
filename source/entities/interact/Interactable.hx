@@ -13,6 +13,7 @@ class Interactable extends SelfAssigningFlxNapeSprite implements Triggerable {
 
 	public var disabled:Bool;
 	public var onOffSignal:FlxTypedSignal<Bool->Void> = new FlxTypedSignal<Bool->Void>();
+	public var isBackground:Bool;
 
 	public function setOn(value:Bool) {
 		if (disabled)

@@ -42,9 +42,8 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 	public function setOn(value:Bool) {
 		if (disabled)
 			return;
-		var different = on != value;
 		on = value;
-		if (different) {
+		if (on) {
 			onOffSignal.dispatch(on);
 			FlxTimer.wait(1, () -> {
 				if (shouldResetNodesOnComplete) {
@@ -53,12 +52,13 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 					}
 					resetOnOff();
 				}
-			});
-			if (shouldDisableNodesOnComplete) {
-				for (node in nodes) {
-					node.disabled = true;
+				if (shouldDisableNodesOnComplete) {
+					for (node in nodes) {
+						node.disabled = true;
+					}
+					disabled = true;
 				}
-			}
+			});
 		}
 	}
 

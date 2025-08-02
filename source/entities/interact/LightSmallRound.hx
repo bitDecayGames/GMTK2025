@@ -24,25 +24,29 @@ import nape.phys.BodyType;
 class LightSmallRound extends Interactable {
 	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/smallRoundLight.json");
 
-	public function new(X:Float, Y:Float, rotation:Float) {
+	public function new(X:Float, Y:Float, rotation:Float = 0.0) {
 		super(X, Y);
 		Aseprite.loadAllAnimations(this, AssetPaths.smallRoundLight__json);
 		animation.play(anims.smallRoundLight_0_aseprite);
 		var body = new Body(BodyType.STATIC);
 		body.rotation = rotation;
 		body.position.set(Vec2.get(X, Y));
-		body.shapes.add(new Circle(width / 2));
+		var shape = new Circle(width / 2);
+		shape.sensorEnabled = true;
+		body.shapes.add(shape);
 		body.isBullet = true;
 		body.setShapeFilters(new InteractionFilter(CGroups.INTERACTABLE, CGroups.BALL));
 		addPremadeBody(body);
 		body.setShapeMaterials(new Material(-100));
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
+		isBackground = true;
 	}
 
-	override public function handleInteraction(data:InteractionCallback) {
-		TODO.sfx('small target hit');
-		setOn(true);
-		animation.play(anims.smallRoundLight_1_aseprite);
+	override function setOn(value:Bool) {
+		super.setOn(value);
+		if (value) {
+			animation.play(anims.smallRoundLight_1_aseprite);
+		}
 	}
 
 	override function resetOnOff() {
