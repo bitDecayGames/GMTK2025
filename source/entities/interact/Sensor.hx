@@ -34,6 +34,7 @@ class Sensor extends Interactable {
 
 	override public function handleInteraction(data:InteractionCallback) {
 		setOn(true);
+		super.handleInteraction(data);
 	}
 
 	override function handleInteractionEnd(data:InteractionCallback) {

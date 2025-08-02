@@ -62,7 +62,7 @@ class Kicker extends Interactable {
 		if (occupied) {
 			return;
 		}
-
+		super.handleInteraction(data);
 		occupied = true;
 		var player:Player = data.int1.userData.data;
 		player.body.velocity.muleq(0);

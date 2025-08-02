@@ -17,6 +17,7 @@ class Interactable extends SelfAssigningFlxNapeSprite implements Triggerable {
 	public var isBackground:Bool;
 	public var secondsToReset:Float = -1;
 	public var followListensTo:Bool;
+	public var numberOfTimesInteractedWith:Int;
 
 	public function setOn(value:Bool) {
 		if (disabled)
@@ -50,6 +51,7 @@ class Interactable extends SelfAssigningFlxNapeSprite implements Triggerable {
 
 	public function handleInteraction(data:InteractionCallback) {
 		// Override to provide functionality
+		numberOfTimesInteractedWith++;
 	}
 
 	public function handleInteractionEnd(data:InteractionCallback) {

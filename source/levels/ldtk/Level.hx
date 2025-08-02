@@ -1,5 +1,7 @@
 package levels.ldtk;
 
+import entities.interact.SumTrigger;
+import entities.interact.MessageEntity;
 import flixel.math.FlxMath;
 import echo.util.ext.FloatExt.deg_to_rad;
 import entities.interact.LightShow;
@@ -79,6 +81,7 @@ class Level {
 	public var interactables:Array<Interactable> = [];
 	public var triggerables:Array<Triggerable> = [];
 	public var lightShows:Array<LightShow> = [];
+	public var summers:Array<SumTrigger> = [];
 
 	public function new(worldNameOrIID:String, nameOrIID:String) {
 		this.worldID = worldNameOrIID;
@@ -137,7 +140,7 @@ class Level {
 			parseTriggerables(raw.l_Objects.all_CollectionTrigger, raw.l_Objects.all_TargetSmall, raw.l_Objects.all_TargetLarge, raw.l_Objects.all_DropTarget,
 				raw.l_Objects.all_LightSmallRound, raw.l_Objects.all_LightLargeRound, raw.l_Objects.all_LightSquare, raw.l_Objects.all_LightArrow,
 				raw.l_Objects.all_LightShortTriangle, raw.l_Objects.all_LightTallTriangle, raw.l_Objects.all_LightShow, raw.l_Objects.all_Post,
-				raw.l_Objects.all_Gate, raw.l_Objects.all_Sensor);
+				raw.l_Objects.all_Gate, raw.l_Objects.all_Sensor, raw.l_Objects.all_Message, raw.l_Objects.all_SumTrigger);
 			parseKickers(raw.l_Objects.all_Kicker);
 		}
 	}
@@ -255,7 +258,8 @@ class Level {
 			largeTargets:Array<Ldtk.Entity_TargetLarge>, dropTargets:Array<Ldtk.Entity_DropTarget>, smallRoundLights:Array<Ldtk.Entity_LightSmallRound>,
 			largeRoundLights:Array<Ldtk.Entity_LightLargeRound>, squareLights:Array<Ldtk.Entity_LightSquare>, arrowLights:Array<Ldtk.Entity_LightArrow>,
 			shortTriangleLights:Array<Ldtk.Entity_LightShortTriangle>, tallTriangleLights:Array<Ldtk.Entity_LightTallTriangle>,
-			lightShows:Array<Ldtk.Entity_LightShow>, posts:Array<Ldtk.Entity_Post>, gates:Array<Ldtk.Entity_Gate>, sensors:Array<Ldtk.Entity_Sensor>) {
+			lightShows:Array<Ldtk.Entity_LightShow>, posts:Array<Ldtk.Entity_Post>, gates:Array<Ldtk.Entity_Gate>, sensors:Array<Ldtk.Entity_Sensor>,
+			messages:Array<Ldtk.Entity_Message>, sumTriggers:Array<Ldtk.Entity_SumTrigger>) {
 		var listenerToNode = new Map<Triggerable, String>();
 		for (v in smallTargets) {
 			var rotation = 0.0;
@@ -396,6 +400,28 @@ class Level {
 			interactables.push(t);
 			triggerables.push(t);
 		}
+		for (v in messages) {
+			var t = new MessageEntity();
+			t.IID = v.iid;
+			t.content = v.f_Content;
+			t.secondsUntilHidden = v.f_SecondsUntilHide;
+			if (v.f_ListensTo != null) {
+				listenerToNode.set(t, v.f_ListensTo.entityIid);
+			}
+			triggerables.push(t);
+		}
+		var sumTriggerToNodes = new Map<SumTrigger, Array<String>>();
+		for (v in sumTriggers) {
+			var nodeIds = v.f_Nodes.map((f) -> f.entityIid);
+			var t = new SumTrigger();
+			t.IID = v.iid;
+			t.requiredSum = v.f_RequiredSum;
+			t.shouldDisableNodesOnComplete = v.f_DisableNodes;
+			t.shouldResetNodesOnComplete = v.f_ResetNodes;
+			summers.push(t);
+			triggerables.push(t);
+			sumTriggerToNodes.set(t, nodeIds);
+		}
 		var triggerToNodes = new Map<CollectionTrigger, Array<String>>();
 		for (v in collectionTriggers) {
 			var nodeIds = v.f_Nodes.map((f) -> f.entityIid);
@@ -415,6 +441,16 @@ class Level {
 				for (triggerable in triggerables) {
 					if (triggerable.IID == nodeId) {
 						t.add(triggerable);
+					}
+				}
+			}
+		}
+		for (t in sumTriggerToNodes.keys()) {
+			var nodeIds = sumTriggerToNodes.get(t);
+			for (nodeId in nodeIds) {
+				for (interactable in interactables) {
+					if (interactable.IID == nodeId) {
+						t.nodes.push(interactable);
 					}
 				}
 			}

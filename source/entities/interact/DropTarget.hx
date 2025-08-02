@@ -39,6 +39,7 @@ class DropTarget extends Interactable {
 	override public function handleInteraction(data:InteractionCallback) {
 		FmodPlugin.playSFX(FmodSFX.Dropper);
 		setOn(true);
+		super.handleInteraction(data);
 	}
 
 	override function onOnOffChanged(value:Bool) {

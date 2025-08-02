@@ -51,6 +51,7 @@ class TargetLarge extends Interactable {
 	override public function handleInteraction(data:InteractionCallback) {
 		FmodPlugin.playSFX(FmodSFX.TargetHit);
 		setOn(true);
+		super.handleInteraction(data);
 	}
 
 	override function onOnOffChanged(value:Bool) {

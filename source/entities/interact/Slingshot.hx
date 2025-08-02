@@ -147,6 +147,7 @@ class Slingshot extends Interactable {
 		// trace(data.int1.castBody.velocity.dot(impactNormal));
 		// trace(impactNormal.dot(data.int1.castBody.velocity));
 		if (impactImpulse.length >= sensitivity) {
+			super.handleInteraction(data);
 			// if (data.int1.castBody.velocity.dot(impactNormal) >= sensitivity) {
 			// if (data.int1.castBody.velocity.length >= sensitivity) {
 			data.int1.castBody.applyImpulse(impactNormal.mul(bumpStrength));

@@ -101,4 +101,5 @@ The project uses local dependency management via `haxelib.deps`:
 - **Z** - Left flipper
 - **M** - Right flipper
 - **P/ESC** - Pause/unpause (freezes physics via `FlxG.timeScale = 0`)
+- **R** - Restart current level
 - **Arrow Keys** - Direct ball movement (debug)
