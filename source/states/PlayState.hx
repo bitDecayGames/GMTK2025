@@ -327,7 +327,7 @@ class PlayState extends FlxTransitionableState {
 		}
 
 		/* Cheese to make the flipper sound exactly once all the time*/
-		if (FlxG.keys.anyJustPressed([FlxKey.Z, FlxKey.M])) {
+		if (FlxG.keys.anyJustPressed([FlxKey.Z, FlxKey.X, FlxKey.M])) {
 			FmodPlugin.playSFX(FmodSFX.FlipperStart);
 		}
 

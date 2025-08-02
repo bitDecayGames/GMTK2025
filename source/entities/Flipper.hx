@@ -163,9 +163,9 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 	override public function update(delta:Float) {
 		var activated = switch ctrlGroup {
 			case LEFT:
-				FlxG.keys.pressed.Z;
+				FlxG.keys.pressed.Z ;
 			case RIGHT:
-				FlxG.keys.pressed.M;
+				FlxG.keys.pressed.X || FlxG.keys.pressed.M;
 			default:
 				FlxG.keys.pressed.SPACE;
 		};
