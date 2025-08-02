@@ -146,10 +146,7 @@
 					"defUid": 251,
 					"px": [424,360],
 					"fieldInstances": [
-						{ "__identifier": "Direction", "__type": "Point", "__value": { "cx": 24, "cy": 27 }, "__tile": null, "defUid": 1765, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["24,27"]
-						}] },
+						{ "__identifier": "Direction", "__type": "Point", "__value": null, "__tile": null, "defUid": 1765, "realEditorValues": [] },
 						{ "__identifier": "Force", "__type": "Float", "__value": 1000, "__tile": null, "defUid": 1766, "realEditorValues": [] }
 					],
 					"__worldX": -248,
@@ -1020,16 +1017,16 @@
 			"__pxTotalOffsetY": 0,
 			"__tilesetDefUid": 227,
 			"__tilesetRelPath": "aseprite/baseTileset.png",
-			"iid": "b3a97961-5e50-11f0-96b4-d59c21fa77e7",
+			"iid": "9c78c612-5e50-11f0-8054-c5230d7284fa",
 			"levelId": 717,
-			"layerDefUid": 3248,
+			"layerDefUid": 2063,
 			"pxOffsetX": 0,
 			"pxOffsetY": 0,
 			"visible": true,
 			"optionalRules": [],
 			"intGridCsv": [],
 			"autoLayerTiles": [],
-			"seed": 1317068,
+			"seed": 9702091,
 			"overrideTilesetUid": null,
 			"gridTiles": [
 				{ "px": [0,0], "src": [160,144], "f": 0, "t": 109, "d": [0], "a": 1 },
