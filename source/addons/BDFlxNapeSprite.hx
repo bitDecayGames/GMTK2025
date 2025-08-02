@@ -255,7 +255,7 @@ class BDFlxNapeSprite extends FlxSprite {
 		y = body.position.y - origin.y;
 	}
 
-	inline function set_physicsEnabled(Value:Bool):Bool {
+	function set_physicsEnabled(Value:Bool):Bool {
 		if (body != null)
 			body.space = Value ? BDFlxNapeSpace.space : null;
 

@@ -38,14 +38,13 @@ class Kicker extends Interactable {
 
 	public function new(X:Float, Y:Float, rotation:Float, power:Float) {
 		super(X, Y);
-		loadGraphic(AssetPaths.Icons32x32__json, true, 32, 32);
-		animation.add('a', [1]);
+		loadGraphic(AssetPaths.Icons48x48__png, true, 48, 48);
+		animation.add('a', [0]);
 		animation.play('a');
-		animation.frameIndex = 1;
 		var body = new Body(BodyType.STATIC);
 		body.rotation = rotation;
 		body.position.set(Vec2.get(X, Y));
-		var s = new Circle(16);
+		var s = new Circle(1);
 		s.sensorEnabled = true;
 		body.shapes.add(s);
 		body.isBullet = true;

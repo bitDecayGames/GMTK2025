@@ -77,7 +77,7 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		var w = width;
 
 		var body = new Body(BodyType.DYNAMIC);
-		body.position.set(Vec2.get(X, Y));
+		body.position.set(Vec2.weak(X, Y));
 		body.shapes.add(new Circle(bigRad, Vec2.weak(0, 0), flipperMaterial));
 		body.shapes.add(new Circle(smallRad, Vec2.weak(w - bigRad - smallRad, 0), flipperMaterial));
 		body.shapes.add(new Polygon([
@@ -121,30 +121,28 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		restingJoint.damping = 0;
 		restingJoint.maxForce = flipperStrength * fmass;
 
-		addPremadeBody(body);
-
 		// Set rotation after body is added to physics space
 		body.rotation = restAngle;
 
 		body.cbTypes.add(CbTypes.CB_CONTROL_SURFACE);
+		addPremadeBody(body);
 
 		// CbEvent.BEGIN, InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_INTERACTABLE,
 		var listener = new PreListener(InteractionType.COLLISION, CbTypes.CB_BALL, CbTypes.CB_CONTROL_SURFACE, testPre, 0, false);
 		BDFlxNapeSpace.space.listeners.add(listener);
+	}
 
-		// Force lockout to 0 to fix CW flipper initialization issue
-		lockout = 0;
+	override function set_physicsEnabled(Value:Bool):Bool {
+		if (pivotJoint != null)
+			pivotJoint.space = Value ? BDFlxNapeSpace.space : null;
+		if (angleJoint != null)
+			angleJoint.space = Value ? BDFlxNapeSpace.space : null;
+		if (activateJoint != null)
+			activateJoint.space = Value ? BDFlxNapeSpace.space : null;
+		if (restingJoint != null)
+			restingJoint.space = Value ? BDFlxNapeSpace.space : null;
 
-		// Ensure flipper starts at correct rotation within joint range
-		body.rotation = restAngle;
-
-		// Only recalculate resting joint for CW flippers (CCW flippers work fine with original calculation)
-		if (flipDirection == CW) {
-			var forceLocalPos2 = Vec2.get(width - height - height / 2, 0).muleq(leverArmScale);
-			var correctedRestingPos = body.localPointToWorld(forceLocalPos2.copy().rotate(restAngle));
-			restingJoint.anchor2 = correctedRestingPos;
-		}
-		restingJoint.active = true;
+		return super.set_physicsEnabled(Value);
 	}
 
 	function testPre(cb:PreCallback):PreFlag {
@@ -160,6 +158,11 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		}
 	}
 
+	// for some reason, we still are gettng physics weirdness...
+	// so this forces the flippers to think they are activated
+	// for X frames after first being loaded.
+	var jitterFix = 10;
+
 	override public function update(delta:Float) {
 		var activated = switch ctrlGroup {
 			case LEFT:
@@ -169,6 +172,12 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 			default:
 				FlxG.keys.pressed.SPACE;
 		};
+
+		if (jitterFix > 0) {
+			jitterFix--;
+			activated = true;
+		}
+
 		if (activated) {
 			flip(delta);
 		} else {
@@ -191,7 +200,6 @@ class Flipper extends SelfAssigningFlxNapeSprite {
 		} else {
 			lockout = 0;
 		}
-		
 
 		if (flipDirection == CCW && body.rotation <= jointMin) {
 			body.rotation = jointMin;

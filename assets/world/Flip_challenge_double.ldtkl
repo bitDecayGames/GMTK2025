@@ -148,7 +148,10 @@
 					"fieldInstances": [
 						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2214, "realEditorValues": [] },
 						{ "__identifier": "SecondsToReset", "__type": "Float", "__value": -1, "__tile": null, "defUid": 2215, "realEditorValues": [] },
-						{ "__identifier": "RotateTo", "__type": "Point", "__value": null, "__tile": null, "defUid": 2216, "realEditorValues": [] }
+						{ "__identifier": "RotateTo", "__type": "Point", "__value": { "cx": 49, "cy": 21 }, "__tile": null, "defUid": 2216, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["49,21"]
+						}] }
 					],
 					"__worldX": 840,
 					"__worldY": 312
@@ -168,7 +171,10 @@
 					"fieldInstances": [
 						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2214, "realEditorValues": [] },
 						{ "__identifier": "SecondsToReset", "__type": "Float", "__value": -1, "__tile": null, "defUid": 2215, "realEditorValues": [] },
-						{ "__identifier": "RotateTo", "__type": "Point", "__value": null, "__tile": null, "defUid": 2216, "realEditorValues": [] }
+						{ "__identifier": "RotateTo", "__type": "Point", "__value": { "cx": 51, "cy": 22 }, "__tile": null, "defUid": 2216, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["51,22"]
+						}] }
 					],
 					"__worldX": 872,
 					"__worldY": 328
@@ -188,7 +194,10 @@
 					"fieldInstances": [
 						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2214, "realEditorValues": [] },
 						{ "__identifier": "SecondsToReset", "__type": "Float", "__value": -1, "__tile": null, "defUid": 2215, "realEditorValues": [] },
-						{ "__identifier": "RotateTo", "__type": "Point", "__value": null, "__tile": null, "defUid": 2216, "realEditorValues": [] }
+						{ "__identifier": "RotateTo", "__type": "Point", "__value": { "cx": 53, "cy": 23 }, "__tile": null, "defUid": 2216, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["53,23"]
+						}] }
 					],
 					"__worldX": 904,
 					"__worldY": 344
@@ -232,7 +241,7 @@
 							"id": "V_String",
 							"params": ["11,34"]
 						}] },
-						{ "__identifier": "Force", "__type": "Float", "__value": 1000, "__tile": null, "defUid": 1766, "realEditorValues": [] }
+						{ "__identifier": "Force", "__type": "Float", "__value": 2000, "__tile": null, "defUid": 1766, "realEditorValues": [{ "id": "V_Float", "params": [2000] }] }
 					],
 					"__worldX": 496,
 					"__worldY": 629
@@ -994,7 +1003,7 @@
 				{ "px": [192,304], "src": [64,64], "f": 0, "t": 48, "d": [1266], "a": 1 },
 				{ "px": [208,304], "src": [80,64], "f": 0, "t": 49, "d": [1267], "a": 1 },
 				{ "px": [336,304], "src": [0,16], "f": 0, "t": 11, "d": [1275], "a": 1 },
-				{ "px": [352,304], "src": [16,16], "f": 0, "t": 12, "d": [1276], "a": 1 },
+				{ "px": [352,304], "src": [160,144], "f": 0, "t": 109, "d": [1276], "a": 1 },
 				{ "px": [752,304], "src": [160,96], "f": 0, "t": 76, "d": [1301], "a": 1 },
 				{ "px": [768,304], "src": [128,128], "f": 0, "t": 96, "d": [1302], "a": 1 },
 				{ "px": [960,304], "src": [0,64], "f": 0, "t": 44, "d": [1314], "a": 1 },

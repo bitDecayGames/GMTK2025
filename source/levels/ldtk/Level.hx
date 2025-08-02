@@ -441,7 +441,6 @@ class Level {
 	function rotateTo(pos:Vec2, rotateTo:Vec2) {
 		var rel = Vec2.get(rotateTo.x - pos.x, rotateTo.y - pos.y);
 		rel = rel.normalise();
-		trace('pos(${pos.x}, ${pos.y}) to(${rotateTo.x}, ${rotateTo.y}) rel(${rel.x}, ${rel.y}) angle=${rel.angle}');
 		return rel.angle;
 	}
 }
