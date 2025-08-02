@@ -272,26 +272,6 @@
 					"__worldY": -680
 				},
 				{
-					"__identifier": "DropTarget",
-					"__grid": [7,33],
-					"__pivot": [0.5,0.5],
-					"__tags": [ "interactable", "triggerable" ],
-					"__tile": { "tilesetUid": 242, "x": 32, "y": 0, "w": 32, "h": 16 },
-					"__smartColor": "#CCC7C6",
-					"iid": "3c511560-5e50-11f0-8c4e-394290a21a61",
-					"width": 32,
-					"height": 16,
-					"defUid": 249,
-					"px": [117,542],
-					"fieldInstances": [
-						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2214, "realEditorValues": [] },
-						{ "__identifier": "SecondsToReset", "__type": "Float", "__value": -1, "__tile": null, "defUid": 2215, "realEditorValues": [] },
-						{ "__identifier": "RotateTo", "__type": "Point", "__value": null, "__tile": null, "defUid": 2216, "realEditorValues": [] }
-					],
-					"__worldX": 1461,
-					"__worldY": -370
-				},
-				{
 					"__identifier": "Tunnel",
 					"__grid": [33,37],
 					"__pivot": [0.5,0.5],
@@ -563,20 +543,77 @@
 					"__worldY": -232
 				},
 				{
-					"__identifier": "Spawn",
-					"__grid": [33,40],
-					"__pivot": [0,0],
-					"__tags": ["Player"],
+					"__identifier": "Gate",
+					"__grid": [6,32],
+					"__pivot": [0.5,0.5],
+					"__tags": [ "interactable", "triggerable" ],
 					"__tile": null,
-					"__smartColor": "#FFFFFF",
-					"iid": "a79e9450-5e50-11f0-aa11-c109c416b965",
-					"width": 32,
+					"__smartColor": "#3A4466",
+					"iid": "ac2d96d0-5e50-11f0-8907-65fad07dd72f",
+					"width": 48,
+					"height": 16,
+					"defUid": 2217,
+					"px": [104,520],
+					"fieldInstances": [
+						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
+							"entityIid": "c159a9e0-5e50-11f0-8907-8303170d3bd3",
+							"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
+							"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
+							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
+						}, "__tile": null, "defUid": 2218, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["c159a9e0-5e50-11f0-8907-8303170d3bd3"]
+						}] },
+						{ "__identifier": "RotateTo", "__type": "Point", "__value": { "cx": 7, "cy": 34 }, "__tile": null, "defUid": 2219, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["7,34"]
+						}] }
+					],
+					"__worldX": 1448,
+					"__worldY": -392
+				},
+				{
+					"__identifier": "Sensor",
+					"__grid": [11,33],
+					"__pivot": [0.5,0.5],
+					"__tags": ["triggerable"],
+					"__tile": null,
+					"__smartColor": "#D743D2",
+					"iid": "c159a9e0-5e50-11f0-8907-8303170d3bd3",
+					"width": 48,
 					"height": 32,
-					"defUid": 74,
-					"px": [528,640],
-					"fieldInstances": [],
-					"__worldX": 1872,
-					"__worldY": -272
+					"defUid": 2220,
+					"px": [184,536],
+					"fieldInstances": [
+						{ "__identifier": "SecondsToReset", "__type": "Float", "__value": -1, "__tile": null, "defUid": 2221, "realEditorValues": [] },
+						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2222, "realEditorValues": [] }
+					],
+					"__worldX": 1528,
+					"__worldY": -376
+				},
+				{
+					"__identifier": "LightSmallRound",
+					"__grid": [13,30],
+					"__pivot": [0.5,0.5],
+					"__tags": ["triggerable"],
+					"__tile": { "tilesetUid": 243, "x": 96, "y": 0, "w": 32, "h": 32 },
+					"__smartColor": "#8AFFC7",
+					"iid": "760d0340-5e50-11f0-8907-19b97be88a7d",
+					"width": 16,
+					"height": 16,
+					"defUid": 2211,
+					"px": [216,488],
+					"fieldInstances": [{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
+						"entityIid": "c159a9e0-5e50-11f0-8907-8303170d3bd3",
+						"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
+						"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
+						"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
+					}, "__tile": null, "defUid": 2212, "realEditorValues": [{
+						"id": "V_String",
+						"params": ["c159a9e0-5e50-11f0-8907-8303170d3bd3"]
+					}] }],
+					"__worldX": 1560,
+					"__worldY": -424
 				}
 			]
 		},
