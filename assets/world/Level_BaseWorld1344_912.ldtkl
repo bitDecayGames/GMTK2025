@@ -765,6 +765,38 @@
 					],
 					"__worldX": 1624,
 					"__worldY": -312
+				},
+				{
+					"__identifier": "Post",
+					"__grid": [14,31],
+					"__pivot": [0.5,0.5],
+					"__tags": ["interactable"],
+					"__tile": { "tilesetUid": 243, "x": 128, "y": 0, "w": 32, "h": 32 },
+					"__smartColor": "#E43B44",
+					"iid": "cd4a8910-5e50-11f0-8907-b3bc9802e019",
+					"width": 16,
+					"height": 16,
+					"defUid": 2223,
+					"px": [232,504],
+					"fieldInstances": [],
+					"__worldX": 1576,
+					"__worldY": -408
+				},
+				{
+					"__identifier": "Post",
+					"__grid": [17,29],
+					"__pivot": [0.5,0.5],
+					"__tags": ["interactable"],
+					"__tile": { "tilesetUid": 243, "x": 128, "y": 0, "w": 32, "h": 32 },
+					"__smartColor": "#E43B44",
+					"iid": "ce0107d0-5e50-11f0-8907-01e077e534ed",
+					"width": 16,
+					"height": 16,
+					"defUid": 2223,
+					"px": [280,472],
+					"fieldInstances": [],
+					"__worldX": 1624,
+					"__worldY": -440
 				}
 			]
 		},
