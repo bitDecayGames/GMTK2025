@@ -111,10 +111,12 @@ class Player extends SelfAssigningFlxNapeSprite {
 		var rot = body.velocity.angle * radToDeg;
 		emitter.angle.set(rot, rot, rot, rot);
 
+		#if debug
 		var inputDir = InputCalculator.getInputCardinal(playerNum);
 		if (inputDir != NONE) {
 			body.velocity.set(new Vec2(inputDir.asVector().x * speed, inputDir.asVector().y * speed));
 		}
+		#end
 
 		// Check timeout for moving ball with no collisions (only if timeout is enabled)
 		if (timeoutDuration > 0) {

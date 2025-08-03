@@ -49,12 +49,32 @@ class SnakeNut extends FlxSprite {
 		});
 		if (isRed) {
 			TODO.sfx("Start to fill up the RED nut");
+			FmodManager.SetEventParameterOnSong("highpass", 1);		
+			undoLowpass();
+			FmodPlugin.playSFX(FmodSFX.BallConfirm);
 			animation.play(animsRed.FillUp);
 		} else {
 			TODO.sfx("Start to fill up one of the GREEN nuts");
+			FmodManager.SetEventParameterOnSong("highpass", 1);
+			undoLowpass();
+			FmodPlugin.playSFX(FmodSFX.BallConfirm);
 			animation.play(anims.FillUp);
 		}
 	}
+}
+
+function undoLowpass() {
+		var duration = 3.9;
+		var interval = 0.1;
+		var repeats = Std.int(duration / interval);
+
+		FlxTimer.loop(interval, (timer) -> {
+			FmodManager.SetEventParameterOnSong("highpass", 1);
+		}, repeats);
+
+		FlxTimer.wait(4, ()->{
+			FmodManager.SetEventParameterOnSong("highpass", 0);
+		});
 }
 
 class SnakeNutSystem extends FlxTypedGroup<SnakeNut> {
