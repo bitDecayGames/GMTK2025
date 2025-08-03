@@ -139,22 +139,6 @@
 					"__worldY": 1352
 				},
 				{
-					"__identifier": "Spawn",
-					"__grid": [29,49],
-					"__pivot": [0,0],
-					"__tags": ["Player"],
-					"__tile": null,
-					"__smartColor": "#FFFFFF",
-					"iid": "cbb8ceb0-5e50-11f0-8054-456fe2abad42",
-					"width": 32,
-					"height": 32,
-					"defUid": 74,
-					"px": [464,784],
-					"fieldInstances": [],
-					"__worldX": 6432,
-					"__worldY": 1568
-				},
-				{
 					"__identifier": "FlipperFree",
 					"__grid": [31,21],
 					"__pivot": [0.5,0.5],
