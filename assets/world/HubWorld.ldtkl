@@ -547,6 +547,107 @@
 					"fieldInstances": [],
 					"__worldX": 1472,
 					"__worldY": -368
+				},
+				{
+					"__identifier": "SnakeNut",
+					"__grid": [16,32],
+					"__pivot": [0.5,0.5],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#71F24F",
+					"iid": "28119e30-5e50-11f0-8cf6-0b04c90b58ce",
+					"width": 32,
+					"height": 32,
+					"defUid": 3337,
+					"px": [264,520],
+					"fieldInstances": [
+						{ "__identifier": "IsRed", "__type": "Bool", "__value": false, "__tile": null, "defUid": 3339, "realEditorValues": [] },
+						{ "__identifier": "EndZoneSpawnPoint", "__type": "Point", "__value": null, "__tile": null, "defUid": 3340, "realEditorValues": [] }
+					],
+					"__worldX": 1608,
+					"__worldY": -312
+				},
+				{
+					"__identifier": "SnakeNut",
+					"__grid": [16,35],
+					"__pivot": [0.5,0.5],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#71F24F",
+					"iid": "28aea180-5e50-11f0-8cf6-5d5f6ff3d9dc",
+					"width": 32,
+					"height": 32,
+					"defUid": 3337,
+					"px": [264,568],
+					"fieldInstances": [
+						{ "__identifier": "IsRed", "__type": "Bool", "__value": false, "__tile": null, "defUid": 3339, "realEditorValues": [] },
+						{ "__identifier": "EndZoneSpawnPoint", "__type": "Point", "__value": null, "__tile": null, "defUid": 3340, "realEditorValues": [] }
+					],
+					"__worldX": 1608,
+					"__worldY": -264
+				},
+				{
+					"__identifier": "SnakeNut",
+					"__grid": [18,37],
+					"__pivot": [0.5,0.5],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#71F24F",
+					"iid": "292de3a0-5e50-11f0-8cf6-0dde6a7a0ff9",
+					"width": 32,
+					"height": 32,
+					"defUid": 3337,
+					"px": [296,600],
+					"fieldInstances": [
+						{ "__identifier": "IsRed", "__type": "Bool", "__value": true, "__tile": null, "defUid": 3339, "realEditorValues": [{
+							"id": "V_Bool",
+							"params": [ true ]
+						}] },
+						{ "__identifier": "EndZoneSpawnPoint", "__type": "Point", "__value": { "cx": 18, "cy": 33 }, "__tile": null, "defUid": 3340, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["18,33"]
+						}] }
+					],
+					"__worldX": 1640,
+					"__worldY": -232
+				},
+				{
+					"__identifier": "SnakeNut",
+					"__grid": [21,35],
+					"__pivot": [0.5,0.5],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#71F24F",
+					"iid": "2998b360-5e50-11f0-8cf6-97b06e7eff06",
+					"width": 32,
+					"height": 32,
+					"defUid": 3337,
+					"px": [344,568],
+					"fieldInstances": [
+						{ "__identifier": "IsRed", "__type": "Bool", "__value": false, "__tile": null, "defUid": 3339, "realEditorValues": [] },
+						{ "__identifier": "EndZoneSpawnPoint", "__type": "Point", "__value": null, "__tile": null, "defUid": 3340, "realEditorValues": [] }
+					],
+					"__worldX": 1688,
+					"__worldY": -264
+				},
+				{
+					"__identifier": "SnakeNut",
+					"__grid": [21,32],
+					"__pivot": [0.5,0.5],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#71F24F",
+					"iid": "29fbe200-5e50-11f0-8cf6-5b0642db4700",
+					"width": 32,
+					"height": 32,
+					"defUid": 3337,
+					"px": [344,520],
+					"fieldInstances": [
+						{ "__identifier": "IsRed", "__type": "Bool", "__value": false, "__tile": null, "defUid": 3339, "realEditorValues": [] },
+						{ "__identifier": "EndZoneSpawnPoint", "__type": "Point", "__value": null, "__tile": null, "defUid": 3340, "realEditorValues": [] }
+					],
+					"__worldX": 1688,
+					"__worldY": -312
 				}
 			]
 		},
