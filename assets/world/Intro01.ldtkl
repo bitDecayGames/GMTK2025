@@ -94,54 +94,20 @@
 					"__worldY": -3952
 				},
 				{
-					"__identifier": "Message",
-					"__grid": [13,19],
-					"__pivot": [0.5,0.5],
-					"__tags": ["triggerable"],
-					"__tile": { "tilesetUid": 16, "x": 160, "y": 16, "w": 16, "h": 16 },
-					"__smartColor": "#C0CBDC",
-					"iid": "d1900970-5e50-11f0-afd1-b1372eb460d5",
-					"width": 16,
-					"height": 16,
-					"defUid": 2262,
-					"px": [216,312],
-					"fieldInstances": [
-						{ "__identifier": "Content", "__type": "String", "__value": "Press 'Z'", "__tile": null, "defUid": 2263, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["Press 'Z'"]
-						}] },
-						{ "__identifier": "SecondsUntilHide", "__type": "Float", "__value": 5, "__tile": null, "defUid": 2265, "realEditorValues": [] },
-						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
-							"entityIid": "127e67b0-5e50-11f0-afd1-dddef41c376e",
-							"layerIid": "50319a91-5e50-11f0-86e4-5ff0bcc45aaf",
-							"levelIid": "50319a90-5e50-11f0-86e4-cd373511dd14",
-							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
-						}, "__tile": null, "defUid": 2266, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["127e67b0-5e50-11f0-afd1-dddef41c376e"]
-						}] }
-					],
-					"__worldX": 1736,
-					"__worldY": -3656
-				},
-				{
-					"__identifier": "Sensor",
-					"__grid": [12,23],
-					"__pivot": [0.5,0.5],
-					"__tags": ["triggerable"],
+					"__identifier": "Spawn",
+					"__grid": [5,21],
+					"__pivot": [0,0],
+					"__tags": ["Player"],
 					"__tile": null,
-					"__smartColor": "#D743D2",
-					"iid": "127e67b0-5e50-11f0-afd1-dddef41c376e",
-					"width": 145,
-					"height": 51,
-					"defUid": 2220,
-					"px": [207,372],
-					"fieldInstances": [
-						{ "__identifier": "SecondsToReset", "__type": "Float", "__value": -1, "__tile": null, "defUid": 2221, "realEditorValues": [] },
-						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2222, "realEditorValues": [] }
-					],
-					"__worldX": 1727,
-					"__worldY": -3596
+					"__smartColor": "#FFFFFF",
+					"iid": "fe1b7590-5e50-11f0-aa9c-37e38aa1c3e5",
+					"width": 32,
+					"height": 32,
+					"defUid": 74,
+					"px": [80,336],
+					"fieldInstances": [],
+					"__worldX": 1600,
+					"__worldY": -3632
 				}
 			]
 		},

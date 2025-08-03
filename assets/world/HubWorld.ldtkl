@@ -463,22 +463,6 @@
 					"__worldY": -456
 				},
 				{
-					"__identifier": "Spawn",
-					"__grid": [32,36],
-					"__pivot": [0,0],
-					"__tags": ["Player"],
-					"__tile": null,
-					"__smartColor": "#FFFFFF",
-					"iid": "80c12960-5e50-11f0-aadc-f59fbb105f4a",
-					"width": 32,
-					"height": 32,
-					"defUid": 74,
-					"px": [512,576],
-					"fieldInstances": [],
-					"__worldX": 1856,
-					"__worldY": -256
-				},
-				{
 					"__identifier": "Kicker",
 					"__grid": [19,2],
 					"__pivot": [0.5,0.5],
