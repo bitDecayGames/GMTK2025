@@ -10206,12 +10206,12 @@
 			{ "id": "DOWN", "tileRect": { "tilesetUid": 16, "x": 48, "y": 80, "w": 16, "h": 16 }, "color": 14120515 },
 			{ "id": "LEFT", "tileRect": { "tilesetUid": 16, "x": 32, "y": 80, "w": 16, "h": 16 }, "color": 15389866 },
 			{ "id": "RIGHT", "tileRect": { "tilesetUid": 16, "x": 16, "y": 80, "w": 16, "h": 16 }, "color": 14984818 }
-		], "iconTilesetUid": 16, "externalRelPath": "../source/types/Direction.hx", "externalFileChecksum": "d9d0868d18b9a6244951f099d5f943e8", "tags": [] },
+		], "iconTilesetUid": 16, "externalRelPath": "../source/types/Direction.hx", "externalFileChecksum": "72edd69d6e24c5a5274d0b09ea08f1db", "tags": [] },
 		{ "identifier": "LightShowEnum", "uid": 2245, "values": [
 			{ "id": "SEQUENTIAL", "tileRect": { "tilesetUid": 16, "x": 224, "y": 112, "w": 16, "h": 16 }, "color": 12470831 },
 			{ "id": "ALTERNATE", "tileRect": { "tilesetUid": 16, "x": 336, "y": 256, "w": 16, "h": 16 }, "color": 14120515 },
 			{ "id": "BLINK", "tileRect": { "tilesetUid": 16, "x": 400, "y": 0, "w": 16, "h": 16 }, "color": 15389866 }
-		], "iconTilesetUid": 16, "externalRelPath": "../source/entities/interact/LightShowEnum.hx", "externalFileChecksum": "5c36f79c304028541593007515d118a5", "tags": [] }
+		], "iconTilesetUid": 16, "externalRelPath": "../source/entities/interact/LightShowEnum.hx", "externalFileChecksum": "a40dd978c8f3a443f01bfc06f955d634", "tags": [] }
 	], "levelFields": [
 		{
 			"identifier": "Music",
