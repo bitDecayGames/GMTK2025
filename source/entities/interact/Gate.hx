@@ -27,7 +27,7 @@ class Gate extends Interactable {
 	public function new(X:Float, Y:Float, rotation:Float) {
 		super(X, Y);
 		Aseprite.loadAllAnimations(this, AssetPaths.dropGate__json);
-		animation.play(anims.dropGate_0_aseprite);
+		animation.play(anims.dropGate_1_aseprite);
 		var body = new Body(BodyType.STATIC);
 		body.rotation = rotation;
 		body.position.set(Vec2.get(X, Y));
@@ -48,10 +48,10 @@ class Gate extends Interactable {
 	override function onOnOffChanged(value:Bool) {
 		if (value) {
 			disableInteractions();
-			animation.play(anims.dropGate_1_aseprite);
+			animation.play(anims.dropGate_0_aseprite);
 		} else {
 			enableInteractions();
-			animation.play(anims.dropGate_0_aseprite);
+			animation.play(anims.dropGate_1_aseprite);
 		}
 		super.onOnOffChanged(value);
 	}
