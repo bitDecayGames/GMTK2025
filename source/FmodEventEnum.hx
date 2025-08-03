@@ -14,6 +14,7 @@ enum FmodSong {
 enum FmodSFX {
     BallTerrain;
     BallTerrain2;
+    BallConfirm;
     Dropper;
     Dropper2;
     Dropper3;
@@ -49,6 +50,7 @@ class FmodEvent {
         return switch(sfx) {
             case BallTerrain: "event:/SFX/Ball/BallTerrain";
             case BallTerrain2: "event:/SFX/Ball/BallTerrain2";
+            case BallConfirm: "event:/SFX/BallConfirm/BallConfirm";
             case Dropper: "event:/SFX/Dropper/Dropper";
             case Dropper2: "event:/SFX/Dropper/Dropper2";
             case Dropper3: "event:/SFX/Dropper/Dropper3";

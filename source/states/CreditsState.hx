@@ -76,14 +76,14 @@ class CreditsState extends FlxTransitionableState {
 		for (flxText in _txtRole) {
 			center(flxText);
 			flxText.y = creditsVerticalOffset;
-			
+
 			// Position underline if this text has one
 			if (_underlines.exists(flxText)) {
 				var underline = _underlines.get(flxText);
 				center(underline);
 				underline.y = flxText.y + flxText.height + 2;
 			}
-			
+
 			creditsVerticalOffset += entryVerticalSpacing;
 		}
 
@@ -131,7 +131,7 @@ class CreditsState extends FlxTransitionableState {
 		finalRoleArray.push(roleText);
 		finalRoleArray.push(roleText);
 		_allCreditElements.push(roleText);
-		
+
 		// Add underline for category names
 		var underline = new FlxSprite();
 		underline.makeGraphic(Std.int(roleText.width), 2, FlxColor.WHITE);
@@ -178,7 +178,7 @@ class CreditsState extends FlxTransitionableState {
 	}
 
 	function clickMainMenu():Void {
-		FmodFlxUtilities.TransitionToState(new MainMenuState());
+		FmodFlxUtilities.TransitionToState(new PlayState());
 	}
 
 	override public function onFocusLost() {

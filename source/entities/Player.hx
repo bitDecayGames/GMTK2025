@@ -42,12 +42,7 @@ class Player extends SelfAssigningFlxNapeSprite {
 	// Timeout system for moving ball with no collisions
 	var timeSinceLastCollision:Float = 0;
 	var velocityThreshold:Float = 50; // Minimum velocity to consider ball "moving"
-	#if debug
-	var timeoutDuration:Float = 0; // 8 seconds (set to 0 to disable timeout functionality)
-	#else
 	var timeoutDuration:Float = 8.0; // 8 seconds (set to 0 to disable timeout functionality)
-
-	#end
 	public var onTimeout:Void->Void = null;
 
 	public function new(X:Float, Y:Float) {
@@ -116,10 +111,12 @@ class Player extends SelfAssigningFlxNapeSprite {
 		var rot = body.velocity.angle * radToDeg;
 		emitter.angle.set(rot, rot, rot, rot);
 
+		#if debug
 		var inputDir = InputCalculator.getInputCardinal(playerNum);
 		if (inputDir != NONE) {
 			body.velocity.set(new Vec2(inputDir.asVector().x * speed, inputDir.asVector().y * speed));
 		}
+		#end
 
 		// Check timeout for moving ball with no collisions (only if timeout is enabled)
 		if (timeoutDuration > 0) {

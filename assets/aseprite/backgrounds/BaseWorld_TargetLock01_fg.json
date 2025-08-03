@@ -1,6 +1,6 @@
 { "frames": [
    {
-    "filename": "BaseWorld_TargetLock01_bg.ase",
+    "filename": "BaseWorld_TargetLock01_fg.ase",
     "frame": { "x": 0, "y": 0, "w": 640, "h": 640 },
     "rotated": false,
     "trimmed": false,
@@ -12,16 +12,13 @@
  "meta": {
   "app": "https://www.aseprite.org/",
   "version": "1.3.13-x64",
-  "image": "BaseWorld_TargetLock01_bg.png",
+  "image": "BaseWorld_TargetLock01_fg.png",
   "format": "RGBA8888",
   "size": { "w": 640, "h": 640 },
   "scale": "1",
   "frameTags": [
   ],
   "layers": [
-   { "name": "Layer", "opacity": 255, "blendMode": "normal" },
-   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" },
-   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" },
    { "name": "Layer 3", "opacity": 255, "blendMode": "normal" },
    { "name": "Layer 4", "opacity": 255, "blendMode": "normal" },
    { "name": "Layer 4 Copy", "opacity": 255, "blendMode": "normal" }
