@@ -193,6 +193,10 @@ class PlayState extends FlxTransitionableState {
 			}
 		}
 
+		for (lock in level.ballLocks) {
+			midGroundGroup.add(lock);
+		}
+
 		for (kicker in level.kickers) {
 			midGroundGroup.add(kicker);
 		}

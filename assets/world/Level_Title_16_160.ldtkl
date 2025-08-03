@@ -145,7 +145,7 @@
 				},
 				{
 					"__identifier": "Spawn",
-					"__grid": [1,18],
+					"__grid": [4,19],
 					"__pivot": [0,0],
 					"__tags": ["Player"],
 					"__tile": null,
@@ -154,10 +154,10 @@
 					"width": 32,
 					"height": 32,
 					"defUid": 74,
-					"px": [28,299],
+					"px": [76,315],
 					"fieldInstances": [],
-					"__worldX": 12,
-					"__worldY": 139
+					"__worldX": 60,
+					"__worldY": 155
 				}
 			]
 		},
