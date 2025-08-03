@@ -28,6 +28,7 @@ class SnakeNut extends FlxSprite {
 			animation.play(anims.Off);
 		}
 		endZonePostion = FlxPoint.get(endZoneX, endZoneY);
+		offset.set(width / 2, -height / 7);
 	}
 
 	public function fillUp(onComplete:String->Void) {

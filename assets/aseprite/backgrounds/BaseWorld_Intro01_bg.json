@@ -10,7 +10,7 @@
    }
  ],
  "meta": {
-  "app": "http://www.aseprite.org/",
+  "app": "https://www.aseprite.org/",
   "version": "1.3.14.4-x64",
   "image": "BaseWorld_Intro01_bg.png",
   "format": "RGBA8888",
@@ -19,10 +19,14 @@
   "frameTags": [
   ],
   "layers": [
+   { "name": "Layer 4", "opacity": 255, "blendMode": "normal" },
    { "name": "Playfield", "opacity": 255, "blendMode": "normal" },
    { "name": "Layer", "opacity": 255, "blendMode": "normal" },
    { "name": "Layer Copy Copy", "opacity": 255, "blendMode": "normal" },
-   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" }
+   { "name": "Layer 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 2", "opacity": 51, "blendMode": "normal" },
+   { "name": "Layer 3", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 5", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
   ]

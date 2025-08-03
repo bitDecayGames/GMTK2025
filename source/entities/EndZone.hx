@@ -19,7 +19,7 @@ class EndZone extends FlxSprite {
 		super(X, Y);
 		Aseprite.loadAllAnimations(this, AssetPaths.endZone__json);
 		animation.play(anims.Waiting);
-		origin.set(-width / 2, -height / 2);
+		offset.set(width / 2, 0);
 		alpha = 0;
 	}
 
