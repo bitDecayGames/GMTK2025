@@ -151,7 +151,9 @@ class PlayState extends FlxTransitionableState {
 		player = new Player(level.spawnPoint.x, level.spawnPoint.y);
 		// player.body.mass = level.rawLevels[0].f_BallMass;
 		player.body.mass = ballMass;
-		player.onTimeout = respawnToTunnel;
+		player.onTimeout = () -> {
+			HudMessage.show("Press 'r' to respawn");
+		};
 		camera.follow(player, LOCKON, 0.1);
 		playerGroup.add(player.disappearer);
 		playerGroup.add(player.emitter);
@@ -237,6 +239,7 @@ class PlayState extends FlxTransitionableState {
 		// Set up tunnel exit tracking
 		Tunnel.onTunnelExit = (exitTunnel) -> {
 			lastTunnelExit = exitTunnel;
+			var tunnelIndex = level.tunnels.indexOf(exitTunnel);
 			// HudMessage.show("You can do it!");
 		};
 
@@ -260,16 +263,24 @@ class PlayState extends FlxTransitionableState {
 	}
 
 	function respawnToTunnel() {
-		// var targetTunnel = lastTunnelExit != null ? lastTunnelExit : getClosestTunnelToSpawn();
+		var targetTunnel:Tunnel = null;
 
-		// if (targetTunnel == null) {
-		// 	// Fallback to full reset if no tunnels
-		// 	FlxG.resetState();
-		// 	return;
-		// }
+		// Always use tunnel at index 3 if it exists
+		if (level.tunnels.length > 3) {
+			targetTunnel = level.tunnels[3];
+		} else {
+			// Fallback to previous logic if tunnel 3 doesn't exist
+			targetTunnel = lastTunnelExit != null ? lastTunnelExit : getClosestTunnelToSpawn();
+		}
 
-		// // Use tunnel's teleportation with respawn flag
-		// Tunnel.teleportTo(player, targetTunnel, true);
+		if (targetTunnel == null) {
+			// Fallback to full reset if no tunnels
+			FlxG.resetState();
+			return;
+		}
+
+		// Use tunnel's teleportation with respawn flag
+		Tunnel.teleportTo(player, targetTunnel, true);
 	}
 
 	function makeTileBodies(l:BDTilemap) {
