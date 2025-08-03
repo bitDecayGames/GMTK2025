@@ -11,7 +11,7 @@
 	"iid": "48a599b0-1460-11ee-8f1d-1923aa7248a0",
 	"jsonVersion": "1.5.3",
 	"appBuildId": 473703,
-	"nextUid": 3331,
+	"nextUid": 3332,
 	"identifierStyle": "Capitalize",
 	"toc": [],
 	"worldLayout": null,
@@ -7851,6 +7851,43 @@
 					"allowedRefsEntityUid": null,
 					"allowedRefTags": [],
 					"tilesetUid": null
+				},
+				{
+					"identifier": "MaxTriggers",
+					"doc": null,
+					"__type": "Int",
+					"uid": 3331,
+					"type": "F_Int",
+					"isArray": false,
+					"canBeNull": false,
+					"arrayMinLength": null,
+					"arrayMaxLength": null,
+					"editorDisplayMode": "Hidden",
+					"editorDisplayScale": 1,
+					"editorDisplayPos": "Above",
+					"editorLinkStyle": "StraightArrow",
+					"editorDisplayColor": null,
+					"editorAlwaysShow": false,
+					"editorShowInWorld": true,
+					"editorCutLongValues": true,
+					"editorTextSuffix": null,
+					"editorTextPrefix": null,
+					"useForSmartColor": false,
+					"exportToToc": false,
+					"searchable": false,
+					"min": null,
+					"max": null,
+					"regex": null,
+					"acceptFileTypes": null,
+					"defaultOverride": { "id": "V_Int", "params": [999] },
+					"textLanguageMode": null,
+					"symmetricalRef": false,
+					"autoChainRef": true,
+					"allowOutOfLevelRef": true,
+					"allowedRefs": "OnlySame",
+					"allowedRefsEntityUid": null,
+					"allowedRefTags": [],
+					"tilesetUid": null
 				}
 			]
 		},
@@ -10064,16 +10101,20 @@
 			{ "id": "INVISIBLE", "tileRect": null, "color": 14984818 }
 		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
 	], "externalEnums": [
-		{ "identifier": "FmodSong", "uid": 223, "values": [ { "id": "Fkip", "tileRect": null, "color": 14120515 }, { "id": "LetsGo", "tileRect": null, "color": 12470831 } ], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "a774193595377831f6180abc922dd095", "tags": [] },
+		{ "identifier": "FmodSong", "uid": 223, "values": [ { "id": "Fkip", "tileRect": null, "color": 14120515 }, { "id": "LetsGo", "tileRect": null, "color": 12470831 } ], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "c348d7533d05ff4d440b753dde293d5f", "tags": [] },
 		{ "identifier": "FmodSFX", "uid": 224, "values": [
 			{ "id": "BallTerrain", "tileRect": null, "color": 6539085 },
 			{ "id": "BallTerrain2", "tileRect": null, "color": 4098376 },
 			{ "id": "Dropper", "tileRect": null, "color": 1199753 },
+			{ "id": "Dropper2", "tileRect": null, "color": 10626611 },
+			{ "id": "Dropper3", "tileRect": null, "color": 16217634 },
 			{ "id": "FlipperStart", "tileRect": null, "color": 15389866 },
 			{ "id": "FlipperStart2", "tileRect": null, "color": 39387 },
 			{ "id": "FlipperStop", "tileRect": null, "color": 14984818 },
 			{ "id": "KickerEnter", "tileRect": null, "color": 2943221 },
 			{ "id": "KickerLaunch", "tileRect": null, "color": 16777215 },
+			{ "id": "Light", "tileRect": null, "color": 2513986 },
+			{ "id": "LightComplete", "tileRect": null, "color": 1578021 },
 			{ "id": "MenuHover", "tileRect": null, "color": 12470831 },
 			{ "id": "MenuSelect", "tileRect": null, "color": 14120515 },
 			{ "id": "Popper", "tileRect": null, "color": 12635100 },
@@ -10086,18 +10127,18 @@
 			{ "id": "TargetHit", "tileRect": null, "color": 16711748 },
 			{ "id": "TunnelEnter", "tileRect": null, "color": 16705377 },
 			{ "id": "TunnelExit", "tileRect": null, "color": 11882632 }
-		], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "a774193595377831f6180abc922dd095", "tags": [] },
+		], "iconTilesetUid": null, "externalRelPath": "../source/FmodEventEnum.hx", "externalFileChecksum": "c348d7533d05ff4d440b753dde293d5f", "tags": [] },
 		{ "identifier": "Direction", "uid": 870, "values": [
 			{ "id": "UP", "tileRect": { "tilesetUid": 16, "x": 0, "y": 80, "w": 16, "h": 16 }, "color": 12470831 },
 			{ "id": "DOWN", "tileRect": { "tilesetUid": 16, "x": 48, "y": 80, "w": 16, "h": 16 }, "color": 14120515 },
 			{ "id": "LEFT", "tileRect": { "tilesetUid": 16, "x": 32, "y": 80, "w": 16, "h": 16 }, "color": 15389866 },
 			{ "id": "RIGHT", "tileRect": { "tilesetUid": 16, "x": 16, "y": 80, "w": 16, "h": 16 }, "color": 14984818 }
-		], "iconTilesetUid": 16, "externalRelPath": "../source/types/Direction.hx", "externalFileChecksum": "d9d0868d18b9a6244951f099d5f943e8", "tags": [] },
+		], "iconTilesetUid": 16, "externalRelPath": "../source/types/Direction.hx", "externalFileChecksum": "72edd69d6e24c5a5274d0b09ea08f1db", "tags": [] },
 		{ "identifier": "LightShowEnum", "uid": 2245, "values": [
 			{ "id": "SEQUENTIAL", "tileRect": { "tilesetUid": 16, "x": 224, "y": 112, "w": 16, "h": 16 }, "color": 12470831 },
 			{ "id": "ALTERNATE", "tileRect": { "tilesetUid": 16, "x": 336, "y": 256, "w": 16, "h": 16 }, "color": 14120515 },
 			{ "id": "BLINK", "tileRect": { "tilesetUid": 16, "x": 400, "y": 0, "w": 16, "h": 16 }, "color": 15389866 }
-		], "iconTilesetUid": 16, "externalRelPath": "../source/entities/interact/LightShowEnum.hx", "externalFileChecksum": "5c36f79c304028541593007515d118a5", "tags": [] }
+		], "iconTilesetUid": 16, "externalRelPath": "../source/entities/interact/LightShowEnum.hx", "externalFileChecksum": "a40dd978c8f3a443f01bfc06f955d634", "tags": [] }
 	], "levelFields": [
 		{
 			"identifier": "Music",

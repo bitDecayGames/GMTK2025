@@ -22,6 +22,7 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 	public var followListensTo:Bool;
 	public var numberOfTimesTriggered:Int = 0;
 	public var sfx:String;
+	public var maxTriggers:Int = 0;
 
 	public function new() {
 		super();
@@ -53,7 +54,9 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 		if (on) {
 			numberOfTimesTriggered += 1;
 			onOffSignal.dispatch(on);
-			playSoundSoundEffect();
+			if (numberOfTimesTriggered <= maxTriggers) {
+				playSoundSoundEffect();
+			}
 			FlxTimer.wait(1, () -> {
 				if (shouldResetNodesOnComplete) {
 					for (node in nodes) {
@@ -76,7 +79,8 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 		if (sfx == null || sfx == "")
 			return;
 
-		TODO.sfx("Play this.sfx here (if it is valid?)");
+		QLog.notice("playing " + sfx);
+		FmodManager.PlaySoundOneShot(sfx);
 	}
 
 	public function isOn():Bool {

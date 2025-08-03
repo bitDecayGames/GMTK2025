@@ -77,8 +77,7 @@ class Player extends SelfAssigningFlxNapeSprite {
 		emitter.start(false, 0);
 
 		disappearer = new FlxEmitter(X, Y, 20);
-		// TODO: this is the wrong sprite for this, need maybe pieces of the ball?
-		disappearer.loadParticles(AssetPaths.ball_trail__png, 20, 0, false, false);
+		disappearer.loadParticles(AssetPaths.spark__png, 20, 0, false, false);
 		disappearer.launchMode = CIRCLE;
 		disappearer.launchAngle.set(0, 360);
 		disappearer.alpha.set(.8, 1, 0, 0);
