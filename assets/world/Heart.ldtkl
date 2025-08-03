@@ -1155,9 +1155,9 @@
 					"px": [526,703],
 					"fieldInstances": [
 						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2228, "realEditorValues": [] },
-						{ "__identifier": "RotateTo", "__type": "Point", "__value": { "cx": 31, "cy": 44 }, "__tile": null, "defUid": 2229, "realEditorValues": [{
+						{ "__identifier": "RotateTo", "__type": "Point", "__value": { "cx": 38, "cy": 45 }, "__tile": null, "defUid": 2229, "realEditorValues": [{
 							"id": "V_String",
-							"params": ["31,44"]
+							"params": ["38,45"]
 						}] },
 						{ "__identifier": "FollowListensTo", "__type": "Bool", "__value": false, "__tile": null, "defUid": 2290, "realEditorValues": [] }
 					],
