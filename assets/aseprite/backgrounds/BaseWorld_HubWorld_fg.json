@@ -1,11 +1,11 @@
 { "frames": [
    {
     "filename": "BaseWorld_HubWorld_fg.ase",
-    "frame": { "x": 0, "y": 0, "w": 560, "h": 944 },
+    "frame": { "x": 0, "y": 0, "w": 560, "h": 912 },
     "rotated": false,
     "trimmed": false,
-    "spriteSourceSize": { "x": 0, "y": 0, "w": 560, "h": 944 },
-    "sourceSize": { "w": 560, "h": 944 },
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 560, "h": 912 },
+    "sourceSize": { "w": 560, "h": 912 },
     "duration": 100
    }
  ],
@@ -14,7 +14,7 @@
   "version": "1.3.14.4-x64",
   "image": "BaseWorld_HubWorld_fg.png",
   "format": "RGBA8888",
-  "size": { "w": 560, "h": 944 },
+  "size": { "w": 560, "h": 912 },
   "scale": "1",
   "frameTags": [
   ],
