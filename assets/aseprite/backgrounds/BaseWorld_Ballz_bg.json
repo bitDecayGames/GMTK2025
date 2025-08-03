@@ -20,8 +20,15 @@
   ],
   "layers": [
    { "name": "Layer 1", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 4", "opacity": 255, "blendMode": "normal" },
    { "name": "Layer 2", "opacity": 255, "blendMode": "normal" },
-   { "name": "Layer", "opacity": 255, "blendMode": "normal" }
+   { "name": "shadows", "opacity": 163, "blendMode": "normal" },
+   { "name": "Layer", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 3", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 7", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 6", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 8", "opacity": 255, "blendMode": "normal" },
+   { "name": "props", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
   ]
