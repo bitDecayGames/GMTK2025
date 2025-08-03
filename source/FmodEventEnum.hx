@@ -15,6 +15,8 @@ enum FmodSFX {
     BallTerrain;
     BallTerrain2;
     Dropper;
+    Dropper2;
+    Dropper3;
     FlipperStart;
     FlipperStart2;
     FlipperStop;
@@ -46,6 +48,8 @@ class FmodEvent {
             case BallTerrain: "event:/SFX/Ball/BallTerrain";
             case BallTerrain2: "event:/SFX/Ball/BallTerrain2";
             case Dropper: "event:/SFX/Dropper/Dropper";
+            case Dropper2: "event:/SFX/Dropper/Dropper2";
+            case Dropper3: "event:/SFX/Dropper/Dropper3";
             case FlipperStart: "event:/SFX/Flipper/FlipperStart";
             case FlipperStart2: "event:/SFX/Flipper/FlipperStart2";
             case FlipperStop: "event:/SFX/Flipper/FlipperStop";
