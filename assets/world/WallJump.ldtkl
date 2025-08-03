@@ -98,9 +98,9 @@
 							"id": "V_String",
 							"params": ["19,48"]
 						}] },
-						{ "__identifier": "Active", "__type": "Point", "__value": { "cx": 23, "cy": 43 }, "__tile": null, "defUid": 2259, "realEditorValues": [{
+						{ "__identifier": "Active", "__type": "Point", "__value": { "cx": 30, "cy": 42 }, "__tile": null, "defUid": 2259, "realEditorValues": [{
 							"id": "V_String",
-							"params": ["23,43"]
+							"params": ["30,42"]
 						}] },
 						{ "__identifier": "Clockwise", "__type": "Bool", "__value": false, "__tile": null, "defUid": 2260, "realEditorValues": [] }
 					],
@@ -126,9 +126,9 @@
 							"id": "V_String",
 							"params": ["29,41"]
 						}] },
-						{ "__identifier": "Active", "__type": "Point", "__value": { "cx": 25, "cy": 36 }, "__tile": null, "defUid": 2259, "realEditorValues": [{
+						{ "__identifier": "Active", "__type": "Point", "__value": { "cx": 18, "cy": 35 }, "__tile": null, "defUid": 2259, "realEditorValues": [{
 							"id": "V_String",
-							"params": ["25,36"]
+							"params": ["18,35"]
 						}] },
 						{ "__identifier": "Clockwise", "__type": "Bool", "__value": true, "__tile": null, "defUid": 2260, "realEditorValues": [{
 							"id": "V_Bool",
@@ -157,9 +157,9 @@
 							"id": "V_String",
 							"params": ["29,27"]
 						}] },
-						{ "__identifier": "Active", "__type": "Point", "__value": { "cx": 25, "cy": 22 }, "__tile": null, "defUid": 2259, "realEditorValues": [{
+						{ "__identifier": "Active", "__type": "Point", "__value": { "cx": 25, "cy": 21 }, "__tile": null, "defUid": 2259, "realEditorValues": [{
 							"id": "V_String",
-							"params": ["25,22"]
+							"params": ["25,21"]
 						}] },
 						{ "__identifier": "Clockwise", "__type": "Bool", "__value": true, "__tile": null, "defUid": 2260, "realEditorValues": [{
 							"id": "V_Bool",
@@ -188,9 +188,9 @@
 							"id": "V_String",
 							"params": ["19,34"]
 						}] },
-						{ "__identifier": "Active", "__type": "Point", "__value": { "cx": 23, "cy": 29 }, "__tile": null, "defUid": 2259, "realEditorValues": [{
+						{ "__identifier": "Active", "__type": "Point", "__value": { "cx": 25, "cy": 28 }, "__tile": null, "defUid": 2259, "realEditorValues": [{
 							"id": "V_String",
-							"params": ["23,29"]
+							"params": ["25,28"]
 						}] },
 						{ "__identifier": "Clockwise", "__type": "Bool", "__value": false, "__tile": null, "defUid": 2260, "realEditorValues": [] }
 					],
