@@ -1,5 +1,6 @@
 package entities.interact;
 
+import entities.SnakeNut.SnakeNutSystem;
 import flixel.FlxObject;
 import flixel.math.FlxPoint;
 import flixel.tweens.FlxEase;
@@ -41,6 +42,8 @@ class BallLock extends Interactable {
 	public var aliveOnActivate:Array<FlxObject> = [];
 
 	public static var onTunnelExit:Tunnel->Void = null;
+
+	public var snakeNutSystem:SnakeNutSystem;
 
 	public function new(X:Float, Y:Float, exitIID:String) {
 		super(X, Y);
@@ -97,8 +100,15 @@ class BallLock extends Interactable {
 					ease: FlxEase.cubeInOut,
 					type: ONESHOT,
 					onComplete: (t:FlxTween) -> {
-						TODO.sfx('ball lock exited');
-						player.reappear();
+						if (snakeNutSystem != null) {
+							snakeNutSystem.trigger(() -> {
+								TODO.sfx('ball lock exited');
+								player.reappear();
+							});
+						} else {
+							TODO.sfx('ball lock exited');
+							player.reappear();
+						}
 						// onTunnelExit(targetTunnel);
 					}
 				});

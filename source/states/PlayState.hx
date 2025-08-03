@@ -194,6 +194,7 @@ class PlayState extends FlxTransitionableState {
 		}
 
 		for (lock in level.ballLocks) {
+			lock.snakeNutSystem = level.snakeNutSystem;
 			midGroundGroup.add(lock);
 		}
 
@@ -211,6 +212,11 @@ class PlayState extends FlxTransitionableState {
 
 		for (focus in level.focusZones) {
 			focusZones.add(focus);
+		}
+
+		if (level.snakeNutSystem != null) {
+			level.snakeNutSystem.player = player;
+			add(level.snakeNutSystem);
 		}
 
 		handleCameraBounds(true);
@@ -351,7 +357,8 @@ class PlayState extends FlxTransitionableState {
 			impulse += a.totalImpulse(data.int1.castBody).length;
 		}
 
-		QLog.notice('touch @ $impulse');
+		// MW commented out noisy log message
+		// QLog.notice('touch @ $impulse');
 
 		var hitSound = FmodPlugin.playSFXWithRef(FmodSFX.BallTerrain2);
 		FmodManager.SetEventParameterOnSound(hitSound, "volume", impulse);

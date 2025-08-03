@@ -91,7 +91,7 @@ class Level {
 	public var triggerables:Array<Triggerable> = [];
 	public var lightShows:Array<LightShow> = [];
 	public var summers:Array<SumTrigger> = [];
-	public var snakeNuts:Array<SnakeNut> = [];
+	public var snakeNutSystem:SnakeNutSystem;
 
 	public function new(worldNameOrIID:String, nameOrIID:String) {
 		this.worldID = worldNameOrIID;
@@ -152,7 +152,7 @@ class Level {
 				raw.l_Objects.all_LightShortTriangle, raw.l_Objects.all_LightTallTriangle, raw.l_Objects.all_LightShow, raw.l_Objects.all_Post,
 				raw.l_Objects.all_Gate, raw.l_Objects.all_Sensor, raw.l_Objects.all_Message, raw.l_Objects.all_SumTrigger);
 			parseKickers(raw.l_Objects.all_Kicker);
-			parseSnakeNuts(raw.l_Objects.all_SnakeNut);
+			parseSnakeNuts(raw.l_Objects.all_SnakeNut, raw.l_Objects.all_EndZone);
 			parseBallLocks(raw.l_Objects.all_BallLock);
 
 			for (o in raw.l_Objects.getAllUntyped()) {
@@ -336,9 +336,14 @@ class Level {
 		}
 	}
 
-	function parseSnakeNuts(nuts:Array<Ldtk.Entity_SnakeNut>) {
+	function parseSnakeNuts(nuts:Array<Ldtk.Entity_SnakeNut>, endZones:Array<Ldtk.Entity_EndZone>) {
+		if (endZones.length == 0) {
+			trace("MW can't find the end zone, no ending here");
+			return;
+		}
+		snakeNutSystem = new SnakeNutSystem();
 		for (nut in nuts) {
-			snakeNuts.push(new SnakeNut(nut.worldPixelX, nut.worldPixelY, false));
+			snakeNutSystem.add(new SnakeNut(nut.worldPixelX, nut.worldPixelY, nut.f_IsRed, endZones[0].worldPixelX, endZones[0].worldPixelY));
 		}
 	}
 
