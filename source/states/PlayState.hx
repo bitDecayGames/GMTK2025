@@ -139,7 +139,7 @@ class PlayState extends FlxTransitionableState {
 			maxBounds.x = Math.max(maxBounds.x, tl.x + tl.width);
 			maxBounds.y = Math.max(maxBounds.y, tl.y + tl.height);
 
-			#if (debug || drawTerrain)
+			#if (drawTerrain)
 			tl.alpha = .5;
 			midGroundGroup.add(tl);
 			#end
