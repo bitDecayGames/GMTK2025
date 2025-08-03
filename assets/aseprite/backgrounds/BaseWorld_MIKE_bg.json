@@ -10,7 +10,7 @@
    }
  ],
  "meta": {
-  "app": "http://www.aseprite.org/",
+  "app": "https://www.aseprite.org/",
   "version": "1.3.14.4-x64",
   "image": "BaseWorld_MIKE_bg.png",
   "format": "RGBA8888",
@@ -19,10 +19,12 @@
   "frameTags": [
   ],
   "layers": [
-   { "name": "Layer", "opacity": 255, "blendMode": "normal" },
    { "name": "playfield", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 5", "opacity": 255, "blendMode": "normal" },
    { "name": "shadows", "opacity": 166, "blendMode": "normal" },
-   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" }
+   { "name": "Layer 2", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 4", "opacity": 255, "blendMode": "normal" },
+   { "name": "Layer 3", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
   ]
