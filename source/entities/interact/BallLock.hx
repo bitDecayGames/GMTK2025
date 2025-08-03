@@ -102,11 +102,11 @@ class BallLock extends Interactable {
 					onComplete: (t:FlxTween) -> {
 						if (snakeNutSystem != null) {
 							snakeNutSystem.trigger(() -> {
-								TODO.sfx('ball lock exited');
+								FmodPlugin.playSFX(FmodSFX.TunnelExit);
 								player.reappear();
 							});
 						} else {
-							TODO.sfx('ball lock exited');
+							FmodPlugin.playSFX(FmodSFX.TunnelExit);
 							player.reappear();
 						}
 						// onTunnelExit(targetTunnel);
