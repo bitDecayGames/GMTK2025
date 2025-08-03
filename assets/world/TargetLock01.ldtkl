@@ -370,7 +370,10 @@
 							"id": "V_String",
 							"params": ["015bb010-5e50-11f0-b898-e17a40eb460b"]
 						} ] },
-						{ "__identifier": "SFX", "__type": "String", "__value": null, "__tile": null, "defUid": 3330, "realEditorValues": [] },
+						{ "__identifier": "SFX", "__type": "String", "__value": "event:/SFX/Light/LightComplete", "__tile": null, "defUid": 3330, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["event:/SFX/Light/LightComplete"]
+						}] },
 						{ "__identifier": "MaxTriggers", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3331, "realEditorValues": [] }
 					],
 					"__worldX": 329,

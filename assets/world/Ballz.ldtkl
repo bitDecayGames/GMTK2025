@@ -513,7 +513,10 @@
 								"params": ["ee454080-5e50-11f0-bf41-7fb9304cd56d"]
 							}
 						] },
-						{ "__identifier": "SFX", "__type": "String", "__value": null, "__tile": null, "defUid": 3330, "realEditorValues": [] },
+						{ "__identifier": "SFX", "__type": "String", "__value": "event:/SFX/Light/LightComplete", "__tile": null, "defUid": 3330, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["event:/SFX/Light/LightComplete"]
+						}] },
 						{ "__identifier": "MaxTriggers", "__type": "Int", "__value": 999, "__tile": null, "defUid": 3331, "realEditorValues": [] }
 					],
 					"__worldX": 5608,
@@ -576,15 +579,7 @@
 					"defUid": 2227,
 					"px": [303,200],
 					"fieldInstances": [
-						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
-							"entityIid": "516d50d0-5e50-11f0-bf41-8fd01c3e66ef",
-							"layerIid": "5bd8b961-5e50-11f0-8bb5-5d9e807809e3",
-							"levelIid": "5bd8b960-5e50-11f0-8bb5-6760eb2b7996",
-							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
-						}, "__tile": null, "defUid": 2228, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["516d50d0-5e50-11f0-bf41-8fd01c3e66ef"]
-						}] },
+						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2228, "realEditorValues": [null] },
 						{ "__identifier": "RotateTo", "__type": "Point", "__value": null, "__tile": null, "defUid": 2229, "realEditorValues": [] },
 						{ "__identifier": "FollowListensTo", "__type": "Bool", "__value": false, "__tile": null, "defUid": 2290, "realEditorValues": [] }
 					],
@@ -650,6 +645,47 @@
 					],
 					"__worldX": 5664,
 					"__worldY": 1256
+				},
+				{
+					"__identifier": "LightShow",
+					"__grid": [11,7],
+					"__pivot": [0.5,0.5],
+					"__tags": ["triggerable"],
+					"__tile": { "tilesetUid": 16, "x": 16, "y": 128, "w": 16, "h": 16 },
+					"__smartColor": "#FF0044",
+					"iid": "5a48cb50-5e50-11f0-bb38-3148a1053276",
+					"width": 16,
+					"height": 16,
+					"defUid": 2239,
+					"px": [184,120],
+					"fieldInstances": [
+						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": {
+							"entityIid": "516d50d0-5e50-11f0-bf41-8fd01c3e66ef",
+							"layerIid": "5bd8b961-5e50-11f0-8bb5-5d9e807809e3",
+							"levelIid": "5bd8b960-5e50-11f0-8bb5-6760eb2b7996",
+							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
+						}, "__tile": null, "defUid": 2244, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["516d50d0-5e50-11f0-bf41-8fd01c3e66ef"]
+						}] },
+						{ "__identifier": "Nodes", "__type": "Array<EntityRef>", "__value": [{
+							"entityIid": "f26ede40-5e50-11f0-a2b8-1b0759cf6c22",
+							"layerIid": "5bd8b961-5e50-11f0-8bb5-5d9e807809e3",
+							"levelIid": "5bd8b960-5e50-11f0-8bb5-6760eb2b7996",
+							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
+						}], "__tile": null, "defUid": 2243, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["f26ede40-5e50-11f0-a2b8-1b0759cf6c22"]
+						}] },
+						{ "__identifier": "ShowType", "__type": "ExternEnum.LightShowEnum", "__value": "BLINK", "__tile": null, "defUid": 2246, "realEditorValues": [{
+							"id": "V_String",
+							"params": ["BLINK"]
+						}] },
+						{ "__identifier": "StepSpeed", "__type": "Float", "__value": 0.2, "__tile": null, "defUid": 2247, "realEditorValues": [] },
+						{ "__identifier": "NumOfCycles", "__type": "Int", "__value": 999, "__tile": null, "defUid": 2248, "realEditorValues": [{ "id": "V_Int", "params": [999] }] }
+					],
+					"__worldX": 5544,
+					"__worldY": 1288
 				}
 			]
 		},
