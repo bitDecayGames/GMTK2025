@@ -6205,7 +6205,7 @@
 			"nineSliceBorders": [],
 			"maxCount": 1,
 			"limitScope": "PerWorld",
-			"limitBehavior": "MoveLastOne",
+			"limitBehavior": "DiscardOldOnes",
 			"pivotX": 0,
 			"pivotY": 0,
 			"fieldDefs": []
@@ -10457,7 +10457,7 @@
 				"worldY": -4000,
 				"worldDepth": 0,
 				"pxWid": 640,
-				"pxHei": 592,
+				"pxHei": 640,
 				"__bgColor": "#696A79",
 				"bgColor": null,
 				"useAutoIdentifier": true,
