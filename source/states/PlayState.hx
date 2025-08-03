@@ -254,16 +254,16 @@ class PlayState extends FlxTransitionableState {
 	}
 
 	function respawnToTunnel() {
-		var targetTunnel = lastTunnelExit != null ? lastTunnelExit : getClosestTunnelToSpawn();
+		// var targetTunnel = lastTunnelExit != null ? lastTunnelExit : getClosestTunnelToSpawn();
 
-		if (targetTunnel == null) {
-			// Fallback to full reset if no tunnels
-			FlxG.resetState();
-			return;
-		}
+		// if (targetTunnel == null) {
+		// 	// Fallback to full reset if no tunnels
+		// 	FlxG.resetState();
+		// 	return;
+		// }
 
-		// Use tunnel's teleportation with respawn flag
-		Tunnel.teleportTo(player, targetTunnel, true);
+		// // Use tunnel's teleportation with respawn flag
+		// Tunnel.teleportTo(player, targetTunnel, true);
 	}
 
 	function makeTileBodies(l:BDTilemap) {
