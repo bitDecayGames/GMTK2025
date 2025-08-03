@@ -44,7 +44,7 @@ class LightShow extends FlxObject {
 				}
 			}
 			if (loopNum == totalCycles) {
-				started = false;
+				resetLights();
 			}
 		}, totalCycles);
 	}
@@ -70,7 +70,7 @@ class LightShow extends FlxObject {
 			}
 			on = !on;
 			if (loopNum == numOfCycles) {
-				started = false;
+				resetLights();
 			}
 		}, numOfCycles);
 	}
@@ -87,8 +87,19 @@ class LightShow extends FlxObject {
 			}
 			on = !on;
 			if (loopNum == numOfCycles) {
-				started = false;
+				resetLights();
 			}
 		}, numOfCycles);
+	}
+
+	function resetLights() {
+		started = false;
+		for (light in nodes) {
+			if (light.isOn()) {
+				light.lightOn();
+			} else {
+				light.lightOff();
+			}
+		}
 	}
 }
