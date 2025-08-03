@@ -76,7 +76,8 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 		if (sfx == null || sfx == "")
 			return;
 
-		TODO.sfx("Play this.sfx here (if it is valid?)");
+		QLog.notice("playing " + sfx);
+		FmodManager.PlaySoundOneShot(sfx);
 	}
 
 	public function isOn():Bool {
