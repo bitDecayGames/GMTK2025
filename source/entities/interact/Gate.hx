@@ -22,12 +22,12 @@ import nape.phys.BodyType;
  * A gate can only be turned on and off by something else triggering it
  */
 class Gate extends Interactable {
-	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/narrowTarget.json");
+	public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/dropGate.json");
 
 	public function new(X:Float, Y:Float, rotation:Float) {
 		super(X, Y);
-		Aseprite.loadAllAnimations(this, AssetPaths.narrowTarget__json);
-		animation.play(anims.narrowTarget_0_aseprite);
+		Aseprite.loadAllAnimations(this, AssetPaths.dropGate__json);
+		animation.play(anims.dropGate_0_aseprite);
 		var body = new Body(BodyType.STATIC);
 		body.rotation = rotation;
 		body.position.set(Vec2.get(X, Y));
@@ -48,10 +48,10 @@ class Gate extends Interactable {
 	override function onOnOffChanged(value:Bool) {
 		if (value) {
 			disableInteractions();
-			animation.play(anims.narrowTarget_1_aseprite);
+			animation.play(anims.dropGate_1_aseprite);
 		} else {
 			enableInteractions();
-			animation.play(anims.narrowTarget_0_aseprite);
+			animation.play(anims.dropGate_0_aseprite);
 		}
 		super.onOnOffChanged(value);
 	}

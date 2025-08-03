@@ -1,5 +1,6 @@
 package entities.interact;
 
+import todo.TODO;
 import flixel.util.FlxTimer;
 import entities.interact.Interactable.Triggerable;
 import flixel.FlxObject;
@@ -20,6 +21,7 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 	public var onOffSignal:FlxTypedSignal<Bool->Void> = new FlxTypedSignal<Bool->Void>();
 	public var followListensTo:Bool;
 	public var numberOfTimesTriggered:Int = 0;
+	public var sfx:String;
 
 	public function new() {
 		super();
@@ -50,8 +52,8 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 		on = value;
 		if (on) {
 			numberOfTimesTriggered += 1;
-			trace('Num: ${numberOfTimesTriggered}');
 			onOffSignal.dispatch(on);
+			playSoundSoundEffect();
 			FlxTimer.wait(1, () -> {
 				if (shouldResetNodesOnComplete) {
 					for (node in nodes) {
@@ -67,6 +69,14 @@ class CollectionTrigger extends FlxObject implements Triggerable {
 				}
 			});
 		}
+	}
+
+	public function playSoundSoundEffect() {
+		// if no sfx, then don't play one
+		if (sfx == null || sfx == "")
+			return;
+
+		TODO.sfx("Play this.sfx here (if it is valid?)");
 	}
 
 	public function isOn():Bool {

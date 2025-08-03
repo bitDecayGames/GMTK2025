@@ -436,6 +436,7 @@ class Level {
 			t.onlyOneNodeRequired = v.f_OR;
 			t.shouldDisableNodesOnComplete = v.f_DisableNodes;
 			t.shouldResetNodesOnComplete = v.f_ResetNodes;
+			t.sfx = v.f_SFX;
 			triggerables.push(t);
 			triggerToNodes.set(t, nodeIds);
 		}
