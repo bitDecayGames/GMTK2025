@@ -123,7 +123,7 @@ class Player extends SelfAssigningFlxNapeSprite {
 		disappearer.visible = true;
 		disappearer.setPosition(body.position.x, body.position.y);
 		disappearer.start(true);
-		FlxTimer.wait(0.5, ()->{
+		FlxTimer.wait(0.1, () -> {
 			physicsEnabled = false;
 		});
 	}

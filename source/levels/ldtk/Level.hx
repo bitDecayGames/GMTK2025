@@ -1,5 +1,6 @@
 package levels.ldtk;
 
+import entities.interact.BallLock;
 import entities.interact.SumTrigger;
 import entities.interact.MessageEntity;
 import flixel.math.FlxMath;
@@ -76,6 +77,11 @@ class Level {
 	public var poppers:Array<Popper> = [];
 	public var poppersSmall:Array<PopperSmall> = [];
 	public var slingshots:Array<Slingshot> = [];
+
+	var lockDests:Array<Ldtk.Entity_Something> = [];
+
+	public var ballLocks:Array<BallLock> = [];
+
 	public var kickers:Array<Kicker> = [];
 	public var tunnels:Array<Tunnel> = [];
 	public var interactables:Array<Interactable> = [];
@@ -142,6 +148,22 @@ class Level {
 				raw.l_Objects.all_LightShortTriangle, raw.l_Objects.all_LightTallTriangle, raw.l_Objects.all_LightShow, raw.l_Objects.all_Post,
 				raw.l_Objects.all_Gate, raw.l_Objects.all_Sensor, raw.l_Objects.all_Message, raw.l_Objects.all_SumTrigger);
 			parseKickers(raw.l_Objects.all_Kicker);
+
+			for (s in raw.l_Objects.all_Something) {
+				lockDests.push(s);
+			}
+		}
+
+		matchBallLocks();
+	}
+
+	function matchBallLocks() {
+		for (bl in ballLocks) {
+			for (dest in lockDests) {
+				if (bl.destIID == dest.iid) {
+					bl.exit.set(dest.worldPixelX, dest.worldPixelY);
+				}
+			}
 		}
 	}
 
@@ -247,6 +269,10 @@ class Level {
 
 	function parseKickers(kDefs:Array<Ldtk.Entity_Kicker>) {
 		for (kickerDef in kDefs) {
+			if (kickerDef.f_Entity_ref != null) {
+				ballLocks.push(new BallLock(kickerDef.worldPixelX, kickerDef.worldPixelY, kickerDef.f_Entity_ref.entityIid));
+				return;
+			}
 			var dir = 0.0;
 			if (kickerDef.f_Direction != null) {
 				dir = rotateTo(Vec2.get(kickerDef.cx, kickerDef.cy), Vec2.get(kickerDef.f_Direction.cx, kickerDef.f_Direction.cy));
