@@ -47,7 +47,7 @@ class AchievementsState extends FlxTransitionableState {
 	}
 
 	function clickMainMenu():Void {
-		FmodFlxUtilities.TransitionToState(new MainMenuState());
+		FmodFlxUtilities.TransitionToState(new PlayState());
 	}
 
 	function addAchievementToasts() {

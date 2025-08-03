@@ -59,7 +59,7 @@
 			"entityInstances": [
 				{
 					"__identifier": "FlipperLeft",
-					"__grid": [25,29],
+					"__grid": [25,30],
 					"__pivot": [0.163,0.5],
 					"__tags": ["control"],
 					"__tile": null,
@@ -68,14 +68,14 @@
 					"width": 80,
 					"height": 26,
 					"defUid": 236,
-					"px": [403,472],
+					"px": [403,488],
 					"fieldInstances": [
 						{ "__identifier": "ForceFactor", "__type": "Float", "__value": 1, "__tile": null, "defUid": 237, "realEditorValues": [] },
 						{ "__identifier": "Mass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 262, "realEditorValues": [] },
 						{ "__identifier": "Travel", "__type": "Int", "__value": 60, "__tile": null, "defUid": 263, "realEditorValues": [] }
 					],
 					"__worldX": 3363,
-					"__worldY": -360
+					"__worldY": -344
 				},
 				{
 					"__identifier": "FlipperFree",
