@@ -39,6 +39,12 @@ class Player extends SelfAssigningFlxNapeSprite {
 	public var disappearer:FlxEmitter;
 	public var sparks:FlxEmitter;
 
+	// Timeout system for moving ball with no collisions
+	var timeSinceLastCollision:Float = 0;
+	var velocityThreshold:Float = 50; // Minimum velocity to consider ball "moving"
+	var timeoutDuration:Float = 8.0; // 8 seconds (set to 0 to disable timeout functionality)
+	public var onTimeout:Void->Void = null;
+
 	public function new(X:Float, Y:Float) {
 		super(X, Y);
 		// This call can be used once https://github.com/HaxeFlixel/flixel/pull/2860 is merged
@@ -109,6 +115,21 @@ class Player extends SelfAssigningFlxNapeSprite {
 		if (inputDir != NONE) {
 			body.velocity.set(new Vec2(inputDir.asVector().x * speed, inputDir.asVector().y * speed));
 		}
+
+		// Check timeout for moving ball with no collisions (only if timeout is enabled)
+		if (timeoutDuration > 0) {
+			var isMoving = body.velocity.length > velocityThreshold;
+			if (isMoving) {
+				// Increment timer if ball is moving
+				timeSinceLastCollision += delta;
+				if (timeSinceLastCollision >= timeoutDuration && onTimeout != null) {
+					onTimeout();
+				}
+			} else {
+				// Reset timer if ball is not moving
+				timeSinceLastCollision = 0;
+			}
+		}
 	}
 
 	override function draw() {
@@ -122,7 +143,7 @@ class Player extends SelfAssigningFlxNapeSprite {
 		disappearer.visible = true;
 		disappearer.setPosition(body.position.x, body.position.y);
 		disappearer.start(true);
-		FlxTimer.wait(0.5, ()->{
+		FlxTimer.wait(0.1, () -> {
 			physicsEnabled = false;
 		});
 	}
@@ -140,6 +161,9 @@ class Player extends SelfAssigningFlxNapeSprite {
 	}
 
 	public function handleInteraction(data:InteractionCallback) {
+		// Reset collision timer on any interaction
+		timeSinceLastCollision = 0;
+
 		var arb = data.arbiters.at(0).collisionArbiter;
 		var impactNormal = Vec2.get(arb.normal.x, arb.normal.y);
 		if (arb.shape2.body == body) {

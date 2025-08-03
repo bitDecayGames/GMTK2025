@@ -151,6 +151,7 @@ class PlayState extends FlxTransitionableState {
 		player = new Player(level.spawnPoint.x, level.spawnPoint.y);
 		// player.body.mass = level.rawLevels[0].f_BallMass;
 		player.body.mass = ballMass;
+		player.onTimeout = respawnToTunnel;
 		camera.follow(player, LOCKON, 0.1);
 		playerGroup.add(player.disappearer);
 		playerGroup.add(player.emitter);
@@ -190,6 +191,10 @@ class PlayState extends FlxTransitionableState {
 			} else {
 				foregroundGroup.add(interactable);
 			}
+		}
+
+		for (lock in level.ballLocks) {
+			midGroundGroup.add(lock);
 		}
 
 		for (kicker in level.kickers) {

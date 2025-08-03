@@ -1,5 +1,7 @@
 package levels.ldtk;
 
+import ldtk.Entity;
+import entities.interact.BallLock;
 import entities.interact.SumTrigger;
 import entities.interact.MessageEntity;
 import flixel.math.FlxMath;
@@ -76,6 +78,11 @@ class Level {
 	public var poppers:Array<Popper> = [];
 	public var poppersSmall:Array<PopperSmall> = [];
 	public var slingshots:Array<Slingshot> = [];
+
+	var allEnts:Array<Entity> = [];
+
+	public var ballLocks:Array<BallLock> = [];
+
 	public var kickers:Array<Kicker> = [];
 	public var tunnels:Array<Tunnel> = [];
 	public var interactables:Array<Interactable> = [];
@@ -142,6 +149,23 @@ class Level {
 				raw.l_Objects.all_LightShortTriangle, raw.l_Objects.all_LightTallTriangle, raw.l_Objects.all_LightShow, raw.l_Objects.all_Post,
 				raw.l_Objects.all_Gate, raw.l_Objects.all_Sensor, raw.l_Objects.all_Message, raw.l_Objects.all_SumTrigger);
 			parseKickers(raw.l_Objects.all_Kicker);
+			parseBallLocks(raw.l_Objects.all_BallLock);
+
+			for (o in raw.l_Objects.getAllUntyped()) {
+				allEnts.push(o);
+			}
+		}
+
+		matchBallLocks();
+	}
+
+	function matchBallLocks() {
+		for (bl in ballLocks) {
+			for (dest in allEnts) {
+				if (bl.destIID == dest.iid) {
+					bl.exit.set(dest.worldPixelX, dest.worldPixelY);
+				}
+			}
 		}
 	}
 
@@ -242,6 +266,12 @@ class Level {
 			if (entrance != null && exit != null) {
 				entrance.exit = exit;
 			}
+		}
+	}
+
+	function parseBallLocks(blDefs:Array<Ldtk.Entity_BallLock>) {
+		for (d in blDefs) {
+			ballLocks.push(new BallLock(d.worldPixelX, d.worldPixelY, d.f_Destination.entityIid));
 		}
 	}
 

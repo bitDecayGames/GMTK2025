@@ -1196,22 +1196,6 @@
 					"__worldY": -3432
 				},
 				{
-					"__identifier": "Spawn",
-					"__grid": [3,7],
-					"__pivot": [0,0],
-					"__tags": ["Player"],
-					"__tile": null,
-					"__smartColor": "#FFFFFF",
-					"iid": "a2c7d170-5e50-11f0-9e55-c95a40eae12c",
-					"width": 32,
-					"height": 32,
-					"defUid": 74,
-					"px": [48,112],
-					"fieldInstances": [],
-					"__worldX": -5936,
-					"__worldY": -4080
-				},
-				{
 					"__identifier": "LightArrow",
 					"__grid": [28,45],
 					"__pivot": [0.5,0.5],
