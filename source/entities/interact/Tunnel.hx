@@ -76,7 +76,7 @@ class Tunnel extends Interactable {
 				if (!isRespawn && onTunnelExit != null) {
 					onTunnelExit(targetTunnel);
 				} else if (isRespawn) {
-					HudMessage.show("You can do it!");
+					// HudMessage.show("You can do it!");
 				}
 			}
 		});

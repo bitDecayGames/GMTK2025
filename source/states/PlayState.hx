@@ -237,11 +237,11 @@ class PlayState extends FlxTransitionableState {
 		// Set up tunnel exit tracking
 		Tunnel.onTunnelExit = (exitTunnel) -> {
 			lastTunnelExit = exitTunnel;
-			HudMessage.show("You can do it!");
+			// HudMessage.show("You can do it!");
 		};
 
 		// Show welcome message
-		HudMessage.show("Let's GOOOOOOO");
+		// HudMessage.show("Let's GOOOOOOO");
 	}
 
 	function getClosestTunnelToSpawn():Tunnel {
