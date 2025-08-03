@@ -8,11 +8,11 @@
 		"appVersion": "1.5.3",
 		"url": "https://ldtk.io"
 	},
-	"identifier": "Level_Title_416528",
+	"identifier": "Level_BaseWorld1120_3280",
 	"iid": "1d6c4050-5e50-11f0-86e4-2748da979a4d",
 	"uid": 2250,
-	"worldX": -416,
-	"worldY": 528,
+	"worldX": 1120,
+	"worldY": -3280,
 	"worldDepth": 0,
 	"pxWid": 1040,
 	"pxHei": 1312,
@@ -76,8 +76,8 @@
 						{ "__identifier": "Rest", "__type": "Point", "__value": null, "__tile": null, "defUid": 2251, "realEditorValues": [] },
 						{ "__identifier": "Activate", "__type": "Point", "__value": null, "__tile": null, "defUid": 2252, "realEditorValues": [] }
 					],
-					"__worldX": 445,
-					"__worldY": 936
+					"__worldX": 1981,
+					"__worldY": -2872
 				},
 				{
 					"__identifier": "FlipperRight",
@@ -98,8 +98,8 @@
 						{ "__identifier": "Rest", "__type": "Point", "__value": null, "__tile": null, "defUid": 2251, "realEditorValues": [] },
 						{ "__identifier": "Activate", "__type": "Point", "__value": null, "__tile": null, "defUid": 2252, "realEditorValues": [] }
 					],
-					"__worldX": 141,
-					"__worldY": 936
+					"__worldX": 1677,
+					"__worldY": -2872
 				},
 				{
 					"__identifier": "FlipperLeft",
@@ -118,8 +118,8 @@
 						{ "__identifier": "Mass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 262, "realEditorValues": [] },
 						{ "__identifier": "Travel", "__type": "Int", "__value": 60, "__tile": null, "defUid": 263, "realEditorValues": [] }
 					],
-					"__worldX": -285,
-					"__worldY": 1144
+					"__worldX": 1251,
+					"__worldY": -2664
 				},
 				{
 					"__identifier": "FlipperLeft",
@@ -138,8 +138,8 @@
 						{ "__identifier": "Mass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 262, "realEditorValues": [] },
 						{ "__identifier": "Travel", "__type": "Int", "__value": 60, "__tile": null, "defUid": 263, "realEditorValues": [] }
 					],
-					"__worldX": -173,
-					"__worldY": 1256
+					"__worldX": 1363,
+					"__worldY": -2552
 				},
 				{
 					"__identifier": "Message",
@@ -163,14 +163,14 @@
 							"entityIid": "fe5bfc70-5e50-11f0-afd1-559c6345c3dd",
 							"layerIid": "1d6c6760-5e50-11f0-86e4-9747571eeb3e",
 							"levelIid": "1d6c4050-5e50-11f0-86e4-2748da979a4d",
-							"worldIid": "50317380-5e50-11f0-86e4-e79ef831fdc9"
+							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
 						}, "__tile": null, "defUid": 2266, "realEditorValues": [{
 							"id": "V_String",
 							"params": ["fe5bfc70-5e50-11f0-afd1-559c6345c3dd"]
 						}] }
 					],
-					"__worldX": 360,
-					"__worldY": 856
+					"__worldX": 1896,
+					"__worldY": -2952
 				},
 				{
 					"__identifier": "FlipperFree",
@@ -200,8 +200,8 @@
 							"params": [ true ]
 						}] }
 					],
-					"__worldX": 392,
-					"__worldY": 1672
+					"__worldX": 1928,
+					"__worldY": -2136
 				},
 				{
 					"__identifier": "Gate",
@@ -220,7 +220,7 @@
 							"entityIid": "79440df0-5e50-11f0-afd1-db8fee2afe87",
 							"layerIid": "1d6c6760-5e50-11f0-86e4-9747571eeb3e",
 							"levelIid": "1d6c4050-5e50-11f0-86e4-2748da979a4d",
-							"worldIid": "50317380-5e50-11f0-86e4-e79ef831fdc9"
+							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
 						}, "__tile": null, "defUid": 2218, "realEditorValues": [{
 							"id": "V_String",
 							"params": ["79440df0-5e50-11f0-afd1-db8fee2afe87"]
@@ -230,8 +230,8 @@
 							"params": ["35,65"]
 						}] }
 					],
-					"__worldX": 57,
-					"__worldY": 1647
+					"__worldX": 1593,
+					"__worldY": -2161
 				},
 				{
 					"__identifier": "TargetLarge",
@@ -249,8 +249,8 @@
 						"id": "V_String",
 						"params": ["25,61"]
 					}] }],
-					"__worldX": 79,
-					"__worldY": 1447
+					"__worldX": 1615,
+					"__worldY": -2361
 				},
 				{
 					"__identifier": "LightLargeRound",
@@ -269,15 +269,15 @@
 							"entityIid": "ae3f65f0-5e50-11f0-afd1-e17862a774b0",
 							"layerIid": "1d6c6760-5e50-11f0-86e4-9747571eeb3e",
 							"levelIid": "1d6c4050-5e50-11f0-86e4-2748da979a4d",
-							"worldIid": "50317380-5e50-11f0-86e4-e79ef831fdc9"
+							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
 						}, "__tile": null, "defUid": 2231, "realEditorValues": [{
 							"id": "V_String",
 							"params": ["ae3f65f0-5e50-11f0-afd1-e17862a774b0"]
 						}] },
 						{ "__identifier": "FollowListensTo", "__type": "Bool", "__value": false, "__tile": null, "defUid": 2292, "realEditorValues": [] }
 					],
-					"__worldX": 113,
-					"__worldY": 1621
+					"__worldX": 1649,
+					"__worldY": -2187
 				},
 				{
 					"__identifier": "Sensor",
@@ -295,8 +295,8 @@
 						{ "__identifier": "SecondsToReset", "__type": "Float", "__value": -1, "__tile": null, "defUid": 2221, "realEditorValues": [] },
 						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2222, "realEditorValues": [] }
 					],
-					"__worldX": 403,
-					"__worldY": 872
+					"__worldX": 1939,
+					"__worldY": -2936
 				},
 				{
 					"__identifier": "BallLock",
@@ -311,16 +311,16 @@
 					"defUid": 3332,
 					"px": [200,1208],
 					"fieldInstances": [{ "__identifier": "Destination", "__type": "EntityRef", "__value": {
-						"entityIid": "e7ac9870-5e50-11f0-86e4-67911471ffd2",
-						"layerIid": "50319a91-5e50-11f0-86e4-5ff0bcc45aaf",
-						"levelIid": "50319a90-5e50-11f0-86e4-cd373511dd14",
-						"worldIid": "50317380-5e50-11f0-86e4-e79ef831fdc9"
+						"entityIid": "88bd38f0-5e50-11f0-8c4e-89977ac8d1f1",
+						"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
+						"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
+						"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
 					}, "__tile": null, "defUid": 3335, "realEditorValues": [{
 						"id": "V_String",
-						"params": ["e7ac9870-5e50-11f0-86e4-67911471ffd2"]
+						"params": ["88bd38f0-5e50-11f0-8c4e-89977ac8d1f1"]
 					}] }],
-					"__worldX": -216,
-					"__worldY": 1736
+					"__worldX": 1320,
+					"__worldY": -2072
 				}
 			]
 		},

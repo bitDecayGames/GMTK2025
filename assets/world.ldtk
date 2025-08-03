@@ -10405,12 +10405,12 @@
 				"__bgColor": "#696A79",
 				"bgColor": null,
 				"useAutoIdentifier": true,
-				"bgRelPath": "aseprite/backgrounds/BaseWorld_Level_6_bg.png",
-				"bgPos": "Cover",
+				"bgRelPath": null,
+				"bgPos": null,
 				"bgPivotX": 0.5,
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
-				"__bgPos": { "topLeftPx": [0,0], "scale": [1,1], "cropRect": [0,32,560,880] },
+				"__bgPos": null,
 				"externalRelPath": "world/Level_BaseWorld1344_832.ldtkl",
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
@@ -10419,7 +10419,7 @@
 					{ "__identifier": "BallMass", "__type": "Float", "__value": 0.1, "__tile": null, "defUid": 259, "realEditorValues": [{ "id": "V_Float", "params": [0.1] }] }
 				],
 				"layerInstances": null,
-				"__neighbours": [{ "levelIid": "2b992c20-5e50-11f0-92cc-330c7a92f094", "dir": "w" }]
+				"__neighbours": [ { "levelIid": "2b992c20-5e50-11f0-92cc-330c7a92f094", "dir": "w" }, { "levelIid": "47e60a60-5e50-11f0-8054-179d98264fe0", "dir": "e" } ]
 			},
 			{
 				"identifier": "Level_BaseWorld48_1536",
@@ -10450,13 +10450,13 @@
 				"__neighbours": [{ "levelIid": "2b992c20-5e50-11f0-92cc-330c7a92f094", "dir": "e" }]
 			},
 			{
-				"identifier": "Level_BaseWorld_4528_4000",
+				"identifier": "Level_BaseWorld53601168",
 				"iid": "5bd8b960-5e50-11f0-8bb5-6760eb2b7996",
 				"uid": 2267,
-				"worldX": -4528,
-				"worldY": -4000,
+				"worldX": 5360,
+				"worldY": 1168,
 				"worldDepth": 0,
-				"pxWid": 560,
+				"pxWid": 608,
 				"pxHei": 576,
 				"__bgColor": "#696A79",
 				"bgColor": null,
@@ -10467,7 +10467,7 @@
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
 				"__bgPos": null,
-				"externalRelPath": "world/Level_BaseWorld_4528_4000.ldtkl",
+				"externalRelPath": "world/Level_BaseWorld53601168.ldtkl",
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
 					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
@@ -10475,14 +10475,14 @@
 					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
 				],
 				"layerInstances": null,
-				"__neighbours": []
+				"__neighbours": [{ "levelIid": "9c41bd60-5e50-11f0-ace2-6380d2859ae7", "dir": "e" }]
 			},
 			{
-				"identifier": "Level_BaseWorld4192_3840",
+				"identifier": "Level_BaseWorld8736_4416",
 				"iid": "69c8afd0-5e50-11f0-8bb5-7f7e260977ed",
 				"uid": 2268,
-				"worldX": 4192,
-				"worldY": -3840,
+				"worldX": 8736,
+				"worldY": -4416,
 				"worldDepth": 0,
 				"pxWid": 640,
 				"pxHei": 480,
@@ -10495,7 +10495,7 @@
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
 				"__bgPos": null,
-				"externalRelPath": "world/Level_BaseWorld4192_3840.ldtkl",
+				"externalRelPath": "world/Level_BaseWorld8736_4416.ldtkl",
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
 					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
@@ -10503,7 +10503,7 @@
 					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
 				],
 				"layerInstances": null,
-				"__neighbours": []
+				"__neighbours": [{ "levelIid": "70c99830-5e50-11f0-8bb5-c19f7149b429", "dir": "s" }]
 			},
 			{
 				"identifier": "Level_BaseWorld5600_3872",
@@ -10587,14 +10587,14 @@
 					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
 				],
 				"layerInstances": null,
-				"__neighbours": []
+				"__neighbours": [{ "levelIid": "69c8afd0-5e50-11f0-8bb5-7f7e260977ed", "dir": "n" }]
 			},
 			{
-				"identifier": "Level_BaseWorld2784_2752",
+				"identifier": "Level_BaseWorld7744_3264",
 				"iid": "724cdcd0-5e50-11f0-8bb5-17bf6bc86e18",
 				"uid": 2272,
-				"worldX": 2784,
-				"worldY": -2752,
+				"worldX": 7744,
+				"worldY": -3264,
 				"worldDepth": 0,
 				"pxWid": 640,
 				"pxHei": 480,
@@ -10607,7 +10607,7 @@
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
 				"__bgPos": null,
-				"externalRelPath": "world/Level_BaseWorld2784_2752.ldtkl",
+				"externalRelPath": "world/Level_BaseWorld7744_3264.ldtkl",
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
 					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
@@ -10618,11 +10618,11 @@
 				"__neighbours": []
 			},
 			{
-				"identifier": "Level_BaseWorld4160_2720",
+				"identifier": "Level_BaseWorld7408_5136",
 				"iid": "7450ea30-5e50-11f0-8bb5-a9776619d1ce",
 				"uid": 2273,
-				"worldX": 4160,
-				"worldY": -2720,
+				"worldX": 7408,
+				"worldY": -5136,
 				"worldDepth": 0,
 				"pxWid": 640,
 				"pxHei": 480,
@@ -10635,7 +10635,7 @@
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
 				"__bgPos": null,
-				"externalRelPath": "world/Level_BaseWorld4160_2720.ldtkl",
+				"externalRelPath": "world/Level_BaseWorld7408_5136.ldtkl",
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
 					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
@@ -10646,11 +10646,11 @@
 				"__neighbours": []
 			},
 			{
-				"identifier": "Level_BaseWorld5728_2688",
+				"identifier": "Level_BaseWorld6192_5040",
 				"iid": "915029c0-5e50-11f0-8bb5-578c62d80e8a",
 				"uid": 2274,
-				"worldX": 5728,
-				"worldY": -2688,
+				"worldX": 6192,
+				"worldY": -5040,
 				"worldDepth": 0,
 				"pxWid": 640,
 				"pxHei": 480,
@@ -10663,7 +10663,7 @@
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
 				"__bgPos": null,
-				"externalRelPath": "world/Level_BaseWorld5728_2688.ldtkl",
+				"externalRelPath": "world/Level_BaseWorld6192_5040.ldtkl",
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
 					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
@@ -10733,10 +10733,10 @@
 				"identifier": "MIKE",
 				"iid": "976ea160-5e50-11f0-8bb5-039514adee06",
 				"uid": 2277,
-				"worldX": -5984,
-				"worldY": -4192,
+				"worldX": 3152,
+				"worldY": 560,
 				"worldDepth": 0,
-				"pxWid": 816,
+				"pxWid": 880,
 				"pxHei": 896,
 				"__bgColor": "#696A79",
 				"bgColor": null,
@@ -10755,17 +10755,17 @@
 					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
 				],
 				"layerInstances": null,
-				"__neighbours": []
+				"__neighbours": [{ "levelIid": "adfdedf0-5e50-11f0-8bb5-e31aca2b545d", "dir": "n" }]
 			},
 			{
 				"identifier": "TANNER",
 				"iid": "a10528c0-5e50-11f0-8bb5-0fe1f8928b1a",
 				"uid": 2278,
-				"worldX": -6832,
-				"worldY": 2304,
+				"worldX": 6576,
+				"worldY": 784,
 				"worldDepth": 0,
-				"pxWid": 2384,
-				"pxHei": 1840,
+				"pxWid": 2240,
+				"pxHei": 1600,
 				"__bgColor": "#696A79",
 				"bgColor": null,
 				"useAutoIdentifier": false,
@@ -10783,17 +10783,17 @@
 					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
 				],
 				"layerInstances": null,
-				"__neighbours": []
+				"__neighbours": [{ "levelIid": "9c41bd60-5e50-11f0-ace2-6380d2859ae7", "dir": "w" }]
 			},
 			{
 				"identifier": "LOGAN",
 				"iid": "adfdedf0-5e50-11f0-8bb5-e31aca2b545d",
 				"uid": 2279,
-				"worldX": 144,
-				"worldY": 7280,
+				"worldX": 2960,
+				"worldY": -832,
 				"worldDepth": 0,
 				"pxWid": 1072,
-				"pxHei": 1088,
+				"pxHei": 1392,
 				"__bgColor": "#696A79",
 				"bgColor": null,
 				"useAutoIdentifier": false,
@@ -10811,14 +10811,14 @@
 					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
 				],
 				"layerInstances": null,
-				"__neighbours": []
+				"__neighbours": [ { "levelIid": "976ea160-5e50-11f0-8bb5-039514adee06", "dir": "s" }, { "levelIid": "47e60a60-5e50-11f0-8054-179d98264fe0", "dir": "w" } ]
 			},
 			{
 				"identifier": "TRISTAN",
 				"iid": "b30f8970-5e50-11f0-8bb5-0f19b98042a0",
 				"uid": 2280,
-				"worldX": 6464,
-				"worldY": 4192,
+				"worldX": 8912,
+				"worldY": -1696,
 				"worldDepth": 0,
 				"pxWid": 640,
 				"pxHei": 480,
@@ -10868,6 +10868,118 @@
 				],
 				"layerInstances": null,
 				"__neighbours": []
+			},
+			{
+				"identifier": "Level_BaseWorld1520_3968",
+				"iid": "50319a90-5e50-11f0-86e4-cd373511dd14",
+				"uid": 2249,
+				"worldX": 1520,
+				"worldY": -3968,
+				"worldDepth": 0,
+				"pxWid": 640,
+				"pxHei": 688,
+				"__bgColor": "#696A79",
+				"bgColor": null,
+				"useAutoIdentifier": true,
+				"bgRelPath": null,
+				"bgPos": null,
+				"bgPivotX": 0.5,
+				"bgPivotY": 0.5,
+				"__smartColor": "#ADADB5",
+				"__bgPos": null,
+				"externalRelPath": "world/Level_BaseWorld1520_3968.ldtkl",
+				"fieldInstances": [
+					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
+					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
+					{ "__identifier": "GravityX", "__type": "Int", "__value": 0, "__tile": null, "defUid": 258, "realEditorValues": [] },
+					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
+				],
+				"layerInstances": null,
+				"__neighbours": [{ "levelIid": "1d6c4050-5e50-11f0-86e4-2748da979a4d", "dir": "s" }]
+			},
+			{
+				"identifier": "Level_BaseWorld1120_3280",
+				"iid": "1d6c4050-5e50-11f0-86e4-2748da979a4d",
+				"uid": 2250,
+				"worldX": 1120,
+				"worldY": -3280,
+				"worldDepth": 0,
+				"pxWid": 1040,
+				"pxHei": 1312,
+				"__bgColor": "#696A79",
+				"bgColor": null,
+				"useAutoIdentifier": true,
+				"bgRelPath": null,
+				"bgPos": null,
+				"bgPivotX": 0.5,
+				"bgPivotY": 0.5,
+				"__smartColor": "#ADADB5",
+				"__bgPos": null,
+				"externalRelPath": "world/Level_BaseWorld1120_3280.ldtkl",
+				"fieldInstances": [
+					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
+					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
+					{ "__identifier": "GravityX", "__type": "Int", "__value": 0, "__tile": null, "defUid": 258, "realEditorValues": [] },
+					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
+				],
+				"layerInstances": null,
+				"__neighbours": [{ "levelIid": "50319a90-5e50-11f0-86e4-cd373511dd14", "dir": "n" }]
+			},
+			{
+				"identifier": "Flip_challenge_double",
+				"iid": "47e60a60-5e50-11f0-8054-179d98264fe0",
+				"uid": 876,
+				"worldX": 1904,
+				"worldY": -832,
+				"worldDepth": 0,
+				"pxWid": 1056,
+				"pxHei": 672,
+				"__bgColor": "#696A79",
+				"bgColor": null,
+				"useAutoIdentifier": false,
+				"bgRelPath": null,
+				"bgPos": null,
+				"bgPivotX": 0.5,
+				"bgPivotY": 0.5,
+				"__smartColor": "#ADADB5",
+				"__bgPos": null,
+				"externalRelPath": "world/Flip_challenge_double.ldtkl",
+				"fieldInstances": [
+					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
+					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
+					{ "__identifier": "GravityX", "__type": "Int", "__value": 0, "__tile": null, "defUid": 258, "realEditorValues": [] },
+					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
+				],
+				"layerInstances": null,
+				"__neighbours": [ { "levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea", "dir": "w" }, { "levelIid": "adfdedf0-5e50-11f0-8bb5-e31aca2b545d", "dir": "e" } ]
+			},
+			{
+				"identifier": "VertHall",
+				"iid": "9c41bd60-5e50-11f0-ace2-6380d2859ae7",
+				"uid": 3336,
+				"worldX": 5968,
+				"worldY": 784,
+				"worldDepth": 0,
+				"pxWid": 608,
+				"pxHei": 960,
+				"__bgColor": "#696A79",
+				"bgColor": null,
+				"useAutoIdentifier": false,
+				"bgRelPath": null,
+				"bgPos": null,
+				"bgPivotX": 0.5,
+				"bgPivotY": 0.5,
+				"__smartColor": "#ADADB5",
+				"__bgPos": null,
+				"externalRelPath": "world/VertHall.ldtkl",
+				"fieldInstances": [
+					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
+					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
+					{ "__identifier": "GravityX", "__type": "Int", "__value": 0, "__tile": null, "defUid": 258, "realEditorValues": [] },
+					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
+				],
+				"layerInstances": null,
+				"__neighbours": [ { "levelIid": "5bd8b960-5e50-11f0-8bb5-6760eb2b7996", "dir": "w" }, { "levelIid": "a10528c0-5e50-11f0-8bb5-0fe1f8928b1a", "dir": "e" } ]
 			}
 		] },
 		{ "iid": "031d4320-5e50-11f0-ae13-51acc99c6704", "identifier": "SpecialWorld", "defaultLevelWidth": 256, "defaultLevelHeight": 256, "worldGridWidth": 256, "worldGridHeight": 256, "worldLayout": "Free", "levels": [
@@ -10900,122 +11012,8 @@
 				"__neighbours": []
 			}
 		] },
-		{ "iid": "47e5e350-5e50-11f0-8054-278e27a8ca32", "identifier": "Logan", "defaultLevelWidth": 256, "defaultLevelHeight": 256, "worldGridWidth": 256, "worldGridHeight": 256, "worldLayout": "Free", "levels": [
-			{
-				"identifier": "Flip_challenge_double",
-				"iid": "47e60a60-5e50-11f0-8054-179d98264fe0",
-				"uid": 876,
-				"worldX": 0,
-				"worldY": 0,
-				"worldDepth": 0,
-				"pxWid": 1056,
-				"pxHei": 704,
-				"__bgColor": "#696A79",
-				"bgColor": null,
-				"useAutoIdentifier": false,
-				"bgRelPath": null,
-				"bgPos": null,
-				"bgPivotX": 0.5,
-				"bgPivotY": 0.5,
-				"__smartColor": "#ADADB5",
-				"__bgPos": null,
-				"externalRelPath": "world/Flip_challenge_double.ldtkl",
-				"fieldInstances": [
-					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
-					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
-					{ "__identifier": "GravityX", "__type": "Int", "__value": 0, "__tile": null, "defUid": 258, "realEditorValues": [] },
-					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
-				],
-				"layerInstances": null,
-				"__neighbours": []
-			},
-			{
-				"identifier": "VertHall",
-				"iid": "9c41bd60-5e50-11f0-ace2-6380d2859ae7",
-				"uid": 3336,
-				"worldX": 16,
-				"worldY": 1168,
-				"worldDepth": 0,
-				"pxWid": 896,
-				"pxHei": 960,
-				"__bgColor": "#696A79",
-				"bgColor": null,
-				"useAutoIdentifier": false,
-				"bgRelPath": null,
-				"bgPos": null,
-				"bgPivotX": 0.5,
-				"bgPivotY": 0.5,
-				"__smartColor": "#ADADB5",
-				"__bgPos": null,
-				"externalRelPath": "world/VertHall.ldtkl",
-				"fieldInstances": [
-					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
-					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
-					{ "__identifier": "GravityX", "__type": "Int", "__value": 0, "__tile": null, "defUid": 258, "realEditorValues": [] },
-					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
-				],
-				"layerInstances": null,
-				"__neighbours": []
-			}
-		] },
-		{ "iid": "50317380-5e50-11f0-86e4-e79ef831fdc9", "identifier": "Title", "defaultLevelWidth": 256, "defaultLevelHeight": 256, "worldGridWidth": 256, "worldGridHeight": 256, "worldLayout": "Free", "levels": [
-			{
-				"identifier": "Level_Title_16_160",
-				"iid": "50319a90-5e50-11f0-86e4-cd373511dd14",
-				"uid": 2249,
-				"worldX": -16,
-				"worldY": -160,
-				"worldDepth": 0,
-				"pxWid": 640,
-				"pxHei": 688,
-				"__bgColor": "#696A79",
-				"bgColor": null,
-				"useAutoIdentifier": true,
-				"bgRelPath": null,
-				"bgPos": null,
-				"bgPivotX": 0.5,
-				"bgPivotY": 0.5,
-				"__smartColor": "#ADADB5",
-				"__bgPos": null,
-				"externalRelPath": "world/Level_Title_16_160.ldtkl",
-				"fieldInstances": [
-					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
-					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
-					{ "__identifier": "GravityX", "__type": "Int", "__value": 0, "__tile": null, "defUid": 258, "realEditorValues": [] },
-					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
-				],
-				"layerInstances": null,
-				"__neighbours": [{ "levelIid": "1d6c4050-5e50-11f0-86e4-2748da979a4d", "dir": "s" }]
-			},
-			{
-				"identifier": "Level_Title_416528",
-				"iid": "1d6c4050-5e50-11f0-86e4-2748da979a4d",
-				"uid": 2250,
-				"worldX": -416,
-				"worldY": 528,
-				"worldDepth": 0,
-				"pxWid": 1040,
-				"pxHei": 1312,
-				"__bgColor": "#696A79",
-				"bgColor": null,
-				"useAutoIdentifier": true,
-				"bgRelPath": null,
-				"bgPos": null,
-				"bgPivotX": 0.5,
-				"bgPivotY": 0.5,
-				"__smartColor": "#ADADB5",
-				"__bgPos": null,
-				"externalRelPath": "world/Level_Title_416528.ldtkl",
-				"fieldInstances": [
-					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
-					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
-					{ "__identifier": "GravityX", "__type": "Int", "__value": 0, "__tile": null, "defUid": 258, "realEditorValues": [] },
-					{ "__identifier": "BallMass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 259, "realEditorValues": [] }
-				],
-				"layerInstances": null,
-				"__neighbours": [{ "levelIid": "50319a90-5e50-11f0-86e4-cd373511dd14", "dir": "n" }]
-			}
-		] }
+		{ "iid": "47e5e350-5e50-11f0-8054-278e27a8ca32", "identifier": "Logan", "defaultLevelWidth": 256, "defaultLevelHeight": 256, "worldGridWidth": 256, "worldGridHeight": 256, "worldLayout": "Free", "levels": [] },
+		{ "iid": "50317380-5e50-11f0-86e4-e79ef831fdc9", "identifier": "Title", "defaultLevelWidth": 256, "defaultLevelHeight": 256, "worldGridWidth": 256, "worldGridHeight": 256, "worldLayout": "Free", "levels": [] }
 	],
 	"dummyWorldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
 }

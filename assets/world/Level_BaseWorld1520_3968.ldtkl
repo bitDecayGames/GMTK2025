@@ -8,11 +8,11 @@
 		"appVersion": "1.5.3",
 		"url": "https://ldtk.io"
 	},
-	"identifier": "Level_Title_16_160",
+	"identifier": "Level_BaseWorld1520_3968",
 	"iid": "50319a90-5e50-11f0-86e4-cd373511dd14",
 	"uid": 2249,
-	"worldX": -16,
-	"worldY": -160,
+	"worldX": 1520,
+	"worldY": -3968,
 	"worldDepth": 0,
 	"pxWid": 640,
 	"pxHei": 688,
@@ -74,8 +74,8 @@
 						{ "__identifier": "Mass", "__type": "Float", "__value": 1, "__tile": null, "defUid": 262, "realEditorValues": [] },
 						{ "__identifier": "Travel", "__type": "Int", "__value": 60, "__tile": null, "defUid": 263, "realEditorValues": [] }
 					],
-					"__worldX": 144,
-					"__worldY": 242
+					"__worldX": 1680,
+					"__worldY": -3566
 				},
 				{
 					"__identifier": "CameraZone",
@@ -90,8 +90,8 @@
 					"defUid": 200,
 					"px": [16,16],
 					"fieldInstances": [{ "__identifier": "AutoFocus", "__type": "Bool", "__value": false, "__tile": null, "defUid": 873, "realEditorValues": [] }],
-					"__worldX": 0,
-					"__worldY": -144
+					"__worldX": 1536,
+					"__worldY": -3952
 				},
 				{
 					"__identifier": "Message",
@@ -115,14 +115,14 @@
 							"entityIid": "127e67b0-5e50-11f0-afd1-dddef41c376e",
 							"layerIid": "50319a91-5e50-11f0-86e4-5ff0bcc45aaf",
 							"levelIid": "50319a90-5e50-11f0-86e4-cd373511dd14",
-							"worldIid": "50317380-5e50-11f0-86e4-e79ef831fdc9"
+							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
 						}, "__tile": null, "defUid": 2266, "realEditorValues": [{
 							"id": "V_String",
 							"params": ["127e67b0-5e50-11f0-afd1-dddef41c376e"]
 						}] }
 					],
-					"__worldX": 200,
-					"__worldY": 152
+					"__worldX": 1736,
+					"__worldY": -3656
 				},
 				{
 					"__identifier": "Sensor",
@@ -140,8 +140,8 @@
 						{ "__identifier": "SecondsToReset", "__type": "Float", "__value": -1, "__tile": null, "defUid": 2221, "realEditorValues": [] },
 						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2222, "realEditorValues": [] }
 					],
-					"__worldX": 191,
-					"__worldY": 212
+					"__worldX": 1727,
+					"__worldY": -3596
 				},
 				{
 					"__identifier": "Spawn",
@@ -156,8 +156,8 @@
 					"defUid": 74,
 					"px": [76,315],
 					"fieldInstances": [],
-					"__worldX": 60,
-					"__worldY": 155
+					"__worldX": 1596,
+					"__worldY": -3653
 				}
 			]
 		},
