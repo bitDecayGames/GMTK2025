@@ -564,6 +564,30 @@
 					],
 					"__worldX": 248,
 					"__worldY": -1464
+				},
+				{
+					"__identifier": "BallLock",
+					"__grid": [2,6],
+					"__pivot": [0.5,0.5],
+					"__tags": ["interactable"],
+					"__tile": { "tilesetUid": 245, "x": 0, "y": 0, "w": 48, "h": 48 },
+					"__smartColor": "#FEAE34",
+					"iid": "ced13060-5e50-11f0-8e68-c7987957e6b9",
+					"width": 48,
+					"height": 48,
+					"defUid": 3332,
+					"px": [40,104],
+					"fieldInstances": [{ "__identifier": "Destination", "__type": "EntityRef", "__value": {
+						"entityIid": "88bd38f0-5e50-11f0-8c4e-89977ac8d1f1",
+						"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
+						"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
+						"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
+					}, "__tile": null, "defUid": 3335, "realEditorValues": [{
+						"id": "V_String",
+						"params": ["88bd38f0-5e50-11f0-8c4e-89977ac8d1f1"]
+					}] }],
+					"__worldX": 88,
+					"__worldY": -1432
 				}
 			]
 		},

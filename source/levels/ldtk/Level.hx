@@ -1,5 +1,6 @@
 package levels.ldtk;
 
+import ldtk.Entity;
 import entities.interact.BallLock;
 import entities.interact.SumTrigger;
 import entities.interact.MessageEntity;
@@ -78,7 +79,7 @@ class Level {
 	public var poppersSmall:Array<PopperSmall> = [];
 	public var slingshots:Array<Slingshot> = [];
 
-	var lockDests:Array<Ldtk.Entity_Something> = [];
+	var allEnts:Array<Entity> = [];
 
 	public var ballLocks:Array<BallLock> = [];
 
@@ -148,9 +149,10 @@ class Level {
 				raw.l_Objects.all_LightShortTriangle, raw.l_Objects.all_LightTallTriangle, raw.l_Objects.all_LightShow, raw.l_Objects.all_Post,
 				raw.l_Objects.all_Gate, raw.l_Objects.all_Sensor, raw.l_Objects.all_Message, raw.l_Objects.all_SumTrigger);
 			parseKickers(raw.l_Objects.all_Kicker);
+			parseBallLocks(raw.l_Objects.all_BallLock);
 
-			for (s in raw.l_Objects.all_Something) {
-				lockDests.push(s);
+			for (o in raw.l_Objects.getAllUntyped()) {
+				allEnts.push(o);
 			}
 		}
 
@@ -159,7 +161,7 @@ class Level {
 
 	function matchBallLocks() {
 		for (bl in ballLocks) {
-			for (dest in lockDests) {
+			for (dest in allEnts) {
 				if (bl.destIID == dest.iid) {
 					bl.exit.set(dest.worldPixelX, dest.worldPixelY);
 				}
@@ -267,12 +269,14 @@ class Level {
 		}
 	}
 
+	function parseBallLocks(blDefs:Array<Ldtk.Entity_BallLock>) {
+		for (d in blDefs) {
+			ballLocks.push(new BallLock(d.worldPixelX, d.worldPixelY, d.f_Destination.entityIid));
+		}
+	}
+
 	function parseKickers(kDefs:Array<Ldtk.Entity_Kicker>) {
 		for (kickerDef in kDefs) {
-			if (kickerDef.f_Entity_ref != null) {
-				ballLocks.push(new BallLock(kickerDef.worldPixelX, kickerDef.worldPixelY, kickerDef.f_Entity_ref.entityIid));
-				return;
-			}
 			var dir = 0.0;
 			if (kickerDef.f_Direction != null) {
 				dir = rotateTo(Vec2.get(kickerDef.cx, kickerDef.cy), Vec2.get(kickerDef.f_Direction.cx, kickerDef.f_Direction.cy));

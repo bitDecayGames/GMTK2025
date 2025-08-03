@@ -204,28 +204,6 @@
 					"__worldY": 1672
 				},
 				{
-					"__identifier": "Kicker",
-					"__grid": [12,73],
-					"__pivot": [0.5,0.5],
-					"__tags": ["interactable"],
-					"__tile": { "tilesetUid": 245, "x": 0, "y": 0, "w": 48, "h": 48 },
-					"__smartColor": "#FEAE34",
-					"iid": "8a140f50-5e50-11f0-afd1-6ffb79ca14cd",
-					"width": 48,
-					"height": 48,
-					"defUid": 251,
-					"px": [200,1176],
-					"fieldInstances": [
-						{ "__identifier": "Direction", "__type": "Point", "__value": { "cx": 12, "cy": 69 }, "__tile": null, "defUid": 1765, "realEditorValues": [{
-							"id": "V_String",
-							"params": ["12,69"]
-						}] },
-						{ "__identifier": "Force", "__type": "Float", "__value": 1000, "__tile": null, "defUid": 1766, "realEditorValues": [] }
-					],
-					"__worldX": -216,
-					"__worldY": 1704
-				},
-				{
 					"__identifier": "Gate",
 					"__grid": [29,69],
 					"__pivot": [0.5,0.5],
@@ -319,6 +297,30 @@
 					],
 					"__worldX": 403,
 					"__worldY": 872
+				},
+				{
+					"__identifier": "BallLock",
+					"__grid": [12,75],
+					"__pivot": [0.5,0.5],
+					"__tags": ["interactable"],
+					"__tile": { "tilesetUid": 245, "x": 0, "y": 0, "w": 48, "h": 48 },
+					"__smartColor": "#FEAE34",
+					"iid": "0ba82e70-5e50-11f0-b8bf-5b10747550b6",
+					"width": 48,
+					"height": 48,
+					"defUid": 3332,
+					"px": [200,1208],
+					"fieldInstances": [{ "__identifier": "Destination", "__type": "EntityRef", "__value": {
+						"entityIid": "e7ac9870-5e50-11f0-86e4-67911471ffd2",
+						"layerIid": "50319a91-5e50-11f0-86e4-5ff0bcc45aaf",
+						"levelIid": "50319a90-5e50-11f0-86e4-cd373511dd14",
+						"worldIid": "50317380-5e50-11f0-86e4-e79ef831fdc9"
+					}, "__tile": null, "defUid": 3335, "realEditorValues": [{
+						"id": "V_String",
+						"params": ["e7ac9870-5e50-11f0-86e4-67911471ffd2"]
+					}] }],
+					"__worldX": -216,
+					"__worldY": 1736
 				}
 			]
 		},
