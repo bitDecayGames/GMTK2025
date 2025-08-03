@@ -22,6 +22,7 @@ enum FmodSFX {
     FlipperStop;
     KickerEnter;
     KickerLaunch;
+    Light;
     MenuHover;
     MenuSelect;
     Popper;
@@ -55,6 +56,7 @@ class FmodEvent {
             case FlipperStop: "event:/SFX/Flipper/FlipperStop";
             case KickerEnter: "event:/SFX/Kicker/KickerEnter";
             case KickerLaunch: "event:/SFX/Kicker/KickerLaunch";
+            case Light: "event:/SFX/Light/Light";
             case MenuHover: "event:/SFX/Menu/MenuHover";
             case MenuSelect: "event:/SFX/Menu/MenuSelect";
             case Popper: "event:/SFX/Popper/Popper";
