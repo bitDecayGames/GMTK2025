@@ -8,7 +8,7 @@
 		"appVersion": "1.5.3",
 		"url": "https://ldtk.io"
 	},
-	"identifier": "Level_BaseWorld1344_832",
+	"identifier": "HubWorld",
 	"iid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
 	"uid": 874,
 	"worldX": 1344,
@@ -18,7 +18,7 @@
 	"pxHei": 880,
 	"__bgColor": "#696A79",
 	"bgColor": null,
-	"useAutoIdentifier": true,
+	"useAutoIdentifier": false,
 	"bgRelPath": null,
 	"bgPos": null,
 	"bgPivotX": 0.5,
@@ -616,6 +616,22 @@
 					}] }],
 					"__worldX": 1656,
 					"__worldY": 8
+				},
+				{
+					"__identifier": "CameraZone",
+					"__grid": [0,0],
+					"__pivot": [0,0],
+					"__tags": ["Camera"],
+					"__tile": { "tilesetUid": 16, "x": 64, "y": 64, "w": 16, "h": 16 },
+					"__smartColor": "#FF00FC",
+					"iid": "ed592da0-5e50-11f0-a5eb-e794d7658219",
+					"width": 560,
+					"height": 880,
+					"defUid": 200,
+					"px": [0,0],
+					"fieldInstances": [{ "__identifier": "AutoFocus", "__type": "Bool", "__value": false, "__tile": null, "defUid": 873, "realEditorValues": [] }],
+					"__worldX": 1344,
+					"__worldY": -832
 				}
 			]
 		},

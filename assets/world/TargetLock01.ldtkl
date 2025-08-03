@@ -8,7 +8,7 @@
 		"appVersion": "1.5.3",
 		"url": "https://ldtk.io"
 	},
-	"identifier": "Level_BaseWorld48_1536",
+	"identifier": "TargetLock01",
 	"iid": "a923ae90-5e50-11f0-b898-a5c6a7df9105",
 	"uid": 2261,
 	"worldX": 48,
@@ -18,7 +18,7 @@
 	"pxHei": 640,
 	"__bgColor": "#696A79",
 	"bgColor": null,
-	"useAutoIdentifier": true,
+	"useAutoIdentifier": false,
 	"bgRelPath": null,
 	"bgPos": null,
 	"bgPivotX": 0.5,

@@ -8,7 +8,7 @@
 		"appVersion": "1.5.3",
 		"url": "https://ldtk.io"
 	},
-	"identifier": "Level_BaseWorld1520_3968",
+	"identifier": "Intro01",
 	"iid": "50319a90-5e50-11f0-86e4-cd373511dd14",
 	"uid": 2249,
 	"worldX": 1520,
@@ -18,7 +18,7 @@
 	"pxHei": 688,
 	"__bgColor": "#696A79",
 	"bgColor": null,
-	"useAutoIdentifier": true,
+	"useAutoIdentifier": false,
 	"bgRelPath": null,
 	"bgPos": null,
 	"bgPivotX": 0.5,
