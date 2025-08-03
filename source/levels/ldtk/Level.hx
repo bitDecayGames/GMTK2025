@@ -1,5 +1,6 @@
 package levels.ldtk;
 
+import entities.SnakeNut;
 import ldtk.Entity;
 import entities.interact.BallLock;
 import entities.interact.SumTrigger;
@@ -90,6 +91,7 @@ class Level {
 	public var triggerables:Array<Triggerable> = [];
 	public var lightShows:Array<LightShow> = [];
 	public var summers:Array<SumTrigger> = [];
+	public var snakeNuts:Array<SnakeNut> = [];
 
 	public function new(worldNameOrIID:String, nameOrIID:String) {
 		this.worldID = worldNameOrIID;
@@ -150,6 +152,7 @@ class Level {
 				raw.l_Objects.all_LightShortTriangle, raw.l_Objects.all_LightTallTriangle, raw.l_Objects.all_LightShow, raw.l_Objects.all_Post,
 				raw.l_Objects.all_Gate, raw.l_Objects.all_Sensor, raw.l_Objects.all_Message, raw.l_Objects.all_SumTrigger);
 			parseKickers(raw.l_Objects.all_Kicker);
+			parseSnakeNuts(raw.l_Objects.all_SnakeNut);
 			parseBallLocks(raw.l_Objects.all_BallLock);
 
 			for (o in raw.l_Objects.getAllUntyped()) {
@@ -330,6 +333,12 @@ class Level {
 			var k = new Kicker(kickerDef.worldPixelX, kickerDef.worldPixelY, dir, kickerDef.f_Force);
 			k.IID = kickerDef.iid;
 			kickers.push(k);
+		}
+	}
+
+	function parseSnakeNuts(nuts:Array<Ldtk.Entity_SnakeNut>) {
+		for (nut in nuts) {
+			snakeNuts.push(new SnakeNut(nut.worldPixelX, nut.worldPixelY, false));
 		}
 	}
 
