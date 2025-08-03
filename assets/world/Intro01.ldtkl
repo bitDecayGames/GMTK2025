@@ -92,6 +92,22 @@
 					"fieldInstances": [{ "__identifier": "AutoFocus", "__type": "Bool", "__value": false, "__tile": null, "defUid": 873, "realEditorValues": [] }],
 					"__worldX": 1536,
 					"__worldY": -3952
+				},
+				{
+					"__identifier": "Spawn",
+					"__grid": [4,18],
+					"__pivot": [0,0],
+					"__tags": ["Player"],
+					"__tile": null,
+					"__smartColor": "#FFFFFF",
+					"iid": "4dfcc410-5e50-11f0-bb38-7b6ee4980aad",
+					"width": 32,
+					"height": 32,
+					"defUid": 74,
+					"px": [64,288],
+					"fieldInstances": [],
+					"__worldX": 1584,
+					"__worldY": -3680
 				}
 			]
 		},
