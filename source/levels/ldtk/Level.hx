@@ -437,6 +437,7 @@ class Level {
 			t.shouldDisableNodesOnComplete = v.f_DisableNodes;
 			t.shouldResetNodesOnComplete = v.f_ResetNodes;
 			t.sfx = v.f_SFX;
+			t.maxTriggers = v.f_MaxTriggers;
 			triggerables.push(t);
 			triggerToNodes.set(t, nodeIds);
 		}
