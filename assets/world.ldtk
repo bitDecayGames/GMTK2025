@@ -10133,12 +10133,12 @@
 			{ "id": "DOWN", "tileRect": { "tilesetUid": 16, "x": 48, "y": 80, "w": 16, "h": 16 }, "color": 14120515 },
 			{ "id": "LEFT", "tileRect": { "tilesetUid": 16, "x": 32, "y": 80, "w": 16, "h": 16 }, "color": 15389866 },
 			{ "id": "RIGHT", "tileRect": { "tilesetUid": 16, "x": 16, "y": 80, "w": 16, "h": 16 }, "color": 14984818 }
-		], "iconTilesetUid": 16, "externalRelPath": "../source/types/Direction.hx", "externalFileChecksum": "72edd69d6e24c5a5274d0b09ea08f1db", "tags": [] },
+		], "iconTilesetUid": 16, "externalRelPath": "../source/types/Direction.hx", "externalFileChecksum": "d9d0868d18b9a6244951f099d5f943e8", "tags": [] },
 		{ "identifier": "LightShowEnum", "uid": 2245, "values": [
 			{ "id": "SEQUENTIAL", "tileRect": { "tilesetUid": 16, "x": 224, "y": 112, "w": 16, "h": 16 }, "color": 12470831 },
 			{ "id": "ALTERNATE", "tileRect": { "tilesetUid": 16, "x": 336, "y": 256, "w": 16, "h": 16 }, "color": 14120515 },
 			{ "id": "BLINK", "tileRect": { "tilesetUid": 16, "x": 400, "y": 0, "w": 16, "h": 16 }, "color": 15389866 }
-		], "iconTilesetUid": 16, "externalRelPath": "../source/entities/interact/LightShowEnum.hx", "externalFileChecksum": "a40dd978c8f3a443f01bfc06f955d634", "tags": [] }
+		], "iconTilesetUid": 16, "externalRelPath": "../source/entities/interact/LightShowEnum.hx", "externalFileChecksum": "5c36f79c304028541593007515d118a5", "tags": [] }
 	], "levelFields": [
 		{
 			"identifier": "Music",
@@ -10377,14 +10377,14 @@
 				"__neighbours": [{ "levelIid": "2b992c20-5e50-11f0-92cc-330c7a92f094", "dir": "e" }]
 			},
 			{
-				"identifier": "Level_BaseWorld2752_3808",
+				"identifier": "Level_BaseWorld_4528_4000",
 				"iid": "5bd8b960-5e50-11f0-8bb5-6760eb2b7996",
 				"uid": 2267,
-				"worldX": 2752,
-				"worldY": -3808,
+				"worldX": -4528,
+				"worldY": -4000,
 				"worldDepth": 0,
 				"pxWid": 640,
-				"pxHei": 480,
+				"pxHei": 592,
 				"__bgColor": "#696A79",
 				"bgColor": null,
 				"useAutoIdentifier": true,
@@ -10394,7 +10394,7 @@
 				"bgPivotY": 0.5,
 				"__smartColor": "#ADADB5",
 				"__bgPos": null,
-				"externalRelPath": "world/Level_BaseWorld2752_3808.ldtkl",
+				"externalRelPath": "world/Level_BaseWorld_4528_4000.ldtkl",
 				"fieldInstances": [
 					{ "__identifier": "Music", "__type": "ExternEnum.FmodSong", "__value": null, "__tile": null, "defUid": 225, "realEditorValues": [] },
 					{ "__identifier": "GravityY", "__type": "Int", "__value": 1000, "__tile": null, "defUid": 257, "realEditorValues": [] },
