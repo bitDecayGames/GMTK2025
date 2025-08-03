@@ -447,7 +447,8 @@
 						}, {
 							"id": "V_String",
 							"params": ["f3940490-5e50-11f0-b2ac-ab32001c90e8"]
-						} ] }
+						} ] },
+						{ "__identifier": "SFX", "__type": "String", "__value": null, "__tile": null, "defUid": 3330, "realEditorValues": [] }
 					],
 					"__worldX": 1848,
 					"__worldY": -392

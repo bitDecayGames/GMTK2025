@@ -653,7 +653,8 @@
 						}, {
 							"id": "V_String",
 							"params": ["ff09db90-5e50-11f0-821f-8d2b173aac64"]
-						} ] }
+						} ] },
+						{ "__identifier": "SFX", "__type": "String", "__value": null, "__tile": null, "defUid": 3330, "realEditorValues": [] }
 					],
 					"__worldX": -5880,
 					"__worldY": -3832
@@ -714,7 +715,8 @@
 						}, {
 							"id": "V_String",
 							"params": ["007f8ba0-5e50-11f0-821f-9115f06f3046"]
-						} ] }
+						} ] },
+						{ "__identifier": "SFX", "__type": "String", "__value": null, "__tile": null, "defUid": 3330, "realEditorValues": [] }
 					],
 					"__worldX": -5288,
 					"__worldY": -3832
@@ -1001,29 +1003,30 @@
 								"id": "V_String",
 								"params": ["db96a6d0-5e50-11f0-821f-9dc89401d026"]
 							}
-						] }
+						] },
+						{ "__identifier": "SFX", "__type": "String", "__value": null, "__tile": null, "defUid": 3330, "realEditorValues": [] }
 					],
 					"__worldX": -5224,
 					"__worldY": -3544
 				},
 				{
 					"__identifier": "Sensor",
-					"__grid": [25,53],
+					"__grid": [11,51],
 					"__pivot": [0.5,0.5],
 					"__tags": ["triggerable"],
 					"__tile": null,
 					"__smartColor": "#D743D2",
 					"iid": "6bc999d0-5e50-11f0-821f-4f384f85e82e",
-					"width": 208,
+					"width": 16,
 					"height": 16,
 					"defUid": 2220,
-					"px": [408,856],
+					"px": [184,824],
 					"fieldInstances": [
 						{ "__identifier": "SecondsToReset", "__type": "Float", "__value": -1, "__tile": null, "defUid": 2221, "realEditorValues": [] },
 						{ "__identifier": "ListensTo", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 2222, "realEditorValues": [] }
 					],
-					"__worldX": -5576,
-					"__worldY": -3336
+					"__worldX": -5800,
+					"__worldY": -3368
 				},
 				{
 					"__identifier": "Spawn",
