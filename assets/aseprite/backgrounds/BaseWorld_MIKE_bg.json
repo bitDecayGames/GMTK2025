@@ -21,6 +21,7 @@
   "layers": [
    { "name": "Layer", "opacity": 255, "blendMode": "normal" },
    { "name": "playfield", "opacity": 255, "blendMode": "normal" },
+   { "name": "shadows", "opacity": 166, "blendMode": "normal" },
    { "name": "Layer 2", "opacity": 255, "blendMode": "normal" }
   ],
   "slices": [
