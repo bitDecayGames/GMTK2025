@@ -1,5 +1,6 @@
 package entities.interact;
 
+import flixel.FlxObject;
 import flixel.math.FlxPoint;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -33,6 +34,12 @@ class BallLock extends Interactable {
 	public var destIID:String = null;
 	public var exit:FlxPoint = FlxPoint.get();
 
+	public var killIIDs:Array<String> = [];
+	public var aliveIIDs:Array<String> = [];
+
+	public var killOnActivate:Array<FlxObject> = [];
+	public var aliveOnActivate:Array<FlxObject> = [];
+
 	public static var onTunnelExit:Tunnel->Void = null;
 
 	public function new(X:Float, Y:Float, exitIID:String) {
@@ -52,8 +59,22 @@ class BallLock extends Interactable {
 		body.cbTypes.add(CbTypes.CB_INTERACTABLE);
 	}
 
+	public function prekill() {
+		for (a in aliveOnActivate) {
+			a.kill();
+		}
+	}
+
 	public function teleportTo(player:Player, exit:FlxPoint) {
 		FmodPlugin.playSFX(FmodSFX.TunnelEnter);
+
+		for (k in killOnActivate) {
+			k.kill();
+		}
+
+		for (a in aliveOnActivate) {
+			a.revive();
+		}
 
 		player.body.velocity.muleq(0);
 		FlxTween.tween(player.body, {
@@ -91,6 +112,10 @@ class BallLock extends Interactable {
 		}
 
 		super.handleInteraction(data);
+
+		for (o in killOnActivate) {
+			o.kill();
+		}
 		var player:Player = data.int1.userData.data;
 		teleportTo(player, exit);
 	}

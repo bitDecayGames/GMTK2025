@@ -30,6 +30,7 @@ import ui.HudMessage;
 
 class Tunnel extends Interactable {
 	// public static var anims = AsepriteMacros.tagNames("assets/aseprite/characters/tunnel.json");
+	public var exitIID:String = "";
 	public var exit:Tunnel = null;
 
 	public static var onTunnelExit:Tunnel->Void = null;

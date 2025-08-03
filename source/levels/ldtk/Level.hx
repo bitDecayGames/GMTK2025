@@ -80,6 +80,7 @@ class Level {
 	public var slingshots:Array<Slingshot> = [];
 
 	var allEnts:Array<Entity> = [];
+	var allObjs:Array<FlxObject> = [];
 
 	public var ballLocks:Array<BallLock> = [];
 
@@ -157,6 +158,7 @@ class Level {
 		}
 
 		matchBallLocks();
+		matchTunnels();
 	}
 
 	function matchBallLocks() {
@@ -164,6 +166,36 @@ class Level {
 			for (dest in allEnts) {
 				if (bl.destIID == dest.iid) {
 					bl.exit.set(dest.worldPixelX, dest.worldPixelY);
+				}
+			}
+
+			for (p in poppersSmall) {
+				if (bl.aliveIIDs.contains(p.IID)) {
+					bl.aliveOnActivate.push(p);
+				}
+				if (bl.killIIDs.contains(p.IID)) {
+					bl.killOnActivate.push(p);
+				}
+			}
+
+			for (p in kickers) {
+				if (bl.aliveIIDs.contains(p.IID)) {
+					bl.aliveOnActivate.push(p);
+				}
+				if (bl.killIIDs.contains(p.IID)) {
+					bl.killOnActivate.push(p);
+				}
+			}
+
+			bl.prekill();
+		}
+	}
+
+	function matchTunnels() {
+		for (t in tunnels) {
+			for (e in tunnels) {
+				if (t.exitIID == e.IID) {
+					t.exit = e;
 				}
 			}
 		}
@@ -217,10 +249,14 @@ class Level {
 
 	function parsePoppers(popperDefs:Array<Ldtk.Entity_Popper>, smallPopDefs:Array<Ldtk.Entity_SmallPopper>) {
 		for (pd in popperDefs) {
-			poppers.push(new Popper(pd.worldPixelX, pd.worldPixelY, 75));
+			var p = new Popper(pd.worldPixelX, pd.worldPixelY, 75);
+			p.IID = pd.iid;
+			poppers.push(p);
 		}
 		for (pd in smallPopDefs) {
-			poppersSmall.push(new PopperSmall(pd.worldPixelX, pd.worldPixelY, 75));
+			var p = new PopperSmall(pd.worldPixelX, pd.worldPixelY, 75);
+			p.IID = pd.iid;
+			poppersSmall.push(p);
 		}
 	}
 
@@ -238,6 +274,9 @@ class Level {
 		for (td in tunnelDefs) {
 			var tunnel = new Tunnel(td.worldPixelX, td.worldPixelY);
 			tunnel.IID = td.iid;
+			if (td.f_Exit != null) {
+				tunnel.exitIID = td.f_Exit.entityIid;
+			}
 			tunnels.push(tunnel);
 		}
 
@@ -271,7 +310,14 @@ class Level {
 
 	function parseBallLocks(blDefs:Array<Ldtk.Entity_BallLock>) {
 		for (d in blDefs) {
-			ballLocks.push(new BallLock(d.worldPixelX, d.worldPixelY, d.f_Destination.entityIid));
+			var block = new BallLock(d.worldPixelX, d.worldPixelY, d.f_Destination.entityIid);
+			for (a in d.f_ToAlive) {
+				block.aliveIIDs.push(a.entityIid);
+			}
+			for (k in d.f_ToKill) {
+				block.killIIDs.push(k.entityIid);
+			}
+			ballLocks.push(block);
 		}
 	}
 
@@ -281,7 +327,9 @@ class Level {
 			if (kickerDef.f_Direction != null) {
 				dir = rotateTo(Vec2.get(kickerDef.cx, kickerDef.cy), Vec2.get(kickerDef.f_Direction.cx, kickerDef.f_Direction.cy));
 			}
-			kickers.push(new Kicker(kickerDef.worldPixelX, kickerDef.worldPixelY, dir, kickerDef.f_Force));
+			var k = new Kicker(kickerDef.worldPixelX, kickerDef.worldPixelY, dir, kickerDef.f_Force);
+			k.IID = kickerDef.iid;
+			kickers.push(k);
 		}
 	}
 

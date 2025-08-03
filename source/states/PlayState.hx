@@ -450,13 +450,20 @@ class PlayState extends FlxTransitionableState {
 		}
 	}
 
+	var inTransition = false;
+
 	function transitionCamera(area:FlxRect, instant:Bool = false) {
+		if (inTransition) {
+			return;
+		}
+
 		activeCamBounds = area;
 		if (instant) {
 			setCameraBounds(area);
 			return;
 		}
 
+		inTransition = true;
 		FmodManager.SetEventParameterOnSong("highpass", 1);
 		FlxTween.tween(this, {"timeScale": 0.01}, 0.3, {
 			ease: FlxEase.cubeOut,
@@ -482,6 +489,9 @@ class PlayState extends FlxTransitionableState {
 					FmodManager.SetEventParameterOnSong("highpass", 0);
 					FlxTween.tween(this, {"timeScale": 1}, 0.3, {
 						ease: FlxEase.cubeOut,
+						onComplete: (t) -> {
+							inTransition = false;
+						}
 					});
 				});
 			}

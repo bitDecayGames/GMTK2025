@@ -32,7 +32,7 @@ class Player extends SelfAssigningFlxNapeSprite {
 	private static var radToDeg = 180.0 / Math.PI;
 
 	// public static var eventData = AsepriteMacros.frameUserData("assets/aseprite/characters/ball.json", "Layer 1");
-	var speed:Float = 150;
+	var speed:Float = 400;
 	var playerNum = 0;
 
 	public var emitter:FlxEmitter;
