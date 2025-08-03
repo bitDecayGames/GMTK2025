@@ -28,11 +28,8 @@ import openfl.events.KeyboardEvent;
 import openfl.text.Font;
 import openfl.ui.Keyboard;
 import openfl.utils.Assets;
-import states.MainMenuState;
 import states.SplashScreenState;
-#if play
 import states.PlayState;
-#end
 #if credits
 import states.CreditsState;
 #end
@@ -53,7 +50,7 @@ class Main extends Sprite {
 		startingState = CreditsState;
 		#else
 		if (Macros.isDefined("SKIP_SPLASH")) {
-			startingState = MainMenuState;
+			startingState = PlayState;
 		}
 		#end
 		FlxG.signals.preGameStart.add(() -> {
