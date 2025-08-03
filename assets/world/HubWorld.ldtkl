@@ -562,7 +562,7 @@
 					"px": [264,520],
 					"fieldInstances": [
 						{ "__identifier": "IsRed", "__type": "Bool", "__value": false, "__tile": null, "defUid": 3339, "realEditorValues": [] },
-						{ "__identifier": "EndZoneSpawnPoint", "__type": "Point", "__value": null, "__tile": null, "defUid": 3340, "realEditorValues": [] }
+						{ "__identifier": "EndZone", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 3342, "realEditorValues": [] }
 					],
 					"__worldX": 1608,
 					"__worldY": -312
@@ -581,7 +581,7 @@
 					"px": [264,568],
 					"fieldInstances": [
 						{ "__identifier": "IsRed", "__type": "Bool", "__value": false, "__tile": null, "defUid": 3339, "realEditorValues": [] },
-						{ "__identifier": "EndZoneSpawnPoint", "__type": "Point", "__value": null, "__tile": null, "defUid": 3340, "realEditorValues": [] }
+						{ "__identifier": "EndZone", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 3342, "realEditorValues": [] }
 					],
 					"__worldX": 1608,
 					"__worldY": -264
@@ -603,9 +603,14 @@
 							"id": "V_Bool",
 							"params": [ true ]
 						}] },
-						{ "__identifier": "EndZoneSpawnPoint", "__type": "Point", "__value": { "cx": 18, "cy": 33 }, "__tile": null, "defUid": 3340, "realEditorValues": [{
+						{ "__identifier": "EndZone", "__type": "EntityRef", "__value": {
+							"entityIid": "d8a99860-5e50-11f0-b0b1-516f44f76ac4",
+							"layerIid": "100c7f01-5e50-11f0-8c4e-ed477f88d823",
+							"levelIid": "100c7f00-5e50-11f0-8c4e-e340f2888eea",
+							"worldIid": "48a599b1-1460-11ee-8f1d-bf5d483c5ed2"
+						}, "__tile": null, "defUid": 3342, "realEditorValues": [{
 							"id": "V_String",
-							"params": ["18,33"]
+							"params": ["d8a99860-5e50-11f0-b0b1-516f44f76ac4"]
 						}] }
 					],
 					"__worldX": 1640,
@@ -625,7 +630,7 @@
 					"px": [344,568],
 					"fieldInstances": [
 						{ "__identifier": "IsRed", "__type": "Bool", "__value": false, "__tile": null, "defUid": 3339, "realEditorValues": [] },
-						{ "__identifier": "EndZoneSpawnPoint", "__type": "Point", "__value": null, "__tile": null, "defUid": 3340, "realEditorValues": [] }
+						{ "__identifier": "EndZone", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 3342, "realEditorValues": [] }
 					],
 					"__worldX": 1688,
 					"__worldY": -264
@@ -644,10 +649,26 @@
 					"px": [344,520],
 					"fieldInstances": [
 						{ "__identifier": "IsRed", "__type": "Bool", "__value": false, "__tile": null, "defUid": 3339, "realEditorValues": [] },
-						{ "__identifier": "EndZoneSpawnPoint", "__type": "Point", "__value": null, "__tile": null, "defUid": 3340, "realEditorValues": [] }
+						{ "__identifier": "EndZone", "__type": "EntityRef", "__value": null, "__tile": null, "defUid": 3342, "realEditorValues": [] }
 					],
 					"__worldX": 1688,
 					"__worldY": -312
+				},
+				{
+					"__identifier": "EndZone",
+					"__grid": [19,33],
+					"__pivot": [0.5,0.5],
+					"__tags": [],
+					"__tile": null,
+					"__smartColor": "#680A01",
+					"iid": "d8a99860-5e50-11f0-b0b1-516f44f76ac4",
+					"width": 32,
+					"height": 32,
+					"defUid": 3341,
+					"px": [312,536],
+					"fieldInstances": [],
+					"__worldX": 1656,
+					"__worldY": -296
 				}
 			]
 		},
