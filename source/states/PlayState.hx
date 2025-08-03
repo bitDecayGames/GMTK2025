@@ -1,5 +1,6 @@
 package states;
 
+import flixel.util.FlxColor;
 import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.FlxCamera;
@@ -76,6 +77,8 @@ class PlayState extends FlxTransitionableState {
 		super.create();
 
 		// FlxG.camera.pixelPerfectRender = true;
+
+		camera.bgColor = new FlxColor(0xff222034);
 
 		Achievements.onAchieve.add(handleAchieve);
 		EventBus.subscribe(ClickCount, (c) -> {
