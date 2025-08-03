@@ -407,8 +407,6 @@ class PlayState extends FlxTransitionableState {
 		}
 
 		handleCameraBounds();
-
-		// TODO.sfx('scarySound');
 	}
 
 	function togglePause() {
@@ -454,7 +452,7 @@ class PlayState extends FlxTransitionableState {
 			return;
 		}
 
-		TODO.sfx('time warp slow down for camera transition');
+		FmodManager.SetEventParameterOnSong("highpass", 1);
 		FlxTween.tween(this, {"timeScale": 0.01}, 0.3, {
 			ease: FlxEase.cubeOut,
 			onComplete: (t) -> {
@@ -476,7 +474,7 @@ class PlayState extends FlxTransitionableState {
 					setCameraBounds(null);
 				}
 				FlxTimer.wait(1, () -> {
-					TODO.sfx('time warp speed up to resume gameplay');
+					FmodManager.SetEventParameterOnSong("highpass", 0);
 					FlxTween.tween(this, {"timeScale": 1}, 0.3, {
 						ease: FlxEase.cubeOut,
 					});

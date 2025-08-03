@@ -41,8 +41,18 @@ class Gate extends Interactable {
 		followListensTo = true;
 	}
 
+	function playHitSound(data:InteractionCallback) {
+		var impulse = 0.0;
+		for (a in data.arbiters) {
+			impulse += a.totalImpulse(data.int1.castBody).length;
+		}
+
+		var hitSound = FmodPlugin.playSFXWithRef(FmodSFX.BallTerrain2);
+		FmodManager.SetEventParameterOnSound(hitSound, "volume", impulse);
+	}
+
 	override public function handleInteraction(data:InteractionCallback) {
-		TODO.sfx('gate hit');
+		playHitSound(data);
 	}
 
 	override function onOnOffChanged(value:Bool) {

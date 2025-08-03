@@ -114,8 +114,6 @@ class Slingshot extends Interactable {
 			impulse += a.totalImpulse(data.int1.castBody).length;
 		}
 
-		QLog.notice('touch @ $impulse');
-
 		var hitSound = FmodPlugin.playSFXWithRef(FmodSFX.BallTerrain2);
 		FmodManager.SetEventParameterOnSound(hitSound, "volume", impulse);
 	}
